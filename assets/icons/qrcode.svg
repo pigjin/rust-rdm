@@ -1,0 +1,22 @@
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <path
+            stroke-width="3"
+            d="M20 6H6V20H20V6Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round" />
+        <path
+            stroke-width="3"
+            d="M20 28H6V42H20V28Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round" />
+        <path
+            stroke-width="3"
+            d="M42 6H28V20H42V6Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round" />
+        <path stroke-width="3" d="M29 28V42" stroke="currentColor" stroke-linecap="round" />
+        <path stroke-width="3" d="M41 28V42" stroke="currentColor" stroke-linecap="round" />
+    </svg>

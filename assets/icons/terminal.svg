@@ -1,0 +1,24 @@
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <rect
+            fill="currentColor"
+            stroke-width="3"
+            height="32"
+            rx="2"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            width="40"
+            x="4"
+            y="8" />
+        <path
+            stroke="currentColor"
+            stroke-width="3"
+            d="M12 18L19 24L12 30"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path
+            stroke="currentColor"
+            stroke-width="3"
+            d="M23 32H36"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+    </svg>
