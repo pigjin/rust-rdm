@@ -1,0 +1,206 @@
+{
+  "sourceSha": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "source": "Original desktop frontend font stack, Chrome system-ui layout on macOS; QA-only local page",
+  "samples": [
+    {
+      "size": 12,
+      "text": "自定义解码器ABCDEFGHIJKLMN",
+      "width": 180.453125
+    },
+    {
+      "size": 12,
+      "text": "解码/解压方式",
+      "width": 75.171875
+    },
+    {
+      "size": 12,
+      "text": "查看方式",
+      "width": 47.6875
+    },
+    {
+      "size": 12,
+      "text": "AVATAR",
+      "width": 44.28125
+    },
+    {
+      "size": 12,
+      "text": "To Wa Yo",
+      "width": 51.890625
+    },
+    {
+      "size": 12,
+      "text": "Redis 6.2",
+      "width": 52.3125
+    },
+    {
+      "size": 12,
+      "text": "数据库 DB 0",
+      "width": 66.671875
+    },
+    {
+      "size": 12,
+      "text": "TTL: -1",
+      "width": 40.203125
+    },
+    {
+      "size": 12,
+      "text": "连接 (localhost)",
+      "width": 87.609375
+    },
+    {
+      "size": 12,
+      "text": "123,456.78",
+      "width": 62.984375
+    },
+    {
+      "size": 14,
+      "text": "自定义解码器ABCDEFGHIJKLMN",
+      "width": 208.34375
+    },
+    {
+      "size": 14,
+      "text": "解码/解压方式",
+      "width": 87.46875
+    },
+    {
+      "size": 14,
+      "text": "查看方式",
+      "width": 55.578125
+    },
+    {
+      "size": 14,
+      "text": "AVATAR",
+      "width": 50.75
+    },
+    {
+      "size": 14,
+      "text": "To Wa Yo",
+      "width": 59.328125
+    },
+    {
+      "size": 14,
+      "text": "Redis 6.2",
+      "width": 59.6875
+    },
+    {
+      "size": 14,
+      "text": "数据库 DB 0",
+      "width": 77
+    },
+    {
+      "size": 14,
+      "text": "TTL: -1",
+      "width": 45.84375
+    },
+    {
+      "size": 14,
+      "text": "连接 (localhost)",
+      "width": 100.375
+    },
+    {
+      "size": 14,
+      "text": "123,456.78",
+      "width": 71.96875
+    },
+    {
+      "size": 16,
+      "text": "自定义解码器ABCDEFGHIJKLMN",
+      "width": 236.140625
+    },
+    {
+      "size": 16,
+      "text": "解码/解压方式",
+      "width": 99.828125
+    },
+    {
+      "size": 16,
+      "text": "查看方式",
+      "width": 63.515625
+    },
+    {
+      "size": 16,
+      "text": "AVATAR",
+      "width": 57.15625
+    },
+    {
+      "size": 16,
+      "text": "To Wa Yo",
+      "width": 66.671875
+    },
+    {
+      "size": 16,
+      "text": "Redis 6.2",
+      "width": 66.9375
+    },
+    {
+      "size": 16,
+      "text": "数据库 DB 0",
+      "width": 87.296875
+    },
+    {
+      "size": 16,
+      "text": "TTL: -1",
+      "width": 51.40625
+    },
+    {
+      "size": 16,
+      "text": "连接 (localhost)",
+      "width": 113.03125
+    },
+    {
+      "size": 16,
+      "text": "123,456.78",
+      "width": 80.84375
+    },
+    {
+      "size": 20,
+      "text": "自定义解码器ABCDEFGHIJKLMN",
+      "width": 287.3125
+    },
+    {
+      "size": 20,
+      "text": "解码/解压方式",
+      "width": 120.453125
+    },
+    {
+      "size": 20,
+      "text": "查看方式",
+      "width": 76.625
+    },
+    {
+      "size": 20,
+      "text": "AVATAR",
+      "width": 69.5625
+    },
+    {
+      "size": 20,
+      "text": "To Wa Yo",
+      "width": 80.390625
+    },
+    {
+      "size": 20,
+      "text": "Redis 6.2",
+      "width": 81.171875
+    },
+    {
+      "size": 20,
+      "text": "数据库 DB 0",
+      "width": 105.4375
+    },
+    {
+      "size": 20,
+      "text": "TTL: -1",
+      "width": 61.9375
+    },
+    {
+      "size": 20,
+      "text": "连接 (localhost)",
+      "width": 135.953125
+    },
+    {
+      "size": 20,
+      "text": "123,456.78",
+      "width": 99.015625
+    }
+  ]
+}

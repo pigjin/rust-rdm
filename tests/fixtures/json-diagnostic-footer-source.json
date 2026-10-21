@@ -1,0 +1,3403 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "modelValue": "/*",
+  "message": "中文🙂  alpha\nsecond\tline",
+  "footer": "No quick fixes available",
+  "crossMessage": "other problem",
+  "postShowEditorRelayout": false,
+  "scope": "Trusted local AppKit events in own hidden WKWebView rendering the pinned original frontend and Monaco 0.47.0, fixed local RPC mocks and controlled markers. No global input or clipboard operations; no Wails hardware-window or full visual parity claim.",
+  "sequences": {
+    "character": [
+      {
+        "name": "after-local-AppKit-drag",
+        "selected": "中文🙂",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "copy": true
+      },
+      {
+        "name": "forward-1",
+        "selected": "中文🙂 ",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 5,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-2",
+        "selected": "中文🙂  ",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 6,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-3",
+        "selected": "中文🙂  a",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 7,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-4",
+        "selected": "中文🙂  al",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-5",
+        "selected": "中文🙂  alp",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 9,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-6",
+        "selected": "中文🙂  alph",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 10,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-7",
+        "selected": "中文🙂  alpha",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 11,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-8",
+        "selected": "中文🙂  alpha\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-9",
+        "selected": "中文🙂  alpha\ns",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 1,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-10",
+        "selected": "中文🙂  alpha\nse",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 2,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-11",
+        "selected": "中文🙂  alpha\nsec",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 3,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-12",
+        "selected": "中文🙂  alpha\nseco",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-13",
+        "selected": "中文🙂  alpha\nsecon",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 5,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-14",
+        "selected": "中文🙂  alpha\nsecond",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 6,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-15",
+        "selected": "中文🙂  alpha\nsecond\t",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 7,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-16",
+        "selected": "中文🙂  alpha\nsecond\tl",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-17",
+        "selected": "中文🙂  alpha\nsecond\tli",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 9,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-18",
+        "selected": "中文🙂  alpha\nsecond\tlin",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 10,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-19",
+        "selected": "中文🙂  alpha\nsecond\tline",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 11,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-20",
+        "selected": "中文🙂  alpha\nsecond\tlinej",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 1,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-21",
+        "selected": "中文🙂  alpha\nsecond\tlinejs",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 2,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-22",
+        "selected": "中文🙂  alpha\nsecond\tlinejso",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 3,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-23",
+        "selected": "中文🙂  alpha\nsecond\tlinejson",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-24",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 5,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-25",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(7",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 6,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-26",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(77",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 7,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-27",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-28",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 9,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-29",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": true
+      },
+      {
+        "name": "forward-30",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nN",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 1,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-31",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 2,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": true
+      },
+      {
+        "name": "forward-32",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo ",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 3,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-33",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo q",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-34",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo qu",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 5,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-35",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo qui",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 6,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-36",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quic",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 7,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-37",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-38",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick ",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 9,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-39",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick f",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 10,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-40",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fi",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 11,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-41",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fix",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 12,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-42",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixe",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 13,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-43",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 14,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-44",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes ",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 15,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-45",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes a",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 16,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-46",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes av",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 17,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-47",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes ava",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 18,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-48",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes avai",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 19,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-49",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes avail",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 20,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-50",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes availa",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 21,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-51",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes availab",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 22,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-52",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes availabl",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 23,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-53",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 24,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": true
+      },
+      {
+        "name": "forward-54",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available\n",
+        "hoverScrollTop": 2,
+        "focusRegion": "horizontal",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "shift-right",
+        "copy": true
+      },
+      {
+        "name": "forward-55",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available\n",
+        "hoverScrollTop": 2,
+        "focusRegion": "vertical",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "shift-right",
+        "copy": true
+      },
+      {
+        "name": "forward-56",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available\n",
+        "hoverScrollTop": 2,
+        "focusRegion": "vertical",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-57",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available\n",
+        "hoverScrollTop": 2,
+        "focusRegion": "vertical",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "tail-back-1",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available\n",
+        "hoverScrollTop": 2,
+        "focusRegion": "horizontal",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "shift-left",
+        "copy": true
+      },
+      {
+        "name": "tail-back-2",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available",
+        "hoverScrollTop": 2,
+        "focusRegion": "footer",
+        "focusOffset": 24,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "shift-left",
+        "copy": true
+      },
+      {
+        "name": "tail-back-3",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes availabl",
+        "hoverScrollTop": 2,
+        "focusRegion": "footer",
+        "focusOffset": 23,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "shift-left",
+        "copy": false
+      },
+      {
+        "name": "tail-back-4",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes availab",
+        "hoverScrollTop": 2,
+        "focusRegion": "footer",
+        "focusOffset": 22,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "shift-left",
+        "copy": false
+      },
+      {
+        "name": "tail-back-5",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes availa",
+        "hoverScrollTop": 2,
+        "focusRegion": "footer",
+        "focusOffset": 21,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "shift-left",
+        "copy": false
+      },
+      {
+        "name": "tail-word-back",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes ",
+        "hoverScrollTop": 2,
+        "focusRegion": "footer",
+        "focusOffset": 15,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "alt-shift-left",
+        "copy": true
+      }
+    ],
+    "word": [
+      {
+        "name": "after-local-AppKit-drag",
+        "selected": "中文🙂",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "copy": true
+      },
+      {
+        "name": "word-forward-1",
+        "selected": "中文🙂  alpha",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 11,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-2",
+        "selected": "中文🙂  alpha\nsecond",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 6,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-3",
+        "selected": "中文🙂  alpha\nsecond\tlinejson",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-4",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-5",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": true
+      },
+      {
+        "name": "word-forward-6",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 2,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": true
+      },
+      {
+        "name": "word-forward-7",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-8",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 14,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-9",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 24,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": true
+      },
+      {
+        "name": "word-forward-10",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "vertical",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": true
+      },
+      {
+        "name": "word-forward-11",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "vertical",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-12",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "vertical",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-13",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "vertical",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": true
+      },
+      {
+        "name": "word-back-1",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes ",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 15,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": true
+      },
+      {
+        "name": "word-back-2",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick ",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 9,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-3",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo ",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 3,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-4",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": true
+      },
+      {
+        "name": "word-back-5",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-6",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-7",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-8",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-9",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-10",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-11",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      }
+    ],
+    "boundaries": [
+      {
+        "name": "after-local-AppKit-drag",
+        "selected": "中文🙂",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "copy": true
+      },
+      {
+        "name": "forward-1",
+        "selected": "中文🙂 ",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 5,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-2",
+        "selected": "中文🙂  ",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 6,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-3",
+        "selected": "中文🙂  a",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 7,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-4",
+        "selected": "中文🙂  al",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-5",
+        "selected": "中文🙂  alp",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 9,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-6",
+        "selected": "中文🙂  alph",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 10,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-7",
+        "selected": "中文🙂  alpha",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 11,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-8",
+        "selected": "中文🙂  alpha\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-9",
+        "selected": "中文🙂  alpha\ns",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 1,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-10",
+        "selected": "中文🙂  alpha\nse",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 2,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-11",
+        "selected": "中文🙂  alpha\nsec",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 3,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-12",
+        "selected": "中文🙂  alpha\nseco",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-13",
+        "selected": "中文🙂  alpha\nsecon",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 5,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-14",
+        "selected": "中文🙂  alpha\nsecond",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 6,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-15",
+        "selected": "中文🙂  alpha\nsecond\t",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 7,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-16",
+        "selected": "中文🙂  alpha\nsecond\tl",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-17",
+        "selected": "中文🙂  alpha\nsecond\tli",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 9,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-18",
+        "selected": "中文🙂  alpha\nsecond\tlin",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 10,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-19",
+        "selected": "中文🙂  alpha\nsecond\tline",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 11,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-20",
+        "selected": "中文🙂  alpha\nsecond\tlinej",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 1,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-21",
+        "selected": "中文🙂  alpha\nsecond\tlinejs",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 2,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-22",
+        "selected": "中文🙂  alpha\nsecond\tlinejso",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 3,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-23",
+        "selected": "中文🙂  alpha\nsecond\tlinejson",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-24",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 5,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-25",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(7",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 6,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-26",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(77",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 7,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-27",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-28",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 9,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "forward-29",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": true
+      },
+      {
+        "name": "footer-char-back",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 9,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-left",
+        "copy": false
+      },
+      {
+        "name": "footer-char-forward",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-right",
+        "copy": false
+      },
+      {
+        "name": "footer-word-back",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": true
+      },
+      {
+        "name": "footer-word-forward",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 2,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "footer-retract-char",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nN",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 1,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "shift-left",
+        "copy": false
+      },
+      {
+        "name": "footer-retract-word",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "footer-next-word-1",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 2,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "footer-next-word-2",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "footer-next-word-3",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 14,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "footer-next-word-4",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 24,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "footer-next-word-5",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "vertical",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": true
+      },
+      {
+        "name": "tail-char-back",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes available\n",
+        "hoverScrollTop": 2,
+        "focusRegion": "horizontal",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "shift-left",
+        "copy": false
+      },
+      {
+        "name": "tail-word-back",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nNo quick fixes ",
+        "hoverScrollTop": 2,
+        "focusRegion": "footer",
+        "focusOffset": 15,
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 299
+        },
+        "key": "alt-shift-left",
+        "copy": true
+      }
+    ],
+    "crossmessage": [
+      {
+        "name": "after-local-AppKit-drag",
+        "selected": "中文🙂",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "copy": true
+      },
+      {
+        "name": "word-forward-1",
+        "selected": "中文🙂  alpha",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 11,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-2",
+        "selected": "中文🙂  alpha\nsecond",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 6,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-3",
+        "selected": "中文🙂  alpha\nsecond\tlinejson",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-4",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-5",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 5,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": true
+      },
+      {
+        "name": "word-forward-6",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 4,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": true
+      },
+      {
+        "name": "word-forward-7",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778",
+        "hoverScrollTop": 0,
+        "focusRegion": "body",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-8",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-9",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\nNo",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 2,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": true
+      },
+      {
+        "name": "word-forward-10",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\nNo quick",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 8,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": true
+      },
+      {
+        "name": "word-forward-11",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\nNo quick fixes",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 14,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-12",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\nNo quick fixes available",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 24,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": false
+      },
+      {
+        "name": "word-forward-13",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\nNo quick fixes available\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "vertical",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-right",
+        "copy": true
+      },
+      {
+        "name": "word-back-1",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\nNo quick fixes ",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 15,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": true
+      },
+      {
+        "name": "word-back-2",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\nNo quick ",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 9,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-3",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\nNo ",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 3,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-4",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": true
+      },
+      {
+        "name": "word-back-5",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-6",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-7",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-8",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-9",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-10",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      },
+      {
+        "name": "word-back-11",
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)\nother problemjson(778)\n",
+        "hoverScrollTop": 0,
+        "focusRegion": "footer",
+        "focusOffset": 0,
+        "hoverBox": {
+          "height": 105,
+          "width": 282,
+          "x": 727,
+          "y": 219
+        },
+        "footerBox": {
+          "height": 22,
+          "width": 132.234375,
+          "x": 867.984375,
+          "y": 301
+        },
+        "key": "alt-shift-left",
+        "copy": false
+      }
+    ]
+  },
+  "save": {
+    "records": [
+      {
+        "name": "after-local-AppKit-drag",
+        "selected": "No"
+      },
+      {
+        "name": "footer-cmd-a",
+        "selected": "No"
+      },
+      {
+        "name": "footer-extend-space",
+        "selected": "No "
+      },
+      {
+        "name": "footer-cmd-s",
+        "selected": ""
+      }
+    ],
+    "expectedRequest": {
+      "server": "localhost",
+      "db": 0,
+      "key": "aahash",
+      "field": "old",
+      "newField": "old",
+      "value": "/*",
+      "decode": "None",
+      "format": "JSON",
+      "retDecode": "None",
+      "retFormat": "Raw"
+    }
+  },
+  "showCommandModelValue": "{\"a\":}",
+  "showCommand": [
+    {
+      "hover": false,
+      "hoverBox": null,
+      "editorHasTextFocus": true,
+      "name": "initial"
+    },
+    {
+      "hover": false,
+      "hoverBox": null,
+      "editorHasTextFocus": true,
+      "name": "first-prefix",
+      "key": "cmd-k"
+    },
+    {
+      "hover": true,
+      "hoverBox": {
+        "height": 54,
+        "width": 282,
+        "x": 727,
+        "y": 270
+      },
+      "editorHasTextFocus": true,
+      "name": "first-complete",
+      "key": "cmd-i"
+    },
+    {
+      "hover": true,
+      "hoverBox": {
+        "height": 54,
+        "width": 282,
+        "x": 727,
+        "y": 270
+      },
+      "editorHasTextFocus": true,
+      "name": "second-prefix",
+      "key": "cmd-k"
+    },
+    {
+      "hover": true,
+      "hoverBox": {
+        "height": 54,
+        "width": 282,
+        "x": 727,
+        "y": 270
+      },
+      "editorHasTextFocus": false,
+      "name": "second-complete",
+      "key": "cmd-i"
+    },
+    {
+      "hover": false,
+      "hoverBox": null,
+      "editorHasTextFocus": true,
+      "name": "escape",
+      "key": "escape"
+    }
+  ]
+}

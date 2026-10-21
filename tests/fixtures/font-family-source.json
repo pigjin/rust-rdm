@@ -1,0 +1,689 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "records": [
+    {
+      "families": [],
+      "metrics": [
+        {
+          "class": "",
+          "id": "app-toolbar-title",
+          "text": "Tiny RDM",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 1,
+          "y": 4,
+          "w": 346,
+          "h": 32
+        },
+        {
+          "class": "flex-box-h flex-item-expand",
+          "id": "app-content",
+          "text": "localhost筛选可以从左边选择并打开连接 添加新连接运",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 1,
+          "y": 40,
+          "w": 1022,
+          "h": 727
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 16.5,
+          "y": 648,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 16.5,
+          "y": 686,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 16.5,
+          "y": 724,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "n-tree-node-content__text",
+          "id": "",
+          "text": "localhost",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 110,
+          "y": 44,
+          "w": 231,
+          "h": 22
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type nav-pane-func-btn",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 59,
+          "y": 736.8125,
+          "w": 24,
+          "h": 24
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type nav-pane-func-btn",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 86,
+          "y": 736.8125,
+          "w": 24,
+          "h": 24
+        },
+        {
+          "class": "n-input__input-el",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 168.640625,
+          "y": 732.828125,
+          "w": 114.359375,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type nav-pane-func-btn",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 318,
+          "y": 736.8125,
+          "w": 24,
+          "h": 24
+        },
+        {
+          "class": "__button-1lzl83h-lmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "添加新连接",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 628.265625,
+          "y": 428,
+          "w": 117.46875,
+          "h": 32
+        },
+        {
+          "class": "n-dialog __dialog-1lzl83h-dl n-dialog--icon-left n-modal",
+          "id": "",
+          "text": "偏好设置常规配置编辑器命令行自定义解码主题浅色深色自动语言简",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 192,
+          "y": 75.125,
+          "w": 640,
+          "h": 617.75
+        },
+        {
+          "class": "n-input__input-el",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 346.46875,
+          "y": 361.125,
+          "w": 154,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-clmmd-xhd1wp n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 504.46875,
+          "y": 368.125,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "__button-1lzl83h-clmmd-xhd1wp n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 522.46875,
+          "y": 368.125,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "n-input__input-el",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 346.46875,
+          "y": 432.375,
+          "w": 209.765625,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-clmmp n-button n-button--primary-type n-button--medium-type",
+          "id": "",
+          "text": "隐私策略",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 473.390625,
+          "y": 584.375,
+          "w": 55.578125,
+          "h": 14
+        },
+        {
+          "class": "__button-1lzl83h-lmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "重置为默认",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 220,
+          "y": 640.875,
+          "w": 93.46875,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-lmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "取消",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 688.40625,
+          "y": 640.875,
+          "w": 51.796875,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-lmmp n-button n-button--primary-type n-button--medium-type",
+          "id": "",
+          "text": "保存",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 752.203125,
+          "y": 640.875,
+          "w": 51.796875,
+          "h": 32
+        }
+      ]
+    },
+    {
+      "families": [
+        "Monaco"
+      ],
+      "metrics": [
+        {
+          "class": "",
+          "id": "app-toolbar-title",
+          "text": "Tiny RDM",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 1,
+          "y": 4,
+          "w": 346,
+          "h": 32
+        },
+        {
+          "class": "flex-box-h flex-item-expand",
+          "id": "app-content",
+          "text": "localhost筛选可以从左边选择并打开连接 添加新连接运",
+          "fontFamily": "Monaco",
+          "fontSize": "14px",
+          "x": 1,
+          "y": 40,
+          "w": 1022,
+          "h": 727
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "Monaco",
+          "fontSize": "14px",
+          "x": 16.5,
+          "y": 648,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "Monaco",
+          "fontSize": "14px",
+          "x": 16.5,
+          "y": 686,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "Monaco",
+          "fontSize": "14px",
+          "x": 16.5,
+          "y": 724,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "n-tree-node-content__text",
+          "id": "",
+          "text": "localhost",
+          "fontFamily": "Monaco",
+          "fontSize": "14px",
+          "x": 110,
+          "y": 44,
+          "w": 231,
+          "h": 22
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type nav-pane-func-btn",
+          "id": "",
+          "text": "",
+          "fontFamily": "Monaco",
+          "fontSize": "14px",
+          "x": 59,
+          "y": 736.8125,
+          "w": 24,
+          "h": 24
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type nav-pane-func-btn",
+          "id": "",
+          "text": "",
+          "fontFamily": "Monaco",
+          "fontSize": "14px",
+          "x": 86,
+          "y": 736.8125,
+          "w": 24,
+          "h": 24
+        },
+        {
+          "class": "n-input__input-el",
+          "id": "",
+          "text": "",
+          "fontFamily": "Monaco",
+          "fontSize": "14px",
+          "x": 168.640625,
+          "y": 732.828125,
+          "w": 114.359375,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type nav-pane-func-btn",
+          "id": "",
+          "text": "",
+          "fontFamily": "Monaco",
+          "fontSize": "14px",
+          "x": 318,
+          "y": 736.8125,
+          "w": 24,
+          "h": 24
+        },
+        {
+          "class": "__button-1lzl83h-lmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "添加新连接",
+          "fontFamily": "Monaco",
+          "fontSize": "14px",
+          "x": 628,
+          "y": 428,
+          "w": 118,
+          "h": 32
+        },
+        {
+          "class": "n-dialog __dialog-1lzl83h-dl n-dialog--icon-left n-modal",
+          "id": "",
+          "text": "偏好设置常规配置编辑器命令行自定义解码主题浅色深色自动语言简",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 192,
+          "y": 74.125,
+          "w": 640,
+          "h": 619.75
+        },
+        {
+          "class": "n-input__input-el",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 346.46875,
+          "y": 362.125,
+          "w": 154,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-clmmd-xhd1wp n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 504.46875,
+          "y": 369.125,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "__button-1lzl83h-clmmd-xhd1wp n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 522.46875,
+          "y": 369.125,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "n-input__input-el",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 346.46875,
+          "y": 433.375,
+          "w": 209.765625,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-clmmp n-button n-button--primary-type n-button--medium-type",
+          "id": "",
+          "text": "隐私策略",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 473.390625,
+          "y": 585.375,
+          "w": 55.578125,
+          "h": 14
+        },
+        {
+          "class": "__button-1lzl83h-lmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "重置为默认",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 220,
+          "y": 641.875,
+          "w": 93.46875,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-lmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "取消",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 688.40625,
+          "y": 641.875,
+          "w": 51.796875,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-lmmp n-button n-button--primary-type n-button--medium-type",
+          "id": "",
+          "text": "保存",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 752.203125,
+          "y": 641.875,
+          "w": 51.796875,
+          "h": 32
+        }
+      ]
+    },
+    {
+      "families": [
+        "Missing QA Font",
+        "Monaco"
+      ],
+      "metrics": [
+        {
+          "class": "",
+          "id": "app-toolbar-title",
+          "text": "Tiny RDM",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 1,
+          "y": 4,
+          "w": 346,
+          "h": 32
+        },
+        {
+          "class": "flex-box-h flex-item-expand",
+          "id": "app-content",
+          "text": "localhost筛选可以从左边选择并打开连接 添加新连接运",
+          "fontFamily": "\"Missing QA Font\", Monaco",
+          "fontSize": "14px",
+          "x": 1,
+          "y": 40,
+          "w": 1022,
+          "h": 727
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "\"Missing QA Font\", Monaco",
+          "fontSize": "14px",
+          "x": 16.5,
+          "y": 648,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "\"Missing QA Font\", Monaco",
+          "fontSize": "14px",
+          "x": 16.5,
+          "y": 686,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "\"Missing QA Font\", Monaco",
+          "fontSize": "14px",
+          "x": 16.5,
+          "y": 724,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "n-tree-node-content__text",
+          "id": "",
+          "text": "localhost",
+          "fontFamily": "\"Missing QA Font\", Monaco",
+          "fontSize": "14px",
+          "x": 110,
+          "y": 44,
+          "w": 231,
+          "h": 22
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type nav-pane-func-btn",
+          "id": "",
+          "text": "",
+          "fontFamily": "\"Missing QA Font\", Monaco",
+          "fontSize": "14px",
+          "x": 59,
+          "y": 736.8125,
+          "w": 24,
+          "h": 24
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type nav-pane-func-btn",
+          "id": "",
+          "text": "",
+          "fontFamily": "\"Missing QA Font\", Monaco",
+          "fontSize": "14px",
+          "x": 86,
+          "y": 736.8125,
+          "w": 24,
+          "h": 24
+        },
+        {
+          "class": "n-input__input-el",
+          "id": "",
+          "text": "",
+          "fontFamily": "\"Missing QA Font\", Monaco",
+          "fontSize": "14px",
+          "x": 168.640625,
+          "y": 732.828125,
+          "w": 114.359375,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-clmmd n-button n-button--default-type n-button--medium-type nav-pane-func-btn",
+          "id": "",
+          "text": "",
+          "fontFamily": "\"Missing QA Font\", Monaco",
+          "fontSize": "14px",
+          "x": 318,
+          "y": 736.8125,
+          "w": 24,
+          "h": 24
+        },
+        {
+          "class": "__button-1lzl83h-lmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "添加新连接",
+          "fontFamily": "\"Missing QA Font\", Monaco",
+          "fontSize": "14px",
+          "x": 628,
+          "y": 428,
+          "w": 118,
+          "h": 32
+        },
+        {
+          "class": "n-dialog __dialog-1lzl83h-dl n-dialog--icon-left n-modal",
+          "id": "",
+          "text": "偏好设置常规配置编辑器命令行自定义解码主题浅色深色自动语言简",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 192,
+          "y": 74.125,
+          "w": 640,
+          "h": 619.75
+        },
+        {
+          "class": "n-input__input-el",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 346.46875,
+          "y": 362.125,
+          "w": 154,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-clmmd-xhd1wp n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 504.46875,
+          "y": 369.125,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "__button-1lzl83h-clmmd-xhd1wp n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 522.46875,
+          "y": 369.125,
+          "w": 18,
+          "h": 18
+        },
+        {
+          "class": "n-input__input-el",
+          "id": "",
+          "text": "",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 346.46875,
+          "y": 433.375,
+          "w": 209.765625,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-clmmp n-button n-button--primary-type n-button--medium-type",
+          "id": "",
+          "text": "隐私策略",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 473.390625,
+          "y": 585.375,
+          "w": 55.578125,
+          "h": 14
+        },
+        {
+          "class": "__button-1lzl83h-lmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "重置为默认",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 220,
+          "y": 641.875,
+          "w": 93.46875,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-lmmd n-button n-button--default-type n-button--medium-type",
+          "id": "",
+          "text": "取消",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 688.40625,
+          "y": 641.875,
+          "w": 51.796875,
+          "h": 32
+        },
+        {
+          "class": "__button-1lzl83h-lmmp n-button n-button--primary-type n-button--medium-type",
+          "id": "",
+          "text": "保存",
+          "fontFamily": "v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "x": 752.203125,
+          "y": 641.875,
+          "w": 51.796875,
+          "h": 32
+        }
+      ]
+    }
+  ],
+  "zero": {
+    "fontSize": "0px",
+    "height": 1
+  }
+}

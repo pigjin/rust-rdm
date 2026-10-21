@@ -1,0 +1,1822 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "sourceFile": "outputs/source-probes/status-clients-metadata-macos/stdout-attempt1.json",
+  "sourceSHA256": "9c80356cbd037451150a6a5c0ef8a372f8aa4974bdb9318b1d970ca2fe0b1f11",
+  "locale": {
+    "caseFirst": "false",
+    "collation": "default",
+    "ignorePunctuation": false,
+    "locale": "zh-CN",
+    "numeric": false,
+    "sensitivity": "variant",
+    "usage": "sort"
+  },
+  "pairs": [
+    {
+      "a": "10.0.0.1:10",
+      "b": "10.0.0.1:10",
+      "order": 0
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "2.0.0.2:2",
+      "order": -1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "a.local",
+      "order": -1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "á.local",
+      "order": -1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "a-b.local",
+      "order": -1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "10.0.0.1:10",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "10.0.0.1:10",
+      "order": 1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "2.0.0.2:2",
+      "order": 0
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "a.local",
+      "order": -1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "á.local",
+      "order": -1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "a-b.local",
+      "order": -1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "2.0.0.2:2",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "10.0.0.1:10",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "2.0.0.2:2",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "A.local",
+      "order": 0
+    },
+    {
+      "a": "A.local",
+      "b": "a.local",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "á.local",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "a-b.local",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "A.local",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "A.local",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "A.local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "A.local",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "A.local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "A.local",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "A.local",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "a.local",
+      "b": "10.0.0.1:10",
+      "order": 1
+    },
+    {
+      "a": "a.local",
+      "b": "2.0.0.2:2",
+      "order": 1
+    },
+    {
+      "a": "a.local",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "a.local",
+      "b": "a.local",
+      "order": 0
+    },
+    {
+      "a": "a.local",
+      "b": "á.local",
+      "order": 1
+    },
+    {
+      "a": "a.local",
+      "b": "a-b.local",
+      "order": 1
+    },
+    {
+      "a": "a.local",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "a.local",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "a.local",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "a.local",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "a.local",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "a.local",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "a.local",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "a.local",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "a.local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "a.local",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "a.local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "a.local",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "a.local",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "á.local",
+      "b": "10.0.0.1:10",
+      "order": 1
+    },
+    {
+      "a": "á.local",
+      "b": "2.0.0.2:2",
+      "order": 1
+    },
+    {
+      "a": "á.local",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "á.local",
+      "b": "a.local",
+      "order": -1
+    },
+    {
+      "a": "á.local",
+      "b": "á.local",
+      "order": 0
+    },
+    {
+      "a": "á.local",
+      "b": "a-b.local",
+      "order": 1
+    },
+    {
+      "a": "á.local",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "á.local",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "á.local",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "á.local",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "á.local",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "á.local",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "á.local",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "á.local",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "á.local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "á.local",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "á.local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "á.local",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "á.local",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "a-b.local",
+      "b": "10.0.0.1:10",
+      "order": 1
+    },
+    {
+      "a": "a-b.local",
+      "b": "2.0.0.2:2",
+      "order": 1
+    },
+    {
+      "a": "a-b.local",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "a-b.local",
+      "b": "a.local",
+      "order": -1
+    },
+    {
+      "a": "a-b.local",
+      "b": "á.local",
+      "order": -1
+    },
+    {
+      "a": "a-b.local",
+      "b": "a-b.local",
+      "order": 0
+    },
+    {
+      "a": "a-b.local",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "a-b.local",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "a-b.local",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "a-b.local",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "a-b.local",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "a-b.local",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "a-b.local",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "a-b.local",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "a-b.local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "a-b.local",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "a-b.local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "a-b.local",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "a-b.local",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "10.0.0.1:10",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "2.0.0.2:2",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "A.local",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "a.local",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "á.local",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "a-b.local",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "ab.local",
+      "order": 0
+    },
+    {
+      "a": "ab.local",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "ab.local",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "ab.local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "ab.local",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "ab.local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "ab.local",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "ab.local",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "_local",
+      "b": "10.0.0.1:10",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "2.0.0.2:2",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "a.local",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "á.local",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "a-b.local",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "_local",
+      "order": 0
+    },
+    {
+      "a": "_local",
+      "b": "[::1]:1",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "::1",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "/tmp/袜.sock",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "/tmp/早.sock",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "👩‍💻",
+      "order": -1
+    },
+    {
+      "a": "_local",
+      "b": "🧪",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "10.0.0.1:10",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "2.0.0.2:2",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "a.local",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "á.local",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "a-b.local",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "[::1]:1",
+      "order": 0
+    },
+    {
+      "a": "[::1]:1",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "/tmp/袜.sock",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "/tmp/早.sock",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "👩‍💻",
+      "order": -1
+    },
+    {
+      "a": "[::1]:1",
+      "b": "🧪",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "10.0.0.1:10",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "2.0.0.2:2",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "a.local",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "á.local",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "a-b.local",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "::1",
+      "b": "[::1]:1",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "::1",
+      "order": 0
+    },
+    {
+      "a": "::1",
+      "b": "/tmp/袜.sock",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "/tmp/早.sock",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "👩‍💻",
+      "order": -1
+    },
+    {
+      "a": "::1",
+      "b": "🧪",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "10.0.0.1:10",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "2.0.0.2:2",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "a.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "á.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "a-b.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "/tmp/袜.sock",
+      "order": 0
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "/tmp/早.sock",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "👩‍💻",
+      "order": -1
+    },
+    {
+      "a": "/tmp/袜.sock",
+      "b": "🧪",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "10.0.0.1:10",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "2.0.0.2:2",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "a.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "á.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "a-b.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "/tmp/早.sock",
+      "order": 0
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "👩‍💻",
+      "order": -1
+    },
+    {
+      "a": "/tmp/早.sock",
+      "b": "🧪",
+      "order": -1
+    },
+    {
+      "a": "z",
+      "b": "10.0.0.1:10",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "2.0.0.2:2",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "A.local",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "a.local",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "á.local",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "a-b.local",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "ab.local",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "z",
+      "order": 0
+    },
+    {
+      "a": "z",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "z",
+      "b": "é.local",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "e.local",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "é.local",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "z",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "10.0.0.1:10",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "2.0.0.2:2",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "A.local",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "a.local",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "á.local",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "a-b.local",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "ab.local",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "z",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "Z",
+      "order": 0
+    },
+    {
+      "a": "Z",
+      "b": "é.local",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "e.local",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "é.local",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "Z",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "10.0.0.1:10",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "2.0.0.2:2",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "A.local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "a.local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "á.local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "a-b.local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "ab.local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "é.local",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "é.local",
+      "b": "é.local",
+      "order": 0
+    },
+    {
+      "a": "é.local",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "é.local",
+      "b": "é.local",
+      "order": 0
+    },
+    {
+      "a": "é.local",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "10.0.0.1:10",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "2.0.0.2:2",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "A.local",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "a.local",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "á.local",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "a-b.local",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "ab.local",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "e.local",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "e.local",
+      "b": "é.local",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "e.local",
+      "order": 0
+    },
+    {
+      "a": "e.local",
+      "b": "é.local",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "e.local",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "10.0.0.1:10",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "2.0.0.2:2",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "A.local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "a.local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "á.local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "a-b.local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "ab.local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "é.local",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "é.local",
+      "b": "é.local",
+      "order": 0
+    },
+    {
+      "a": "é.local",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "é.local",
+      "b": "é.local",
+      "order": 0
+    },
+    {
+      "a": "é.local",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "é.local",
+      "b": "🧪",
+      "order": 1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "10.0.0.1:10",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "2.0.0.2:2",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "a.local",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "á.local",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "a-b.local",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "👩‍💻",
+      "b": "👩‍💻",
+      "order": 0
+    },
+    {
+      "a": "👩‍💻",
+      "b": "🧪",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "10.0.0.1:10",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "2.0.0.2:2",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "A.local",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "a.local",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "á.local",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "a-b.local",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "ab.local",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "_local",
+      "order": 1
+    },
+    {
+      "a": "🧪",
+      "b": "[::1]:1",
+      "order": 1
+    },
+    {
+      "a": "🧪",
+      "b": "::1",
+      "order": 1
+    },
+    {
+      "a": "🧪",
+      "b": "/tmp/袜.sock",
+      "order": 1
+    },
+    {
+      "a": "🧪",
+      "b": "/tmp/早.sock",
+      "order": 1
+    },
+    {
+      "a": "🧪",
+      "b": "z",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "Z",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "e.local",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "é.local",
+      "order": -1
+    },
+    {
+      "a": "🧪",
+      "b": "👩‍💻",
+      "order": 1
+    },
+    {
+      "a": "🧪",
+      "b": "🧪",
+      "order": 0
+    }
+  ],
+  "scope": "Actual originalJS localeCompare on19synthetic addresses,361ordered pairs. Onlythis capturedlocale/corpus accepted."
+}

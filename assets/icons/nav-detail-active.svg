@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none"><defs><mask id="inverse" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48"><g fill="none">
+        <rect
+            fill="#fff"
+            stroke-width="4"
+            height="36"
+            rx="3"
+            stroke="#fff"
+            stroke-linejoin="round"
+            width="36"
+            x="6"
+            y="6" />
+        <rect
+            fill="#000"
+            stroke="#000"
+            stroke-width="4"
+            height="8"
+            stroke-linejoin="round"
+            width="8"
+            x="13"
+            y="13" />
+        <path
+            stroke="#000"
+            stroke-width="4"
+            d="M27 13L35 13"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path
+            stroke="#000"
+            stroke-width="4"
+            d="M27 20L35 20"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path
+            stroke="#000"
+            stroke-width="4"
+            d="M13 28L35 28"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path
+            stroke="#000"
+            stroke-width="4"
+            d="M13 35H35"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+    </g></mask></defs><rect width="48" height="48" fill="currentColor" mask="url(#inverse)"/></svg>

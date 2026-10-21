@@ -1,0 +1,1626 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "method": "Original ExportKeyDialog, Naive UI and vueuc unchanged. Only existing local Wails boundary mocked. Wheel event, scroll container offsets and real DOM mouse selection / copy-key events; copy default prevented after recording.",
+  "count": 1000,
+  "keyPattern": "key:%04d",
+  "records": [
+    {
+      "name": "csv-list-start",
+      "bounds": {
+        "x": 334,
+        "y": 410.375,
+        "width": 356,
+        "height": 180
+      },
+      "scrollTop": 0,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "selection": "",
+      "rows": [
+        {
+          "text": "key:0000",
+          "textContent": "key:0000",
+          "bounds": {
+            "x": 334,
+            "y": 410.375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0001",
+          "textContent": "key:0001",
+          "bounds": {
+            "x": 334,
+            "y": 432.765625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0002",
+          "textContent": "key:0002",
+          "bounds": {
+            "x": 334,
+            "y": 455.15625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0003",
+          "textContent": "key:0003",
+          "bounds": {
+            "x": 334,
+            "y": 477.546875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0004",
+          "textContent": "key:0004",
+          "bounds": {
+            "x": 334,
+            "y": 499.9375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0005",
+          "textContent": "key:0005",
+          "bounds": {
+            "x": 334,
+            "y": 522.328125,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0006",
+          "textContent": "key:0006",
+          "bounds": {
+            "x": 334,
+            "y": 544.71875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0007",
+          "textContent": "key:0007",
+          "bounds": {
+            "x": 334,
+            "y": 567.109375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0008",
+          "textContent": "key:0008",
+          "bounds": {
+            "x": 334,
+            "y": 589.5,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0009",
+          "textContent": "key:0009",
+          "bounds": {
+            "x": 334,
+            "y": 611.890625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        }
+      ],
+      "scrollbars": [
+        {
+          "classes": "n-scrollbar-rail n-scrollbar-rail--vertical n-scrollbar-rail--vertical--right",
+          "bounds": {
+            "x": 678,
+            "y": 412.375,
+            "width": 8,
+            "height": 176
+          },
+          "color": "rgba(0, 0, 0, 0)",
+          "opacity": "1"
+        }
+      ],
+      "children": [
+        {
+          "classes": "v-vl-items",
+          "bounds": {
+            "x": 334,
+            "y": 410.375,
+            "width": 356,
+            "height": 25000
+          },
+          "height": "25000px",
+          "transform": ""
+        }
+      ],
+      "card": {
+        "x": 317,
+        "y": 361.375,
+        "width": 390,
+        "height": 242
+      },
+      "dialog": {
+        "x": 289,
+        "y": 96.625,
+        "width": 446,
+        "height": 574.75
+      }
+    },
+    {
+      "name": "csv-list-hover",
+      "bounds": {
+        "x": 334,
+        "y": 410.375,
+        "width": 356,
+        "height": 180
+      },
+      "scrollTop": 0,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "selection": "",
+      "rows": [
+        {
+          "text": "key:0000",
+          "textContent": "key:0000",
+          "bounds": {
+            "x": 334,
+            "y": 410.375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0001",
+          "textContent": "key:0001",
+          "bounds": {
+            "x": 334,
+            "y": 432.765625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0002",
+          "textContent": "key:0002",
+          "bounds": {
+            "x": 334,
+            "y": 455.15625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0003",
+          "textContent": "key:0003",
+          "bounds": {
+            "x": 334,
+            "y": 477.546875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0004",
+          "textContent": "key:0004",
+          "bounds": {
+            "x": 334,
+            "y": 499.9375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0005",
+          "textContent": "key:0005",
+          "bounds": {
+            "x": 334,
+            "y": 522.328125,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0006",
+          "textContent": "key:0006",
+          "bounds": {
+            "x": 334,
+            "y": 544.71875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0007",
+          "textContent": "key:0007",
+          "bounds": {
+            "x": 334,
+            "y": 567.109375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0008",
+          "textContent": "key:0008",
+          "bounds": {
+            "x": 334,
+            "y": 589.5,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0009",
+          "textContent": "key:0009",
+          "bounds": {
+            "x": 334,
+            "y": 611.890625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        }
+      ],
+      "scrollbars": [
+        {
+          "classes": "n-scrollbar-rail n-scrollbar-rail--vertical n-scrollbar-rail--vertical--right",
+          "bounds": {
+            "x": 678,
+            "y": 412.375,
+            "width": 8,
+            "height": 176
+          },
+          "color": "rgba(0, 0, 0, 0)",
+          "opacity": "1"
+        },
+        {
+          "classes": "n-scrollbar-rail__scrollbar",
+          "bounds": {
+            "x": 678,
+            "y": 412.375,
+            "width": 8,
+            "height": 13.265625
+          },
+          "color": "rgba(0, 0, 0, 0.4)",
+          "opacity": "1"
+        }
+      ],
+      "children": [
+        {
+          "classes": "v-vl-items",
+          "bounds": {
+            "x": 334,
+            "y": 410.375,
+            "width": 356,
+            "height": 25000
+          },
+          "height": "25000px",
+          "transform": ""
+        }
+      ],
+      "card": {
+        "x": 317,
+        "y": 361.375,
+        "width": 390,
+        "height": 242
+      },
+      "dialog": {
+        "x": 289,
+        "y": 96.625,
+        "width": 446,
+        "height": 574.75
+      }
+    },
+    {
+      "name": "csv-list-drag",
+      "bounds": {
+        "x": 334,
+        "y": 410.375,
+        "width": 356,
+        "height": 180
+      },
+      "scrollTop": 9676,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "selection": "",
+      "rows": [
+        {
+          "text": "key:0386",
+          "textContent": "key:0386",
+          "bounds": {
+            "x": 334,
+            "y": 384.375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0387",
+          "textContent": "key:0387",
+          "bounds": {
+            "x": 334,
+            "y": 406.765625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0388",
+          "textContent": "key:0388",
+          "bounds": {
+            "x": 334,
+            "y": 429.15625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0389",
+          "textContent": "key:0389",
+          "bounds": {
+            "x": 334,
+            "y": 451.546875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0390",
+          "textContent": "key:0390",
+          "bounds": {
+            "x": 334,
+            "y": 473.9375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0391",
+          "textContent": "key:0391",
+          "bounds": {
+            "x": 334,
+            "y": 496.328125,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0392",
+          "textContent": "key:0392",
+          "bounds": {
+            "x": 334,
+            "y": 518.71875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0393",
+          "textContent": "key:0393",
+          "bounds": {
+            "x": 334,
+            "y": 541.109375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0394",
+          "textContent": "key:0394",
+          "bounds": {
+            "x": 334,
+            "y": 563.5,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0395",
+          "textContent": "key:0395",
+          "bounds": {
+            "x": 334,
+            "y": 585.890625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        }
+      ],
+      "scrollbars": [
+        {
+          "classes": "n-scrollbar-rail n-scrollbar-rail--vertical n-scrollbar-rail--vertical--right",
+          "bounds": {
+            "x": 678,
+            "y": 412.375,
+            "width": 8,
+            "height": 176
+          },
+          "color": "rgba(0, 0, 0, 0)",
+          "opacity": "1"
+        }
+      ],
+      "children": [
+        {
+          "classes": "v-vl-items",
+          "bounds": {
+            "x": 334,
+            "y": -9265.625,
+            "width": 356,
+            "height": 25000
+          },
+          "height": "25000px",
+          "transform": ""
+        }
+      ],
+      "card": {
+        "x": 317,
+        "y": 361.375,
+        "width": 390,
+        "height": 242
+      },
+      "dialog": {
+        "x": 289,
+        "y": 96.625,
+        "width": 446,
+        "height": 574.75
+      },
+      "gesture": {
+        "fromPoint": {
+          "x": 682,
+          "y": 419.0078125
+        },
+        "toPoint": {
+          "x": 682,
+          "y": 484.0078125
+        }
+      }
+    },
+    {
+      "name": "csv-list-wheel",
+      "bounds": {
+        "x": 334,
+        "y": 410.375,
+        "width": 356,
+        "height": 180
+      },
+      "scrollTop": 250,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "selection": "",
+      "rows": [
+        {
+          "text": "key:0009",
+          "textContent": "key:0009",
+          "bounds": {
+            "x": 334,
+            "y": 385.375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0010",
+          "textContent": "key:0010",
+          "bounds": {
+            "x": 334,
+            "y": 407.765625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0011",
+          "textContent": "key:0011",
+          "bounds": {
+            "x": 334,
+            "y": 430.15625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0012",
+          "textContent": "key:0012",
+          "bounds": {
+            "x": 334,
+            "y": 452.546875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0013",
+          "textContent": "key:0013",
+          "bounds": {
+            "x": 334,
+            "y": 474.9375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0014",
+          "textContent": "key:0014",
+          "bounds": {
+            "x": 334,
+            "y": 497.328125,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0015",
+          "textContent": "key:0015",
+          "bounds": {
+            "x": 334,
+            "y": 519.71875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0016",
+          "textContent": "key:0016",
+          "bounds": {
+            "x": 334,
+            "y": 542.109375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0017",
+          "textContent": "key:0017",
+          "bounds": {
+            "x": 334,
+            "y": 564.5,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0018",
+          "textContent": "key:0018",
+          "bounds": {
+            "x": 334,
+            "y": 586.890625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        }
+      ],
+      "scrollbars": [
+        {
+          "classes": "n-scrollbar-rail n-scrollbar-rail--vertical n-scrollbar-rail--vertical--right",
+          "bounds": {
+            "x": 678,
+            "y": 412.375,
+            "width": 8,
+            "height": 176
+          },
+          "color": "rgba(0, 0, 0, 0)",
+          "opacity": "1"
+        }
+      ],
+      "children": [
+        {
+          "classes": "v-vl-items",
+          "bounds": {
+            "x": 334,
+            "y": 160.375,
+            "width": 356,
+            "height": 25000
+          },
+          "height": "25000px",
+          "transform": ""
+        }
+      ],
+      "card": {
+        "x": 317,
+        "y": 361.375,
+        "width": 390,
+        "height": 242
+      },
+      "dialog": {
+        "x": 289,
+        "y": 96.625,
+        "width": 446,
+        "height": 574.75
+      }
+    },
+    {
+      "name": "csv-list-middle",
+      "bounds": {
+        "x": 334,
+        "y": 410.375,
+        "width": 356,
+        "height": 180
+      },
+      "scrollTop": 12417,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "selection": "",
+      "rows": [
+        {
+          "text": "key:0495",
+          "textContent": "key:0495",
+          "bounds": {
+            "x": 334,
+            "y": 368.375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0496",
+          "textContent": "key:0496",
+          "bounds": {
+            "x": 334,
+            "y": 390.765625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0497",
+          "textContent": "key:0497",
+          "bounds": {
+            "x": 334,
+            "y": 413.15625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0498",
+          "textContent": "key:0498",
+          "bounds": {
+            "x": 334,
+            "y": 435.546875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0499",
+          "textContent": "key:0499",
+          "bounds": {
+            "x": 334,
+            "y": 457.9375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0500",
+          "textContent": "key:0500",
+          "bounds": {
+            "x": 334,
+            "y": 480.328125,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0501",
+          "textContent": "key:0501",
+          "bounds": {
+            "x": 334,
+            "y": 502.71875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0502",
+          "textContent": "key:0502",
+          "bounds": {
+            "x": 334,
+            "y": 525.109375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0503",
+          "textContent": "key:0503",
+          "bounds": {
+            "x": 334,
+            "y": 547.5,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0504",
+          "textContent": "key:0504",
+          "bounds": {
+            "x": 334,
+            "y": 569.890625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        }
+      ],
+      "scrollbars": [
+        {
+          "classes": "n-scrollbar-rail n-scrollbar-rail--vertical n-scrollbar-rail--vertical--right",
+          "bounds": {
+            "x": 678,
+            "y": 412.375,
+            "width": 8,
+            "height": 176
+          },
+          "color": "rgba(0, 0, 0, 0)",
+          "opacity": "1"
+        }
+      ],
+      "children": [
+        {
+          "classes": "v-vl-items",
+          "bounds": {
+            "x": 334,
+            "y": -12006.625,
+            "width": 356,
+            "height": 25000
+          },
+          "height": "25000px",
+          "transform": ""
+        }
+      ],
+      "card": {
+        "x": 317,
+        "y": 361.375,
+        "width": 390,
+        "height": 242
+      },
+      "dialog": {
+        "x": 289,
+        "y": 96.625,
+        "width": 446,
+        "height": 574.75
+      }
+    },
+    {
+      "name": "csv-list-selection",
+      "bounds": {
+        "x": 334,
+        "y": 410.375,
+        "width": 356,
+        "height": 180
+      },
+      "scrollTop": 12417,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "selection": "y:0498\nkey:0499\nkey:0",
+      "rows": [
+        {
+          "text": "key:0495",
+          "textContent": "key:0495",
+          "bounds": {
+            "x": 334,
+            "y": 368.375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0496",
+          "textContent": "key:0496",
+          "bounds": {
+            "x": 334,
+            "y": 390.765625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0497",
+          "textContent": "key:0497",
+          "bounds": {
+            "x": 334,
+            "y": 413.15625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0498",
+          "textContent": "key:0498",
+          "bounds": {
+            "x": 334,
+            "y": 435.546875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0499",
+          "textContent": "key:0499",
+          "bounds": {
+            "x": 334,
+            "y": 457.9375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0500",
+          "textContent": "key:0500",
+          "bounds": {
+            "x": 334,
+            "y": 480.328125,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0501",
+          "textContent": "key:0501",
+          "bounds": {
+            "x": 334,
+            "y": 502.71875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0502",
+          "textContent": "key:0502",
+          "bounds": {
+            "x": 334,
+            "y": 525.109375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0503",
+          "textContent": "key:0503",
+          "bounds": {
+            "x": 334,
+            "y": 547.5,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0504",
+          "textContent": "key:0504",
+          "bounds": {
+            "x": 334,
+            "y": 569.890625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        }
+      ],
+      "scrollbars": [
+        {
+          "classes": "n-scrollbar-rail n-scrollbar-rail--vertical n-scrollbar-rail--vertical--right",
+          "bounds": {
+            "x": 678,
+            "y": 412.375,
+            "width": 8,
+            "height": 176
+          },
+          "color": "rgba(0, 0, 0, 0)",
+          "opacity": "1"
+        }
+      ],
+      "children": [
+        {
+          "classes": "v-vl-items",
+          "bounds": {
+            "x": 334,
+            "y": -12006.625,
+            "width": 356,
+            "height": 25000
+          },
+          "height": "25000px",
+          "transform": ""
+        }
+      ],
+      "card": {
+        "x": 317,
+        "y": 361.375,
+        "width": 390,
+        "height": 242
+      },
+      "dialog": {
+        "x": 289,
+        "y": 96.625,
+        "width": 446,
+        "height": 574.75
+      },
+      "gesture": {
+        "fromText": "key:0498",
+        "toText": "key:0500",
+        "fromOffset": 2,
+        "toOffset": 5,
+        "fromPoint": {
+          "x": 348.8125,
+          "y": 446.046875
+        },
+        "toPoint": {
+          "x": 368.9375,
+          "y": 490.828125
+        }
+      }
+    },
+    {
+      "name": "csv-list-end",
+      "bounds": {
+        "x": 334,
+        "y": 410.375,
+        "width": 356,
+        "height": 180
+      },
+      "scrollTop": 24820,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "selection": "key:0994\nkey:0995\n",
+      "rows": [
+        {
+          "text": "key:0991",
+          "textContent": "key:0991",
+          "bounds": {
+            "x": 334,
+            "y": 365.375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0992",
+          "textContent": "key:0992",
+          "bounds": {
+            "x": 334,
+            "y": 387.765625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0993",
+          "textContent": "key:0993",
+          "bounds": {
+            "x": 334,
+            "y": 410.15625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0994",
+          "textContent": "key:0994",
+          "bounds": {
+            "x": 334,
+            "y": 432.546875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0995",
+          "textContent": "key:0995",
+          "bounds": {
+            "x": 334,
+            "y": 454.9375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0996",
+          "textContent": "key:0996",
+          "bounds": {
+            "x": 334,
+            "y": 477.328125,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0997",
+          "textContent": "key:0997",
+          "bounds": {
+            "x": 334,
+            "y": 499.71875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0998",
+          "textContent": "key:0998",
+          "bounds": {
+            "x": 334,
+            "y": 522.109375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0999",
+          "textContent": "key:0999",
+          "bounds": {
+            "x": 334,
+            "y": 544.5,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        }
+      ],
+      "scrollbars": [
+        {
+          "classes": "n-scrollbar-rail n-scrollbar-rail--vertical n-scrollbar-rail--vertical--right",
+          "bounds": {
+            "x": 678,
+            "y": 412.375,
+            "width": 8,
+            "height": 176
+          },
+          "color": "rgba(0, 0, 0, 0)",
+          "opacity": "1"
+        }
+      ],
+      "children": [
+        {
+          "classes": "v-vl-items",
+          "bounds": {
+            "x": 334,
+            "y": -24409.625,
+            "width": 356,
+            "height": 25000
+          },
+          "height": "25000px",
+          "transform": ""
+        }
+      ],
+      "card": {
+        "x": 317,
+        "y": 361.375,
+        "width": 390,
+        "height": 242
+      },
+      "dialog": {
+        "x": 289,
+        "y": 96.625,
+        "width": 446,
+        "height": 574.75
+      }
+    },
+    {
+      "name": "csv-list-return",
+      "bounds": {
+        "x": 334,
+        "y": 410.375,
+        "width": 356,
+        "height": 180
+      },
+      "scrollTop": 0,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "selection": "key:0003\nkey:0004\n",
+      "rows": [
+        {
+          "text": "key:0000",
+          "textContent": "key:0000",
+          "bounds": {
+            "x": 334,
+            "y": 410.375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0001",
+          "textContent": "key:0001",
+          "bounds": {
+            "x": 334,
+            "y": 432.765625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0002",
+          "textContent": "key:0002",
+          "bounds": {
+            "x": 334,
+            "y": 455.15625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0003",
+          "textContent": "key:0003",
+          "bounds": {
+            "x": 334,
+            "y": 477.546875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0004",
+          "textContent": "key:0004",
+          "bounds": {
+            "x": 334,
+            "y": 499.9375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0005",
+          "textContent": "key:0005",
+          "bounds": {
+            "x": 334,
+            "y": 522.328125,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0006",
+          "textContent": "key:0006",
+          "bounds": {
+            "x": 334,
+            "y": 544.71875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0007",
+          "textContent": "key:0007",
+          "bounds": {
+            "x": 334,
+            "y": 567.109375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0008",
+          "textContent": "key:0008",
+          "bounds": {
+            "x": 334,
+            "y": 589.5,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0009",
+          "textContent": "key:0009",
+          "bounds": {
+            "x": 334,
+            "y": 611.890625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        }
+      ],
+      "scrollbars": [
+        {
+          "classes": "n-scrollbar-rail n-scrollbar-rail--vertical n-scrollbar-rail--vertical--right",
+          "bounds": {
+            "x": 678,
+            "y": 412.375,
+            "width": 8,
+            "height": 176
+          },
+          "color": "rgba(0, 0, 0, 0)",
+          "opacity": "1"
+        }
+      ],
+      "children": [
+        {
+          "classes": "v-vl-items",
+          "bounds": {
+            "x": 334,
+            "y": 410.375,
+            "width": 356,
+            "height": 25000
+          },
+          "height": "25000px",
+          "transform": ""
+        }
+      ],
+      "card": {
+        "x": 317,
+        "y": 361.375,
+        "width": 390,
+        "height": 242
+      },
+      "dialog": {
+        "x": 289,
+        "y": 96.625,
+        "width": 446,
+        "height": 574.75
+      }
+    },
+    {
+      "name": "csv-list-dark-middle",
+      "bounds": {
+        "x": 334,
+        "y": 410.375,
+        "width": 356,
+        "height": 180
+      },
+      "scrollTop": 12417,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "selection": "key:0498\nkey:0499\n",
+      "rows": [
+        {
+          "text": "key:0495",
+          "textContent": "key:0495",
+          "bounds": {
+            "x": 334,
+            "y": 368.375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0496",
+          "textContent": "key:0496",
+          "bounds": {
+            "x": 334,
+            "y": 390.765625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0497",
+          "textContent": "key:0497",
+          "bounds": {
+            "x": 334,
+            "y": 413.15625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0498",
+          "textContent": "key:0498",
+          "bounds": {
+            "x": 334,
+            "y": 435.546875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0499",
+          "textContent": "key:0499",
+          "bounds": {
+            "x": 334,
+            "y": 457.9375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0500",
+          "textContent": "key:0500",
+          "bounds": {
+            "x": 334,
+            "y": 480.328125,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0501",
+          "textContent": "key:0501",
+          "bounds": {
+            "x": 334,
+            "y": 502.71875,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0502",
+          "textContent": "key:0502",
+          "bounds": {
+            "x": 334,
+            "y": 525.109375,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0503",
+          "textContent": "key:0503",
+          "bounds": {
+            "x": 334,
+            "y": 547.5,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        },
+        {
+          "text": "key:0504",
+          "textContent": "key:0504",
+          "bounds": {
+            "x": 334,
+            "y": 569.890625,
+            "width": 356,
+            "height": 22.390625
+          },
+          "font": "14px / 22.4px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "lineHeight": "22.4px"
+        }
+      ],
+      "scrollbars": [
+        {
+          "classes": "n-scrollbar-rail n-scrollbar-rail--vertical n-scrollbar-rail--vertical--right",
+          "bounds": {
+            "x": 678,
+            "y": 412.375,
+            "width": 8,
+            "height": 176
+          },
+          "color": "rgba(0, 0, 0, 0)",
+          "opacity": "1"
+        }
+      ],
+      "children": [
+        {
+          "classes": "v-vl-items",
+          "bounds": {
+            "x": 334,
+            "y": -12006.625,
+            "width": 356,
+            "height": 25000
+          },
+          "height": "25000px",
+          "transform": ""
+        }
+      ],
+      "card": {
+        "x": 317,
+        "y": 361.375,
+        "width": 390,
+        "height": 242
+      },
+      "dialog": {
+        "x": 289,
+        "y": 96.625,
+        "width": 446,
+        "height": 574.75
+      }
+    }
+  ],
+  "states": [
+    {
+      "name": "wheel-1000",
+      "scrollTop": 250,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "html": "<div class=\"v-vl\"><div class=\"v-vl-items\" style=\"box-sizing: content-box; height: 25000px; padding-top: 0px; padding-bottom: 0px;\"><div class=\"v-vl-visible-items\" style=\"transform: translateY(225px);\"><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0009</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0010</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0011</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0012</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0013</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0014</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0015</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0016</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0017</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0018</div></div></div></div>",
+      "selection": "",
+      "copied": null
+    },
+    {
+      "name": "middle-copy",
+      "scrollTop": 12417,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "html": "<div class=\"v-vl\"><div class=\"v-vl-items\" style=\"box-sizing: content-box; height: 25000px; padding-top: 0px; padding-bottom: 0px;\"><div class=\"v-vl-visible-items\" style=\"transform: translateY(12375px);\"><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0495</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0496</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0497</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0498</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0499</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0500</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0501</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0502</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0503</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0504</div></div></div></div>",
+      "selection": "y:0498\nkey:0499\nkey:0",
+      "copied": "y:0498\nkey:0499\nkey:0"
+    },
+    {
+      "name": "selection-after-unmount",
+      "scrollTop": 24820,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "html": "<div class=\"v-vl\"><div class=\"v-vl-items\" style=\"box-sizing: content-box; height: 25000px; padding-top: 0px; padding-bottom: 0px;\"><div class=\"v-vl-visible-items\" style=\"transform: translateY(24775px);\"><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0991</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0992</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0993</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0994</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0995</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0996</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0997</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0998</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0999</div></div></div></div>",
+      "selection": "key:0994\nkey:0995\n",
+      "copied": "key:0994\nkey:0995\n"
+    },
+    {
+      "name": "selection-back-at-start",
+      "scrollTop": 0,
+      "scrollHeight": 25000,
+      "clientHeight": 180,
+      "html": "<div class=\"v-vl\"><div class=\"v-vl-items\" style=\"box-sizing: content-box; height: 25000px; padding-top: 0px; padding-bottom: 0px;\"><div class=\"v-vl-visible-items\" style=\"transform: translateY(0px);\"><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0000</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0001</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0002</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0003</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0004</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0005</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0006</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0007</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0008</div><div data-v-575a797b=\"\" class=\"line-item content-value\">key:0009</div></div></div></div>",
+      "selection": "key:0003\nkey:0004\n",
+      "copied": "key:0003\nkey:0004\n"
+    }
+  ]
+}

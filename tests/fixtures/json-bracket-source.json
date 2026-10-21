@@ -1,0 +1,481 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "samples": [
+    {
+      "dark": false,
+      "text": "{broken",
+      "spans": [
+        {
+          "text": "{",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk1 unexpected-closing-bracket"
+        },
+        {
+          "text": "broken",
+          "color": "rgb(0, 0, 0)",
+          "class": "mtk1"
+        }
+      ]
+    },
+    {
+      "dark": false,
+      "text": "[}",
+      "spans": [
+        {
+          "text": "[",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk1 unexpected-closing-bracket"
+        },
+        {
+          "text": "}",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk1 unexpected-closing-bracket"
+        }
+      ]
+    },
+    {
+      "dark": false,
+      "text": "]",
+      "spans": [
+        {
+          "text": "]",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk1 unexpected-closing-bracket"
+        }
+      ]
+    },
+    {
+      "dark": false,
+      "text": "{\"a\":[1]}",
+      "spans": [
+        {
+          "text": "{",
+          "color": "rgb(4, 49, 250)",
+          "class": "mtk1 bracket-highlighting-0"
+        },
+        {
+          "text": "\"a\"",
+          "color": "rgb(163, 21, 21)",
+          "class": "mtk20"
+        },
+        {
+          "text": ":",
+          "color": "rgb(0, 0, 0)",
+          "class": "mtk1"
+        },
+        {
+          "text": "[",
+          "color": "rgb(49, 147, 49)",
+          "class": "mtk1 bracket-highlighting-1"
+        },
+        {
+          "text": "1",
+          "color": "rgb(9, 134, 88)",
+          "class": "mtk7"
+        },
+        {
+          "text": "]",
+          "color": "rgb(49, 147, 49)",
+          "class": "mtk1 bracket-highlighting-1"
+        },
+        {
+          "text": "}",
+          "color": "rgb(4, 49, 250)",
+          "class": "mtk1 bracket-highlighting-0"
+        }
+      ]
+    },
+    {
+      "dark": false,
+      "text": "{\"a\":[1}",
+      "spans": [
+        {
+          "text": "{",
+          "color": "rgb(4, 49, 250)",
+          "class": "mtk1 bracket-highlighting-0"
+        },
+        {
+          "text": "\"a\"",
+          "color": "rgb(163, 21, 21)",
+          "class": "mtk20"
+        },
+        {
+          "text": ":",
+          "color": "rgb(0, 0, 0)",
+          "class": "mtk1"
+        },
+        {
+          "text": "[",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk1 unexpected-closing-bracket"
+        },
+        {
+          "text": "1",
+          "color": "rgb(9, 134, 88)",
+          "class": "mtk7"
+        },
+        {
+          "text": "}",
+          "color": "rgb(4, 49, 250)",
+          "class": "mtk1 bracket-highlighting-0"
+        }
+      ]
+    },
+    {
+      "dark": false,
+      "text": "{\"a\": \"]\\\"{\"}",
+      "spans": [
+        {
+          "text": "{",
+          "color": "rgb(4, 49, 250)",
+          "class": "mtk1 bracket-highlighting-0"
+        },
+        {
+          "text": "\"a\"",
+          "color": "rgb(163, 21, 21)",
+          "class": "mtk20"
+        },
+        {
+          "text": ": ",
+          "color": "rgb(0, 0, 0)",
+          "class": "mtk1"
+        },
+        {
+          "text": "\"]\\\"{\"",
+          "color": "rgb(4, 81, 165)",
+          "class": "mtk5"
+        },
+        {
+          "text": "}",
+          "color": "rgb(4, 49, 250)",
+          "class": "mtk1 bracket-highlighting-0"
+        }
+      ]
+    },
+    {
+      "dark": false,
+      "text": "[[[[[]]]]]",
+      "spans": [
+        {
+          "text": "[",
+          "color": "rgb(4, 49, 250)",
+          "class": "mtk1 bracket-highlighting-0"
+        },
+        {
+          "text": "[",
+          "color": "rgb(49, 147, 49)",
+          "class": "mtk1 bracket-highlighting-1"
+        },
+        {
+          "text": "[",
+          "color": "rgb(123, 56, 20)",
+          "class": "mtk1 bracket-highlighting-2"
+        },
+        {
+          "text": "[",
+          "color": "rgb(4, 49, 250)",
+          "class": "mtk1 bracket-highlighting-3"
+        },
+        {
+          "text": "[",
+          "color": "rgb(49, 147, 49)",
+          "class": "mtk1 bracket-highlighting-4"
+        },
+        {
+          "text": "]",
+          "color": "rgb(49, 147, 49)",
+          "class": "mtk1 bracket-highlighting-4"
+        },
+        {
+          "text": "]",
+          "color": "rgb(4, 49, 250)",
+          "class": "mtk1 bracket-highlighting-3"
+        },
+        {
+          "text": "]",
+          "color": "rgb(123, 56, 20)",
+          "class": "mtk1 bracket-highlighting-2"
+        },
+        {
+          "text": "]",
+          "color": "rgb(49, 147, 49)",
+          "class": "mtk1 bracket-highlighting-1"
+        },
+        {
+          "text": "]",
+          "color": "rgb(4, 49, 250)",
+          "class": "mtk1 bracket-highlighting-0"
+        }
+      ]
+    },
+    {
+      "dark": false,
+      "text": "{\"a\": [",
+      "spans": [
+        {
+          "text": "{",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk1 unexpected-closing-bracket"
+        },
+        {
+          "text": "\"a\"",
+          "color": "rgb(163, 21, 21)",
+          "class": "mtk20"
+        },
+        {
+          "text": ": ",
+          "color": "rgb(0, 0, 0)",
+          "class": "mtk1"
+        },
+        {
+          "text": "[",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk1 unexpected-closing-bracket"
+        }
+      ]
+    },
+    {
+      "dark": true,
+      "text": "{broken",
+      "spans": [
+        {
+          "text": "{",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk9 unexpected-closing-bracket"
+        },
+        {
+          "text": "broken",
+          "color": "rgb(212, 212, 212)",
+          "class": "mtk1"
+        }
+      ]
+    },
+    {
+      "dark": true,
+      "text": "[}",
+      "spans": [
+        {
+          "text": "[",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk9 unexpected-closing-bracket"
+        },
+        {
+          "text": "}",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk9 unexpected-closing-bracket"
+        }
+      ]
+    },
+    {
+      "dark": true,
+      "text": "]",
+      "spans": [
+        {
+          "text": "]",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk9 unexpected-closing-bracket"
+        }
+      ]
+    },
+    {
+      "dark": true,
+      "text": "{\"a\":[1]}",
+      "spans": [
+        {
+          "text": "{",
+          "color": "rgb(255, 215, 0)",
+          "class": "mtk9 bracket-highlighting-0"
+        },
+        {
+          "text": "\"a\"",
+          "color": "rgb(156, 220, 254)",
+          "class": "mtk4"
+        },
+        {
+          "text": ":",
+          "color": "rgb(220, 220, 220)",
+          "class": "mtk9"
+        },
+        {
+          "text": "[",
+          "color": "rgb(218, 112, 214)",
+          "class": "mtk9 bracket-highlighting-1"
+        },
+        {
+          "text": "1",
+          "color": "rgb(181, 206, 168)",
+          "class": "mtk6"
+        },
+        {
+          "text": "]",
+          "color": "rgb(218, 112, 214)",
+          "class": "mtk9 bracket-highlighting-1"
+        },
+        {
+          "text": "}",
+          "color": "rgb(255, 215, 0)",
+          "class": "mtk9 bracket-highlighting-0"
+        }
+      ]
+    },
+    {
+      "dark": true,
+      "text": "{\"a\":[1}",
+      "spans": [
+        {
+          "text": "{",
+          "color": "rgb(255, 215, 0)",
+          "class": "mtk9 bracket-highlighting-0"
+        },
+        {
+          "text": "\"a\"",
+          "color": "rgb(156, 220, 254)",
+          "class": "mtk4"
+        },
+        {
+          "text": ":",
+          "color": "rgb(220, 220, 220)",
+          "class": "mtk9"
+        },
+        {
+          "text": "[",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk9 unexpected-closing-bracket"
+        },
+        {
+          "text": "1",
+          "color": "rgb(181, 206, 168)",
+          "class": "mtk6"
+        },
+        {
+          "text": "}",
+          "color": "rgb(255, 215, 0)",
+          "class": "mtk9 bracket-highlighting-0"
+        }
+      ]
+    },
+    {
+      "dark": true,
+      "text": "{\"a\": \"]\\\"{\"}",
+      "spans": [
+        {
+          "text": "{",
+          "color": "rgb(255, 215, 0)",
+          "class": "mtk9 bracket-highlighting-0"
+        },
+        {
+          "text": "\"a\"",
+          "color": "rgb(156, 220, 254)",
+          "class": "mtk4"
+        },
+        {
+          "text": ":",
+          "color": "rgb(220, 220, 220)",
+          "class": "mtk9"
+        },
+        {
+          "text": " ",
+          "color": "rgb(212, 212, 212)",
+          "class": "mtk1"
+        },
+        {
+          "text": "\"]\\\"{\"",
+          "color": "rgb(206, 145, 120)",
+          "class": "mtk5"
+        },
+        {
+          "text": "}",
+          "color": "rgb(255, 215, 0)",
+          "class": "mtk9 bracket-highlighting-0"
+        }
+      ]
+    },
+    {
+      "dark": true,
+      "text": "[[[[[]]]]]",
+      "spans": [
+        {
+          "text": "[",
+          "color": "rgb(255, 215, 0)",
+          "class": "mtk9 bracket-highlighting-0"
+        },
+        {
+          "text": "[",
+          "color": "rgb(218, 112, 214)",
+          "class": "mtk9 bracket-highlighting-1"
+        },
+        {
+          "text": "[",
+          "color": "rgb(23, 159, 255)",
+          "class": "mtk9 bracket-highlighting-2"
+        },
+        {
+          "text": "[",
+          "color": "rgb(255, 215, 0)",
+          "class": "mtk9 bracket-highlighting-3"
+        },
+        {
+          "text": "[",
+          "color": "rgb(218, 112, 214)",
+          "class": "mtk9 bracket-highlighting-4"
+        },
+        {
+          "text": "]",
+          "color": "rgb(218, 112, 214)",
+          "class": "mtk9 bracket-highlighting-4"
+        },
+        {
+          "text": "]",
+          "color": "rgb(255, 215, 0)",
+          "class": "mtk9 bracket-highlighting-3"
+        },
+        {
+          "text": "]",
+          "color": "rgb(23, 159, 255)",
+          "class": "mtk9 bracket-highlighting-2"
+        },
+        {
+          "text": "]",
+          "color": "rgb(218, 112, 214)",
+          "class": "mtk9 bracket-highlighting-1"
+        },
+        {
+          "text": "]",
+          "color": "rgb(255, 215, 0)",
+          "class": "mtk9 bracket-highlighting-0"
+        }
+      ]
+    },
+    {
+      "dark": true,
+      "text": "{\"a\": [",
+      "spans": [
+        {
+          "text": "{",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk9 unexpected-closing-bracket"
+        },
+        {
+          "text": "\"a\"",
+          "color": "rgb(156, 220, 254)",
+          "class": "mtk4"
+        },
+        {
+          "text": ":",
+          "color": "rgb(220, 220, 220)",
+          "class": "mtk9"
+        },
+        {
+          "text": " ",
+          "color": "rgb(212, 212, 212)",
+          "class": "mtk1"
+        },
+        {
+          "text": "[",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "class": "mtk9 unexpected-closing-bracket"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2030 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "36 original Monaco color/token samples, 18 per theme. DOM spans are from an own hidden WKWebView running pinned original frontend files and the original editor. No global inputs, clipboard or real Redis. Does not accept full native or whole-image parity.",
+  "samples": [
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk8",
+              "color": "rgb(0, 128, 0)",
+              "text": "/*"
+            }
+          ]
+        }
+      ],
+      "text": "/*",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk8",
+              "color": "rgb(0, 128, 0)",
+              "text": "/* a {} */"
+            }
+          ]
+        }
+      ],
+      "text": "/* a {} */",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk8",
+              "color": "rgb(0, 128, 0)",
+              "text": "/* ["
+            }
+          ]
+        },
+        {
+          "spans": [
+            {
+              "class": "mtk8",
+              "color": "rgb(0, 128, 0)",
+              "text": "] */"
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": " "
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "{"
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "/* [\n] */ {}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          }
+        ],
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": ""
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 6,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk8",
+              "color": "rgb(0, 128, 0)",
+              "text": "// {}"
+            }
+          ]
+        },
+        {
+          "spans": [
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "{"
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "// {}\n{}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.line.json"
+          }
+        ],
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "{"
+            },
+            {
+              "class": "mtk20",
+              "color": "rgb(163, 21, 21)",
+              "text": "\"url\""
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "\"http://x\""
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"url\":\"http://x\"}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 6,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 7,
+            "type": "string.value.json"
+          },
+          {
+            "language": "json",
+            "offset": 17,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "{"
+            },
+            {
+              "class": "mtk20",
+              "color": "rgb(163, 21, 21)",
+              "text": "\"s\""
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "\"/* {} */\""
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"s\":\"/* {} */\"}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "string.value.json"
+          },
+          {
+            "language": "json",
+            "offset": 15,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "{"
+            },
+            {
+              "class": "mtk20",
+              "color": "rgb(163, 21, 21)",
+              "text": "\"a\""
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "true"
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": ","
+            },
+            {
+              "class": "mtk20",
+              "color": "rgb(163, 21, 21)",
+              "text": "\"b\""
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "false"
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"a\":true,\"b\":false}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 9,
+            "type": "delimiter.comma.json"
+          },
+          {
+            "language": "json",
+            "offset": 10,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 13,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 14,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 19,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "{"
+            },
+            {
+              "class": "mtk20",
+              "color": "rgb(163, 21, 21)",
+              "text": "\"a\""
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "null"
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"a\":null}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 9,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "["
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "true"
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": ","
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "false"
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": ","
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "null"
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "]"
+            }
+          ]
+        }
+      ],
+      "text": "[true,false,null]",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.array.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "delimiter.comma.json"
+          },
+          {
+            "language": "json",
+            "offset": 6,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 11,
+            "type": "delimiter.comma.json"
+          },
+          {
+            "language": "json",
+            "offset": 12,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 16,
+            "type": "delimiter.array.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "true"
+            }
+          ]
+        }
+      ],
+      "text": "true",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "keyword.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk20",
+              "color": "rgb(163, 21, 21)",
+              "text": "\"x\""
+            }
+          ]
+        }
+      ],
+      "text": "\"x\"",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "string.key.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "["
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "\"x\""
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "]"
+            }
+          ]
+        }
+      ],
+      "text": "[\"x\"]",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.array.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.value.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.array.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "{"
+            },
+            {
+              "class": "mtk20",
+              "color": "rgb(163, 21, 21)",
+              "text": "\"a\""
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "\"x\""
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"a\":\"x\"}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "string.value.json"
+          },
+          {
+            "language": "json",
+            "offset": 8,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "{"
+            },
+            {
+              "class": "mtk20",
+              "color": "rgb(163, 21, 21)",
+              "text": "\"a\""
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "\"\\u0041\""
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"a\":\"\\u0041\"}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "string.value.json"
+          },
+          {
+            "language": "json",
+            "offset": 13,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "{"
+            },
+            {
+              "class": "mtk20",
+              "color": "rgb(163, 21, 21)",
+              "text": "\"a\""
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "\"x"
+            }
+          ]
+        },
+        {
+          "spans": [
+            {
+              "class": "mtk20",
+              "color": "rgb(163, 21, 21)",
+              "text": "// y\""
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"a\":\"x\n// y\"}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "string.value.json"
+          }
+        ],
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk8",
+              "color": "rgb(0, 128, 0)",
+              "text": "/* x"
+            }
+          ]
+        },
+        {
+          "spans": [
+            {
+              "class": "mtk8",
+              "color": "rgb(0, 128, 0)",
+              "text": "y */"
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": " "
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(4, 81, 165)",
+              "text": "false"
+            }
+          ]
+        }
+      ],
+      "text": "/* x\ny */ false",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          }
+        ],
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": ""
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "keyword.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk8",
+              "color": "rgb(0, 128, 0)",
+              "text": "// x"
+            }
+          ]
+        },
+        {
+          "spans": [
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "["
+            },
+            {
+              "class": "mtk7",
+              "color": "rgb(9, 134, 88)",
+              "text": "1"
+            },
+            {
+              "class": "mtk1 bracket-highlighting-0",
+              "color": "rgb(4, 49, 250)",
+              "text": "]"
+            }
+          ]
+        }
+      ],
+      "text": "// x\r\n[1]",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.line.json"
+          }
+        ],
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.array.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "number.json"
+          },
+          {
+            "language": "json",
+            "offset": 2,
+            "type": "delimiter.array.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": false,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk1",
+              "color": "rgb(0, 0, 0)",
+              "text": "中文🙂 "
+            },
+            {
+              "class": "mtk8",
+              "color": "rgb(0, 128, 0)",
+              "text": "/* [] */"
+            }
+          ]
+        }
+      ],
+      "text": "中文🙂 /* [] */",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": ""
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": ""
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "comment.block.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk7",
+              "color": "rgb(96, 139, 78)",
+              "text": "/*"
+            }
+          ]
+        }
+      ],
+      "text": "/*",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk7",
+              "color": "rgb(96, 139, 78)",
+              "text": "/* a {} */"
+            }
+          ]
+        }
+      ],
+      "text": "/* a {} */",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk7",
+              "color": "rgb(96, 139, 78)",
+              "text": "/* ["
+            }
+          ]
+        },
+        {
+          "spans": [
+            {
+              "class": "mtk7",
+              "color": "rgb(96, 139, 78)",
+              "text": "] */"
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(212, 212, 212)",
+              "text": " "
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "{"
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "/* [\n] */ {}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          }
+        ],
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": ""
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 6,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk7",
+              "color": "rgb(96, 139, 78)",
+              "text": "// {}"
+            }
+          ]
+        },
+        {
+          "spans": [
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "{"
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "// {}\n{}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.line.json"
+          }
+        ],
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "{"
+            },
+            {
+              "class": "mtk4",
+              "color": "rgb(156, 220, 254)",
+              "text": "\"url\""
+            },
+            {
+              "class": "mtk9",
+              "color": "rgb(220, 220, 220)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "\"http://x\""
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"url\":\"http://x\"}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 6,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 7,
+            "type": "string.value.json"
+          },
+          {
+            "language": "json",
+            "offset": 17,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "{"
+            },
+            {
+              "class": "mtk4",
+              "color": "rgb(156, 220, 254)",
+              "text": "\"s\""
+            },
+            {
+              "class": "mtk9",
+              "color": "rgb(220, 220, 220)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "\"/* {} */\""
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"s\":\"/* {} */\"}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "string.value.json"
+          },
+          {
+            "language": "json",
+            "offset": 15,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "{"
+            },
+            {
+              "class": "mtk4",
+              "color": "rgb(156, 220, 254)",
+              "text": "\"a\""
+            },
+            {
+              "class": "mtk9",
+              "color": "rgb(220, 220, 220)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "true"
+            },
+            {
+              "class": "mtk9",
+              "color": "rgb(220, 220, 220)",
+              "text": ","
+            },
+            {
+              "class": "mtk4",
+              "color": "rgb(156, 220, 254)",
+              "text": "\"b\""
+            },
+            {
+              "class": "mtk9",
+              "color": "rgb(220, 220, 220)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "false"
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"a\":true,\"b\":false}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 9,
+            "type": "delimiter.comma.json"
+          },
+          {
+            "language": "json",
+            "offset": 10,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 13,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 14,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 19,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "{"
+            },
+            {
+              "class": "mtk4",
+              "color": "rgb(156, 220, 254)",
+              "text": "\"a\""
+            },
+            {
+              "class": "mtk9",
+              "color": "rgb(220, 220, 220)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "null"
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"a\":null}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 9,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "["
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "true"
+            },
+            {
+              "class": "mtk9",
+              "color": "rgb(220, 220, 220)",
+              "text": ","
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "false"
+            },
+            {
+              "class": "mtk9",
+              "color": "rgb(220, 220, 220)",
+              "text": ","
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "null"
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "]"
+            }
+          ]
+        }
+      ],
+      "text": "[true,false,null]",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.array.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "delimiter.comma.json"
+          },
+          {
+            "language": "json",
+            "offset": 6,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 11,
+            "type": "delimiter.comma.json"
+          },
+          {
+            "language": "json",
+            "offset": 12,
+            "type": "keyword.json"
+          },
+          {
+            "language": "json",
+            "offset": 16,
+            "type": "delimiter.array.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "true"
+            }
+          ]
+        }
+      ],
+      "text": "true",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "keyword.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk4",
+              "color": "rgb(156, 220, 254)",
+              "text": "\"x\""
+            }
+          ]
+        }
+      ],
+      "text": "\"x\"",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "string.key.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "["
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "\"x\""
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "]"
+            }
+          ]
+        }
+      ],
+      "text": "[\"x\"]",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.array.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.value.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.array.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "{"
+            },
+            {
+              "class": "mtk4",
+              "color": "rgb(156, 220, 254)",
+              "text": "\"a\""
+            },
+            {
+              "class": "mtk9",
+              "color": "rgb(220, 220, 220)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "\"x\""
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"a\":\"x\"}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "string.value.json"
+          },
+          {
+            "language": "json",
+            "offset": 8,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "{"
+            },
+            {
+              "class": "mtk4",
+              "color": "rgb(156, 220, 254)",
+              "text": "\"a\""
+            },
+            {
+              "class": "mtk9",
+              "color": "rgb(220, 220, 220)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "\"\\u0041\""
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"a\":\"\\u0041\"}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "string.value.json"
+          },
+          {
+            "language": "json",
+            "offset": 13,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "{"
+            },
+            {
+              "class": "mtk4",
+              "color": "rgb(156, 220, 254)",
+              "text": "\"a\""
+            },
+            {
+              "class": "mtk9",
+              "color": "rgb(220, 220, 220)",
+              "text": ":"
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "\"x"
+            }
+          ]
+        },
+        {
+          "spans": [
+            {
+              "class": "mtk4",
+              "color": "rgb(156, 220, 254)",
+              "text": "// y\""
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "}"
+            }
+          ]
+        }
+      ],
+      "text": "{\"a\":\"x\n// y\"}",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.bracket.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": "delimiter.colon.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "string.value.json"
+          }
+        ],
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "string.key.json"
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "delimiter.bracket.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk7",
+              "color": "rgb(96, 139, 78)",
+              "text": "/* x"
+            }
+          ]
+        },
+        {
+          "spans": [
+            {
+              "class": "mtk7",
+              "color": "rgb(96, 139, 78)",
+              "text": "y */"
+            },
+            {
+              "class": "mtk1",
+              "color": "rgb(212, 212, 212)",
+              "text": " "
+            },
+            {
+              "class": "mtk5",
+              "color": "rgb(206, 145, 120)",
+              "text": "false"
+            }
+          ]
+        }
+      ],
+      "text": "/* x\ny */ false",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          }
+        ],
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.block.json"
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": ""
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "keyword.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk7",
+              "color": "rgb(96, 139, 78)",
+              "text": "// x"
+            }
+          ]
+        },
+        {
+          "spans": [
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "["
+            },
+            {
+              "class": "mtk6",
+              "color": "rgb(181, 206, 168)",
+              "text": "1"
+            },
+            {
+              "class": "mtk9 bracket-highlighting-0",
+              "color": "rgb(255, 215, 0)",
+              "text": "]"
+            }
+          ]
+        }
+      ],
+      "text": "// x\r\n[1]",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "comment.line.json"
+          }
+        ],
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": "delimiter.array.json"
+          },
+          {
+            "language": "json",
+            "offset": 1,
+            "type": "number.json"
+          },
+          {
+            "language": "json",
+            "offset": 2,
+            "type": "delimiter.array.json"
+          }
+        ]
+      ]
+    },
+    {
+      "dark": true,
+      "lines": [
+        {
+          "spans": [
+            {
+              "class": "mtk1",
+              "color": "rgb(212, 212, 212)",
+              "text": "中文🙂 "
+            },
+            {
+              "class": "mtk7",
+              "color": "rgb(96, 139, 78)",
+              "text": "/* [] */"
+            }
+          ]
+        }
+      ],
+      "text": "中文🙂 /* [] */",
+      "tokens": [
+        [
+          {
+            "language": "json",
+            "offset": 0,
+            "type": ""
+          },
+          {
+            "language": "json",
+            "offset": 4,
+            "type": ""
+          },
+          {
+            "language": "json",
+            "offset": 5,
+            "type": "comment.block.json"
+          }
+        ]
+      ]
+    }
+  ],
+  "rawReports": [
+    {
+      "path": "outputs/source-probes/json-syntax/light-raw.json",
+      "sha256": "e9b718cb8ccd62f9b47f136a5465cc168bdf58c6f8574bd6c2a26571f9be4899"
+    },
+    {
+      "path": "outputs/source-probes/json-syntax/dark-raw.json",
+      "sha256": "b9c12aa53544594cbc209a750576cecec810a5520fb408fdf8eec7be6071876c"
+    }
+  ]
+}

@@ -1,0 +1,799 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "states": [
+    {
+      "step": "focus",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "Enter",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowDown",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowUp",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowDown",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "Enter",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": true,
+          "pending": true,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowDown",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": true,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowRight",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": true,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": true,
+          "expanded": true
+        },
+        {
+          "label": "primary",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowRight",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": true,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": true
+        },
+        {
+          "label": "primary",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowDown",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": true,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": true
+        },
+        {
+          "label": "primary",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "Enter",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": true
+        },
+        {
+          "label": "primary",
+          "selected": true,
+          "pending": true,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowLeft",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": true,
+          "expanded": true
+        },
+        {
+          "label": "primary",
+          "selected": true,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowLeft",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowRight",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": true,
+          "expanded": true
+        },
+        {
+          "label": "primary",
+          "selected": true,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowLeft",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowDown",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowDown",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowDown",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowUp",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "blur",
+      "focused": "n-input__input-el",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "refocus-down",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    }
+  ],
+  "filtered": [
+    {
+      "step": "filter-focus",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": true
+        },
+        {
+          "label": "cache",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "orders",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowDown",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": true
+        },
+        {
+          "label": "cache",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "orders",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowDown",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": true,
+          "expanded": true
+        },
+        {
+          "label": "cache",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "orders",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowRight",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": true
+        },
+        {
+          "label": "cache",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        },
+        {
+          "label": "orders",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowRight",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": true
+        },
+        {
+          "label": "cache",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        },
+        {
+          "label": "orders",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "ArrowDown",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": true
+        },
+        {
+          "label": "cache",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "orders",
+          "selected": false,
+          "pending": true,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    },
+    {
+      "step": "Enter",
+      "focused": "n-tree n-tree--block-node n-tree--block-line fill-height n-scrollbar __scrollbar-1lzl83h",
+      "rows": [
+        {
+          "label": "localhost",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "开发环境",
+          "selected": false,
+          "pending": false,
+          "expanded": true
+        },
+        {
+          "label": "cache",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        },
+        {
+          "label": "orders",
+          "selected": true,
+          "pending": true,
+          "expanded": false
+        },
+        {
+          "label": "生产环境",
+          "selected": false,
+          "pending": false,
+          "expanded": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "setupSource": "outputs/source-probes/status-clients-macos/setup.js",
+  "setupSHA256": "30758e3b998a4c68aec0073e47cde22e4c4cdde600fb817aeb5265b9b8722854",
+  "serverInfo": {
+    "Server": {
+      "redis_version": "8.10.2",
+      "redis_mode": "standalone",
+      "uptime_in_seconds": "3600"
+    },
+    "Replication": {
+      "role": "master"
+    },
+    "Clients": {
+      "connected_clients": "17"
+    },
+    "Memory": {
+      "used_memory": "1234567"
+    },
+    "Stats": {
+      "instantaneous_ops_per_sec": "25",
+      "instantaneous_input_kbps": "42.9",
+      "instantaneous_output_kbps": "128.8"
+    },
+    "Keyspace": {
+      "db0": "keys=19,expires=0,avg_ttl=0",
+      "db1": "keys=2,expires=0,avg_ttl=0"
+    },
+    "CPU": {
+      "used_cpu_sys": "2.5",
+      "used_cpu_user": "7.1"
+    }
+  },
+  "scope": "Controlled INFO literal used by the archived original client component probe;connected client count is replaced per source state."
+}

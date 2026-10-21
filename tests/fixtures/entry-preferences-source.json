@@ -1,0 +1,351 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Five original nested decoder-preferences layouts with a changed field and multiline value. Records that the parent editor remains rendered under the modal; Records modal focus and actual Cmd+S with pinned and unpinned parents; no native parity claim from Source capture alone.",
+  "records": [
+    {
+      "name": "entry-preferences",
+      "editor": {
+        "x": 687,
+        "y": 165.1875,
+        "width": 331,
+        "height": 559.8125
+      },
+      "card": {
+        "x": 689,
+        "y": 165.1875,
+        "width": 329,
+        "height": 559.8125
+      },
+      "field": {
+        "x": 718,
+        "y": 245.1875,
+        "width": 271,
+        "height": 32,
+        "value": "draft-field"
+      },
+      "value": {
+        "x": 709,
+        "y": 324.1875,
+        "width": 289,
+        "height": 305.8125
+      },
+      "format": {
+        "x": 706,
+        "y": 638,
+        "width": 74.921875,
+        "height": 32
+      },
+      "decode": {
+        "x": 821.921875,
+        "y": 638,
+        "width": 82.234375,
+        "height": 32
+      },
+      "modal": {
+        "x": 192,
+        "y": 174.5,
+        "width": 640,
+        "height": 419
+      },
+      "mask": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 768
+      },
+      "valueLines": [
+        "line one",
+        "line two"
+      ],
+      "updateEnabled": true,
+      "focusOwner": "BODY",
+      "editorBackground": "rgb(255, 255, 255)",
+      "modalText": "偏好设置常规配置编辑器命令行自定义解码主题浅色深色自动语言简体中文字体 请选择或手动输入字体名字体尺寸SCAN命令默认数量 键图标样式紧凑类型更新 自动检查更新隐私策略 允许收集匿名数据 隐私策略字体 请选择或手动输入字体名字体尺寸 显示行号 启用代码折叠 允许拖放文本 支持链接跳转字体 请选择或手动输入字体名字体尺寸光标样式方块下划线竖线 新增自定义解码 帮助解码器名称命令预览状态操作无数据重置为默认取消保存"
+    },
+    {
+      "name": "entry-preferences-return",
+      "editor": {
+        "x": 687,
+        "y": 165.1875,
+        "width": 331,
+        "height": 559.8125
+      },
+      "card": {
+        "x": 689,
+        "y": 165.1875,
+        "width": 329,
+        "height": 559.8125
+      },
+      "field": {
+        "x": 718,
+        "y": 245.1875,
+        "width": 271,
+        "height": 32,
+        "value": "draft-field"
+      },
+      "value": {
+        "x": 709,
+        "y": 324.1875,
+        "width": 289,
+        "height": 305.8125
+      },
+      "format": {
+        "x": 706,
+        "y": 638,
+        "width": 74.921875,
+        "height": 32
+      },
+      "decode": {
+        "x": 821.921875,
+        "y": 638,
+        "width": 82.234375,
+        "height": 32
+      },
+      "modal": null,
+      "mask": null,
+      "valueLines": [
+        "line one",
+        "line two"
+      ],
+      "updateEnabled": true,
+      "focusOwner": "BODY",
+      "editorBackground": "rgb(255, 255, 255)",
+      "modalText": null
+    },
+    {
+      "name": "entry-preferences-full",
+      "editor": {
+        "x": 351,
+        "y": 79.1875,
+        "width": 672,
+        "height": 687.8125
+      },
+      "card": {
+        "x": 353,
+        "y": 79.1875,
+        "width": 670,
+        "height": 687.8125
+      },
+      "field": {
+        "x": 382,
+        "y": 159.1875,
+        "width": 612,
+        "height": 32,
+        "value": "draft-field"
+      },
+      "value": {
+        "x": 373,
+        "y": 238.1875,
+        "width": 630,
+        "height": 433.8125
+      },
+      "format": {
+        "x": 370,
+        "y": 680,
+        "width": 74.921875,
+        "height": 32
+      },
+      "decode": {
+        "x": 485.921875,
+        "y": 680,
+        "width": 82.234375,
+        "height": 32
+      },
+      "modal": {
+        "x": 192,
+        "y": 174.5,
+        "width": 640,
+        "height": 419
+      },
+      "mask": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 768
+      },
+      "valueLines": [
+        "line one",
+        "line two"
+      ],
+      "updateEnabled": true,
+      "focusOwner": "BODY",
+      "editorBackground": "rgb(255, 255, 255)",
+      "modalText": "偏好设置常规配置编辑器命令行自定义解码主题浅色深色自动语言简体中文字体 请选择或手动输入字体名字体尺寸SCAN命令默认数量 键图标样式紧凑类型更新 自动检查更新隐私策略 允许收集匿名数据 隐私策略字体 请选择或手动输入字体名字体尺寸 显示行号 启用代码折叠 允许拖放文本 支持链接跳转字体 请选择或手动输入字体名字体尺寸光标样式方块下划线竖线 新增自定义解码 帮助解码器名称命令预览状态操作无数据重置为默认取消保存"
+    },
+    {
+      "name": "entry-preferences-dark",
+      "editor": {
+        "x": 687,
+        "y": 165.1875,
+        "width": 331,
+        "height": 559.8125
+      },
+      "card": {
+        "x": 689,
+        "y": 165.1875,
+        "width": 329,
+        "height": 559.8125
+      },
+      "field": {
+        "x": 718,
+        "y": 245.1875,
+        "width": 271,
+        "height": 32,
+        "value": "draft-field"
+      },
+      "value": {
+        "x": 709,
+        "y": 324.1875,
+        "width": 289,
+        "height": 305.8125
+      },
+      "format": {
+        "x": 706,
+        "y": 638,
+        "width": 74.921875,
+        "height": 32
+      },
+      "decode": {
+        "x": 821.921875,
+        "y": 638,
+        "width": 82.234375,
+        "height": 32
+      },
+      "modal": {
+        "x": 192,
+        "y": 174.5,
+        "width": 640,
+        "height": 419
+      },
+      "mask": {
+        "x": 0,
+        "y": 0,
+        "width": 1024,
+        "height": 768
+      },
+      "valueLines": [
+        "line one",
+        "line two"
+      ],
+      "updateEnabled": true,
+      "focusOwner": "BODY",
+      "editorBackground": "rgb(24, 24, 28)",
+      "modalText": "偏好设置常规配置编辑器命令行自定义解码主题浅色深色自动语言简体中文字体 请选择或手动输入字体名字体尺寸SCAN命令默认数量 键图标样式紧凑类型更新 自动检查更新隐私策略 允许收集匿名数据 隐私策略字体 请选择或手动输入字体名字体尺寸 显示行号 启用代码折叠 允许拖放文本 支持链接跳转字体 请选择或手动输入字体名字体尺寸光标样式方块下划线竖线 新增自定义解码 帮助解码器名称命令预览状态操作无数据重置为默认取消保存"
+    },
+    {
+      "name": "entry-preferences-saved",
+      "editor": {
+        "x": 351,
+        "y": 79.1875,
+        "width": 672,
+        "height": 687.8125
+      },
+      "card": {
+        "x": 353,
+        "y": 79.1875,
+        "width": 670,
+        "height": 687.8125
+      },
+      "field": {
+        "x": 382,
+        "y": 159.1875,
+        "width": 612,
+        "height": 32,
+        "value": "draft-field"
+      },
+      "value": {
+        "x": 373,
+        "y": 238.1875,
+        "width": 630,
+        "height": 433.8125
+      },
+      "format": {
+        "x": 370,
+        "y": 680,
+        "width": 74.921875,
+        "height": 32
+      },
+      "decode": {
+        "x": 485.921875,
+        "y": 680,
+        "width": 82.234375,
+        "height": 32
+      },
+      "modal": null,
+      "mask": null,
+      "valueLines": [
+        "line one",
+        "line two"
+      ],
+      "updateEnabled": true,
+      "focusOwner": "BODY",
+      "editorBackground": "rgb(24, 24, 28)",
+      "modalText": null
+    }
+  ],
+  "events": [
+    {
+      "name": "cancel-retains-draft",
+      "field": "draft-field",
+      "valueLines": [
+        "line one",
+        "line two"
+      ]
+    },
+    {
+      "name": "cancel-keeps-fullscreen",
+      "editor": {
+        "x": 351,
+        "y": 79.1875,
+        "width": 672,
+        "height": 687.8125
+      },
+      "field": "draft-field"
+    },
+    {
+      "name": "cancel-restores-theme",
+      "editorBackground": "rgb(255, 255, 255)",
+      "field": "draft-field"
+    },
+    {
+      "name": "unpinned-shortcut-under-preferences",
+      "focusOwner": "BODY",
+      "requests": [],
+      "editorOpen": true,
+      "preferencesOpen": true,
+      "saveButtonEnabled": true
+    },
+    {
+      "name": "pinned-shortcut-under-preferences",
+      "focusOwner": "BODY",
+      "requests": [],
+      "editorOpen": true,
+      "preferencesOpen": true,
+      "saveButtonEnabled": true
+    },
+    {
+      "name": "save-keeps-draft-fullscreen-theme",
+      "saveRequests": 1,
+      "savedTheme": "dark",
+      "field": "draft-field",
+      "editor": {
+        "x": 351,
+        "y": 79.1875,
+        "width": 672,
+        "height": 687.8125
+      },
+      "editorBackground": "rgb(24, 24, 28)",
+      "focusOwner": "BODY",
+      "savedEditor": {
+        "font": "",
+        "fontFamily": [],
+        "fontSize": 14,
+        "showLineNum": false,
+        "showFolding": false,
+        "dropText": false,
+        "links": false,
+        "entryTextAlign": 0
+      }
+    }
+  ]
+}

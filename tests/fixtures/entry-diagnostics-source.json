@@ -1,0 +1,982 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Original Monaco JSON markers, decoration ranges/ruler/hover and computed token colors, with exact programmatic model inputs (not typing/auto-closing behavior) in the untouched original ContentEditor. Local mock RPCs; diagnostic source evidence only, not native alignment.",
+  "records": [
+    {
+      "index": 0,
+      "input": "visible draft",
+      "language": "json",
+      "value": "visible draft",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "0",
+          "severity": 8,
+          "message": "Expected a JSON object, array or literal.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 8
+        }
+      ],
+      "decorations": [
+        {
+          "range": {
+            "startLineNumber": 1,
+            "startColumn": 1,
+            "endLineNumber": 1,
+            "endColumn": 8
+          },
+          "className": "squiggly-error",
+          "inlineClassName": null,
+          "overviewRuler": {
+            "color": {
+              "id": "editorOverviewRuler.errorForeground"
+            },
+            "darkColor": "",
+            "_resolvedColor": "rgba(255, 18, 18, 0.7)",
+            "position": 4
+          },
+          "hoverMessage": null
+        }
+      ],
+      "spans": [
+        {
+          "text": "visible draft",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "visible draft",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "input": "{\"a\":}",
+      "language": "json",
+      "value": "{\"a\":}",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "516",
+          "severity": 8,
+          "message": "Value expected",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 6,
+          "endLineNumber": 1,
+          "endColumn": 7
+        }
+      ],
+      "decorations": [
+        {
+          "range": {
+            "startLineNumber": 1,
+            "startColumn": 6,
+            "endLineNumber": 1,
+            "endColumn": 7
+          },
+          "className": "squiggly-error",
+          "inlineClassName": null,
+          "overviewRuler": {
+            "color": {
+              "id": "editorOverviewRuler.errorForeground"
+            },
+            "darkColor": "",
+            "_resolvedColor": "rgba(255, 18, 18, 0.7)",
+            "position": 4
+          },
+          "hoverMessage": null
+        }
+      ],
+      "spans": [
+        {
+          "text": "{\"a\":}",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "{",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        },
+        {
+          "text": "\"a\"",
+          "class": "mtk20",
+          "color": "rgb(163, 21, 21)",
+          "font": ""
+        },
+        {
+          "text": ":",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "}",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "input": "{\"a\" 1}",
+      "language": "json",
+      "value": "{\"a\" 1}",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "515",
+          "severity": 8,
+          "message": "Colon expected",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 6,
+          "endLineNumber": 1,
+          "endColumn": 7
+        }
+      ],
+      "decorations": [
+        {
+          "range": {
+            "startLineNumber": 1,
+            "startColumn": 6,
+            "endLineNumber": 1,
+            "endColumn": 7
+          },
+          "className": "squiggly-error",
+          "inlineClassName": null,
+          "overviewRuler": {
+            "color": {
+              "id": "editorOverviewRuler.errorForeground"
+            },
+            "darkColor": "",
+            "_resolvedColor": "rgba(255, 18, 18, 0.7)",
+            "position": 4
+          },
+          "hoverMessage": null
+        }
+      ],
+      "spans": [
+        {
+          "text": "{\"a\" 1}",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "{",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        },
+        {
+          "text": "\"a\"",
+          "class": "mtk20",
+          "color": "rgb(163, 21, 21)",
+          "font": ""
+        },
+        {
+          "text": " ",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "1",
+          "class": "mtk7",
+          "color": "rgb(9, 134, 88)",
+          "font": ""
+        },
+        {
+          "text": "}",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "input": "{\"a\":1,}",
+      "language": "json",
+      "value": "{\"a\":1,}",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "519",
+          "severity": 8,
+          "message": "Trailing comma",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 7,
+          "endLineNumber": 1,
+          "endColumn": 8
+        }
+      ],
+      "decorations": [
+        {
+          "range": {
+            "startLineNumber": 1,
+            "startColumn": 7,
+            "endLineNumber": 1,
+            "endColumn": 8
+          },
+          "className": "squiggly-error",
+          "inlineClassName": null,
+          "overviewRuler": {
+            "color": {
+              "id": "editorOverviewRuler.errorForeground"
+            },
+            "darkColor": "",
+            "_resolvedColor": "rgba(255, 18, 18, 0.7)",
+            "position": 4
+          },
+          "hoverMessage": null
+        }
+      ],
+      "spans": [
+        {
+          "text": "{\"a\":1,}",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "{",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        },
+        {
+          "text": "\"a\"",
+          "class": "mtk20",
+          "color": "rgb(163, 21, 21)",
+          "font": ""
+        },
+        {
+          "text": ":",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "1",
+          "class": "mtk7",
+          "color": "rgb(9, 134, 88)",
+          "font": ""
+        },
+        {
+          "text": ",",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "}",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "input": "{\"a\":1 \"b\":2}",
+      "language": "json",
+      "value": "{\"a\":1 \"b\":2}",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "514",
+          "severity": 8,
+          "message": "Expected comma",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 8,
+          "endLineNumber": 1,
+          "endColumn": 11
+        }
+      ],
+      "decorations": [
+        {
+          "range": {
+            "startLineNumber": 1,
+            "startColumn": 8,
+            "endLineNumber": 1,
+            "endColumn": 11
+          },
+          "className": "squiggly-error",
+          "inlineClassName": null,
+          "overviewRuler": {
+            "color": {
+              "id": "editorOverviewRuler.errorForeground"
+            },
+            "darkColor": "",
+            "_resolvedColor": "rgba(255, 18, 18, 0.7)",
+            "position": 4
+          },
+          "hoverMessage": null
+        }
+      ],
+      "spans": [
+        {
+          "text": "{\"a\":1 \"b\":2}",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "{",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        },
+        {
+          "text": "\"a\"",
+          "class": "mtk20",
+          "color": "rgb(163, 21, 21)",
+          "font": ""
+        },
+        {
+          "text": ":",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "1",
+          "class": "mtk7",
+          "color": "rgb(9, 134, 88)",
+          "font": ""
+        },
+        {
+          "text": " ",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "\"b\"",
+          "class": "mtk20",
+          "color": "rgb(163, 21, 21)",
+          "font": ""
+        },
+        {
+          "text": ":",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "2",
+          "class": "mtk7",
+          "color": "rgb(9, 134, 88)",
+          "font": ""
+        },
+        {
+          "text": "}",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "input": "[1,]",
+      "language": "json",
+      "value": "[1,]",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "519",
+          "severity": 8,
+          "message": "Trailing comma",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 3,
+          "endLineNumber": 1,
+          "endColumn": 4
+        }
+      ],
+      "decorations": [
+        {
+          "range": {
+            "startLineNumber": 1,
+            "startColumn": 3,
+            "endLineNumber": 1,
+            "endColumn": 4
+          },
+          "className": "squiggly-error",
+          "inlineClassName": null,
+          "overviewRuler": {
+            "color": {
+              "id": "editorOverviewRuler.errorForeground"
+            },
+            "darkColor": "",
+            "_resolvedColor": "rgba(255, 18, 18, 0.7)",
+            "position": 4
+          },
+          "hoverMessage": null
+        }
+      ],
+      "spans": [
+        {
+          "text": "[1,]",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "[",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        },
+        {
+          "text": "1",
+          "class": "mtk7",
+          "color": "rgb(9, 134, 88)",
+          "font": ""
+        },
+        {
+          "text": ",",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "]",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "input": "{\"a\": tru}",
+      "language": "json",
+      "value": "{\"a\": tru}",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "516",
+          "severity": 8,
+          "message": "Value expected",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 7,
+          "endLineNumber": 1,
+          "endColumn": 10
+        }
+      ],
+      "decorations": [
+        {
+          "range": {
+            "startLineNumber": 1,
+            "startColumn": 7,
+            "endLineNumber": 1,
+            "endColumn": 10
+          },
+          "className": "squiggly-error",
+          "inlineClassName": null,
+          "overviewRuler": {
+            "color": {
+              "id": "editorOverviewRuler.errorForeground"
+            },
+            "darkColor": "",
+            "_resolvedColor": "rgba(255, 18, 18, 0.7)",
+            "position": 4
+          },
+          "hoverMessage": null
+        }
+      ],
+      "spans": [
+        {
+          "text": "{\"a\": tru}",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "{",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        },
+        {
+          "text": "\"a\"",
+          "class": "mtk20",
+          "color": "rgb(163, 21, 21)",
+          "font": ""
+        },
+        {
+          "text": ": tru",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "}",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "input": "{\"a\":\"x}",
+      "language": "json",
+      "value": "{\"a\":\"x}",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "258",
+          "severity": 8,
+          "message": "Unexpected end of string.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 6,
+          "endLineNumber": 1,
+          "endColumn": 9
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "518",
+          "severity": 8,
+          "message": "Expected comma or closing brace",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 8,
+          "endLineNumber": 1,
+          "endColumn": 9
+        }
+      ],
+      "decorations": [
+        {
+          "range": {
+            "startLineNumber": 1,
+            "startColumn": 6,
+            "endLineNumber": 1,
+            "endColumn": 9
+          },
+          "className": "squiggly-error",
+          "inlineClassName": null,
+          "overviewRuler": {
+            "color": {
+              "id": "editorOverviewRuler.errorForeground"
+            },
+            "darkColor": "",
+            "_resolvedColor": "rgba(255, 18, 18, 0.7)",
+            "position": 4
+          },
+          "hoverMessage": null
+        },
+        {
+          "range": {
+            "startLineNumber": 1,
+            "startColumn": 8,
+            "endLineNumber": 1,
+            "endColumn": 9
+          },
+          "className": "squiggly-error",
+          "inlineClassName": null,
+          "overviewRuler": {
+            "color": {
+              "id": "editorOverviewRuler.errorForeground"
+            },
+            "darkColor": "",
+            "_resolvedColor": "rgba(255, 18, 18, 0.7)",
+            "position": 4
+          },
+          "hoverMessage": null
+        }
+      ],
+      "spans": [
+        {
+          "text": "{\"a\":\"x}",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "{",
+          "class": "mtk1 unexpected-closing-bracket",
+          "color": "rgba(255, 18, 18, 0.8)",
+          "font": ""
+        },
+        {
+          "text": "\"a\"",
+          "class": "mtk20",
+          "color": "rgb(163, 21, 21)",
+          "font": ""
+        },
+        {
+          "text": ":",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "\"x}",
+          "class": "mtk5",
+          "color": "rgb(4, 81, 165)",
+          "font": ""
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "input": "{\"a\":1} trailing",
+      "language": "json",
+      "value": "{\"a\":1} trailing",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "0",
+          "severity": 8,
+          "message": "End of file expected.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 9,
+          "endLineNumber": 1,
+          "endColumn": 17
+        }
+      ],
+      "decorations": [
+        {
+          "range": {
+            "startLineNumber": 1,
+            "startColumn": 9,
+            "endLineNumber": 1,
+            "endColumn": 17
+          },
+          "className": "squiggly-error",
+          "inlineClassName": null,
+          "overviewRuler": {
+            "color": {
+              "id": "editorOverviewRuler.errorForeground"
+            },
+            "darkColor": "",
+            "_resolvedColor": "rgba(255, 18, 18, 0.7)",
+            "position": 4
+          },
+          "hoverMessage": null
+        }
+      ],
+      "spans": [
+        {
+          "text": "{\"a\":1} trailing",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "{",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        },
+        {
+          "text": "\"a\"",
+          "class": "mtk20",
+          "color": "rgb(163, 21, 21)",
+          "font": ""
+        },
+        {
+          "text": ":",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "1",
+          "class": "mtk7",
+          "color": "rgb(9, 134, 88)",
+          "font": ""
+        },
+        {
+          "text": "}",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        },
+        {
+          "text": " trailing",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "input": "null",
+      "language": "json",
+      "value": "null",
+      "markers": [],
+      "decorations": [],
+      "spans": [
+        {
+          "text": "null",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "null",
+          "class": "mtk5",
+          "color": "rgb(4, 81, 165)",
+          "font": ""
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "input": "{\"a\":1}",
+      "language": "json",
+      "value": "{\"a\":1}",
+      "markers": [],
+      "decorations": [],
+      "spans": [
+        {
+          "text": "{\"a\":1}",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "{",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        },
+        {
+          "text": "\"a\"",
+          "class": "mtk20",
+          "color": "rgb(163, 21, 21)",
+          "font": ""
+        },
+        {
+          "text": ":",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "1",
+          "class": "mtk7",
+          "color": "rgb(9, 134, 88)",
+          "font": ""
+        },
+        {
+          "text": "}",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "input": "// comment\n{\"a\":1}",
+      "language": "json",
+      "value": "// comment\n{\"a\":1}",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 11
+        }
+      ],
+      "decorations": [
+        {
+          "range": {
+            "startLineNumber": 1,
+            "startColumn": 1,
+            "endLineNumber": 1,
+            "endColumn": 11
+          },
+          "className": "squiggly-error",
+          "inlineClassName": null,
+          "overviewRuler": {
+            "color": {
+              "id": "editorOverviewRuler.errorForeground"
+            },
+            "darkColor": "",
+            "_resolvedColor": "rgba(255, 18, 18, 0.7)",
+            "position": 4
+          },
+          "hoverMessage": null
+        }
+      ],
+      "spans": [
+        {
+          "text": "// comment",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "// comment",
+          "class": "mtk8",
+          "color": "rgb(0, 128, 0)",
+          "font": ""
+        },
+        {
+          "text": "{\"a\":1}",
+          "class": "",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "{",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        },
+        {
+          "text": "\"a\"",
+          "class": "mtk20",
+          "color": "rgb(163, 21, 21)",
+          "font": ""
+        },
+        {
+          "text": ":",
+          "class": "mtk1",
+          "color": "rgb(0, 0, 0)",
+          "font": ""
+        },
+        {
+          "text": "1",
+          "class": "mtk7",
+          "color": "rgb(9, 134, 88)",
+          "font": ""
+        },
+        {
+          "text": "}",
+          "class": "mtk1 bracket-highlighting-0",
+          "color": "rgb(4, 49, 250)",
+          "font": ""
+        }
+      ]
+    }
+  ]
+}

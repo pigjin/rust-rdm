@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "checks": [
+    {
+      "name": "vertical-wheel",
+      "delta": {
+        "x": 0,
+        "y": 20
+      },
+      "offset": 20
+    },
+    {
+      "name": "reveal-last",
+      "offset": 116
+    },
+    {
+      "name": "reveal-first",
+      "offset": 0
+    },
+    {
+      "name": "click-detail",
+      "pane": "key_detail"
+    },
+    {
+      "name": "binary-rename-disabled",
+      "disabled": true
+    }
+  ]
+}

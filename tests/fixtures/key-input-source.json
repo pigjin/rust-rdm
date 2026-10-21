@@ -1,0 +1,327 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "records": [
+    {
+      "name": "key-input-focused",
+      "metrics": [
+        {
+          "class": "n-input n-input--medium-size __input-1lzl83h-m n-input--resizable n-input--focus n-input--stateful",
+          "x": 420.046875,
+          "y": 84.1875,
+          "w": 387.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgb(51, 54, 57)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "0px none rgb(51, 54, 57)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__input",
+          "x": 432.046875,
+          "y": 84.1875,
+          "w": 341.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgb(51, 54, 57)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__input-el",
+          "x": 432.046875,
+          "y": 84.1875,
+          "w": 341.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "32px",
+          "color": "rgb(51, 54, 57)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__suffix",
+          "x": 777.203125,
+          "y": 84.1875,
+          "w": 18,
+          "h": 32,
+          "font": "14px",
+          "line": "32px",
+          "color": "rgb(51, 54, 57)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__state-border",
+          "x": 420.046875,
+          "y": 84.1875,
+          "w": 387.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgb(51, 54, 57)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(255, 107, 107, 0.984)",
+          "padding": "0px"
+        }
+      ]
+    },
+    {
+      "name": "key-input-selection",
+      "metrics": [
+        {
+          "class": "n-input n-input--medium-size __input-1lzl83h-m n-input--resizable n-input--focus n-input--stateful",
+          "x": 420.046875,
+          "y": 84.1875,
+          "w": 387.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgb(51, 54, 57)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "0px none rgb(51, 54, 57)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__input",
+          "x": 432.046875,
+          "y": 84.1875,
+          "w": 341.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgb(51, 54, 57)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__input-el",
+          "x": 432.046875,
+          "y": 84.1875,
+          "w": 341.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "32px",
+          "color": "rgb(51, 54, 57)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__suffix",
+          "x": 777.203125,
+          "y": 84.1875,
+          "w": 18,
+          "h": 32,
+          "font": "14px",
+          "line": "32px",
+          "color": "rgb(51, 54, 57)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__state-border",
+          "x": 420.046875,
+          "y": 84.1875,
+          "w": 387.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgb(51, 54, 57)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgb(255, 107, 107)",
+          "padding": "0px"
+        }
+      ]
+    },
+    {
+      "name": "key-input-dark",
+      "metrics": [
+        {
+          "class": "n-input n-input--medium-size __input-dark-1nc2yfq-m n-input--resizable n-input--focus n-input--stateful",
+          "x": 420.046875,
+          "y": 84.1875,
+          "w": 387.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "bg": "rgba(212, 64, 55, 0.1)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__input",
+          "x": 432.046875,
+          "y": 84.1875,
+          "w": 341.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__input-el",
+          "x": 432.046875,
+          "y": 84.1875,
+          "w": 341.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "32px",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__suffix",
+          "x": 777.203125,
+          "y": 84.1875,
+          "w": 18,
+          "h": 32,
+          "font": "14px",
+          "line": "32px",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__state-border",
+          "x": 420.046875,
+          "y": 84.1875,
+          "w": 387.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(255, 107, 107, 0.97)",
+          "padding": "0px"
+        }
+      ]
+    },
+    {
+      "name": "key-input-selection-dark",
+      "metrics": [
+        {
+          "class": "n-input n-input--medium-size __input-dark-1nc2yfq-m n-input--resizable n-input--focus n-input--stateful",
+          "x": 420.046875,
+          "y": 84.1875,
+          "w": 387.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "bg": "rgba(211, 58, 49, 0.1)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__input",
+          "x": 432.046875,
+          "y": 84.1875,
+          "w": 341.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__input-el",
+          "x": 432.046875,
+          "y": 84.1875,
+          "w": 341.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "32px",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__suffix",
+          "x": 777.203125,
+          "y": 84.1875,
+          "w": 18,
+          "h": 32,
+          "font": "14px",
+          "line": "32px",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "padding": "0px"
+        },
+        {
+          "class": "n-input__state-border",
+          "x": 420.046875,
+          "y": 84.1875,
+          "w": 387.15625,
+          "h": 32,
+          "font": "14px",
+          "line": "21px",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgb(255, 107, 107)",
+          "padding": "0px"
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "name": "focus",
+      "value": "aahash",
+      "readonly": true,
+      "start": 6,
+      "end": 6,
+      "selected": ""
+    },
+    {
+      "name": "select-all",
+      "value": "aahash",
+      "readonly": true,
+      "start": 0,
+      "end": 6,
+      "selected": "aahash"
+    },
+    {
+      "name": "readonly-typing",
+      "value": "aahash",
+      "readonly": true,
+      "start": 0,
+      "end": 6,
+      "selected": "aahash"
+    },
+    {
+      "name": "drag-select-suffix",
+      "value": "aahash",
+      "readonly": true,
+      "start": 4,
+      "end": 6,
+      "selected": "sh"
+    },
+    {
+      "name": "copy-selection",
+      "text": "sh"
+    },
+    {
+      "name": "double-click-copies-whole-key",
+      "text": "aahash"
+    }
+  ]
+}

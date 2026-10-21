@@ -1,0 +1,32 @@
+{
+  "source": "/Users/zlsj/Projects/tiny-rdm/backend/services/connection_service.go",
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "method": "Go standard library harness with mechanically extracted ExportConnections and ImportConnections ZIP bodies",
+  "records": [
+    {
+      "name": "source-export",
+      "bytes": "# exported source profile: preserve unknown fields and incomplete transports\n- name: imported\n  type: group\n  connections:\n    - name: \"  \"\n      network: unix\n      sock: \"\"\n      port: 0\n      default_filter: \"\"\n      key_separator: \"\"\n      ssh:\n        enable: true\n        addr: \"\"\n        username: \"\"\n        port: 0\n      future_extra: {keep: true}\n    - name: same\n      addr: \"\"\n      port: 0\n- name: same\n  network: tcp\n  addr: 127.0.0.1\n  port: 6380\n  alias: {0: cache}\n- name: \"bad/name\"\n  addr: \"\"\n  port: 0\n",
+      "sha256": "ede6e759da5699f0ee28f0b7e517bb4d6a48b9b9787fbcd2e839872351ac98ed"
+    },
+    {
+      "name": "first-match",
+      "bytes": "# exported source profile: preserve unknown fields and incomplete transports\n- name: imported\n  type: group\n  connections:\n    - name: \"  \"\n      network: unix\n      sock: \"\"\n      port: 0\n      default_filter: \"\"\n      key_separator: \"\"\n      ssh:\n        enable: true\n        addr: \"\"\n        username: \"\"\n        port: 0\n      future_extra: {keep: true}\n    - name: same\n      addr: \"\"\n      port: 0\n- name: same\n  network: tcp\n  addr: 127.0.0.1\n  port: 6380\n  alias: {0: cache}\n- name: \"bad/name\"\n  addr: \"\"\n  port: 0\n",
+      "sha256": "ede6e759da5699f0ee28f0b7e517bb4d6a48b9b9787fbcd2e839872351ac98ed"
+    },
+    {
+      "name": "last-entry-fallback",
+      "bytes": "# exported source profile: preserve unknown fields and incomplete transports\n- name: imported\n  type: group\n  connections:\n    - name: \"  \"\n      network: unix\n      sock: \"\"\n      port: 0\n      default_filter: \"\"\n      key_separator: \"\"\n      ssh:\n        enable: true\n        addr: \"\"\n        username: \"\"\n        port: 0\n      future_extra: {keep: true}\n    - name: same\n      addr: \"\"\n      port: 0\n- name: same\n  network: tcp\n  addr: 127.0.0.1\n  port: 6380\n  alias: {0: cache}\n- name: \"bad/name\"\n  addr: \"\"\n  port: 0\n",
+      "sha256": "ede6e759da5699f0ee28f0b7e517bb4d6a48b9b9787fbcd2e839872351ac98ed"
+    },
+    {
+      "name": "empty",
+      "bytes": "- name: existing\n",
+      "sha256": "7886e360b88ba9455a14f70d2fe1cece5c9c61082b0fbece8f665444fcc676c1"
+    },
+    {
+      "name": "invalid-yaml",
+      "bytes": "- name: [\n",
+      "sha256": "3a9ed9b76c976523502d24f281d0b6802ed289d5b303d41e31ce5857109cb886"
+    }
+  ]
+}

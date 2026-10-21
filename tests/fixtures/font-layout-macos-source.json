@@ -1,0 +1,1400 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Original Monaco in isolated macOS WKWebView; controlled 600x300 font matrix, wrapping disabled. DOM advance widths only, not original full-page geometry, Wails RPC, rasterization, IME or native-window acceptance.",
+  "sourceEngine": "WKWebView",
+  "wailsVersion": "2.13.0",
+  "rawReport": "outputs/font-advance-webkit-monaco-source.json",
+  "rawReportSha256": "1773a536bba0269d5119232a53d7b4569f788400729c9b5645875f3ab1549314",
+  "controlledEditorSize": [
+    600,
+    300
+  ],
+  "samples": [
+    {
+      "family": "Menlo",
+      "fontSize": 12,
+      "text": "A🙂B",
+      "width": 30.44921875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 12,
+      "text": "中文🙂  alpha",
+      "width": 90.572265625
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 12,
+      "text": "A中B",
+      "width": 26.44921875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 12,
+      "text": "AéB",
+      "width": 21.673828125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 12,
+      "text": "A👩‍💻B",
+      "width": 30.44921875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 12,
+      "text": "A🇨🇳B",
+      "width": 30.44921875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 12,
+      "text": "AΩ·B",
+      "width": 28.8984375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 12,
+      "text": "🙂",
+      "width": 16
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 12,
+      "text": "中",
+      "width": 12
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 12,
+      "text": " ",
+      "width": 7.224609375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 12,
+      "text": "🙂🙂",
+      "width": 32
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 13,
+      "text": "A🙂B",
+      "width": 32.6533203125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 13,
+      "text": "中文🙂  alpha",
+      "width": 97.78662109375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 13,
+      "text": "A中B",
+      "width": 28.6533203125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 13,
+      "text": "AéB",
+      "width": 23.47998046875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 13,
+      "text": "A👩‍💻B",
+      "width": 32.6533203125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 13,
+      "text": "A🇨🇳B",
+      "width": 32.6533203125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 13,
+      "text": "AΩ·B",
+      "width": 31.306640625
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 13,
+      "text": "🙂",
+      "width": 17
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 13,
+      "text": "中",
+      "width": 13
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 13,
+      "text": " ",
+      "width": 7.82666015625
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 13,
+      "text": "🙂🙂",
+      "width": 34
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 14,
+      "text": "A🙂B",
+      "width": 35.857421875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 14,
+      "text": "中文🙂  alpha",
+      "width": 106.0009765625
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 14,
+      "text": "A中B",
+      "width": 30.857421875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 14,
+      "text": "AéB",
+      "width": 25.2861328125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 14,
+      "text": "A👩‍💻B",
+      "width": 35.857421875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 14,
+      "text": "A🇨🇳B",
+      "width": 35.857421875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 14,
+      "text": "AΩ·B",
+      "width": 33.71484375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 14,
+      "text": "🙂",
+      "width": 19
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 14,
+      "text": "中",
+      "width": 14
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 14,
+      "text": " ",
+      "width": 8.4287109375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 14,
+      "text": "🙂🙂",
+      "width": 38
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 15,
+      "text": "A🙂B",
+      "width": 38.0615234375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 15,
+      "text": "中文🙂  alpha",
+      "width": 113.21533203125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 15,
+      "text": "A中B",
+      "width": 33.0615234375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 15,
+      "text": "AéB",
+      "width": 27.09228515625
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 15,
+      "text": "A👩‍💻B",
+      "width": 38.0615234375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 15,
+      "text": "A🇨🇳B",
+      "width": 38.0615234375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 15,
+      "text": "AΩ·B",
+      "width": 36.123046875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 15,
+      "text": "🙂",
+      "width": 20
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 15,
+      "text": "中",
+      "width": 15
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 15,
+      "text": " ",
+      "width": 9.03076171875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 15,
+      "text": "🙂🙂",
+      "width": 40
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 18,
+      "text": "A🙂B",
+      "width": 43.673828125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 18,
+      "text": "中文🙂  alpha",
+      "width": 133.8583984375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 18,
+      "text": "A中B",
+      "width": 39.673828125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 18,
+      "text": "AéB",
+      "width": 32.5107421875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 18,
+      "text": "A👩‍💻B",
+      "width": 43.673828125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 18,
+      "text": "A🇨🇳B",
+      "width": 43.673828125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 18,
+      "text": "AΩ·B",
+      "width": 43.34765625
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 18,
+      "text": "🙂",
+      "width": 22
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 18,
+      "text": "中",
+      "width": 18
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 18,
+      "text": " ",
+      "width": 10.8369140625
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 18,
+      "text": "🙂🙂",
+      "width": 44
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 24,
+      "text": "A🙂B",
+      "width": 53.8984375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 24,
+      "text": "中文🙂  alpha",
+      "width": 174.14453125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 24,
+      "text": "A中B",
+      "width": 52.8984375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 24,
+      "text": "AéB",
+      "width": 43.34765625
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 24,
+      "text": "A👩‍💻B",
+      "width": 53.8984375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 24,
+      "text": "A🇨🇳B",
+      "width": 53.8984375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 24,
+      "text": "AΩ·B",
+      "width": 57.796875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 24,
+      "text": "🙂",
+      "width": 25
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 24,
+      "text": "中",
+      "width": 24
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 24,
+      "text": " ",
+      "width": 14.44921875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 24,
+      "text": "🙂🙂",
+      "width": 50
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 32,
+      "text": "A🙂B",
+      "width": 70.53125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 32,
+      "text": "中文🙂  alpha",
+      "width": 230.859375
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 32,
+      "text": "A中B",
+      "width": 70.53125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 32,
+      "text": "AéB",
+      "width": 57.796875
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 32,
+      "text": "A👩‍💻B",
+      "width": 70.53125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 32,
+      "text": "A🇨🇳B",
+      "width": 70.53125
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 32,
+      "text": "AΩ·B",
+      "width": 77.0625
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 32,
+      "text": "🙂",
+      "width": 32
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 32,
+      "text": "中",
+      "width": 32
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 32,
+      "text": " ",
+      "width": 19.265625
+    },
+    {
+      "family": "Menlo",
+      "fontSize": 32,
+      "text": "🙂🙂",
+      "width": 64
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 12,
+      "text": "A🙂B",
+      "width": 30.40234375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 12,
+      "text": "中文🙂  alpha",
+      "width": 90.408203125
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 12,
+      "text": "A中B",
+      "width": 26.40234375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 12,
+      "text": "AéB",
+      "width": 21.603515625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 12,
+      "text": "A👩‍💻B",
+      "width": 30.40234375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 12,
+      "text": "A🇨🇳B",
+      "width": 30.40234375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 12,
+      "text": "AΩ·B",
+      "width": 28.8046875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 12,
+      "text": "🙂",
+      "width": 16
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 12,
+      "text": "中",
+      "width": 12
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 12,
+      "text": " ",
+      "width": 7.201171875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 12,
+      "text": "🙂🙂",
+      "width": 32
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 13,
+      "text": "A🙂B",
+      "width": 32.6025390625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 13,
+      "text": "中文🙂  alpha",
+      "width": 97.60888671875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 13,
+      "text": "A中B",
+      "width": 28.6025390625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 13,
+      "text": "AéB",
+      "width": 23.40380859375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 13,
+      "text": "A👩‍💻B",
+      "width": 32.6025390625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 13,
+      "text": "A🇨🇳B",
+      "width": 32.6025390625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 13,
+      "text": "AΩ·B",
+      "width": 31.205078125
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 13,
+      "text": "🙂",
+      "width": 17
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 13,
+      "text": "中",
+      "width": 13
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 13,
+      "text": " ",
+      "width": 7.80126953125
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 13,
+      "text": "🙂🙂",
+      "width": 34
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 14,
+      "text": "A🙂B",
+      "width": 35.802734375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 14,
+      "text": "中文🙂  alpha",
+      "width": 105.8095703125
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 14,
+      "text": "A中B",
+      "width": 30.802734375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 14,
+      "text": "AéB",
+      "width": 25.2041015625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 14,
+      "text": "A👩‍💻B",
+      "width": 35.802734375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 14,
+      "text": "A🇨🇳B",
+      "width": 35.802734375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 14,
+      "text": "AΩ·B",
+      "width": 33.60546875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 14,
+      "text": "🙂",
+      "width": 19
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 14,
+      "text": "中",
+      "width": 14
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 14,
+      "text": " ",
+      "width": 8.4013671875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 14,
+      "text": "🙂🙂",
+      "width": 38
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 15,
+      "text": "A🙂B",
+      "width": 38.0029296875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 15,
+      "text": "中文🙂  alpha",
+      "width": 113.01025390625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 15,
+      "text": "A中B",
+      "width": 33.0029296875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 15,
+      "text": "AéB",
+      "width": 27.00439453125
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 15,
+      "text": "A👩‍💻B",
+      "width": 38.0029296875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 15,
+      "text": "A🇨🇳B",
+      "width": 38.0029296875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 15,
+      "text": "AΩ·B",
+      "width": 36.005859375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 15,
+      "text": "🙂",
+      "width": 20
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 15,
+      "text": "中",
+      "width": 15
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 15,
+      "text": " ",
+      "width": 9.00146484375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 15,
+      "text": "🙂🙂",
+      "width": 40
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 18,
+      "text": "A🙂B",
+      "width": 43.603515625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 18,
+      "text": "中文🙂  alpha",
+      "width": 133.6123046875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 18,
+      "text": "A中B",
+      "width": 39.603515625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 18,
+      "text": "AéB",
+      "width": 32.4052734375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 18,
+      "text": "A👩‍💻B",
+      "width": 43.603515625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 18,
+      "text": "A🇨🇳B",
+      "width": 43.603515625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 18,
+      "text": "AΩ·B",
+      "width": 43.20703125
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 18,
+      "text": "🙂",
+      "width": 22
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 18,
+      "text": "中",
+      "width": 18
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 18,
+      "text": " ",
+      "width": 10.8017578125
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 18,
+      "text": "🙂🙂",
+      "width": 44
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 24,
+      "text": "A🙂B",
+      "width": 53.8046875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 24,
+      "text": "中文🙂  alpha",
+      "width": 173.81640625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 24,
+      "text": "A中B",
+      "width": 52.8046875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 24,
+      "text": "AéB",
+      "width": 43.20703125
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 24,
+      "text": "A👩‍💻B",
+      "width": 53.8046875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 24,
+      "text": "A🇨🇳B",
+      "width": 53.8046875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 24,
+      "text": "AΩ·B",
+      "width": 57.609375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 24,
+      "text": "🙂",
+      "width": 25
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 24,
+      "text": "中",
+      "width": 24
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 24,
+      "text": " ",
+      "width": 14.40234375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 24,
+      "text": "🙂🙂",
+      "width": 50
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 32,
+      "text": "A🙂B",
+      "width": 70.40625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 32,
+      "text": "中文🙂  alpha",
+      "width": 230.421875
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 32,
+      "text": "A中B",
+      "width": 70.40625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 32,
+      "text": "AéB",
+      "width": 57.609375
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 32,
+      "text": "A👩‍💻B",
+      "width": 70.40625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 32,
+      "text": "A🇨🇳B",
+      "width": 70.40625
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 32,
+      "text": "AΩ·B",
+      "width": 76.8125
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 32,
+      "text": "🙂",
+      "width": 32
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 32,
+      "text": "中",
+      "width": 32
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 32,
+      "text": " ",
+      "width": 19.203125
+    },
+    {
+      "family": "Monaco",
+      "fontSize": 32,
+      "text": "🙂🙂",
+      "width": 64
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 12,
+      "text": "A🙂B",
+      "width": 30.40234375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 12,
+      "text": "中文🙂  alpha",
+      "width": 90.408203125
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 12,
+      "text": "A中B",
+      "width": 26.40234375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 12,
+      "text": "AéB",
+      "width": 21.603515625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 12,
+      "text": "A👩‍💻B",
+      "width": 30.40234375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 12,
+      "text": "A🇨🇳B",
+      "width": 30.40234375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 12,
+      "text": "AΩ·B",
+      "width": 28.8046875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 12,
+      "text": "🙂",
+      "width": 16
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 12,
+      "text": "中",
+      "width": 12
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 12,
+      "text": " ",
+      "width": 7.201171875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 12,
+      "text": "🙂🙂",
+      "width": 32
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 13,
+      "text": "A🙂B",
+      "width": 32.6025390625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 13,
+      "text": "中文🙂  alpha",
+      "width": 97.60888671875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 13,
+      "text": "A中B",
+      "width": 28.6025390625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 13,
+      "text": "AéB",
+      "width": 23.40380859375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 13,
+      "text": "A👩‍💻B",
+      "width": 32.6025390625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 13,
+      "text": "A🇨🇳B",
+      "width": 32.6025390625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 13,
+      "text": "AΩ·B",
+      "width": 31.205078125
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 13,
+      "text": "🙂",
+      "width": 17
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 13,
+      "text": "中",
+      "width": 13
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 13,
+      "text": " ",
+      "width": 7.80126953125
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 13,
+      "text": "🙂🙂",
+      "width": 34
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 14,
+      "text": "A🙂B",
+      "width": 35.802734375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 14,
+      "text": "中文🙂  alpha",
+      "width": 105.8095703125
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 14,
+      "text": "A中B",
+      "width": 30.802734375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 14,
+      "text": "AéB",
+      "width": 25.2041015625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 14,
+      "text": "A👩‍💻B",
+      "width": 35.802734375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 14,
+      "text": "A🇨🇳B",
+      "width": 35.802734375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 14,
+      "text": "AΩ·B",
+      "width": 33.60546875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 14,
+      "text": "🙂",
+      "width": 19
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 14,
+      "text": "中",
+      "width": 14
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 14,
+      "text": " ",
+      "width": 8.4013671875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 14,
+      "text": "🙂🙂",
+      "width": 38
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 15,
+      "text": "A🙂B",
+      "width": 38.0029296875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 15,
+      "text": "中文🙂  alpha",
+      "width": 113.01025390625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 15,
+      "text": "A中B",
+      "width": 33.0029296875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 15,
+      "text": "AéB",
+      "width": 27.00439453125
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 15,
+      "text": "A👩‍💻B",
+      "width": 38.0029296875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 15,
+      "text": "A🇨🇳B",
+      "width": 38.0029296875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 15,
+      "text": "AΩ·B",
+      "width": 36.005859375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 15,
+      "text": "🙂",
+      "width": 20
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 15,
+      "text": "中",
+      "width": 15
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 15,
+      "text": " ",
+      "width": 9.00146484375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 15,
+      "text": "🙂🙂",
+      "width": 40
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 18,
+      "text": "A🙂B",
+      "width": 43.603515625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 18,
+      "text": "中文🙂  alpha",
+      "width": 133.6123046875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 18,
+      "text": "A中B",
+      "width": 39.603515625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 18,
+      "text": "AéB",
+      "width": 32.4052734375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 18,
+      "text": "A👩‍💻B",
+      "width": 43.603515625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 18,
+      "text": "A🇨🇳B",
+      "width": 43.603515625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 18,
+      "text": "AΩ·B",
+      "width": 43.20703125
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 18,
+      "text": "🙂",
+      "width": 22
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 18,
+      "text": "中",
+      "width": 18
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 18,
+      "text": " ",
+      "width": 10.8017578125
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 18,
+      "text": "🙂🙂",
+      "width": 44
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 24,
+      "text": "A🙂B",
+      "width": 53.8046875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 24,
+      "text": "中文🙂  alpha",
+      "width": 173.81640625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 24,
+      "text": "A中B",
+      "width": 52.8046875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 24,
+      "text": "AéB",
+      "width": 43.20703125
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 24,
+      "text": "A👩‍💻B",
+      "width": 53.8046875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 24,
+      "text": "A🇨🇳B",
+      "width": 53.8046875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 24,
+      "text": "AΩ·B",
+      "width": 57.609375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 24,
+      "text": "🙂",
+      "width": 25
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 24,
+      "text": "中",
+      "width": 24
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 24,
+      "text": " ",
+      "width": 14.40234375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 24,
+      "text": "🙂🙂",
+      "width": 50
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 32,
+      "text": "A🙂B",
+      "width": 70.40625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 32,
+      "text": "中文🙂  alpha",
+      "width": 230.421875
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 32,
+      "text": "A中B",
+      "width": 70.40625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 32,
+      "text": "AéB",
+      "width": 57.609375
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 32,
+      "text": "A👩‍💻B",
+      "width": 70.40625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 32,
+      "text": "A🇨🇳B",
+      "width": 70.40625
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 32,
+      "text": "AΩ·B",
+      "width": 76.8125
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 32,
+      "text": "🙂",
+      "width": 32
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 32,
+      "text": "中",
+      "width": 32
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 32,
+      "text": " ",
+      "width": 19.203125
+    },
+    {
+      "family": "Courier New",
+      "fontSize": 32,
+      "text": "🙂🙂",
+      "width": 64
+    }
+  ]
+}

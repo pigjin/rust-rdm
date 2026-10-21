@@ -1,0 +1,75 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "locale": "zh-CN",
+  "records": [
+    {
+      "values": [
+        0,
+        5000000000000000,
+        10000000000000000,
+        15000000000000000,
+        20000000000000000,
+        25000000000000000
+      ],
+      "labels": [
+        "0",
+        "5E15",
+        "1E16",
+        "2E16",
+        "2E16",
+        "3E16"
+      ]
+    },
+    {
+      "values": [
+        -25000000000000000,
+        -20000000000000000,
+        -15000000000000000,
+        -10000000000000000,
+        -5000000000000000,
+        0
+      ],
+      "labels": [
+        "-3E16",
+        "-2E16",
+        "-2E16",
+        "-1E16",
+        "-5E15",
+        "0"
+      ]
+    },
+    {
+      "values": [
+        0,
+        1000000000000000
+      ],
+      "labels": [
+        "0",
+        "1,000,000,000,000,000"
+      ]
+    },
+    {
+      "values": [
+        0,
+        1000000000000001
+      ],
+      "labels": [
+        "0",
+        "1E15"
+      ]
+    }
+  ],
+  "source": {
+    "path": "/private/tmp/rdm-status-numeric-rounding-source/source.mjs",
+    "sha256": "6b1348891da4aa5df4132b31bd1ff8e5d24569d40cb3abe9c4661cda6e9433b0"
+  },
+  "raw": {
+    "path": "/private/tmp/rdm-status-numeric-rounding-source/stdout.json",
+    "sha256": "2ce56bb764ba3745ed5167fcbc03a775c6ec2a3e5219c53ddb86a9610932a2d6"
+  },
+  "dependency": {
+    "path": "chart.js/dist/chunks/helpers.dataset.js",
+    "sha256": "6cf27e6006f080b52a571ad1c1f3683f9abc96743f929092dc677ff6a610f55a"
+  },
+  "scope": "Actual pinned Chart.js numeric callback,including halfExpand scientific mantissas and1e15 notation boundary;pure function,not component or GPUI evidence."
+}

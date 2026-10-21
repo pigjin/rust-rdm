@@ -1,0 +1,350 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "records": [
+    {
+      "field": "port",
+      "raw": "",
+      "initial": "6379",
+      "input": "",
+      "enter": "",
+      "blurred": "",
+      "value": null
+    },
+    {
+      "field": "port",
+      "raw": "0",
+      "initial": "6379",
+      "input": "0",
+      "enter": "1",
+      "blurred": "1",
+      "value": 1
+    },
+    {
+      "field": "port",
+      "raw": "-10",
+      "initial": "6379",
+      "input": "-10",
+      "enter": "1",
+      "blurred": "1",
+      "value": 1
+    },
+    {
+      "field": "port",
+      "raw": "70000",
+      "initial": "6379",
+      "input": "70000",
+      "enter": "65535",
+      "blurred": "65535",
+      "value": 65535
+    },
+    {
+      "field": "port",
+      "raw": "1e3",
+      "initial": "6379",
+      "input": "1000",
+      "enter": "1000",
+      "blurred": "1000",
+      "value": 1000
+    },
+    {
+      "field": "port",
+      "raw": "junk",
+      "initial": "6379",
+      "input": "junk",
+      "enter": "junk",
+      "blurred": "6379",
+      "value": 6379
+    },
+    {
+      "field": "port",
+      "raw": "3.0",
+      "initial": "6379",
+      "input": "3.0",
+      "enter": "3",
+      "blurred": "3",
+      "value": 3
+    },
+    {
+      "field": "port",
+      "raw": " 2 ",
+      "initial": "6379",
+      "input": "2",
+      "enter": "2",
+      "blurred": "2",
+      "value": 2
+    },
+    {
+      "field": "port",
+      "raw": "0x10",
+      "initial": "6379",
+      "input": "16",
+      "enter": "16",
+      "blurred": "16",
+      "value": 16
+    },
+    {
+      "field": "port",
+      "raw": "+21",
+      "initial": "6379",
+      "input": "21",
+      "enter": "21",
+      "blurred": "21",
+      "value": 21
+    },
+    {
+      "field": "port",
+      "raw": "-",
+      "initial": "6379",
+      "input": "-",
+      "enter": "-",
+      "blurred": "6379",
+      "value": 6379
+    },
+    {
+      "field": "port",
+      "raw": "-0",
+      "initial": "6379",
+      "input": "-0",
+      "enter": "1",
+      "blurred": "1",
+      "value": 1
+    },
+    {
+      "field": "port",
+      "raw": "0.",
+      "initial": "6379",
+      "input": "0.",
+      "enter": "1",
+      "blurred": "1",
+      "value": 1
+    },
+    {
+      "field": "port",
+      "raw": "12.0",
+      "initial": "6379",
+      "input": "12.0",
+      "enter": "12",
+      "blurred": "12",
+      "value": 12
+    },
+    {
+      "field": "port",
+      "raw": "1.5",
+      "initial": "6379",
+      "input": "1.5",
+      "enter": "1.5",
+      "blurred": "1.5",
+      "value": 1.5
+    },
+    {
+      "field": "port",
+      "raw": "Infinity",
+      "initial": "6379",
+      "input": "Infinity",
+      "enter": "65535",
+      "blurred": "65535",
+      "value": 65535
+    },
+    {
+      "field": "connTimeout",
+      "raw": "0",
+      "initial": "60",
+      "input": "0",
+      "enter": "1",
+      "blurred": "1",
+      "value": 1
+    },
+    {
+      "field": "connTimeout",
+      "raw": "1000000",
+      "initial": "60",
+      "input": "1000000",
+      "enter": "999999",
+      "blurred": "999999",
+      "value": 999999
+    },
+    {
+      "field": "connTimeout",
+      "raw": "junk",
+      "initial": "60",
+      "input": "junk",
+      "enter": "junk",
+      "blurred": "60",
+      "value": 60
+    },
+    {
+      "field": "connTimeout",
+      "raw": "1e2",
+      "initial": "60",
+      "input": "100",
+      "enter": "100",
+      "blurred": "100",
+      "value": 100
+    },
+    {
+      "field": "execTimeout",
+      "raw": "0",
+      "initial": "60",
+      "input": "0",
+      "enter": "1",
+      "blurred": "1",
+      "value": 1
+    },
+    {
+      "field": "execTimeout",
+      "raw": "1000000",
+      "initial": "60",
+      "input": "1000000",
+      "enter": "999999",
+      "blurred": "999999",
+      "value": 999999
+    },
+    {
+      "field": "loadSize",
+      "raw": "-10",
+      "initial": "10000",
+      "input": "-10",
+      "enter": "0",
+      "blurred": "0",
+      "value": 0
+    },
+    {
+      "field": "loadSize",
+      "raw": "0",
+      "initial": "10000",
+      "input": "0",
+      "enter": "0",
+      "blurred": "0",
+      "value": 0
+    },
+    {
+      "field": "loadSize",
+      "raw": "1e3",
+      "initial": "10000",
+      "input": "1000",
+      "enter": "1000",
+      "blurred": "1000",
+      "value": 1000
+    },
+    {
+      "field": "loadSize",
+      "raw": "junk",
+      "initial": "10000",
+      "input": "junk",
+      "enter": "junk",
+      "blurred": "10000",
+      "value": 10000
+    },
+    {
+      "field": "ssh.port",
+      "raw": "0",
+      "initial": "22",
+      "input": "0",
+      "enter": "1",
+      "blurred": "1",
+      "value": 1
+    },
+    {
+      "field": "ssh.port",
+      "raw": "70000",
+      "initial": "22",
+      "input": "70000",
+      "enter": "65535",
+      "blurred": "65535",
+      "value": 65535
+    },
+    {
+      "field": "ssh.port",
+      "raw": "junk",
+      "initial": "22",
+      "input": "junk",
+      "enter": "junk",
+      "blurred": "22",
+      "value": 22
+    },
+    {
+      "field": "proxy.port",
+      "raw": "-1",
+      "initial": "8080",
+      "input": "-1",
+      "enter": "0",
+      "blurred": "0",
+      "value": 0
+    },
+    {
+      "field": "proxy.port",
+      "raw": "0",
+      "initial": "8080",
+      "input": "0",
+      "enter": "0",
+      "blurred": "0",
+      "value": 0
+    },
+    {
+      "field": "proxy.port",
+      "raw": "70000",
+      "initial": "8080",
+      "input": "70000",
+      "enter": "65535",
+      "blurred": "65535",
+      "value": 65535
+    },
+    {
+      "field": "proxy.port",
+      "raw": "junk",
+      "initial": "8080",
+      "input": "junk",
+      "enter": "junk",
+      "blurred": "8080",
+      "value": 8080
+    },
+    {
+      "field": "port",
+      "raw": "6379",
+      "key": "ArrowUp",
+      "text": "6380"
+    },
+    {
+      "field": "port",
+      "raw": "1",
+      "key": "ArrowDown",
+      "text": "1"
+    },
+    {
+      "field": "port",
+      "raw": "65535",
+      "key": "ArrowUp",
+      "text": "65535"
+    },
+    {
+      "field": "port",
+      "raw": "",
+      "key": "ArrowUp",
+      "text": "1"
+    },
+    {
+      "field": "port",
+      "raw": "0",
+      "key": "ArrowUp",
+      "text": "1"
+    },
+    {
+      "field": "port",
+      "raw": "70000",
+      "key": "ArrowDown",
+      "text": "70000"
+    },
+    {
+      "field": "port",
+      "raw": "junk",
+      "key": "ArrowUp",
+      "text": "junk"
+    },
+    {
+      "field": "port",
+      "raw": "-",
+      "key": "ArrowDown",
+      "text": "-"
+    }
+  ]
+}

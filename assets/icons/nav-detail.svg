@@ -1,0 +1,45 @@
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <rect
+            fill="none"
+            stroke-width="4"
+            height="36"
+            rx="3"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            width="36"
+            x="6"
+            y="6" />
+        <rect
+            fill="none"
+            stroke="currentColor"
+            stroke-width="4"
+            height="8"
+            stroke-linejoin="round"
+            width="8"
+            x="13"
+            y="13" />
+        <path
+            stroke="currentColor"
+            stroke-width="4"
+            d="M27 13L35 13"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path
+            stroke="currentColor"
+            stroke-width="4"
+            d="M27 20L35 20"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path
+            stroke="currentColor"
+            stroke-width="4"
+            d="M13 28L35 28"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path
+            stroke="currentColor"
+            stroke-width="4"
+            d="M13 35H35"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+    </svg>

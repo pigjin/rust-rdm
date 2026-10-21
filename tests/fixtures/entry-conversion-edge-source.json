@@ -1,0 +1,326 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Untouched original frontend with local synthetic replies. Normalized None/Raw parent, initial editor loading, and empty display prop retaining a visible draft while internal editingContent resets. Source evidence only; not native alignment or backend proof.",
+  "records": [
+    {
+      "name": "entry-conversion-initial",
+      "field": "",
+      "placeholder": "old",
+      "lines": [
+        ""
+      ],
+      "enabled": true,
+      "format": "Raw",
+      "decode": "None",
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "Raw"
+        }
+      ],
+      "pending": 1,
+      "event": "normalized-initial-pending",
+      "geometry": {
+        "panel": {
+          "x": 687,
+          "y": 165.1875,
+          "width": 331,
+          "height": 559.8125
+        },
+        "card": {
+          "x": 689,
+          "y": 165.1875,
+          "width": 329,
+          "height": 559.8125
+        },
+        "field": {
+          "x": 718,
+          "y": 245.1875,
+          "width": 271,
+          "height": 32
+        },
+        "editor": {
+          "x": 709,
+          "y": 324.1875,
+          "width": 289,
+          "height": 305.8125
+        }
+      }
+    },
+    {
+      "name": "entry-conversion-empty-pending",
+      "field": "old",
+      "placeholder": "old",
+      "lines": [
+        "visible draft"
+      ],
+      "enabled": true,
+      "format": "Raw",
+      "decode": "None",
+      "requests": [
+        {
+          "value": "",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "pending": 1,
+      "event": "empty-baseline-pending",
+      "geometry": {
+        "panel": {
+          "x": 687,
+          "y": 165.1875,
+          "width": 331,
+          "height": 559.8125
+        },
+        "card": {
+          "x": 689,
+          "y": 165.1875,
+          "width": 329,
+          "height": 559.8125
+        },
+        "field": {
+          "x": 718,
+          "y": 245.1875,
+          "width": 271,
+          "height": 32
+        },
+        "editor": {
+          "x": 709,
+          "y": 324.1875,
+          "width": 289,
+          "height": 305.8125
+        }
+      }
+    },
+    {
+      "name": "entry-conversion-empty-followup",
+      "field": "old",
+      "placeholder": "old",
+      "lines": [
+        "visible draft"
+      ],
+      "enabled": false,
+      "format": "JSON",
+      "decode": "None",
+      "requests": [
+        {
+          "value": "",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "pending": 1,
+      "event": "empty-baseline-followup",
+      "geometry": {
+        "panel": {
+          "x": 687,
+          "y": 165.1875,
+          "width": 331,
+          "height": 559.8125
+        },
+        "card": {
+          "x": 689,
+          "y": 165.1875,
+          "width": 329,
+          "height": 559.8125
+        },
+        "field": {
+          "x": 718,
+          "y": 245.1875,
+          "width": 271,
+          "height": 32
+        },
+        "editor": {
+          "x": 709,
+          "y": 324.1875,
+          "width": 289,
+          "height": 305.8125
+        }
+      }
+    },
+    {
+      "name": "entry-conversion-empty-ready",
+      "field": "old",
+      "placeholder": "old",
+      "lines": [
+        "visible draft"
+      ],
+      "enabled": false,
+      "format": "JSON",
+      "decode": "None",
+      "requests": [
+        {
+          "value": "",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "pending": 0,
+      "event": "empty-baseline-ready",
+      "geometry": {
+        "panel": {
+          "x": 687,
+          "y": 165.1875,
+          "width": 331,
+          "height": 559.8125
+        },
+        "card": {
+          "x": 689,
+          "y": 165.1875,
+          "width": 329,
+          "height": 559.8125
+        },
+        "field": {
+          "x": 718,
+          "y": 245.1875,
+          "width": 271,
+          "height": 32
+        },
+        "editor": {
+          "x": 709,
+          "y": 324.1875,
+          "width": 289,
+          "height": 305.8125
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "normalized-initial-pending",
+      "field": "",
+      "placeholder": "old",
+      "lines": [
+        ""
+      ],
+      "enabled": true,
+      "format": "Raw",
+      "decode": "None",
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "Raw"
+        }
+      ],
+      "pending": 1
+    },
+    {
+      "name": "normalized-initial-ready",
+      "field": "old",
+      "placeholder": "old",
+      "lines": [
+        "before"
+      ],
+      "enabled": false,
+      "format": "Raw",
+      "decode": "None",
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "Raw"
+        }
+      ],
+      "pending": 0
+    },
+    {
+      "name": "empty-baseline-pending",
+      "field": "old",
+      "placeholder": "old",
+      "lines": [
+        "visible draft"
+      ],
+      "enabled": true,
+      "format": "Raw",
+      "decode": "None",
+      "requests": [
+        {
+          "value": "",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "pending": 1
+    },
+    {
+      "name": "empty-baseline-followup",
+      "field": "old",
+      "placeholder": "old",
+      "lines": [
+        "visible draft"
+      ],
+      "enabled": false,
+      "format": "JSON",
+      "decode": "None",
+      "requests": [
+        {
+          "value": "",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "pending": 1
+    },
+    {
+      "name": "empty-baseline-ready",
+      "field": "old",
+      "placeholder": "old",
+      "lines": [
+        "visible draft"
+      ],
+      "enabled": false,
+      "format": "JSON",
+      "decode": "None",
+      "requests": [
+        {
+          "value": "",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "pending": 0
+    },
+    {
+      "name": "empty-baseline-editor-shortcut",
+      "request": {
+        "path": "/api/browser/set-hash-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aahash",
+          "field": "old",
+          "newField": "old",
+          "value": "",
+          "decode": "None",
+          "format": "JSON",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      },
+      "editorClosed": true
+    }
+  ]
+}

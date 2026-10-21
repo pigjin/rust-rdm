@@ -1,0 +1,1232 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "focusEvents": [
+    {
+      "name": "escape-from-selected-hover",
+      "editorTextFocused": true,
+      "editorWidgetFocused": true,
+      "hoverVisible": false,
+      "navigationVisible": false,
+      "navigationText": "",
+      "selection": ""
+    },
+    {
+      "name": "next-from-selected-navigation",
+      "editorTextFocused": true,
+      "editorWidgetFocused": true,
+      "hoverVisible": false,
+      "navigationVisible": true,
+      "navigationText": "1\n2 of 2 problems\nComments are not permitted in JSON.(521)",
+      "selection": ""
+    },
+    {
+      "name": "escape-from-navigation",
+      "editorTextFocused": true,
+      "editorWidgetFocused": true,
+      "hoverVisible": false,
+      "navigationVisible": false,
+      "navigationText": "",
+      "selection": ""
+    }
+  ],
+  "scope": "Actual original Monaco mouse selection, word double-click and copy-event dispatch. The copy event is prevented after observation to preserve the system clipboard; no OS clipboard write is claimed. Final marker text is a controlled renderer stress case, not JSON validator output.",
+  "records": [
+    {
+      "name": "hover-partial",
+      "selected": "Value",
+      "text": "Value expectedjson(516)",
+      "innerText": "Value expectedjson(516)",
+      "userSelect": "text",
+      "editorTextFocused": false,
+      "font": "",
+      "editorValue": "{\"a\":}",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "516",
+          "severity": 8,
+          "message": "Value expected",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 6,
+          "endLineNumber": 1,
+          "endColumn": 7
+        }
+      ],
+      "gesture": {
+        "kind": "drag",
+        "start": {
+          "x": 793,
+          "y": 285.1875
+        },
+        "end": {
+          "x": 835.140625,
+          "y": 285.1875
+        }
+      },
+      "copyEvent": {
+        "selected": "Value",
+        "providedText": "",
+        "previouslyPrevented": false
+      },
+      "layout": {
+        "html": "<span style=\"white-space: pre-wrap;\">Value expected</span><span style=\"opacity: 0.6; padding-left: 6px;\">json(516)</span>",
+        "selectedRects": [
+          {
+            "x": 793,
+            "y": 277.1875,
+            "width": 42.15625,
+            "height": 16
+          }
+        ],
+        "children": [
+          {
+            "text": "Value expected",
+            "rects": [
+              {
+                "x": 793,
+                "y": 277.1875,
+                "width": 118.015625,
+                "height": 16
+              }
+            ]
+          },
+          {
+            "text": "json(516)",
+            "rects": [
+              {
+                "x": 911.015625,
+                "y": 277.1875,
+                "width": 81.859375,
+                "height": 16
+              }
+            ]
+          }
+        ]
+      },
+      "selectionStyle": {
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgb(97, 97, 97)"
+      }
+    },
+    {
+      "name": "hover-whole",
+      "selected": "Value expectedjson(516)",
+      "text": "Value expectedjson(516)",
+      "innerText": "Value expectedjson(516)",
+      "userSelect": "text",
+      "editorTextFocused": false,
+      "font": "",
+      "editorValue": "{\"a\":}",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "516",
+          "severity": 8,
+          "message": "Value expected",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 6,
+          "endLineNumber": 1,
+          "endColumn": 7
+        }
+      ],
+      "gesture": {
+        "kind": "drag",
+        "start": {
+          "x": 793,
+          "y": 285.1875
+        },
+        "end": {
+          "x": 992.859375,
+          "y": 285.1875
+        }
+      },
+      "copyEvent": {
+        "selected": "Value expectedjson(516)",
+        "providedText": "",
+        "previouslyPrevented": false
+      },
+      "layout": {
+        "html": "<span style=\"white-space: pre-wrap;\">Value expected</span><span style=\"opacity: 0.6; padding-left: 6px;\">json(516)</span>",
+        "selectedRects": [
+          {
+            "x": 793,
+            "y": 277.1875,
+            "width": 118.015625,
+            "height": 16
+          },
+          {
+            "x": 917.015625,
+            "y": 277.1875,
+            "width": 75.859375,
+            "height": 16
+          }
+        ],
+        "children": [
+          {
+            "text": "Value expected",
+            "rects": [
+              {
+                "x": 793,
+                "y": 277.1875,
+                "width": 118.015625,
+                "height": 16
+              }
+            ]
+          },
+          {
+            "text": "json(516)",
+            "rects": [
+              {
+                "x": 911.015625,
+                "y": 277.1875,
+                "width": 81.859375,
+                "height": 16
+              }
+            ]
+          }
+        ]
+      },
+      "selectionStyle": {
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgb(97, 97, 97)"
+      }
+    },
+    {
+      "name": "hover-code-span",
+      "selected": "json(516)",
+      "text": "Value expectedjson(516)",
+      "innerText": "Value expectedjson(516)",
+      "userSelect": "text",
+      "editorTextFocused": false,
+      "font": "",
+      "editorValue": "{\"a\":}",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "516",
+          "severity": 8,
+          "message": "Value expected",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 6,
+          "endLineNumber": 1,
+          "endColumn": 7
+        }
+      ],
+      "gesture": {
+        "kind": "drag",
+        "start": {
+          "x": 911,
+          "y": 285.1875
+        },
+        "end": {
+          "x": 992.859375,
+          "y": 285.1875
+        }
+      },
+      "copyEvent": {
+        "selected": "json(516)",
+        "providedText": "",
+        "previouslyPrevented": false
+      },
+      "layout": {
+        "html": "<span style=\"white-space: pre-wrap;\">Value expected</span><span style=\"opacity: 0.6; padding-left: 6px;\">json(516)</span>",
+        "selectedRects": [
+          {
+            "x": 917.015625,
+            "y": 277.1875,
+            "width": 75.859375,
+            "height": 16
+          }
+        ],
+        "children": [
+          {
+            "text": "Value expected",
+            "rects": [
+              {
+                "x": 793,
+                "y": 277.1875,
+                "width": 118.015625,
+                "height": 16
+              }
+            ]
+          },
+          {
+            "text": "json(516)",
+            "rects": [
+              {
+                "x": 911.015625,
+                "y": 277.1875,
+                "width": 81.859375,
+                "height": 16
+              }
+            ]
+          }
+        ]
+      },
+      "selectionStyle": {
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgb(97, 97, 97)"
+      }
+    },
+    {
+      "name": "hover-wrapped-whole",
+      "selected": "Expected a JSON object, array or literal.json(0)",
+      "text": "Expected a JSON object, array or literal.json(0)",
+      "innerText": "Expected a JSON object, array or literal.json(0)",
+      "userSelect": "text",
+      "editorTextFocused": false,
+      "font": "",
+      "editorValue": "visible draft",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "0",
+          "severity": 8,
+          "message": "Expected a JSON object, array or literal.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 8
+        }
+      ],
+      "gesture": {
+        "kind": "drag",
+        "start": {
+          "x": 729,
+          "y": 264.1875
+        },
+        "end": {
+          "x": 861.4375,
+          "y": 285.1875
+        }
+      },
+      "copyEvent": {
+        "selected": "Expected a JSON object, array or literal.json(0)",
+        "providedText": "",
+        "previouslyPrevented": false
+      },
+      "layout": {
+        "html": "<span style=\"white-space: pre-wrap;\">Expected a JSON object, array or literal.</span><span style=\"opacity: 0.6; padding-left: 6px;\">json(0)</span>",
+        "selectedRects": [
+          {
+            "x": 729,
+            "y": 256.1875,
+            "width": 269.71875,
+            "height": 16
+          },
+          {
+            "x": 998.71875,
+            "y": 256.1875,
+            "width": 8.4375,
+            "height": 16
+          },
+          {
+            "x": 729,
+            "y": 277.1875,
+            "width": 67.4375,
+            "height": 16
+          },
+          {
+            "x": 802.4375,
+            "y": 277.1875,
+            "width": 59.015625,
+            "height": 16
+          }
+        ],
+        "children": [
+          {
+            "text": "Expected a JSON object, array or literal.",
+            "rects": [
+              {
+                "x": 729,
+                "y": 256.1875,
+                "width": 269.71875,
+                "height": 16
+              },
+              {
+                "x": 998.71875,
+                "y": 256.1875,
+                "width": 8.4375,
+                "height": 16
+              },
+              {
+                "x": 729,
+                "y": 277.1875,
+                "width": 67.4375,
+                "height": 16
+              }
+            ]
+          },
+          {
+            "text": "json(0)",
+            "rects": [
+              {
+                "x": 796.4375,
+                "y": 277.1875,
+                "width": 65.015625,
+                "height": 16
+              }
+            ]
+          }
+        ]
+      },
+      "selectionStyle": {
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgb(97, 97, 97)"
+      }
+    },
+    {
+      "name": "hover-overlap-whole",
+      "selected": "Unexpected end of comment.json(257)\nComments are not permitted in JSON.(521)",
+      "text": "Unexpected end of comment.json(257)",
+      "innerText": "Unexpected end of comment.json(257)",
+      "userSelect": "text",
+      "editorTextFocused": false,
+      "font": "",
+      "editorValue": "/*",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "gesture": {
+        "kind": "drag",
+        "start": {
+          "x": 729,
+          "y": 213.1875
+        },
+        "end": {
+          "x": 819.296875,
+          "y": 285.1875
+        }
+      },
+      "copyEvent": {
+        "selected": "Unexpected end of comment.json(257)\nComments are not permitted in JSON.(521)",
+        "providedText": "",
+        "previouslyPrevented": false
+      },
+      "layout": {
+        "html": "<span style=\"white-space: pre-wrap;\">Unexpected end of comment.</span><span style=\"opacity: 0.6; padding-left: 6px;\">json(257)</span>",
+        "selectedRects": [
+          {
+            "x": 729,
+            "y": 205.1875,
+            "width": 143.296875,
+            "height": 16
+          },
+          {
+            "x": 872.296875,
+            "y": 205.1875,
+            "width": 8.4375,
+            "height": 16
+          },
+          {
+            "x": 729,
+            "y": 226.1875,
+            "width": 67.4375,
+            "height": 16
+          },
+          {
+            "x": 796.4375,
+            "y": 226.1875,
+            "width": 81.859375,
+            "height": 16
+          },
+          {
+            "x": 802.4375,
+            "y": 226.1875,
+            "width": 75.859375,
+            "height": 16
+          },
+          {
+            "x": 729,
+            "y": 256.1875,
+            "width": 244.4375,
+            "height": 16
+          },
+          {
+            "x": 973.4375,
+            "y": 256.1875,
+            "width": 8.4375,
+            "height": 16
+          },
+          {
+            "x": 729,
+            "y": 277.1875,
+            "width": 42.15625,
+            "height": 16
+          },
+          {
+            "x": 729,
+            "y": 256.1875,
+            "width": 244.4375,
+            "height": 16
+          },
+          {
+            "x": 973.4375,
+            "y": 256.1875,
+            "width": 8.4375,
+            "height": 16
+          },
+          {
+            "x": 729,
+            "y": 277.1875,
+            "width": 42.15625,
+            "height": 16
+          },
+          {
+            "x": 777.15625,
+            "y": 277.1875,
+            "width": 42.15625,
+            "height": 16
+          }
+        ],
+        "children": [
+          {
+            "text": "Unexpected end of comment.",
+            "rects": [
+              {
+                "x": 729,
+                "y": 205.1875,
+                "width": 143.296875,
+                "height": 16
+              },
+              {
+                "x": 872.296875,
+                "y": 205.1875,
+                "width": 8.4375,
+                "height": 16
+              },
+              {
+                "x": 729,
+                "y": 226.1875,
+                "width": 67.4375,
+                "height": 16
+              }
+            ]
+          },
+          {
+            "text": "json(257)",
+            "rects": [
+              {
+                "x": 796.4375,
+                "y": 226.1875,
+                "width": 81.859375,
+                "height": 16
+              }
+            ]
+          }
+        ]
+      },
+      "selectionStyle": {
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgb(97, 97, 97)"
+      }
+    },
+    {
+      "name": "hover-overlap-reverse",
+      "selected": "Unexpected end of comment.json(257)\nComments are not permitted in JSON.(521)",
+      "text": "Unexpected end of comment.json(257)",
+      "innerText": "Unexpected end of comment.json(257)",
+      "userSelect": "text",
+      "editorTextFocused": false,
+      "font": "",
+      "editorValue": "/*",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "gesture": {
+        "kind": "drag",
+        "start": {
+          "x": 819.296875,
+          "y": 285.1875
+        },
+        "end": {
+          "x": 729,
+          "y": 213.1875
+        }
+      },
+      "copyEvent": {
+        "selected": "Unexpected end of comment.json(257)\nComments are not permitted in JSON.(521)",
+        "providedText": "",
+        "previouslyPrevented": false
+      },
+      "layout": {
+        "html": "<span style=\"white-space: pre-wrap;\">Unexpected end of comment.</span><span style=\"opacity: 0.6; padding-left: 6px;\">json(257)</span>",
+        "selectedRects": [
+          {
+            "x": 729,
+            "y": 205.1875,
+            "width": 143.296875,
+            "height": 16
+          },
+          {
+            "x": 872.296875,
+            "y": 205.1875,
+            "width": 8.4375,
+            "height": 16
+          },
+          {
+            "x": 729,
+            "y": 226.1875,
+            "width": 67.4375,
+            "height": 16
+          },
+          {
+            "x": 796.4375,
+            "y": 226.1875,
+            "width": 81.859375,
+            "height": 16
+          },
+          {
+            "x": 802.4375,
+            "y": 226.1875,
+            "width": 75.859375,
+            "height": 16
+          },
+          {
+            "x": 729,
+            "y": 256.1875,
+            "width": 244.4375,
+            "height": 16
+          },
+          {
+            "x": 973.4375,
+            "y": 256.1875,
+            "width": 8.4375,
+            "height": 16
+          },
+          {
+            "x": 729,
+            "y": 277.1875,
+            "width": 42.15625,
+            "height": 16
+          },
+          {
+            "x": 729,
+            "y": 256.1875,
+            "width": 244.4375,
+            "height": 16
+          },
+          {
+            "x": 973.4375,
+            "y": 256.1875,
+            "width": 8.4375,
+            "height": 16
+          },
+          {
+            "x": 729,
+            "y": 277.1875,
+            "width": 42.15625,
+            "height": 16
+          },
+          {
+            "x": 777.15625,
+            "y": 277.1875,
+            "width": 42.15625,
+            "height": 16
+          }
+        ],
+        "children": [
+          {
+            "text": "Unexpected end of comment.",
+            "rects": [
+              {
+                "x": 729,
+                "y": 205.1875,
+                "width": 143.296875,
+                "height": 16
+              },
+              {
+                "x": 872.296875,
+                "y": 205.1875,
+                "width": 8.4375,
+                "height": 16
+              },
+              {
+                "x": 729,
+                "y": 226.1875,
+                "width": 67.4375,
+                "height": 16
+              }
+            ]
+          },
+          {
+            "text": "json(257)",
+            "rects": [
+              {
+                "x": 796.4375,
+                "y": 226.1875,
+                "width": 81.859375,
+                "height": 16
+              }
+            ]
+          }
+        ]
+      },
+      "selectionStyle": {
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgb(97, 97, 97)"
+      }
+    },
+    {
+      "name": "hover-word-double-click",
+      "selected": "Unexpected",
+      "text": "Unexpected end of comment.json(257)",
+      "innerText": "Unexpected end of comment.json(257)",
+      "userSelect": "text",
+      "editorTextFocused": false,
+      "font": "",
+      "editorValue": "/*",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "gesture": {
+        "kind": "double-click",
+        "position": {
+          "x": 754.28125,
+          "y": 213.1875
+        }
+      },
+      "copyEvent": {
+        "selected": "Unexpected",
+        "providedText": "",
+        "previouslyPrevented": false
+      },
+      "layout": {
+        "html": "<span style=\"white-space: pre-wrap;\">Unexpected end of comment.</span><span style=\"opacity: 0.6; padding-left: 6px;\">json(257)</span>",
+        "selectedRects": [
+          {
+            "x": 729,
+            "y": 205.1875,
+            "width": 84.296875,
+            "height": 16
+          }
+        ],
+        "children": [
+          {
+            "text": "Unexpected end of comment.",
+            "rects": [
+              {
+                "x": 729,
+                "y": 205.1875,
+                "width": 143.296875,
+                "height": 16
+              },
+              {
+                "x": 872.296875,
+                "y": 205.1875,
+                "width": 8.4375,
+                "height": 16
+              },
+              {
+                "x": 729,
+                "y": 226.1875,
+                "width": 67.4375,
+                "height": 16
+              }
+            ]
+          },
+          {
+            "text": "json(257)",
+            "rects": [
+              {
+                "x": 796.4375,
+                "y": 226.1875,
+                "width": 81.859375,
+                "height": 16
+              }
+            ]
+          }
+        ]
+      },
+      "selectionStyle": {
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgb(97, 97, 97)"
+      }
+    },
+    {
+      "name": "navigation-partial",
+      "selected": "Unexpected",
+      "text": "Unexpected end of comment.json(257)",
+      "innerText": "Unexpected end of comment.json(257)",
+      "userSelect": "text",
+      "editorTextFocused": false,
+      "font": "",
+      "editorValue": "/*",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "gesture": {
+        "kind": "drag",
+        "start": {
+          "x": 729,
+          "y": 398.1875
+        },
+        "end": {
+          "x": 813.28125,
+          "y": 398.1875
+        }
+      },
+      "copyEvent": {
+        "selected": "Unexpected",
+        "providedText": "",
+        "previouslyPrevented": false
+      },
+      "layout": {
+        "html": "<div>Unexpected end of comment.<span class=\"details\"><span class=\"source\">json</span><span class=\"code\">(257)</span></span></div>",
+        "selectedRects": [
+          {
+            "x": 729,
+            "y": 390.1875,
+            "width": 84.296875,
+            "height": 16
+          }
+        ],
+        "children": [
+          {
+            "text": "Unexpected end of comment.json(257)",
+            "rects": [
+              {
+                "x": 729,
+                "y": 388.1875,
+                "width": 301.03125,
+                "height": 21
+              }
+            ]
+          }
+        ]
+      },
+      "selectionStyle": {
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)"
+      }
+    },
+    {
+      "name": "controlled-unicode-hard-line",
+      "selected": "中文🙂  alpha\nsecond\tlinejson(777)",
+      "text": "中文🙂  alphasecond\tlinejson(777)",
+      "innerText": "中文🙂  alpha\nsecond\tlinejson(777)",
+      "userSelect": "text",
+      "editorTextFocused": false,
+      "font": "",
+      "editorValue": "/*",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "selection-qa",
+          "code": "777",
+          "severity": 8,
+          "message": "中文🙂  alpha\nsecond\tline",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "gesture": {
+        "kind": "drag",
+        "start": {
+          "x": 751,
+          "y": 264.1875
+        },
+        "end": {
+          "x": 934,
+          "y": 285.1875
+        }
+      },
+      "copyEvent": {
+        "selected": "中文🙂  alpha\nsecond\tlinejson(777)",
+        "providedText": "",
+        "previouslyPrevented": false
+      },
+      "layout": {
+        "html": "<span style=\"white-space: pre-wrap;\">中文🙂  alpha<br>second\tline</span><span style=\"opacity: 0.6; padding-left: 6px;\">json(777)</span>",
+        "selectedRects": [
+          {
+            "x": 751,
+            "y": 256.1875,
+            "width": 105.015625,
+            "height": 16
+          },
+          {
+            "x": 856.015625,
+            "y": 256.1875,
+            "width": 0,
+            "height": 16
+          },
+          {
+            "x": 751,
+            "y": 277.1875,
+            "width": 50.578125,
+            "height": 16
+          },
+          {
+            "x": 801.578125,
+            "y": 277.1875,
+            "width": 16.859375,
+            "height": 16
+          },
+          {
+            "x": 818.4375,
+            "y": 277.1875,
+            "width": 33.71875,
+            "height": 16
+          },
+          {
+            "x": 858.15625,
+            "y": 277.1875,
+            "width": 75.859375,
+            "height": 16
+          }
+        ],
+        "children": [
+          {
+            "text": "中文🙂  alpha\nsecond\tline",
+            "rects": [
+              {
+                "x": 751,
+                "y": 256.1875,
+                "width": 105.015625,
+                "height": 16
+              },
+              {
+                "x": 856.015625,
+                "y": 256.1875,
+                "width": 0,
+                "height": 16
+              },
+              {
+                "x": 751,
+                "y": 277.1875,
+                "width": 50.578125,
+                "height": 16
+              },
+              {
+                "x": 801.578125,
+                "y": 277.1875,
+                "width": 16.859375,
+                "height": 16
+              },
+              {
+                "x": 818.4375,
+                "y": 277.1875,
+                "width": 33.71875,
+                "height": 16
+              }
+            ]
+          },
+          {
+            "text": "json(777)",
+            "rects": [
+              {
+                "x": 852.15625,
+                "y": 277.1875,
+                "width": 81.859375,
+                "height": 16
+              }
+            ]
+          }
+        ]
+      },
+      "selectionStyle": {
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgb(97, 97, 97)"
+      }
+    },
+    {
+      "name": "navigation-keyboard-focus",
+      "selected": "Unexpected",
+      "text": "Unexpected end of comment.json(257)",
+      "innerText": "Unexpected end of comment.json(257)",
+      "userSelect": "text",
+      "editorTextFocused": false,
+      "font": "",
+      "editorValue": "/*",
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "gesture": {
+        "kind": "drag",
+        "start": {
+          "x": 729,
+          "y": 398.1875
+        },
+        "end": {
+          "x": 813.28125,
+          "y": 398.1875
+        }
+      },
+      "copyEvent": {
+        "selected": "Unexpected",
+        "providedText": "",
+        "previouslyPrevented": false
+      },
+      "layout": {
+        "html": "<div>Unexpected end of comment.<span class=\"details\"><span class=\"source\">json</span><span class=\"code\">(257)</span></span></div>",
+        "selectedRects": [
+          {
+            "x": 729,
+            "y": 390.1875,
+            "width": 84.296875,
+            "height": 16
+          }
+        ],
+        "children": [
+          {
+            "text": "Unexpected end of comment.json(257)",
+            "rects": [
+              {
+                "x": 729,
+                "y": 388.1875,
+                "width": 301.03125,
+                "height": 21
+              }
+            ]
+          }
+        ]
+      },
+      "selectionStyle": {
+        "background": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)"
+      }
+    }
+  ]
+}

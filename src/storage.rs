@@ -1,82 +1,198 @@
 use crate::model::{Connection, Preferences};
 use anyhow::{Context, Result, bail};
 use serde::{Serialize, de::DeserializeOwned};
-use std::{fs::{self, OpenOptions}, io::Write, path::{Path, PathBuf}};
+use std::{
+    fs,
+    io::{Read, Write},
+    path::{Path, PathBuf},
+};
 
 #[derive(Clone)]
-pub struct Store { pub root: PathBuf }
+pub struct Store {
+    pub root: PathBuf,
+}
 impl Store {
-    pub fn new(root: impl Into<PathBuf>) -> Self { Self { root: root.into() } }
+    pub fn new(root: impl Into<PathBuf>) -> Self {
+        Self { root: root.into() }
+    }
     pub fn system() -> Self {
-        if let Some(path) = std::env::var_os("RUST_RDM_DATA_DIR") { return Self::new(path); }
-        Self::new(directories::BaseDirs::new().map(|d|d.config_dir().join("rust-rdm")).unwrap_or_else(|| PathBuf::from(".rdm-data")))
+        if let Some(path) = std::env::var_os("RUST_RDM_DATA_DIR") {
+            return Self::new(path);
+        }
+        Self::new(
+            directories::BaseDirs::new()
+                .map(|d| d.config_dir().join("rust-rdm"))
+                .unwrap_or_else(|| PathBuf::from(".rdm-data")),
+        )
     }
     pub fn load<T: DeserializeOwned + Default>(&self, filename: &str) -> Result<T> {
         let path = self.root.join(filename);
-        if !path.exists() { return Ok(T::default()); }
-        serde_yaml::from_slice(&fs::read(&path)?).with_context(|| format!("无法读取 {}", path.display()))
+        if !path.exists() {
+            return Ok(T::default());
+        }
+        serde_yaml::from_slice(&fs::read(&path)?)
+            .with_context(|| format!("无法读取 {}", path.display()))
     }
     pub fn save<T: Serialize>(&self, filename: &str, value: &T) -> Result<()> {
+        self.save_bytes(filename, serde_yaml::to_string(value)?.as_bytes())
+    }
+    fn save_bytes(&self, filename: &str, bytes: &[u8]) -> Result<()> {
         fs::create_dir_all(&self.root)?;
-        #[cfg(unix)] { use std::os::unix::fs::PermissionsExt; fs::set_permissions(&self.root, fs::Permissions::from_mode(0o700))?; }
-        atomic_write(&self.root.join(filename), serde_yaml::to_string(value)?.as_bytes())
-    }
-    pub fn connections(&self) -> Result<Vec<Connection>> { self.load("connections.yaml") }
-    pub fn preferences(&self) -> Result<Preferences> { self.load("preferences.yaml") }
-    pub fn import_connections(&self, path: &Path, replace: bool) -> Result<Vec<Connection>> {
-        let mut imported: Vec<Connection> = serde_yaml::from_slice(&fs::read(path)?)?;
-        validate_tree(&imported)?;
-        if !replace {
-            let mut existing = self.connections()?;
-            let names = flatten(&existing).into_iter().map(|c|c.name).collect::<Vec<_>>();
-            for conn in flatten(&imported) {
-                if names.contains(&conn.name) { bail!("同名连接已存在：{}", conn.name); }
-            }
-            for item in imported {
-                if item.category == "group" && let Some(group) = existing.iter_mut().find(|c| c.category == "group" && c.name == item.name) {
-                    group.connections.extend(item.connections);
-                } else { existing.push(item); }
-            }
-            imported = existing;
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            fs::set_permissions(&self.root, fs::Permissions::from_mode(0o700))?;
         }
-        validate_tree(&imported)?; self.save("connections.yaml", &imported)?; Ok(imported)
+        atomic_write(&self.root.join(filename), bytes)
     }
-    pub fn export_connections(&self, path: &Path) -> Result<()> { atomic_write(path, serde_yaml::to_string(&self.connections()?)?.as_bytes()) }
+    pub fn connections(&self) -> Result<Vec<Connection>> {
+        self.load("connections.yaml")
+    }
+    pub fn preferences(&self) -> Result<Preferences> {
+        // The original getter falls back to defaults on unreadable YAML and
+        // repairs these layout and scan values without rewriting the file.
+        let mut pref: Preferences = self.load("preferences.yaml").unwrap_or_default();
+        if pref.general.scan_size == 0 {
+            pref.general.scan_size = 3000;
+        }
+        pref.behavior.aside_width = pref.behavior.aside_width.max(300.);
+        pref.behavior.window_width = pref.behavior.window_width.max(960.);
+        pref.behavior.window_height = pref.behavior.window_height.max(640.);
+        Ok(pref)
+    }
+    pub fn import_connections(&self, path: &Path) -> Result<Vec<Connection>> {
+        let mut archive = zip::ZipArchive::new(fs::File::open(path)?)?;
+        let mut candidate = None;
+        // The desktop importer takes the first matching entry, or the last entry
+        // if the archive has no connections.yaml. It copies bytes without form validation.
+        for index in 0..archive.len() {
+            candidate = Some(index);
+            if archive.by_index(index)?.name_raw() == b"connections.yaml" {
+                break;
+            }
+        }
+        if let Some(index) = candidate {
+            let mut bytes = Vec::new();
+            archive.by_index(index)?.read_to_end(&mut bytes)?;
+            self.save_bytes("connections.yaml", &bytes)?;
+        }
+        // The original connection list is empty when the copied YAML is invalid.
+        Ok(self.connections().unwrap_or_default())
+    }
+    pub fn export_connections(&self, path: &Path) -> Result<()> {
+        let bytes = fs::read(self.root.join("connections.yaml"))?;
+        let mut file = staging_file(path)?;
+        {
+            let mut archive = zip::ZipWriter::new(file.as_file_mut());
+            archive.start_file(
+                "connections.yaml",
+                zip::write::FileOptions::default()
+                    .compression_method(zip::CompressionMethod::Deflated),
+            )?;
+            archive.write_all(&bytes)?;
+            archive.finish()?;
+        }
+        file.as_file().sync_all()?;
+        file.persist(path).map_err(|error| error.error)?;
+        Ok(())
+    }
 }
 
 pub fn atomic_write(path: &Path, bytes: &[u8]) -> Result<()> {
-    let tmp = path.with_extension(format!("tmp-{}",std::process::id()));
-    let mut options = OpenOptions::new(); options.write(true).create(true).truncate(true);
-    #[cfg(unix)] { use std::os::unix::fs::OpenOptionsExt; options.mode(0o600); }
-    let mut file = options.open(&tmp)?; file.write_all(bytes)?; file.sync_all()?;
-    fs::rename(&tmp,path)?; Ok(())
+    let mut file = staging_file(path)?;
+    file.write_all(bytes)?;
+    file.as_file().sync_all()?;
+    file.persist(path).map_err(|error| error.error)?;
+    Ok(())
+}
+pub fn staging_file(path: &Path) -> Result<tempfile::NamedTempFile> {
+    let directory = path
+        .parent()
+        .filter(|parent| !parent.as_os_str().is_empty())
+        .unwrap_or_else(|| Path::new("."));
+    Ok(tempfile::Builder::new()
+        .prefix(".rdm-")
+        .tempfile_in(directory)?)
 }
 pub fn flatten(conns: &[Connection]) -> Vec<Connection> {
-    let mut out=vec![];
+    let mut out = vec![];
     for c in conns {
-        if c.category == "group" { for mut child in flatten(&c.connections) { child.group = c.name.clone(); out.push(child); } }
-        else { out.push(c.clone()); }
+        if c.category == "group" {
+            for mut child in flatten(&c.connections) {
+                child.group = c.name.clone();
+                out.push(child);
+            }
+        } else {
+            out.push(c.clone());
+        }
     }
     out
 }
-pub fn validate_tree(conns: &[Connection]) -> Result<()> {
-    let mut names = std::collections::HashSet::new();
-    for c in flatten(conns) { c.validate()?; if !names.insert(c.name.clone()) { bail!("同名连接已存在：{}",c.name); } }
-    let mut groups = std::collections::HashSet::new();
-    for c in conns.iter().filter(|c|c.category == "group") { c.validate()?; if !groups.insert(&c.name) { bail!("同名分组已存在：{}",c.name); } }
-    Ok(())
-}
 pub fn remove_connection(conns: &mut Vec<Connection>, name: &str) -> bool {
-    if let Some(i) = conns.iter().position(|c|c.category != "group" && c.name == name) { conns.remove(i); return true; }
-    conns.iter_mut().any(|c|remove_connection(&mut c.connections,name))
+    if let Some(i) = conns
+        .iter()
+        .position(|c| c.category != "group" && c.name == name)
+    {
+        conns.remove(i);
+        return true;
+    }
+    conns
+        .iter_mut()
+        .any(|c| remove_connection(&mut c.connections, name))
 }
-pub fn save_connection(conns: &mut Vec<Connection>, original: Option<&str>, mut item: Connection) -> Result<()> {
-    item.validate()?;
-    if flatten(conns).iter().any(|c|c.name==item.name && Some(c.name.as_str())!=original) { bail!("同名连接已存在：{}",item.name); }
-    if let Some(name) = original { remove_connection(conns,name); }
-    let group_name=std::mem::take(&mut item.group);
-    if group_name.is_empty() { conns.push(item); }
-    else if let Some(g) = conns.iter_mut().find(|c|c.category=="group" && c.name==group_name) { g.connections.push(item); }
-    else { conns.push(Connection { name:group_name, category:"group".into(), connections:vec![item], ..Default::default() }); }
+pub fn save_connection(
+    conns: &mut Vec<Connection>,
+    original: Option<&str>,
+    mut item: Connection,
+) -> Result<()> {
+    // SaveConnection validates the name; incomplete transport settings can be saved.
+    if item.name.contains('/') {
+        bail!("connection name contains illegal characters");
+    }
+    if flatten(conns)
+        .iter()
+        .any(|c| c.name == item.name && Some(c.name.as_str()) != original)
+    {
+        bail!("同名连接已存在：{}", item.name);
+    }
+    let group_name = std::mem::take(&mut item.group);
+    if let Some(name) = original {
+        let old = flatten(conns)
+            .into_iter()
+            .find(|c| c.name == name)
+            .ok_or_else(|| anyhow::anyhow!("连接不存在：{name}"))?;
+        if old.group == group_name {
+            fn replace(conns: &mut [Connection], name: &str, item: &Connection) -> bool {
+                for c in conns {
+                    if c.category != "group" && c.name == name {
+                        *c = item.clone();
+                        return true;
+                    }
+                    if replace(&mut c.connections, name, item) {
+                        return true;
+                    }
+                }
+                false
+            }
+            replace(conns, name, &item);
+            return Ok(());
+        }
+        remove_connection(conns, name);
+    }
+    if group_name.is_empty() {
+        conns.push(item);
+    } else if let Some(g) = conns
+        .iter_mut()
+        .find(|c| c.category == "group" && c.name == group_name)
+    {
+        g.connections.push(item);
+    } else {
+        conns.push(Connection {
+            name: group_name,
+            category: "group".into(),
+            connections: vec![item],
+            ..Default::default()
+        });
+    }
     Ok(())
 }

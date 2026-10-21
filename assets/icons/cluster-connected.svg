@@ -1,0 +1,60 @@
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <rect
+            fill="#dc423c"
+            stroke-width="3"
+            height="8"
+            stroke="#dc423c"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            width="8"
+            x="4"
+            y="34" />
+        <rect
+            fill="#dc423c"
+            stroke-width="3"
+            height="12"
+            stroke="#dc423c"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            width="32"
+            x="8"
+            y="6" />
+        <path
+            stroke-width="3"
+            d="M24 34V18"
+            stroke="#dc423c"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        <path
+            stroke-width="3"
+            d="M8 34V26H40V34"
+            stroke="#dc423c"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+        <rect
+            fill="#dc423c"
+            stroke-width="3"
+            height="8"
+            stroke="#dc423c"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            width="8"
+            x="36"
+            y="34" />
+        <rect
+            fill="#dc423c"
+            stroke-width="3"
+            height="8"
+            stroke="#dc423c"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            width="8"
+            x="20"
+            y="34" />
+        <path
+            stroke="#fff"
+            stroke-width="3"
+            d="M14 12H16"
+            stroke-linecap="round"
+            stroke-linejoin="round" />
+    </svg>

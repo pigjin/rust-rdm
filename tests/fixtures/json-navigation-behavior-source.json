@@ -1,0 +1,626 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Actual original Alt+F8, next/previous wrapping, Escape, edit and stale-marker navigation behavior in one editor. Local controlled RPCs; source-only evidence.",
+  "events": [
+    {
+      "name": "keyboard-open",
+      "value": "/*",
+      "position": {
+        "lineNumber": 1,
+        "column": 1
+      },
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 1,
+        "endColumn": 1,
+        "selectionStartLineNumber": 1,
+        "selectionStartColumn": 1,
+        "positionLineNumber": 1,
+        "positionColumn": 1
+      },
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "visible": true,
+      "text": "1\n1 of 2 problems\nUnexpected end of comment.json(257)",
+      "stale": false,
+      "bounds": {
+        "x": 709,
+        "y": 345.1875,
+        "width": 279,
+        "height": 84
+      },
+      "focused": true,
+      "lines": [
+        {
+          "text": "/*",
+          "top": 0
+        }
+      ]
+    },
+    {
+      "name": "next",
+      "value": "/*",
+      "position": {
+        "lineNumber": 1,
+        "column": 1
+      },
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 1,
+        "endColumn": 1,
+        "selectionStartLineNumber": 1,
+        "selectionStartColumn": 1,
+        "positionLineNumber": 1,
+        "positionColumn": 1
+      },
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "visible": true,
+      "text": "1\n2 of 2 problems\nComments are not permitted in JSON.(521)",
+      "stale": false,
+      "bounds": {
+        "x": 709,
+        "y": 345.1875,
+        "width": 279,
+        "height": 84
+      },
+      "focused": true,
+      "lines": [
+        {
+          "text": "/*",
+          "top": 0
+        }
+      ]
+    },
+    {
+      "name": "next-wrap",
+      "value": "/*",
+      "position": {
+        "lineNumber": 1,
+        "column": 1
+      },
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 1,
+        "endColumn": 1,
+        "selectionStartLineNumber": 1,
+        "selectionStartColumn": 1,
+        "positionLineNumber": 1,
+        "positionColumn": 1
+      },
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "visible": true,
+      "text": "1\n1 of 2 problems\nUnexpected end of comment.json(257)",
+      "stale": false,
+      "bounds": {
+        "x": 709,
+        "y": 345.1875,
+        "width": 279,
+        "height": 84
+      },
+      "focused": true,
+      "lines": [
+        {
+          "text": "/*",
+          "top": 0
+        }
+      ]
+    },
+    {
+      "name": "previous-wrap",
+      "value": "/*",
+      "position": {
+        "lineNumber": 1,
+        "column": 1
+      },
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 1,
+        "endColumn": 1,
+        "selectionStartLineNumber": 1,
+        "selectionStartColumn": 1,
+        "positionLineNumber": 1,
+        "positionColumn": 1
+      },
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "visible": true,
+      "text": "1\n2 of 2 problems\nComments are not permitted in JSON.(521)",
+      "stale": false,
+      "bounds": {
+        "x": 709,
+        "y": 345.1875,
+        "width": 279,
+        "height": 84
+      },
+      "focused": true,
+      "lines": [
+        {
+          "text": "/*",
+          "top": 0
+        }
+      ]
+    },
+    {
+      "name": "escape-close",
+      "value": "/*",
+      "position": {
+        "lineNumber": 1,
+        "column": 1
+      },
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 1,
+        "endColumn": 1,
+        "selectionStartLineNumber": 1,
+        "selectionStartColumn": 1,
+        "positionLineNumber": 1,
+        "positionColumn": 1
+      },
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "visible": false,
+      "text": "",
+      "stale": false,
+      "bounds": null,
+      "focused": true,
+      "lines": [
+        {
+          "text": "/*",
+          "top": 0
+        }
+      ]
+    },
+    {
+      "name": "keyboard-reopen",
+      "value": "/*",
+      "position": {
+        "lineNumber": 1,
+        "column": 1
+      },
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 1,
+        "endLineNumber": 1,
+        "endColumn": 1,
+        "selectionStartLineNumber": 1,
+        "selectionStartColumn": 1,
+        "positionLineNumber": 1,
+        "positionColumn": 1
+      },
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "visible": true,
+      "text": "1\n1 of 2 problems\nUnexpected end of comment.json(257)",
+      "stale": false,
+      "bounds": {
+        "x": 709,
+        "y": 345.1875,
+        "width": 279,
+        "height": 84
+      },
+      "focused": true,
+      "lines": [
+        {
+          "text": "/*",
+          "top": 0
+        }
+      ]
+    },
+    {
+      "name": "edited-before-validation",
+      "value": "null",
+      "position": {
+        "lineNumber": 1,
+        "column": 5
+      },
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 5,
+        "endLineNumber": 1,
+        "endColumn": 5,
+        "selectionStartLineNumber": 1,
+        "selectionStartColumn": 5,
+        "positionLineNumber": 1,
+        "positionColumn": 5
+      },
+      "markers": [
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "257",
+          "severity": 8,
+          "message": "Unexpected end of comment.",
+          "source": "json",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        },
+        {
+          "resource": {
+            "scheme": "inmemory",
+            "authority": "model",
+            "path": "/1",
+            "query": "",
+            "fragment": "",
+            "_formatted": "inmemory://model/1",
+            "_fsPath": null
+          },
+          "owner": "json",
+          "code": "521",
+          "severity": 8,
+          "message": "Comments are not permitted in JSON.",
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 3
+        }
+      ],
+      "visible": true,
+      "text": "1\n1 of 2 problems\nUnexpected end of comment.json(257)",
+      "stale": false,
+      "bounds": {
+        "x": 709,
+        "y": 345.1875,
+        "width": 279,
+        "height": 84
+      },
+      "focused": true,
+      "lines": [
+        {
+          "text": "null",
+          "top": 0
+        }
+      ]
+    },
+    {
+      "name": "edited-valid-stale",
+      "value": "null",
+      "position": {
+        "lineNumber": 1,
+        "column": 5
+      },
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 5,
+        "endLineNumber": 1,
+        "endColumn": 5,
+        "selectionStartLineNumber": 1,
+        "selectionStartColumn": 5,
+        "positionLineNumber": 1,
+        "positionColumn": 5
+      },
+      "markers": [],
+      "visible": true,
+      "text": "1\n1 of 2 problems\nUnexpected end of comment.json(257)",
+      "stale": true,
+      "bounds": {
+        "x": 709,
+        "y": 345.1875,
+        "width": 279,
+        "height": 84
+      },
+      "focused": true,
+      "lines": [
+        {
+          "text": "null",
+          "top": 0
+        }
+      ]
+    },
+    {
+      "name": "next-without-markers",
+      "value": "null",
+      "position": {
+        "lineNumber": 1,
+        "column": 5
+      },
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 5,
+        "endLineNumber": 1,
+        "endColumn": 5,
+        "selectionStartLineNumber": 1,
+        "selectionStartColumn": 5,
+        "positionLineNumber": 1,
+        "positionColumn": 5
+      },
+      "markers": [],
+      "visible": true,
+      "text": "1\n1 of 2 problems\nUnexpected end of comment.json(257)",
+      "stale": true,
+      "bounds": {
+        "x": 709,
+        "y": 345.1875,
+        "width": 279,
+        "height": 84
+      },
+      "focused": true,
+      "lines": [
+        {
+          "text": "null",
+          "top": 0
+        }
+      ]
+    },
+    {
+      "name": "final-close",
+      "value": "null",
+      "position": {
+        "lineNumber": 1,
+        "column": 5
+      },
+      "selection": {
+        "startLineNumber": 1,
+        "startColumn": 5,
+        "endLineNumber": 1,
+        "endColumn": 5,
+        "selectionStartLineNumber": 1,
+        "selectionStartColumn": 5,
+        "positionLineNumber": 1,
+        "positionColumn": 5
+      },
+      "markers": [],
+      "visible": false,
+      "text": "",
+      "stale": false,
+      "bounds": null,
+      "focused": true,
+      "lines": [
+        {
+          "text": "null",
+          "top": 0
+        }
+      ]
+    }
+  ]
+}

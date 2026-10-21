@@ -1,0 +1,1261 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "sourceSha256": "fd8d5bad4852366a94d7941e1e03eecb099a671adaf2fdf1d29669f1f4f88e86",
+  "goVersion": "go version go1.25.8 darwin/arm64",
+  "timeSourceSha256": "ab61194d541aee6a83f9f45400bec8a78426377a7c4f59d7d807fa4f6e6a18f0",
+  "redisCommandsSha256": "d841bac89b28d7114cbeb1b887e29b19060ce50a98b17ae3f90b2949a57d5917",
+  "method": "Original ImportCSV mechanically extracted; only its time.Now() calls are replaced with qaNow() for an explicit clock, inverse replacement checked equal. Original go-redis v9.21.0 executes actual RESTORE in marked empty DB14/15; a ProcessHook captures the formatted integer TTL before sending. Runtime-safe cases compare actual import/expiry with the Rust service; other cases compare the pure conversion under the same clock. PTTL -1/-2 retain Redis sentinel meaning.",
+  "clockSubstitutions": 4,
+  "value": "csv-ttl-fixture",
+  "key": "csv-ttl:target",
+  "records": [
+    {
+      "name": "missing-expiry",
+      "ttl": -1,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-zero",
+      "ttl": -1,
+      "expiryHex": "30",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-plus-zero",
+      "ttl": -1,
+      "expiryHex": "2b30",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-negative",
+      "ttl": -1,
+      "expiryHex": "2d31",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-empty",
+      "ttl": -1,
+      "expiryHex": "",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-invalid",
+      "ttl": -1,
+      "expiryHex": "78",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-leading-space",
+      "ttl": -1,
+      "expiryHex": "2031",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-trailing-space",
+      "ttl": -1,
+      "expiryHex": "3120",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-i64-overflow",
+      "ttl": -1,
+      "expiryHex": "39323233333732303336383534373735383038",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-i64-min",
+      "ttl": -1,
+      "expiryHex": "2d39323233333732303336383534373735383038",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-past",
+      "ttl": -1,
+      "expiryHex": "31",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": -1792022400122,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 1,
+          "imported": 0
+        }
+      ]
+    },
+    {
+      "name": "absolute-invalid-utf8",
+      "ttl": -1,
+      "expiryHex": "ff",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "ignore-expiry",
+      "ttl": 0,
+      "expiryHex": "39323233333732303336383534373735383037",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-1",
+      "ttl": 1,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 1000,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 988,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-9000",
+      "ttl": 9000,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 9000000,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 8999988,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-9223372036",
+      "ttl": 9223372036,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 9223372036000,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 9223372035987,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-9223372037",
+      "ttl": 9223372037,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": -9223372036709,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 1,
+          "imported": 0
+        }
+      ]
+    },
+    {
+      "name": "custom-10000000000",
+      "ttl": 10000000000,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": -8446744073709,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 1,
+          "imported": 0
+        }
+      ]
+    },
+    {
+      "name": "custom-36028797018963968",
+      "ttl": 36028797018963968,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-9223372036854775807",
+      "ttl": 9223372036854775807,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": -1000,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 1,
+          "imported": 0
+        }
+      ]
+    },
+    {
+      "name": "custom-wrap-ns-512",
+      "ttl": 20211507185753197,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 1,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-wrap-ns-1024",
+      "ttl": 4394217352542426,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 1,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-wrap-ns-256000",
+      "ttl": 17690427566687460,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 1,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-wrap-ns-512000",
+      "ttl": 35380855133374920,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 1,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-wrap-ns-999936",
+      "ttl": 21540798010448781,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 1,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-wrap-ns-1000448",
+      "ttl": 5723508177238010,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 1,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-wrap-ns--512",
+      "ttl": 15817289833210771,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-wrap-ns--999936",
+      "ttl": 14487999008515187,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "custom-wrap-ns--1000448",
+      "ttl": 30305288841725958,
+      "expiryHex": null,
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": -1,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 1,
+          "imported": 0
+        }
+      ]
+    },
+    {
+      "name": "absolute-max",
+      "ttl": -1,
+      "expiryHex": "39323233333732303336383534373735383037",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 9223372036854,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 9223372036842,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-plus-max",
+      "ttl": -1,
+      "expiryHex": "2b39323233333732303336383534373735383037",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 9223372036854,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 9223372036840,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-near-max",
+      "ttl": -1,
+      "expiryHex": "39323233333732303336383534373735383036",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": true,
+      "wireTtlMs": 9223372036854,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 9223372036841,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-near-now--2",
+      "ttl": -1,
+      "expiryHex": "31373932303232343030313231",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": -2,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 1,
+          "imported": 0
+        }
+      ]
+    },
+    {
+      "name": "absolute-near-now--1",
+      "ttl": -1,
+      "expiryHex": "31373932303232343030313232",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": -1,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 1,
+          "imported": 0
+        }
+      ]
+    },
+    {
+      "name": "absolute-near-now-0",
+      "ttl": -1,
+      "expiryHex": "31373932303232343030313233",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -1,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-near-now-1",
+      "ttl": -1,
+      "expiryHex": "31373932303232343030313234",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": 1,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-near-now-2",
+      "ttl": -1,
+      "expiryHex": "31373932303232343030313235",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": 1,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-near-now-10",
+      "ttl": -1,
+      "expiryHex": "31373932303232343030313333",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": 9,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-near-now-1000",
+      "ttl": -1,
+      "expiryHex": "31373932303232343031313233",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": 999,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 988,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-duration-limit--1",
+      "ttl": -1,
+      "expiryHex": "3131303135333934343336393737",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": 9223372036853,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 9223372036841,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-duration-limit-0",
+      "ttl": -1,
+      "expiryHex": "3131303135333934343336393738",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": 9223372036854,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 9223372036843,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-duration-limit-1",
+      "ttl": -1,
+      "expiryHex": "3131303135333934343336393739",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": 9223372036854,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 9223372036842,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-leading-zero",
+      "ttl": -1,
+      "expiryHex": "30303031373932303232343031313233",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": 999,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 986,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-plus-number",
+      "ttl": -1,
+      "expiryHex": "2b31373932303232343031313233",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": 999,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 987,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-max-from-epoch",
+      "ttl": -1,
+      "expiryHex": "39323233333732303336383534373735383037",
+      "nowMs": 0,
+      "nowRemainderNs": 0,
+      "runtimeSafe": false,
+      "wireTtlMs": 9223372036854,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 9223372036842,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-past-from-max-clock",
+      "ttl": -1,
+      "expiryHex": "31",
+      "nowMs": 9223372036854775807,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": -9223372036854,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "pttl": -2,
+      "value": "",
+      "events": [
+        {
+          "ignored": 1,
+          "imported": 0
+        }
+      ]
+    },
+    {
+      "name": "absolute-max-from-min-clock",
+      "ttl": -1,
+      "expiryHex": "39323233333732303336383534373735383037",
+      "nowMs": -9223372036854775808,
+      "nowRemainderNs": 456789,
+      "runtimeSafe": false,
+      "wireTtlMs": 9223372036854,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 9223372036841,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    },
+    {
+      "name": "absolute-at-integer-millisecond",
+      "ttl": -1,
+      "expiryHex": "31373932303232343031313233",
+      "nowMs": 1792022400123,
+      "nowRemainderNs": 0,
+      "runtimeSafe": false,
+      "wireTtlMs": 1000,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "pttl": 989,
+      "value": "csv-ttl-fixture",
+      "events": [
+        {
+          "ignored": 0,
+          "imported": 1
+        }
+      ]
+    }
+  ]
+}

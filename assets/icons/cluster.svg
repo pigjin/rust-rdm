@@ -1,6 +1,6 @@
 <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <rect
-            fill="currentColor"
+            fill="none"
             stroke-width="3"
             height="8"
             stroke="currentColor"
@@ -10,7 +10,7 @@
             x="4"
             y="34" />
         <rect
-            fill="currentColor"
+            fill="none"
             stroke-width="3"
             height="12"
             stroke="currentColor"
@@ -32,7 +32,7 @@
             stroke-linecap="round"
             stroke-linejoin="round" />
         <rect
-            fill="currentColor"
+            fill="none"
             stroke-width="3"
             height="8"
             stroke="currentColor"
@@ -42,7 +42,7 @@
             x="36"
             y="34" />
         <rect
-            fill="currentColor"
+            fill="none"
             stroke-width="3"
             height="8"
             stroke="currentColor"

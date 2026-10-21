@@ -1,0 +1,263 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Seven original Monaco/Menlo Unicode and tab column measurements for future native glyph-advance alignment. Direct model values, controlled local RPCs. Source-only evidence, not native glyph parity.",
+  "records": [
+    {
+      "input": "A🙂B",
+      "value": "A🙂B",
+      "utf16Length": 4,
+      "columns": [
+        {
+          "column": 1,
+          "x": 0
+        },
+        {
+          "column": 2,
+          "x": 8
+        },
+        {
+          "column": 3,
+          "x": 8
+        },
+        {
+          "column": 4,
+          "x": 26
+        },
+        {
+          "column": 5,
+          "x": 35
+        }
+      ],
+      "fontInfo": {
+        "fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+        "fontSize": 14,
+        "lineHeight": 21,
+        "typicalHalfwidthCharacterWidth": 8.4296875,
+        "isMonospace": true
+      },
+      "tabSize": 2
+    },
+    {
+      "input": "A中B",
+      "value": "A中B",
+      "utf16Length": 3,
+      "columns": [
+        {
+          "column": 1,
+          "x": 0
+        },
+        {
+          "column": 2,
+          "x": 8
+        },
+        {
+          "column": 3,
+          "x": 22
+        },
+        {
+          "column": 4,
+          "x": 31
+        }
+      ],
+      "fontInfo": {
+        "fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+        "fontSize": 14,
+        "lineHeight": 21,
+        "typicalHalfwidthCharacterWidth": 8.4296875,
+        "isMonospace": true
+      },
+      "tabSize": 2
+    },
+    {
+      "input": "AéB",
+      "value": "AéB",
+      "utf16Length": 4,
+      "columns": [
+        {
+          "column": 1,
+          "x": 0
+        },
+        {
+          "column": 2,
+          "x": 8
+        },
+        {
+          "column": 3,
+          "x": 8
+        },
+        {
+          "column": 4,
+          "x": 17
+        },
+        {
+          "column": 5,
+          "x": 25
+        }
+      ],
+      "fontInfo": {
+        "fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+        "fontSize": 14,
+        "lineHeight": 21,
+        "typicalHalfwidthCharacterWidth": 8.4296875,
+        "isMonospace": true
+      },
+      "tabSize": 2
+    },
+    {
+      "input": "A👩‍💻B",
+      "value": "A👩‍💻B",
+      "utf16Length": 7,
+      "columns": [
+        {
+          "column": 1,
+          "x": 0
+        },
+        {
+          "column": 2,
+          "x": 8
+        },
+        {
+          "column": 3,
+          "x": 8
+        },
+        {
+          "column": 4,
+          "x": 8
+        },
+        {
+          "column": 5,
+          "x": 8
+        },
+        {
+          "column": 6,
+          "x": 8
+        },
+        {
+          "column": 7,
+          "x": 26
+        },
+        {
+          "column": 8,
+          "x": 35
+        }
+      ],
+      "fontInfo": {
+        "fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+        "fontSize": 14,
+        "lineHeight": 21,
+        "typicalHalfwidthCharacterWidth": 8.4296875,
+        "isMonospace": true
+      },
+      "tabSize": 2
+    },
+    {
+      "input": "A🇨🇳B",
+      "value": "A🇨🇳B",
+      "utf16Length": 6,
+      "columns": [
+        {
+          "column": 1,
+          "x": 0
+        },
+        {
+          "column": 2,
+          "x": 8
+        },
+        {
+          "column": 3,
+          "x": 8
+        },
+        {
+          "column": 4,
+          "x": 8
+        },
+        {
+          "column": 5,
+          "x": 8
+        },
+        {
+          "column": 6,
+          "x": 26
+        },
+        {
+          "column": 7,
+          "x": 35
+        }
+      ],
+      "fontInfo": {
+        "fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+        "fontSize": 14,
+        "lineHeight": 21,
+        "typicalHalfwidthCharacterWidth": 8.4296875,
+        "isMonospace": true
+      },
+      "tabSize": 2
+    },
+    {
+      "input": "AΩ·B",
+      "value": "AΩ·B",
+      "utf16Length": 4,
+      "columns": [
+        {
+          "column": 1,
+          "x": 0
+        },
+        {
+          "column": 2,
+          "x": 8
+        },
+        {
+          "column": 3,
+          "x": 17
+        },
+        {
+          "column": 4,
+          "x": 25
+        },
+        {
+          "column": 5,
+          "x": 34
+        }
+      ],
+      "fontInfo": {
+        "fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+        "fontSize": 14,
+        "lineHeight": 21,
+        "typicalHalfwidthCharacterWidth": 8.4296875,
+        "isMonospace": true
+      },
+      "tabSize": 2
+    },
+    {
+      "input": "A\tB",
+      "value": "A\tB",
+      "utf16Length": 3,
+      "columns": [
+        {
+          "column": 1,
+          "x": 0
+        },
+        {
+          "column": 2,
+          "x": 8
+        },
+        {
+          "column": 3,
+          "x": 17
+        },
+        {
+          "column": 4,
+          "x": 25
+        }
+      ],
+      "fontInfo": {
+        "fontFamily": "Menlo, Monaco, 'Courier New', monospace",
+        "fontSize": 14,
+        "lineHeight": 21,
+        "typicalHalfwidthCharacterWidth": 8.4296875,
+        "isMonospace": true
+      },
+      "tabSize": 2
+    }
+  ]
+}

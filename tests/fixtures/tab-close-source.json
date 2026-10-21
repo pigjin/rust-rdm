@@ -1,0 +1,2492 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "34 controlled programmatic source-only states across two themes. Shared original Vue/Pinia dialogs use an unchanged original Web adapter with fixed mock RPCs; the pinned desktop Go CloseConnection endpoint independently always reports success. No trusted native keyboard, global input, clipboard, real Redis or native/full visual acceptance.",
+  "states": [
+    {
+      "theme": "light",
+      "name": "initial-editor-draft",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": true,
+      "editorValue": "draft retained",
+      "closeCalls": [],
+      "activeTag": "TEXTAREA",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "close-button-warning",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": true,
+      "editorValue": "draft retained",
+      "closeCalls": [],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 1
+    },
+    {
+      "theme": "light",
+      "name": "close-button-cancel",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": true,
+      "editorValue": "draft retained",
+      "closeCalls": [],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "confirmed-backend-failure",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": true,
+      "editorValue": "draft retained",
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "confirmed-request-pending",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": true,
+      "editorValue": "draft retained",
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "confirmed-request-complete",
+      "names": [],
+      "activeIndex": -1,
+      "currentName": null,
+      "nav": "server",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "first-active-close-middle-before",
+      "names": [
+        "qa-one",
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 0,
+      "currentName": "qa-one",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "first-active-close-middle-after",
+      "names": [
+        "qa-one",
+        "qa-three"
+      ],
+      "activeIndex": 0,
+      "currentName": "qa-one",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "middle-active-close-last-before",
+      "names": [
+        "qa-one",
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 1,
+      "currentName": "qa-two",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "middle-active-close-last-after",
+      "names": [
+        "qa-one",
+        "qa-two"
+      ],
+      "activeIndex": 0,
+      "currentName": "qa-one",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "last-active-close-first-before",
+      "names": [
+        "qa-one",
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 2,
+      "currentName": "qa-three",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "last-active-close-first-after",
+      "names": [
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 1,
+      "currentName": "qa-three",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "middle-active-close-self-before",
+      "names": [
+        "qa-one",
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 1,
+      "currentName": "qa-two",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "middle-active-close-self-after",
+      "names": [
+        "qa-one",
+        "qa-three"
+      ],
+      "activeIndex": 0,
+      "currentName": "qa-one",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "last-active-close-self-before",
+      "names": [
+        "qa-one",
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 2,
+      "currentName": "qa-three",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "last-active-close-self-after",
+      "names": [
+        "qa-one",
+        "qa-two"
+      ],
+      "activeIndex": 1,
+      "currentName": "qa-two",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "light",
+      "name": "final-warning-layout",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 1
+    },
+    {
+      "theme": "dark",
+      "name": "initial-editor-draft",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": true,
+      "editorValue": "draft retained",
+      "closeCalls": [],
+      "activeTag": "TEXTAREA",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "close-button-warning",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": true,
+      "editorValue": "draft retained",
+      "closeCalls": [],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 1
+    },
+    {
+      "theme": "dark",
+      "name": "close-button-cancel",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": true,
+      "editorValue": "draft retained",
+      "closeCalls": [],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "confirmed-backend-failure",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": true,
+      "editorValue": "draft retained",
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "confirmed-request-pending",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": true,
+      "editorValue": "draft retained",
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "confirmed-request-complete",
+      "names": [],
+      "activeIndex": -1,
+      "currentName": null,
+      "nav": "server",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "first-active-close-middle-before",
+      "names": [
+        "qa-one",
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 0,
+      "currentName": "qa-one",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "first-active-close-middle-after",
+      "names": [
+        "qa-one",
+        "qa-three"
+      ],
+      "activeIndex": 0,
+      "currentName": "qa-one",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "middle-active-close-last-before",
+      "names": [
+        "qa-one",
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 1,
+      "currentName": "qa-two",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "middle-active-close-last-after",
+      "names": [
+        "qa-one",
+        "qa-two"
+      ],
+      "activeIndex": 0,
+      "currentName": "qa-one",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "last-active-close-first-before",
+      "names": [
+        "qa-one",
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 2,
+      "currentName": "qa-three",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "last-active-close-first-after",
+      "names": [
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 1,
+      "currentName": "qa-three",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "middle-active-close-self-before",
+      "names": [
+        "qa-one",
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 1,
+      "currentName": "qa-two",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "middle-active-close-self-after",
+      "names": [
+        "qa-one",
+        "qa-three"
+      ],
+      "activeIndex": 0,
+      "currentName": "qa-one",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "last-active-close-self-before",
+      "names": [
+        "qa-one",
+        "qa-two",
+        "qa-three"
+      ],
+      "activeIndex": 2,
+      "currentName": "qa-three",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "last-active-close-self-after",
+      "names": [
+        "qa-one",
+        "qa-two"
+      ],
+      "activeIndex": 1,
+      "currentName": "qa-two",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 0
+    },
+    {
+      "theme": "dark",
+      "name": "final-warning-layout",
+      "names": [
+        "localhost"
+      ],
+      "activeIndex": 0,
+      "currentName": "localhost",
+      "nav": "browser",
+      "entryVisible": false,
+      "editorValue": null,
+      "closeCalls": [
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "failure",
+          "responseSuccess": false,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "localhost"
+          },
+          "mode": "delayed",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "localhost"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 0,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-one"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 1,
+          "body": {
+            "name": "qa-two"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        },
+        {
+          "activeIndexAtRequest": 2,
+          "body": {
+            "name": "qa-three"
+          },
+          "mode": "success",
+          "responseSuccess": true,
+          "tabsAtRequest": [
+            "qa-one",
+            "qa-two",
+            "qa-three"
+          ]
+        }
+      ],
+      "activeTag": "BODY",
+      "errorNotifications": [],
+      "visibleWarningCount": 1
+    }
+  ],
+  "layouts": [
+    {
+      "theme": "light",
+      "parts": {
+        "card": {
+          "background": "rgb(255, 255, 255)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderRadius": "4px",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px -9px, rgba(0, 0, 0, 0.05) 0px 9px 28px 0px, rgba(0, 0, 0, 0.03) 0px 12px 48px 16px",
+          "class": "n-dialog n-dialog--icon-left n-modal",
+          "color": "rgb(51, 54, 57)",
+          "display": "block",
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": 137,
+          "layoutHeight": 137,
+          "layoutWidth": 446,
+          "lineHeight": "21px",
+          "margin": "315.5px 289px",
+          "opacity": "1",
+          "outline": "3px none rgb(51, 54, 57)",
+          "padding": "16px 28px 20px",
+          "tag": "DIV",
+          "text": "警告是否关闭此连接（localhost）取消确认",
+          "transform": "none",
+          "width": 446,
+          "x": 289,
+          "y": 315.5
+        },
+        "title": {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(31, 34, 37)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "class": "n-dialog__title",
+          "color": "rgb(31, 34, 37)",
+          "display": "flex",
+          "font": "500 18px / 27px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "18px",
+          "fontWeight": "500",
+          "gap": "normal",
+          "height": 28,
+          "layoutHeight": 28,
+          "layoutWidth": 390,
+          "lineHeight": "27px",
+          "margin": "0px",
+          "opacity": "1",
+          "outline": "3px none rgb(31, 34, 37)",
+          "padding": "0px",
+          "tag": "DIV",
+          "text": "警告",
+          "transform": "none",
+          "width": 390,
+          "x": 317,
+          "y": 331.5
+        },
+        "content": {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "class": "n-dialog__content",
+          "color": "rgb(51, 54, 57)",
+          "display": "block",
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": 21,
+          "layoutHeight": 21,
+          "layoutWidth": 390,
+          "lineHeight": "21px",
+          "margin": "8px 0px 16px",
+          "opacity": "1",
+          "outline": "3px none rgb(51, 54, 57)",
+          "padding": "0px",
+          "tag": "DIV",
+          "text": "是否关闭此连接（localhost）",
+          "transform": "none",
+          "width": 390,
+          "x": 317,
+          "y": 367.5
+        },
+        "actions": {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "class": "n-dialog__action",
+          "color": "rgb(51, 54, 57)",
+          "display": "flex",
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": 28,
+          "layoutHeight": 28,
+          "layoutWidth": 390,
+          "lineHeight": "21px",
+          "margin": "0px",
+          "opacity": "1",
+          "outline": "3px none rgb(51, 54, 57)",
+          "padding": "0px",
+          "tag": "DIV",
+          "text": "取消确认",
+          "transform": "none",
+          "width": 390,
+          "x": 317,
+          "y": 404.5
+        },
+        "cancel": {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderRadius": "4px",
+          "boxShadow": "none",
+          "class": "n-button n-button--default-type n-button--small-type n-button--ghost",
+          "color": "rgb(51, 54, 57)",
+          "display": "flex",
+          "font": "14px / 14px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": 28,
+          "layoutHeight": 28,
+          "layoutWidth": 44,
+          "lineHeight": "14px",
+          "margin": "0px 12px 0px 0px",
+          "opacity": "1",
+          "outline": "3px none rgb(51, 54, 57)",
+          "padding": "0px 8px",
+          "tag": "BUTTON",
+          "text": "取消",
+          "transform": "none",
+          "width": 43.796875,
+          "x": 607.40625,
+          "y": 404.5
+        },
+        "confirm": {
+          "background": "rgb(240, 160, 32)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "4px",
+          "boxShadow": "none",
+          "class": "n-button n-button--warning-type n-button--small-type",
+          "color": "rgb(255, 255, 255)",
+          "display": "flex",
+          "font": "14px / 14px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": 28,
+          "layoutHeight": 28,
+          "layoutWidth": 44,
+          "lineHeight": "14px",
+          "margin": "0px",
+          "opacity": "1",
+          "outline": "3px none rgb(255, 255, 255)",
+          "padding": "0px 8px",
+          "tag": "BUTTON",
+          "text": "确认",
+          "transform": "none",
+          "width": 43.796875,
+          "x": 663.203125,
+          "y": 404.5
+        }
+      }
+    },
+    {
+      "theme": "dark",
+      "parts": {
+        "card": {
+          "background": "rgb(44, 44, 50)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderRadius": "4px",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px -9px, rgba(0, 0, 0, 0.05) 0px 9px 28px 0px, rgba(0, 0, 0, 0.03) 0px 12px 48px 16px",
+          "class": "n-dialog n-dialog--icon-left n-modal",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "display": "block",
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": 137,
+          "layoutHeight": 137,
+          "layoutWidth": 446,
+          "lineHeight": "21px",
+          "margin": "315.5px 289px",
+          "opacity": "1",
+          "outline": "3px none rgba(255, 255, 255, 0.82)",
+          "padding": "16px 28px 20px",
+          "tag": "DIV",
+          "text": "警告是否关闭此连接（localhost）取消确认",
+          "transform": "none",
+          "width": 446,
+          "x": 289,
+          "y": 315.5
+        },
+        "title": {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.9)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "class": "n-dialog__title",
+          "color": "rgba(255, 255, 255, 0.9)",
+          "display": "flex",
+          "font": "500 18px / 27px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "18px",
+          "fontWeight": "500",
+          "gap": "normal",
+          "height": 28,
+          "layoutHeight": 28,
+          "layoutWidth": 390,
+          "lineHeight": "27px",
+          "margin": "0px",
+          "opacity": "1",
+          "outline": "3px none rgba(255, 255, 255, 0.9)",
+          "padding": "0px",
+          "tag": "DIV",
+          "text": "警告",
+          "transform": "none",
+          "width": 390,
+          "x": 317,
+          "y": 331.5
+        },
+        "content": {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "class": "n-dialog__content",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "display": "block",
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": 21,
+          "layoutHeight": 21,
+          "layoutWidth": 390,
+          "lineHeight": "21px",
+          "margin": "8px 0px 16px",
+          "opacity": "1",
+          "outline": "3px none rgba(255, 255, 255, 0.82)",
+          "padding": "0px",
+          "tag": "DIV",
+          "text": "是否关闭此连接（localhost）",
+          "transform": "none",
+          "width": 390,
+          "x": 317,
+          "y": 367.5
+        },
+        "actions": {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderRadius": "0px",
+          "boxShadow": "none",
+          "class": "n-dialog__action",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "display": "flex",
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": 28,
+          "layoutHeight": 28,
+          "layoutWidth": 390,
+          "lineHeight": "21px",
+          "margin": "0px",
+          "opacity": "1",
+          "outline": "3px none rgba(255, 255, 255, 0.82)",
+          "padding": "0px",
+          "tag": "DIV",
+          "text": "取消确认",
+          "transform": "none",
+          "width": 390,
+          "x": 317,
+          "y": 404.5
+        },
+        "cancel": {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderRadius": "4px",
+          "boxShadow": "none",
+          "class": "n-button n-button--default-type n-button--small-type n-button--ghost",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "display": "flex",
+          "font": "14px / 14px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": 28,
+          "layoutHeight": 28,
+          "layoutWidth": 44,
+          "lineHeight": "14px",
+          "margin": "0px 12px 0px 0px",
+          "opacity": "1",
+          "outline": "3px none rgba(255, 255, 255, 0.82)",
+          "padding": "0px 8px",
+          "tag": "BUTTON",
+          "text": "取消",
+          "transform": "none",
+          "width": 43.796875,
+          "x": 607.40625,
+          "y": 404.5
+        },
+        "confirm": {
+          "background": "rgb(242, 201, 125)",
+          "border": "0px none rgb(0, 0, 0)",
+          "borderRadius": "4px",
+          "boxShadow": "none",
+          "class": "n-button n-button--warning-type n-button--small-type",
+          "color": "rgb(0, 0, 0)",
+          "display": "flex",
+          "font": "14px / 14px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "gap": "normal",
+          "height": 28,
+          "layoutHeight": 28,
+          "layoutWidth": 44,
+          "lineHeight": "14px",
+          "margin": "0px",
+          "opacity": "1",
+          "outline": "3px none rgb(0, 0, 0)",
+          "padding": "0px 8px",
+          "tag": "BUTTON",
+          "text": "确认",
+          "transform": "none",
+          "width": 43.796875,
+          "x": 663.203125,
+          "y": 404.5
+        }
+      }
+    }
+  ],
+  "cases": [
+    {
+      "active": 0,
+      "close": 1,
+      "name": "first-active-close-middle"
+    },
+    {
+      "active": 1,
+      "close": 2,
+      "name": "middle-active-close-last"
+    },
+    {
+      "active": 2,
+      "close": 0,
+      "name": "last-active-close-first"
+    },
+    {
+      "active": 1,
+      "close": 1,
+      "name": "middle-active-close-self"
+    },
+    {
+      "active": 2,
+      "close": 2,
+      "name": "last-active-close-self"
+    }
+  ],
+  "animationQualification": "An own timer-backed requestAnimationFrame queue was explicitly advanced and finite CSS animations finished to obtain stable styles in a hidden WKWebView. Original source files were not altered. Animation timing itself is unaccepted. Four failed transient-frame attempts remain archived.",
+  "files": [
+    {
+      "path": "outputs/source-probes/tab-close/light-raw.json",
+      "sha256": "84759db815a6ffc5a3f528e2567737cbbb05a18fee9e8cc5002eccdb7fdfdcfc"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/light-run.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/light-frame.png",
+      "sha256": "dd44c237998abb532ee9b9470f0df5d71e9f34d99ad295f62b12d2254df0b5c1"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/dark-raw.json",
+      "sha256": "da3e129d1034675962ef41fb85f0048c02c96567bbbb8e0ef79a98231dce700a"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/dark-run.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/dark-frame.png",
+      "sha256": "861ea5c82652baaf5cfacfae97bcde27913c4984fb224e82cd7800ea5e13d578"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/setup-light.js",
+      "sha256": "0184fe9e683ea654ad1338af1ceeac4a3a80361bf80b8abfeaf1c6c8bc46921c"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/setup-dark.js",
+      "sha256": "267624ced77d30473125d1dfa55d36a6fc1fe5c4fc7ff5c9d90fbe38f8893822"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/probe.swift",
+      "sha256": "3058087581856f214ae881e0b09dd4a22e519709c2d8598a2d08daff14f00ac9"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/raf.js",
+      "sha256": "e81e672f861cfbde2522b81fb717abfbeb56a7f4c312b8aa3c1d81eacc1c48e2"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/rdm-prepare-tab-close-source.py",
+      "sha256": "1aca90654f7e349053ed0ff6644f126d8a6cb0e4220b0af61abb80e1f1e48649"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/rdm-tab-close-source-run.py",
+      "sha256": "b7aed9682e8e92d11099a91b9579a96d73a1912451921f04f40003b077905ea7"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/rdm-archive-tab-close-source.py",
+      "sha256": "368759414b2940163bcc3737ed7cad8cb7b99765121ab7eb61fe94427905466a"
+    },
+    {
+      "path": "outputs/source-probes/tab-close/qa-server.mjs",
+      "sha256": "d116d7a5962df04c283fc9ead6df346322318d621b6cd1e9203e98510ca4284e"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "frontend/package.json",
+      "sha256": "5ab2c410970d2d8b023fdbd551e4e3b976eb07c95270715a958498cfcf6f4f7e"
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "sha256": "76703106c9c9d192f8e48672724e232e6d6cd866c8d2864a209bca508f17e7bf"
+    },
+    {
+      "path": "frontend/src/AppContent.vue",
+      "sha256": "c8189ab76b9afc24d67d4ae58a5cc997f7017bcd4c9755d41ffae4a2e0017571"
+    },
+    {
+      "path": "frontend/src/components/common/DropdownSelector.vue",
+      "sha256": "64eac087afca950623b6846861d484202aec9f4a000bb693ad814a547d00caab"
+    },
+    {
+      "path": "frontend/src/components/content/ContentValueTab.vue",
+      "sha256": "26a0f4de32b3e82ee49f52da4cb54c7e87d55d716005f3af74a3a2b1169e88c6"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentEditor.vue",
+      "sha256": "3057d2ebe1241b44abb93dd6365a085f7acf11b3c7c354f274c71ba49ffc16d2"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentEntryEditor.vue",
+      "sha256": "8ed9f2a82e9410d47451d802f44a9dc5df9e346c99cef669f676fef58ec060c5"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentValueHash.vue",
+      "sha256": "4d1929bb035f0e7bf3180a84350bd49846f6a9fb959af2ac3c1ec5b5183bbf9c"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentValueList.vue",
+      "sha256": "802ff396c0460c44f89829d5d00cc0e7d13415494daa272d81223633611b6ed6"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentValueSet.vue",
+      "sha256": "6b879f9b7657371e2978498a0a3f0edc9081ee6a89e58863b474c05774517d7b"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentValueZSet.vue",
+      "sha256": "a96e74b58ce738109b7e0fa08ce7e070039975d22e91115976d57ce86bc7ac5c"
+    },
+    {
+      "path": "frontend/src/components/content_value/FormatSelector.vue",
+      "sha256": "25b5909dadfa29c72a7b6681ad1e2e10b3a26417ede9fbaea42bdba19fc1bcea"
+    },
+    {
+      "path": "frontend/src/components/sidebar/ConnectionTree.vue",
+      "sha256": "63cbc33778bbb35cd60ecf9c33b03075d2a99eb98bdecdb08873077a37121aa2"
+    },
+    {
+      "path": "frontend/src/langs/zh-cn.json",
+      "sha256": "f0ba025615c6209a1747b4ac4e7bead968572b0e194e54c0d5bc207f9bb52e40"
+    },
+    {
+      "path": "frontend/src/main.js",
+      "sha256": "20be92d5b6f578c9a025e514b864841298b873bc8e45c112c7a4de1bb04a2555"
+    },
+    {
+      "path": "frontend/src/stores/browser.js",
+      "sha256": "9cac331de599eb66617d73fc181a2a3022a9d8bd75727f95a484bd97b8f60439"
+    },
+    {
+      "path": "frontend/src/stores/preferences.js",
+      "sha256": "07c6c9c9f8e181b1dd425e75af27012a4dfed06c21b6884ee39e25c56dfd40eb"
+    },
+    {
+      "path": "frontend/src/stores/tab.js",
+      "sha256": "541b342efc98403bf3c3fb9bb7255a6625c929349a43ce49a3a30273db6a4e15"
+    },
+    {
+      "path": "frontend/src/styles/style.scss",
+      "sha256": "e02b0b4ae424dbcbc74b7ca52aed3c1419d6138fff0f5875ac4d924337ebdc8b"
+    },
+    {
+      "path": "frontend/src/utils/discrete.js",
+      "sha256": "2e98196462802ffd2c67ad4107768264f89deb5007975bf42cfe492adef97ef7"
+    },
+    {
+      "path": "frontend/src/utils/monaco.js",
+      "sha256": "21da021e6fec497e01d521f9c3af4fc38ec3e5b8b9dea327722d84f038c301ea"
+    },
+    {
+      "path": "frontend/src/utils/theme.js",
+      "sha256": "256959896e81bf611d0497718d0d8efc55d8483b5689651539dcc2bbc4562629"
+    },
+    {
+      "path": "backend/services/browser_service.go",
+      "sha256": "fd8d5bad4852366a94d7941e1e03eecb099a671adaf2fdf1d29669f1f4f88e86"
+    }
+  ]
+}

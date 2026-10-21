@@ -1,0 +1,15 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "samples": [
+    {
+      "text": "查看方式",
+      "width": 59.546875,
+      "font": "700 15px / 30px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+    },
+    {
+      "text": "解码/解压方式",
+      "width": 94.09375,
+      "font": "700 15px / 30px v-sans, system-ui, -apple-system, \"system-ui\", \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+    }
+  ]
+}

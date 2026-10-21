@@ -1,0 +1,1264 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "sourceSha256": "fd8d5bad4852366a94d7941e1e03eecb099a671adaf2fdf1d29669f1f4f88e86",
+  "methodSha256": "010734f7918b6983c034521ff446e85d6bcdd02a3bba20a63c7e3ebcc56358f9",
+  "method": "Original SetKeyValue mechanically extracted, inverse substitutions checked equal. Actual go-redis v9.21.0 and Redis / RedisJSON in marked empty DB15. Support adapters constrain keys to strings and SaveAs to Raw/None, the only values this dialog supplies. Wire capture includes pipeline commands. Keys removed after every case.",
+  "key": "new-key-probe:target",
+  "records": [
+    {
+      "name": "untouched-STRING",
+      "kind": "STRING",
+      "value": "",
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": ""
+        }
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "set",
+          "new-key-probe:target",
+          ""
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": "",
+      "type": "string"
+    },
+    {
+      "name": "untouched-HASH",
+      "kind": "HASH",
+      "value": [],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ]
+      ],
+      "pttl": -2,
+      "snapshot": null,
+      "type": "none"
+    },
+    {
+      "name": "untouched-LIST",
+      "kind": "LIST",
+      "value": [],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": false,
+        "msg": "ERR wrong number of arguments for 'lpush' command"
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "lpush",
+          "new-key-probe:target"
+        ]
+      ],
+      "pttl": -2,
+      "snapshot": null,
+      "type": "none"
+    },
+    {
+      "name": "untouched-SET",
+      "kind": "SET",
+      "value": [],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": false,
+        "msg": "invalid set value"
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ]
+      ],
+      "pttl": -2,
+      "snapshot": null,
+      "type": "none"
+    },
+    {
+      "name": "untouched-ZSET",
+      "kind": "ZSET",
+      "value": [],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": false,
+        "msg": "invalid zset value"
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ]
+      ],
+      "pttl": -2,
+      "snapshot": null,
+      "type": "none"
+    },
+    {
+      "name": "untouched-STREAM",
+      "kind": "STREAM",
+      "value": [],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ]
+      ],
+      "pttl": -2,
+      "snapshot": null,
+      "type": "none"
+    },
+    {
+      "name": "untouched-JSON",
+      "kind": "JSON",
+      "value": "{}",
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": true,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": "{}"
+        }
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "JSON.SET",
+          "new-key-probe:target",
+          ".",
+          "{}"
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": "{}",
+      "type": "ReJSON-RL"
+    },
+    {
+      "name": "string-text",
+      "kind": "STRING",
+      "value": "中文\nRaw: value",
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": "中文\nRaw: value"
+        }
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "set",
+          "new-key-probe:target",
+          "中文\nRaw: value"
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": "中文\nRaw: value",
+      "type": "string"
+    },
+    {
+      "name": "hash-duplicates",
+      "kind": "HASH",
+      "value": [
+        "name",
+        "first",
+        "name",
+        "last",
+        "empty",
+        ""
+      ],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "hset",
+          "new-key-probe:target",
+          "name",
+          "first"
+        ],
+        [
+          "hset",
+          "new-key-probe:target",
+          "name",
+          "last"
+        ],
+        [
+          "hset",
+          "new-key-probe:target",
+          "empty",
+          ""
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": {
+        "empty": "",
+        "name": "last"
+      },
+      "type": "hash"
+    },
+    {
+      "name": "list-duplicates",
+      "kind": "LIST",
+      "value": [
+        "alpha",
+        "alpha",
+        "beta"
+      ],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "lpush",
+          "new-key-probe:target",
+          "alpha",
+          "alpha",
+          "beta"
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": [
+        "beta",
+        "alpha",
+        "alpha"
+      ],
+      "type": "list"
+    },
+    {
+      "name": "set-members",
+      "kind": "SET",
+      "value": [
+        "alpha",
+        "beta"
+      ],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "sadd",
+          "new-key-probe:target",
+          "alpha",
+          "beta"
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": [
+        "alpha",
+        "beta"
+      ],
+      "type": "set"
+    },
+    {
+      "name": "zset-duplicates",
+      "kind": "ZSET",
+      "value": [
+        "member",
+        "2.5",
+        "member",
+        "-3",
+        "other",
+        "Infinity"
+      ],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "zadd",
+          "new-key-probe:target",
+          "2.5",
+          "member",
+          "-3",
+          "member",
+          "+Inf",
+          "other"
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": [
+        [
+          "member",
+          "-3"
+        ],
+        [
+          "other",
+          "+Inf"
+        ]
+      ],
+      "type": "zset"
+    },
+    {
+      "name": "stream-id",
+      "kind": "STREAM",
+      "value": [
+        "1720000000000-0",
+        "event",
+        "logout"
+      ],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "xadd",
+          "new-key-probe:target",
+          "1720000000000-0",
+          "event",
+          "logout"
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": [
+        [
+          "1720000000000-0",
+          {
+            "event": "logout"
+          }
+        ]
+      ],
+      "type": "stream"
+    },
+    {
+      "name": "stream-no-fields",
+      "kind": "STREAM",
+      "value": [
+        "*"
+      ],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ]
+      ],
+      "pttl": -2,
+      "snapshot": null,
+      "type": "none"
+    },
+    {
+      "name": "stream-empty-field-value",
+      "kind": "STREAM",
+      "value": [
+        "1720000000000-0",
+        "event",
+        ""
+      ],
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "xadd",
+          "new-key-probe:target",
+          "1720000000000-0",
+          "event",
+          ""
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": [
+        [
+          "1720000000000-0",
+          {
+            "event": ""
+          }
+        ]
+      ],
+      "type": "stream"
+    },
+    {
+      "name": "negative-ttl-existing-STRING",
+      "kind": "STRING",
+      "value": "new",
+      "ttl": -1,
+      "setup": [
+        [
+          "SET",
+          "old",
+          "PX",
+          "1500"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": "new"
+        }
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "set",
+          "new-key-probe:target",
+          "new"
+        ],
+        [
+          "expire",
+          "new-key-probe:target",
+          "1"
+        ]
+      ],
+      "pttl": 1000,
+      "snapshot": "new",
+      "type": "string"
+    },
+    {
+      "name": "negative-ttl-existing-HASH",
+      "kind": "HASH",
+      "value": [
+        "b",
+        "2"
+      ],
+      "ttl": -1,
+      "setup": [
+        [
+          "HSET",
+          "a",
+          "1"
+        ],
+        [
+          "PEXPIRE",
+          "1500"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "hset",
+          "new-key-probe:target",
+          "b",
+          "2"
+        ],
+        [
+          "expire",
+          "new-key-probe:target",
+          "1"
+        ]
+      ],
+      "pttl": 1000,
+      "snapshot": {
+        "a": "1",
+        "b": "2"
+      },
+      "type": "hash"
+    },
+    {
+      "name": "negative-ttl-existing-LIST",
+      "kind": "LIST",
+      "value": [
+        "new"
+      ],
+      "ttl": -1,
+      "setup": [
+        [
+          "RPUSH",
+          "old"
+        ],
+        [
+          "PEXPIRE",
+          "1500"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "lpush",
+          "new-key-probe:target",
+          "new"
+        ],
+        [
+          "expire",
+          "new-key-probe:target",
+          "1"
+        ]
+      ],
+      "pttl": 1000,
+      "snapshot": [
+        "new",
+        "old"
+      ],
+      "type": "list"
+    },
+    {
+      "name": "negative-ttl-existing-SET",
+      "kind": "SET",
+      "value": [
+        "new"
+      ],
+      "ttl": -1,
+      "setup": [
+        [
+          "SADD",
+          "old"
+        ],
+        [
+          "PEXPIRE",
+          "1500"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "sadd",
+          "new-key-probe:target",
+          "new"
+        ],
+        [
+          "expire",
+          "new-key-probe:target",
+          "1"
+        ]
+      ],
+      "pttl": 1000,
+      "snapshot": [
+        "old",
+        "new"
+      ],
+      "type": "set"
+    },
+    {
+      "name": "negative-ttl-existing-ZSET",
+      "kind": "ZSET",
+      "value": [
+        "new",
+        "2"
+      ],
+      "ttl": -1,
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "old"
+        ],
+        [
+          "PEXPIRE",
+          "1500"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "zadd",
+          "new-key-probe:target",
+          "2",
+          "new"
+        ],
+        [
+          "expire",
+          "new-key-probe:target",
+          "1"
+        ]
+      ],
+      "pttl": 999,
+      "snapshot": [
+        [
+          "old",
+          "1"
+        ],
+        [
+          "new",
+          "2"
+        ]
+      ],
+      "type": "zset"
+    },
+    {
+      "name": "negative-ttl-existing-STREAM",
+      "kind": "STREAM",
+      "value": [
+        "1720000000000-1",
+        "new",
+        "2"
+      ],
+      "ttl": -1,
+      "setup": [
+        [
+          "XADD",
+          "1720000000000-0",
+          "old",
+          "1"
+        ],
+        [
+          "PEXPIRE",
+          "1500"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "xadd",
+          "new-key-probe:target",
+          "1720000000000-1",
+          "new",
+          "2"
+        ],
+        [
+          "expire",
+          "new-key-probe:target",
+          "1"
+        ]
+      ],
+      "pttl": 1000,
+      "snapshot": [
+        [
+          "1720000000000-0",
+          {
+            "old": "1"
+          }
+        ],
+        [
+          "1720000000000-1",
+          {
+            "new": "2"
+          }
+        ]
+      ],
+      "type": "stream"
+    },
+    {
+      "name": "negative-ttl-existing-JSON",
+      "kind": "JSON",
+      "value": "{\"new\":2}",
+      "ttl": -1,
+      "setup": [
+        [
+          "JSON.SET",
+          ".",
+          "{\"old\":1}"
+        ],
+        [
+          "PEXPIRE",
+          "1500"
+        ]
+      ],
+      "jsonServer": true,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": "{\"new\":2}"
+        }
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "JSON.SET",
+          "new-key-probe:target",
+          ".",
+          "{\"new\":2}"
+        ],
+        [
+          "expire",
+          "new-key-probe:target",
+          "1"
+        ]
+      ],
+      "pttl": 1000,
+      "snapshot": "{\"new\":2}",
+      "type": "ReJSON-RL"
+    },
+    {
+      "name": "string-ttl-0",
+      "kind": "STRING",
+      "value": "new",
+      "ttl": 0,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": "new"
+        }
+      },
+      "wire": [
+        [
+          "set",
+          "new-key-probe:target",
+          "new"
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": "new",
+      "type": "string"
+    },
+    {
+      "name": "string-ttl-2",
+      "kind": "STRING",
+      "value": "new",
+      "ttl": 2,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": "new"
+        }
+      },
+      "wire": [
+        [
+          "set",
+          "new-key-probe:target",
+          "new"
+        ],
+        [
+          "expire",
+          "new-key-probe:target",
+          "2"
+        ]
+      ],
+      "pttl": 1999,
+      "snapshot": "new",
+      "type": "string"
+    },
+    {
+      "name": "string-ttl-9223372036",
+      "kind": "STRING",
+      "value": "new",
+      "ttl": 9223372036,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": "new"
+        }
+      },
+      "wire": [
+        [
+          "set",
+          "new-key-probe:target",
+          "new"
+        ],
+        [
+          "expire",
+          "new-key-probe:target",
+          "9223372036"
+        ]
+      ],
+      "pttl": 9223372036000,
+      "snapshot": "new",
+      "type": "string"
+    },
+    {
+      "name": "string-ttl-9223372037",
+      "kind": "STRING",
+      "value": "new",
+      "ttl": 9223372037,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": "new"
+        }
+      },
+      "wire": [
+        [
+          "set",
+          "new-key-probe:target",
+          "new"
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": "new",
+      "type": "string"
+    },
+    {
+      "name": "string-ttl-9007199254740991",
+      "kind": "STRING",
+      "value": "new",
+      "ttl": 9007199254740991,
+      "setup": [],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": "new"
+        }
+      },
+      "wire": [
+        [
+          "set",
+          "new-key-probe:target",
+          "new"
+        ],
+        [
+          "expire",
+          "new-key-probe:target",
+          "4611686017"
+        ]
+      ],
+      "pttl": 4611686017000,
+      "snapshot": "new",
+      "type": "string"
+    },
+    {
+      "name": "zero-ttl-string-replaces",
+      "kind": "STRING",
+      "value": "new",
+      "ttl": 0,
+      "setup": [
+        [
+          "SET",
+          "old",
+          "EX",
+          "600"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": "new"
+        }
+      },
+      "wire": [
+        [
+          "set",
+          "new-key-probe:target",
+          "new"
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": "new",
+      "type": "string"
+    },
+    {
+      "name": "zero-ttl-list-appends",
+      "kind": "LIST",
+      "value": [
+        "new"
+      ],
+      "ttl": 0,
+      "setup": [
+        [
+          "RPUSH",
+          "old"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "lpush",
+          "new-key-probe:target",
+          "new"
+        ]
+      ],
+      "pttl": 600000,
+      "snapshot": [
+        "new",
+        "old"
+      ],
+      "type": "list"
+    },
+    {
+      "name": "hash-empty-keeps-existing",
+      "kind": "HASH",
+      "value": [],
+      "ttl": 2,
+      "setup": [
+        [
+          "HSET",
+          "old",
+          "1"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": null,
+      "pttl": 600000,
+      "snapshot": {
+        "old": "1"
+      },
+      "type": "hash"
+    },
+    {
+      "name": "stream-empty-keeps-existing",
+      "kind": "STREAM",
+      "value": [],
+      "ttl": 2,
+      "setup": [
+        [
+          "XADD",
+          "1720000000000-0",
+          "old",
+          "1"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": null,
+      "pttl": 600000,
+      "snapshot": [
+        [
+          "1720000000000-0",
+          {
+            "old": "1"
+          }
+        ]
+      ],
+      "type": "stream"
+    },
+    {
+      "name": "hash-error-still-expires",
+      "kind": "HASH",
+      "value": [
+        "a",
+        "1",
+        "b",
+        "2"
+      ],
+      "ttl": 2,
+      "setup": [
+        [
+          "SET",
+          "old",
+          "EX",
+          "600"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": false,
+        "msg": "WRONGTYPE Operation against a key holding the wrong kind of value"
+      },
+      "wire": [
+        [
+          "hset",
+          "new-key-probe:target",
+          "a",
+          "1"
+        ],
+        [
+          "hset",
+          "new-key-probe:target",
+          "b",
+          "2"
+        ],
+        [
+          "expire",
+          "new-key-probe:target",
+          "2"
+        ]
+      ],
+      "pttl": 2000,
+      "snapshot": "old",
+      "type": "string"
+    },
+    {
+      "name": "list-wrong-type",
+      "kind": "LIST",
+      "value": [
+        "a"
+      ],
+      "ttl": 2,
+      "setup": [
+        [
+          "SET",
+          "old",
+          "EX",
+          "600"
+        ]
+      ],
+      "jsonServer": false,
+      "result": {
+        "success": false,
+        "msg": "WRONGTYPE Operation against a key holding the wrong kind of value"
+      },
+      "wire": [
+        [
+          "lpush",
+          "new-key-probe:target",
+          "a"
+        ]
+      ],
+      "pttl": 600000,
+      "snapshot": "old",
+      "type": "string"
+    },
+    {
+      "name": "json-empty",
+      "kind": "JSON",
+      "value": "",
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": true,
+      "result": {
+        "success": false,
+        "msg": "EOF while parsing a value at line 1 column 0"
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "JSON.SET",
+          "new-key-probe:target",
+          ".",
+          ""
+        ]
+      ],
+      "pttl": -2,
+      "snapshot": null,
+      "type": "none"
+    },
+    {
+      "name": "json-array",
+      "kind": "JSON",
+      "value": "[1,true,\"中文\"]",
+      "ttl": -1,
+      "setup": [],
+      "jsonServer": true,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "value": "[1,true,\"中文\"]"
+        }
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "JSON.SET",
+          "new-key-probe:target",
+          ".",
+          "[1,true,\"中文\"]"
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": "[1,true,\"中文\"]",
+      "type": "ReJSON-RL"
+    },
+    {
+      "name": "json-wrong-type",
+      "kind": "JSON",
+      "value": "{}",
+      "ttl": -1,
+      "setup": [
+        [
+          "SET",
+          "old"
+        ]
+      ],
+      "jsonServer": true,
+      "result": {
+        "success": false,
+        "msg": "Existing key has wrong Redis type"
+      },
+      "wire": [
+        [
+          "pttl",
+          "new-key-probe:target"
+        ],
+        [
+          "JSON.SET",
+          "new-key-probe:target",
+          ".",
+          "{}"
+        ]
+      ],
+      "pttl": -1,
+      "snapshot": "old",
+      "type": "string"
+    }
+  ]
+}

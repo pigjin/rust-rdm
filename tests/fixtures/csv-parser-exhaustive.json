@@ -1,0 +1,46 @@
+{
+  "alphabetHex": "612c220a0dff",
+  "goVersion": "go1.25.8",
+  "maxLength": 6,
+  "method": "Go encoding/csv.NewReader defaults; every byte string up to maxLength over alphabetHex, in length then lexicographic alphabet-index order. FNV-1a64 input: u64le raw length, raw, u64le accepted row count, then u64le field count per row and u64le byte length + bytes per field, then a single parse-error flag byte. EOF is not a parse error.",
+  "records": [
+    {
+      "count": 1,
+      "fnv1a64": "4dfa4cffd1f7979f",
+      "length": 0
+    },
+    {
+      "count": 6,
+      "fnv1a64": "6dd10fc53dd179a4",
+      "length": 1
+    },
+    {
+      "count": 36,
+      "fnv1a64": "bdc57f935253fc7b",
+      "length": 2
+    },
+    {
+      "count": 216,
+      "fnv1a64": "4d5bca94606a8ae4",
+      "length": 3
+    },
+    {
+      "count": 1296,
+      "fnv1a64": "f742d6da0fcd9a20",
+      "length": 4
+    },
+    {
+      "count": 7776,
+      "fnv1a64": "f83efa43ec0c1f93",
+      "length": 5
+    },
+    {
+      "count": 46656,
+      "fnv1a64": "95b22b4bba78dceb",
+      "length": 6
+    }
+  ],
+  "totalCases": 55987,
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "csvReaderSha256": "c37960d74220590547febce08339aa321f4d85c524740451e14692ebbc9fef1e"
+}

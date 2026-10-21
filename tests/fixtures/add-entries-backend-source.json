@@ -1,0 +1,1498 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "sourceSha256": "fd8d5bad4852366a94d7941e1e03eecb099a671adaf2fdf1d29669f1f4f88e86",
+  "methodSha256": {
+    "AddHashField": "0e58f660b002fcc68085f6fa3efc2bcbab731ad2557d81b8c184d3768a5e167b",
+    "AddListItem": "1d5831681212cf52970f52a25e4ae99b08b42b747a86af9de7994b1f400c1200",
+    "SetSetItem": "990489e3e462472f67946af422396af05a28ca2dcf1e5937148c8c29427de8c6",
+    "AddZSetValue": "3cc3031ad916ff4d413096d44426288a0f4685b0a25529a5a954f1fc2f147dbe",
+    "AddStreamValue": "fe2adab00a896052c72f485659926dd37d5f73bfcf15272486735a7c3923368c"
+  },
+  "method": "Five original Go mutation methods mechanically extracted with inverse substitutions checked equal. Original entry types and actual go-redis v9.21.0 against marked empty DB15; support adapters cover string values, binary key arrays, and JSON indentation. ZSet binding uses Go json.Unmarshal map[string]float64; pipeline / IO interruption not covered. Each scratch key removed.",
+  "records": [
+    {
+      "name": "untouched-HASH",
+      "kind": "HASH",
+      "key": "add-entries-probe:target",
+      "value": [],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": null,
+      "pttl": -2,
+      "type": "none",
+      "snapshot": null
+    },
+    {
+      "name": "untouched-LIST",
+      "kind": "LIST",
+      "key": "add-entries-probe:target",
+      "value": [],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": false,
+        "msg": "ERR wrong number of arguments for 'lpush' command"
+      },
+      "wire": [
+        [
+          "lpush",
+          "add-entries-probe:target"
+        ]
+      ],
+      "pttl": -2,
+      "type": "none",
+      "snapshot": null
+    },
+    {
+      "name": "untouched-SET",
+      "kind": "SET",
+      "key": "add-entries-probe:target",
+      "value": [],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "affected": 0
+        }
+      },
+      "wire": null,
+      "pttl": -2,
+      "type": "none",
+      "snapshot": null
+    },
+    {
+      "name": "untouched-ZSET",
+      "kind": "ZSET",
+      "key": "add-entries-probe:target",
+      "value": [],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": false,
+        "msg": ""
+      },
+      "bindingError": "json: cannot unmarshal array into Go value of type map[string]float64",
+      "wire": null,
+      "pttl": -2,
+      "type": "none",
+      "snapshot": null
+    },
+    {
+      "name": "untouched-STREAM",
+      "kind": "STREAM",
+      "key": "add-entries-probe:target",
+      "value": [
+        "*"
+      ],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": false,
+        "msg": "ERR wrong number of arguments for 'xadd' command"
+      },
+      "wire": [
+        [
+          "xadd",
+          "add-entries-probe:target",
+          "*"
+        ]
+      ],
+      "pttl": -2,
+      "type": "none",
+      "snapshot": null
+    },
+    {
+      "name": "hash-new",
+      "kind": "HASH",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a",
+        "1",
+        "b",
+        "2"
+      ],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "k": "a",
+              "v": "1"
+            },
+            {
+              "k": "b",
+              "v": "2"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "add-entries-probe:target",
+          "a",
+          "1"
+        ],
+        [
+          "hset",
+          "add-entries-probe:target",
+          "b",
+          "2"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshot": {
+        "a": "1",
+        "b": "2"
+      }
+    },
+    {
+      "name": "hash-duplicates",
+      "kind": "HASH",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a",
+        "first",
+        "a",
+        "last"
+      ],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "k": "a",
+              "v": "first"
+            }
+          ],
+          "updated": [
+            {
+              "k": "a",
+              "v": "last"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "add-entries-probe:target",
+          "a",
+          "first"
+        ],
+        [
+          "hset",
+          "add-entries-probe:target",
+          "a",
+          "last"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshot": {
+        "a": "last"
+      }
+    },
+    {
+      "name": "hash-overwrite-existing",
+      "kind": "HASH",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a",
+        "new",
+        "b",
+        "2"
+      ],
+      "action": 0,
+      "setup": [
+        [
+          "HSET",
+          "a",
+          "old"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "k": "b",
+              "v": "2"
+            }
+          ],
+          "updated": [
+            {
+              "k": "a",
+              "v": "new"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "add-entries-probe:target",
+          "a",
+          "new"
+        ],
+        [
+          "hset",
+          "add-entries-probe:target",
+          "b",
+          "2"
+        ]
+      ],
+      "pttl": 599999,
+      "type": "hash",
+      "snapshot": {
+        "a": "new",
+        "b": "2"
+      }
+    },
+    {
+      "name": "hash-ignore-existing",
+      "kind": "HASH",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a",
+        "new",
+        "b",
+        "2",
+        "b",
+        "last"
+      ],
+      "action": 1,
+      "setup": [
+        [
+          "HSET",
+          "a",
+          "old"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "k": "b",
+              "v": "2"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hsetnx",
+          "add-entries-probe:target",
+          "a",
+          "new"
+        ],
+        [
+          "hsetnx",
+          "add-entries-probe:target",
+          "b",
+          "2"
+        ],
+        [
+          "hsetnx",
+          "add-entries-probe:target",
+          "b",
+          "last"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshot": {
+        "a": "old",
+        "b": "2"
+      }
+    },
+    {
+      "name": "hash-wrong-type-overwrite",
+      "kind": "HASH",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a",
+        "1",
+        "b",
+        "2"
+      ],
+      "action": 0,
+      "setup": [
+        [
+          "SET",
+          "old"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "updated": [
+            {
+              "k": "a",
+              "v": "1"
+            },
+            {
+              "k": "b",
+              "v": "2"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "add-entries-probe:target",
+          "a",
+          "1"
+        ],
+        [
+          "hset",
+          "add-entries-probe:target",
+          "b",
+          "2"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshot": "old"
+    },
+    {
+      "name": "hash-wrong-type-ignore",
+      "kind": "HASH",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a",
+        "1"
+      ],
+      "action": 1,
+      "setup": [
+        [
+          "SET",
+          "old"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "hsetnx",
+          "add-entries-probe:target",
+          "a",
+          "1"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshot": "old"
+    },
+    {
+      "name": "list-position-0",
+      "kind": "LIST",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a",
+        "b",
+        "a"
+      ],
+      "action": 0,
+      "setup": [
+        [
+          "RPUSH",
+          "old"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "left": [
+            {
+              "index": 0,
+              "v": "a"
+            },
+            {
+              "index": 0,
+              "v": "b"
+            },
+            {
+              "index": 0,
+              "v": "a"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "lpush",
+          "add-entries-probe:target",
+          "a",
+          "b",
+          "a"
+        ]
+      ],
+      "pttl": 599999,
+      "type": "list",
+      "snapshot": [
+        "a",
+        "b",
+        "a",
+        "old"
+      ]
+    },
+    {
+      "name": "list-wrong-type-0",
+      "kind": "LIST",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a"
+      ],
+      "action": 0,
+      "setup": [
+        [
+          "SET",
+          "old"
+        ]
+      ],
+      "result": {
+        "success": false,
+        "msg": "WRONGTYPE Operation against a key holding the wrong kind of value"
+      },
+      "wire": [
+        [
+          "lpush",
+          "add-entries-probe:target",
+          "a"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshot": "old"
+    },
+    {
+      "name": "list-position-1",
+      "kind": "LIST",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a",
+        "b",
+        "a"
+      ],
+      "action": 1,
+      "setup": [
+        [
+          "RPUSH",
+          "old"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "right": [
+            {
+              "index": 0,
+              "v": "a"
+            },
+            {
+              "index": 0,
+              "v": "b"
+            },
+            {
+              "index": 0,
+              "v": "a"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "rpush",
+          "add-entries-probe:target",
+          "a",
+          "b",
+          "a"
+        ]
+      ],
+      "pttl": 600000,
+      "type": "list",
+      "snapshot": [
+        "old",
+        "a",
+        "b",
+        "a"
+      ]
+    },
+    {
+      "name": "list-wrong-type-1",
+      "kind": "LIST",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a"
+      ],
+      "action": 1,
+      "setup": [
+        [
+          "SET",
+          "old"
+        ]
+      ],
+      "result": {
+        "success": false,
+        "msg": "WRONGTYPE Operation against a key holding the wrong kind of value"
+      },
+      "wire": [
+        [
+          "rpush",
+          "add-entries-probe:target",
+          "a"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshot": "old"
+    },
+    {
+      "name": "set-duplicates",
+      "kind": "SET",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a",
+        "a",
+        "b"
+      ],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "v": "a"
+            },
+            {
+              "v": "b"
+            }
+          ],
+          "affected": 1
+        }
+      },
+      "wire": [
+        [
+          "sadd",
+          "add-entries-probe:target",
+          "a"
+        ],
+        [
+          "sadd",
+          "add-entries-probe:target",
+          "a"
+        ],
+        [
+          "sadd",
+          "add-entries-probe:target",
+          "b"
+        ]
+      ],
+      "pttl": -1,
+      "type": "set",
+      "snapshot": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "name": "set-existing",
+      "kind": "SET",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a",
+        "b",
+        "b"
+      ],
+      "action": 0,
+      "setup": [
+        [
+          "SADD",
+          "a"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "v": "b"
+            }
+          ],
+          "affected": 0
+        }
+      },
+      "wire": [
+        [
+          "sadd",
+          "add-entries-probe:target",
+          "a"
+        ],
+        [
+          "sadd",
+          "add-entries-probe:target",
+          "b"
+        ],
+        [
+          "sadd",
+          "add-entries-probe:target",
+          "b"
+        ]
+      ],
+      "pttl": 599999,
+      "type": "set",
+      "snapshot": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "name": "set-wrong-type",
+      "kind": "SET",
+      "key": "add-entries-probe:target",
+      "value": [
+        "a"
+      ],
+      "action": 0,
+      "setup": [
+        [
+          "SET",
+          "old"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "affected": 0
+        }
+      },
+      "wire": [
+        [
+          "sadd",
+          "add-entries-probe:target",
+          "a"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshot": "old"
+    },
+    {
+      "name": "zset-new",
+      "kind": "ZSET",
+      "key": "add-entries-probe:target",
+      "value": {
+        "a": 1.5,
+        "b": -3
+      },
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "s": 1.5,
+              "v": "a"
+            },
+            {
+              "s": -3,
+              "v": "b"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zadd",
+          "add-entries-probe:target",
+          "1.5",
+          "a"
+        ],
+        [
+          "zadd",
+          "add-entries-probe:target",
+          "-3",
+          "b"
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshot": [
+        [
+          "b",
+          -3
+        ],
+        [
+          "a",
+          1.5
+        ]
+      ]
+    },
+    {
+      "name": "zset-null",
+      "kind": "ZSET",
+      "key": "add-entries-probe:target",
+      "value": {
+        "a": null
+      },
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "s": 0,
+              "v": "a"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zadd",
+          "add-entries-probe:target",
+          "0",
+          "a"
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshot": [
+        [
+          "a",
+          0
+        ]
+      ]
+    },
+    {
+      "name": "zset-empty-object",
+      "kind": "ZSET",
+      "key": "add-entries-probe:target",
+      "value": {},
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": null,
+      "pttl": -2,
+      "type": "none",
+      "snapshot": null
+    },
+    {
+      "name": "zset-overwrite",
+      "kind": "ZSET",
+      "key": "add-entries-probe:target",
+      "value": {
+        "a": 2,
+        "b": 3
+      },
+      "action": 0,
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "a"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "s": 3,
+              "v": "b"
+            }
+          ],
+          "updated": [
+            {
+              "s": 2,
+              "v": "a"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zadd",
+          "add-entries-probe:target",
+          "2",
+          "a"
+        ],
+        [
+          "zadd",
+          "add-entries-probe:target",
+          "3",
+          "b"
+        ]
+      ],
+      "pttl": 600000,
+      "type": "zset",
+      "snapshot": [
+        [
+          "a",
+          2
+        ],
+        [
+          "b",
+          3
+        ]
+      ]
+    },
+    {
+      "name": "zset-ignore",
+      "kind": "ZSET",
+      "key": "add-entries-probe:target",
+      "value": {
+        "a": 2,
+        "b": 3
+      },
+      "action": 1,
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "a"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "s": 3,
+              "v": "b"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zadd",
+          "add-entries-probe:target",
+          "nx",
+          "2",
+          "a"
+        ],
+        [
+          "zadd",
+          "add-entries-probe:target",
+          "nx",
+          "3",
+          "b"
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshot": [
+        [
+          "a",
+          1
+        ],
+        [
+          "b",
+          3
+        ]
+      ]
+    },
+    {
+      "name": "zset-wrong-type-0",
+      "kind": "ZSET",
+      "key": "add-entries-probe:target",
+      "value": {
+        "a": 2
+      },
+      "action": 0,
+      "setup": [
+        [
+          "SET",
+          "old"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "updated": [
+            {
+              "s": 2,
+              "v": "a"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zadd",
+          "add-entries-probe:target",
+          "2",
+          "a"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshot": "old"
+    },
+    {
+      "name": "zset-wrong-type-1",
+      "kind": "ZSET",
+      "key": "add-entries-probe:target",
+      "value": {
+        "a": 2
+      },
+      "action": 1,
+      "setup": [
+        [
+          "SET",
+          "old"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "zadd",
+          "add-entries-probe:target",
+          "nx",
+          "2",
+          "a"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshot": "old"
+    },
+    {
+      "name": "stream-fields-1",
+      "kind": "STREAM",
+      "key": "add-entries-probe:target",
+      "value": [
+        "1720000000000-0",
+        "field0",
+        "0"
+      ],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "id": "1720000000000-0",
+              "v": {
+                "field0": "0"
+              },
+              "dv": "{\n  \"field0\": \"0\"\n}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "xadd",
+          "add-entries-probe:target",
+          "1720000000000-0",
+          "field0",
+          "0"
+        ]
+      ],
+      "pttl": -1,
+      "type": "stream",
+      "snapshot": [
+        [
+          "1720000000000-0",
+          {
+            "field0": "0"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "stream-fields-2",
+      "kind": "STREAM",
+      "key": "add-entries-probe:target",
+      "value": [
+        "1720000000000-0",
+        "field0",
+        "0",
+        "field1",
+        "1"
+      ],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "id": "1720000000000-0",
+              "v": {
+                "field0": "0"
+              },
+              "dv": "{\n  \"field0\": \"0\"\n}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "xadd",
+          "add-entries-probe:target",
+          "1720000000000-0",
+          "field0",
+          "0",
+          "field1",
+          "1"
+        ]
+      ],
+      "pttl": -1,
+      "type": "stream",
+      "snapshot": [
+        [
+          "1720000000000-0",
+          {
+            "field0": "0",
+            "field1": "1"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "stream-fields-3",
+      "kind": "STREAM",
+      "key": "add-entries-probe:target",
+      "value": [
+        "1720000000000-0",
+        "field0",
+        "0",
+        "field1",
+        "1",
+        "field2",
+        "2"
+      ],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "id": "1720000000000-0",
+              "v": {
+                "field0": "0",
+                "field1": "1"
+              },
+              "dv": "{\n  \"field0\": \"0\",\n  \"field1\": \"1\"\n}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "xadd",
+          "add-entries-probe:target",
+          "1720000000000-0",
+          "field0",
+          "0",
+          "field1",
+          "1",
+          "field2",
+          "2"
+        ]
+      ],
+      "pttl": -1,
+      "type": "stream",
+      "snapshot": [
+        [
+          "1720000000000-0",
+          {
+            "field0": "0",
+            "field1": "1",
+            "field2": "2"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "stream-fields-4",
+      "kind": "STREAM",
+      "key": "add-entries-probe:target",
+      "value": [
+        "1720000000000-0",
+        "field0",
+        "0",
+        "field1",
+        "1",
+        "field2",
+        "2",
+        "field3",
+        "3"
+      ],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "id": "1720000000000-0",
+              "v": {
+                "field0": "0",
+                "field1": "1"
+              },
+              "dv": "{\n  \"field0\": \"0\",\n  \"field1\": \"1\"\n}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "xadd",
+          "add-entries-probe:target",
+          "1720000000000-0",
+          "field0",
+          "0",
+          "field1",
+          "1",
+          "field2",
+          "2",
+          "field3",
+          "3"
+        ]
+      ],
+      "pttl": -1,
+      "type": "stream",
+      "snapshot": [
+        [
+          "1720000000000-0",
+          {
+            "field0": "0",
+            "field1": "1",
+            "field2": "2",
+            "field3": "3"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "stream-duplicates",
+      "kind": "STREAM",
+      "key": "add-entries-probe:target",
+      "value": [
+        "1720000000000-0",
+        "f",
+        "first",
+        "f",
+        "last"
+      ],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "id": "1720000000000-0",
+              "v": {
+                "f": "first"
+              },
+              "dv": "{\n  \"f\": \"first\"\n}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "xadd",
+          "add-entries-probe:target",
+          "1720000000000-0",
+          "f",
+          "first",
+          "f",
+          "last"
+        ]
+      ],
+      "pttl": -1,
+      "type": "stream",
+      "snapshot": [
+        [
+          "1720000000000-0",
+          {
+            "f": "last"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "stream-existing",
+      "kind": "STREAM",
+      "key": "add-entries-probe:target",
+      "value": [
+        "1720000000000-1",
+        "new",
+        "value"
+      ],
+      "action": 0,
+      "setup": [
+        [
+          "XADD",
+          "1720000000000-0",
+          "old",
+          "value"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "id": "1720000000000-1",
+              "v": {
+                "new": "value"
+              },
+              "dv": "{\n  \"new\": \"value\"\n}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "xadd",
+          "add-entries-probe:target",
+          "1720000000000-1",
+          "new",
+          "value"
+        ]
+      ],
+      "pttl": 599999,
+      "type": "stream",
+      "snapshot": [
+        [
+          "1720000000000-0",
+          {
+            "old": "value"
+          }
+        ],
+        [
+          "1720000000000-1",
+          {
+            "new": "value"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "stream-existing-id",
+      "kind": "STREAM",
+      "key": "add-entries-probe:target",
+      "value": [
+        "1720000000000-0",
+        "new",
+        "value"
+      ],
+      "action": 0,
+      "setup": [
+        [
+          "XADD",
+          "1720000000000-0",
+          "old",
+          "value"
+        ]
+      ],
+      "result": {
+        "success": false,
+        "msg": "ERR The ID specified in XADD is equal or smaller than the target stream top item"
+      },
+      "wire": [
+        [
+          "xadd",
+          "add-entries-probe:target",
+          "1720000000000-0",
+          "new",
+          "value"
+        ]
+      ],
+      "pttl": -1,
+      "type": "stream",
+      "snapshot": [
+        [
+          "1720000000000-0",
+          {
+            "old": "value"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "stream-invalid-id",
+      "kind": "STREAM",
+      "key": "add-entries-probe:target",
+      "value": [
+        "not-an-id",
+        "f",
+        "v"
+      ],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": false,
+        "msg": "ERR Invalid stream ID specified as stream command argument"
+      },
+      "wire": [
+        [
+          "xadd",
+          "add-entries-probe:target",
+          "not-an-id",
+          "f",
+          "v"
+        ]
+      ],
+      "pttl": -2,
+      "type": "none",
+      "snapshot": null
+    },
+    {
+      "name": "stream-wrong-type",
+      "kind": "STREAM",
+      "key": "add-entries-probe:target",
+      "value": [
+        "1720000000000-0",
+        "f",
+        "v"
+      ],
+      "action": 0,
+      "setup": [
+        [
+          "SET",
+          "old"
+        ]
+      ],
+      "result": {
+        "success": false,
+        "msg": "WRONGTYPE Operation against a key holding the wrong kind of value"
+      },
+      "wire": [
+        [
+          "xadd",
+          "add-entries-probe:target",
+          "1720000000000-0",
+          "f",
+          "v"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshot": "old"
+    },
+    {
+      "name": "binary-key",
+      "kind": "HASH",
+      "key": [
+        255,
+        0,
+        65
+      ],
+      "value": [
+        "field",
+        "中文\nvalue"
+      ],
+      "action": 0,
+      "setup": [],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "k": "field",
+              "v": "中文\nvalue"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "�\u0000A",
+          "field",
+          "中文\nvalue"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshot": {
+        "field": "中文\nvalue"
+      }
+    }
+  ]
+}

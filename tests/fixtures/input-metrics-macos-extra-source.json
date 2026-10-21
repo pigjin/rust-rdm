@@ -1,0 +1,999 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "sourceEngine": "macOS WKWebView",
+  "scope": "Sixty additional independent text controls:Lucida Grande,Monaco,Helvetica,American Typewriter;three sizes,five size attributes. Original special Lucida rule and native fallback advance predictions only;not product/native interaction acceptance.",
+  "rawReport": "outputs/input-metrics-extra-webkit-source-raw.json",
+  "rawSHA256": "d5cd143df61b8401a93ccc627b295cef25ec60be2d720638e1ca2d689c15fd21",
+  "preparation": "outputs/input-metrics-extra-webkit-preparation.json",
+  "execution": "outputs/input-metrics-extra-webkit-execution.json",
+  "samples": [
+    {
+      "family": "Lucida Grande",
+      "point": 12,
+      "count": 1,
+      "width": 26,
+      "zeroWidth": 7.59375
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 12,
+      "count": 2,
+      "width": 31,
+      "zeroWidth": 7.59375
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 12,
+      "count": 10,
+      "width": 71,
+      "zeroWidth": 7.59375
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 12,
+      "count": 20,
+      "width": 121,
+      "zeroWidth": 7.59375
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 12,
+      "count": 40,
+      "width": 221,
+      "zeroWidth": 7.59375
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 14,
+      "count": 1,
+      "width": 30,
+      "zeroWidth": 8.859375
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 14,
+      "count": 2,
+      "width": 36,
+      "zeroWidth": 8.859375
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 14,
+      "count": 10,
+      "width": 84,
+      "zeroWidth": 8.859375
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 14,
+      "count": 20,
+      "width": 144,
+      "zeroWidth": 8.859375
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 14,
+      "count": 40,
+      "width": 264,
+      "zeroWidth": 8.859375
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 20,
+      "count": 1,
+      "width": 41,
+      "zeroWidth": 12.65625
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 20,
+      "count": 2,
+      "width": 50,
+      "zeroWidth": 12.65625
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 20,
+      "count": 10,
+      "width": 122,
+      "zeroWidth": 12.65625
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 20,
+      "count": 20,
+      "width": 212,
+      "zeroWidth": 12.65625
+    },
+    {
+      "family": "Lucida Grande",
+      "point": 20,
+      "count": 40,
+      "width": 392,
+      "zeroWidth": 12.65625
+    },
+    {
+      "family": "Monaco",
+      "point": 12,
+      "count": 1,
+      "width": 9.203125,
+      "zeroWidth": 7.203125
+    },
+    {
+      "family": "Monaco",
+      "point": 12,
+      "count": 2,
+      "width": 16.40625,
+      "zeroWidth": 7.203125
+    },
+    {
+      "family": "Monaco",
+      "point": 12,
+      "count": 10,
+      "width": 74.015625,
+      "zeroWidth": 7.203125
+    },
+    {
+      "family": "Monaco",
+      "point": 12,
+      "count": 20,
+      "width": 146.03125,
+      "zeroWidth": 7.203125
+    },
+    {
+      "family": "Monaco",
+      "point": 12,
+      "count": 40,
+      "width": 290.046875,
+      "zeroWidth": 7.203125
+    },
+    {
+      "family": "Monaco",
+      "point": 14,
+      "count": 1,
+      "width": 10.40625,
+      "zeroWidth": 8.40625
+    },
+    {
+      "family": "Monaco",
+      "point": 14,
+      "count": 2,
+      "width": 18.8125,
+      "zeroWidth": 8.40625
+    },
+    {
+      "family": "Monaco",
+      "point": 14,
+      "count": 10,
+      "width": 86.015625,
+      "zeroWidth": 8.40625
+    },
+    {
+      "family": "Monaco",
+      "point": 14,
+      "count": 20,
+      "width": 170.03125,
+      "zeroWidth": 8.40625
+    },
+    {
+      "family": "Monaco",
+      "point": 14,
+      "count": 40,
+      "width": 338.0625,
+      "zeroWidth": 8.40625
+    },
+    {
+      "family": "Monaco",
+      "point": 20,
+      "count": 1,
+      "width": 14.015625,
+      "zeroWidth": 12.015625
+    },
+    {
+      "family": "Monaco",
+      "point": 20,
+      "count": 2,
+      "width": 26.015625,
+      "zeroWidth": 12.015625
+    },
+    {
+      "family": "Monaco",
+      "point": 20,
+      "count": 10,
+      "width": 122.03125,
+      "zeroWidth": 12.015625
+    },
+    {
+      "family": "Monaco",
+      "point": 20,
+      "count": 20,
+      "width": 242.046875,
+      "zeroWidth": 12.015625
+    },
+    {
+      "family": "Monaco",
+      "point": 20,
+      "count": 40,
+      "width": 482.078125,
+      "zeroWidth": 12.015625
+    },
+    {
+      "family": "Helvetica",
+      "point": 12,
+      "count": 1,
+      "width": 8.6875,
+      "zeroWidth": 6.6875
+    },
+    {
+      "family": "Helvetica",
+      "point": 12,
+      "count": 2,
+      "width": 15.359375,
+      "zeroWidth": 6.6875
+    },
+    {
+      "family": "Helvetica",
+      "point": 12,
+      "count": 10,
+      "width": 68.75,
+      "zeroWidth": 6.6875
+    },
+    {
+      "family": "Helvetica",
+      "point": 12,
+      "count": 20,
+      "width": 135.484375,
+      "zeroWidth": 6.6875
+    },
+    {
+      "family": "Helvetica",
+      "point": 12,
+      "count": 40,
+      "width": 268.953125,
+      "zeroWidth": 6.6875
+    },
+    {
+      "family": "Helvetica",
+      "point": 14,
+      "count": 1,
+      "width": 9.796875,
+      "zeroWidth": 7.796875
+    },
+    {
+      "family": "Helvetica",
+      "point": 14,
+      "count": 2,
+      "width": 17.578125,
+      "zeroWidth": 7.796875
+    },
+    {
+      "family": "Helvetica",
+      "point": 14,
+      "count": 10,
+      "width": 79.875,
+      "zeroWidth": 7.796875
+    },
+    {
+      "family": "Helvetica",
+      "point": 14,
+      "count": 20,
+      "width": 157.734375,
+      "zeroWidth": 7.796875
+    },
+    {
+      "family": "Helvetica",
+      "point": 14,
+      "count": 40,
+      "width": 313.453125,
+      "zeroWidth": 7.796875
+    },
+    {
+      "family": "Helvetica",
+      "point": 20,
+      "count": 1,
+      "width": 13.125,
+      "zeroWidth": 11.125
+    },
+    {
+      "family": "Helvetica",
+      "point": 20,
+      "count": 2,
+      "width": 24.25,
+      "zeroWidth": 11.125
+    },
+    {
+      "family": "Helvetica",
+      "point": 20,
+      "count": 10,
+      "width": 113.234375,
+      "zeroWidth": 11.125
+    },
+    {
+      "family": "Helvetica",
+      "point": 20,
+      "count": 20,
+      "width": 224.46875,
+      "zeroWidth": 11.125
+    },
+    {
+      "family": "Helvetica",
+      "point": 20,
+      "count": 40,
+      "width": 446.921875,
+      "zeroWidth": 11.125
+    },
+    {
+      "family": "American Typewriter",
+      "point": 12,
+      "count": 1,
+      "width": 9.65625,
+      "zeroWidth": 7.65625
+    },
+    {
+      "family": "American Typewriter",
+      "point": 12,
+      "count": 2,
+      "width": 17.296875,
+      "zeroWidth": 7.65625
+    },
+    {
+      "family": "American Typewriter",
+      "point": 12,
+      "count": 10,
+      "width": 78.453125,
+      "zeroWidth": 7.65625
+    },
+    {
+      "family": "American Typewriter",
+      "point": 12,
+      "count": 20,
+      "width": 154.890625,
+      "zeroWidth": 7.65625
+    },
+    {
+      "family": "American Typewriter",
+      "point": 12,
+      "count": 40,
+      "width": 307.765625,
+      "zeroWidth": 7.65625
+    },
+    {
+      "family": "American Typewriter",
+      "point": 14,
+      "count": 1,
+      "width": 10.921875,
+      "zeroWidth": 8.921875
+    },
+    {
+      "family": "American Typewriter",
+      "point": 14,
+      "count": 2,
+      "width": 19.84375,
+      "zeroWidth": 8.921875
+    },
+    {
+      "family": "American Typewriter",
+      "point": 14,
+      "count": 10,
+      "width": 91.1875,
+      "zeroWidth": 8.921875
+    },
+    {
+      "family": "American Typewriter",
+      "point": 14,
+      "count": 20,
+      "width": 180.375,
+      "zeroWidth": 8.921875
+    },
+    {
+      "family": "American Typewriter",
+      "point": 14,
+      "count": 40,
+      "width": 358.734375,
+      "zeroWidth": 8.921875
+    },
+    {
+      "family": "American Typewriter",
+      "point": 20,
+      "count": 1,
+      "width": 14.75,
+      "zeroWidth": 12.75
+    },
+    {
+      "family": "American Typewriter",
+      "point": 20,
+      "count": 2,
+      "width": 27.484375,
+      "zeroWidth": 12.75
+    },
+    {
+      "family": "American Typewriter",
+      "point": 20,
+      "count": 10,
+      "width": 129.40625,
+      "zeroWidth": 12.75
+    },
+    {
+      "family": "American Typewriter",
+      "point": 20,
+      "count": 20,
+      "width": 256.8125,
+      "zeroWidth": 12.75
+    },
+    {
+      "family": "American Typewriter",
+      "point": 20,
+      "count": 40,
+      "width": 511.609375,
+      "zeroWidth": 12.75
+    }
+  ],
+  "nativeTablePredictions": [
+    {
+      "count": 1,
+      "family": "Lucida Grande",
+      "font": "12px / 18px \"Lucida Grande\"",
+      "point": 12,
+      "width": 26,
+      "zeroWidth": 7.59375,
+      "nativePrediction": 26.0
+    },
+    {
+      "count": 2,
+      "family": "Lucida Grande",
+      "font": "12px / 18px \"Lucida Grande\"",
+      "point": 12,
+      "width": 31,
+      "zeroWidth": 7.59375,
+      "nativePrediction": 31.0
+    },
+    {
+      "count": 10,
+      "family": "Lucida Grande",
+      "font": "12px / 18px \"Lucida Grande\"",
+      "point": 12,
+      "width": 71,
+      "zeroWidth": 7.59375,
+      "nativePrediction": 71.0
+    },
+    {
+      "count": 20,
+      "family": "Lucida Grande",
+      "font": "12px / 18px \"Lucida Grande\"",
+      "point": 12,
+      "width": 121,
+      "zeroWidth": 7.59375,
+      "nativePrediction": 121.0
+    },
+    {
+      "count": 40,
+      "family": "Lucida Grande",
+      "font": "12px / 18px \"Lucida Grande\"",
+      "point": 12,
+      "width": 221,
+      "zeroWidth": 7.59375,
+      "nativePrediction": 221.0
+    },
+    {
+      "count": 1,
+      "family": "Lucida Grande",
+      "font": "14px / 21px \"Lucida Grande\"",
+      "point": 14,
+      "width": 30,
+      "zeroWidth": 8.859375,
+      "nativePrediction": 30.0
+    },
+    {
+      "count": 2,
+      "family": "Lucida Grande",
+      "font": "14px / 21px \"Lucida Grande\"",
+      "point": 14,
+      "width": 36,
+      "zeroWidth": 8.859375,
+      "nativePrediction": 36.0
+    },
+    {
+      "count": 10,
+      "family": "Lucida Grande",
+      "font": "14px / 21px \"Lucida Grande\"",
+      "point": 14,
+      "width": 84,
+      "zeroWidth": 8.859375,
+      "nativePrediction": 84.0
+    },
+    {
+      "count": 20,
+      "family": "Lucida Grande",
+      "font": "14px / 21px \"Lucida Grande\"",
+      "point": 14,
+      "width": 144,
+      "zeroWidth": 8.859375,
+      "nativePrediction": 144.0
+    },
+    {
+      "count": 40,
+      "family": "Lucida Grande",
+      "font": "14px / 21px \"Lucida Grande\"",
+      "point": 14,
+      "width": 264,
+      "zeroWidth": 8.859375,
+      "nativePrediction": 264.0
+    },
+    {
+      "count": 1,
+      "family": "Lucida Grande",
+      "font": "20px / 30px \"Lucida Grande\"",
+      "point": 20,
+      "width": 41,
+      "zeroWidth": 12.65625,
+      "nativePrediction": 41.0
+    },
+    {
+      "count": 2,
+      "family": "Lucida Grande",
+      "font": "20px / 30px \"Lucida Grande\"",
+      "point": 20,
+      "width": 50,
+      "zeroWidth": 12.65625,
+      "nativePrediction": 50.0
+    },
+    {
+      "count": 10,
+      "family": "Lucida Grande",
+      "font": "20px / 30px \"Lucida Grande\"",
+      "point": 20,
+      "width": 122,
+      "zeroWidth": 12.65625,
+      "nativePrediction": 122.0
+    },
+    {
+      "count": 20,
+      "family": "Lucida Grande",
+      "font": "20px / 30px \"Lucida Grande\"",
+      "point": 20,
+      "width": 212,
+      "zeroWidth": 12.65625,
+      "nativePrediction": 212.0
+    },
+    {
+      "count": 40,
+      "family": "Lucida Grande",
+      "font": "20px / 30px \"Lucida Grande\"",
+      "point": 20,
+      "width": 392,
+      "zeroWidth": 12.65625,
+      "nativePrediction": 392.0
+    },
+    {
+      "count": 1,
+      "family": "Monaco",
+      "font": "12px / 18px Monaco",
+      "point": 12,
+      "width": 9.203125,
+      "zeroWidth": 7.203125,
+      "nativePrediction": 9.203125
+    },
+    {
+      "count": 2,
+      "family": "Monaco",
+      "font": "12px / 18px Monaco",
+      "point": 12,
+      "width": 16.40625,
+      "zeroWidth": 7.203125,
+      "nativePrediction": 16.40625
+    },
+    {
+      "count": 10,
+      "family": "Monaco",
+      "font": "12px / 18px Monaco",
+      "point": 12,
+      "width": 74.015625,
+      "zeroWidth": 7.203125,
+      "nativePrediction": 74.015625
+    },
+    {
+      "count": 20,
+      "family": "Monaco",
+      "font": "12px / 18px Monaco",
+      "point": 12,
+      "width": 146.03125,
+      "zeroWidth": 7.203125,
+      "nativePrediction": 146.03125
+    },
+    {
+      "count": 40,
+      "family": "Monaco",
+      "font": "12px / 18px Monaco",
+      "point": 12,
+      "width": 290.046875,
+      "zeroWidth": 7.203125,
+      "nativePrediction": 290.046875
+    },
+    {
+      "count": 1,
+      "family": "Monaco",
+      "font": "14px / 21px Monaco",
+      "point": 14,
+      "width": 10.40625,
+      "zeroWidth": 8.40625,
+      "nativePrediction": 10.40625
+    },
+    {
+      "count": 2,
+      "family": "Monaco",
+      "font": "14px / 21px Monaco",
+      "point": 14,
+      "width": 18.8125,
+      "zeroWidth": 8.40625,
+      "nativePrediction": 18.8125
+    },
+    {
+      "count": 10,
+      "family": "Monaco",
+      "font": "14px / 21px Monaco",
+      "point": 14,
+      "width": 86.015625,
+      "zeroWidth": 8.40625,
+      "nativePrediction": 86.015625
+    },
+    {
+      "count": 20,
+      "family": "Monaco",
+      "font": "14px / 21px Monaco",
+      "point": 14,
+      "width": 170.03125,
+      "zeroWidth": 8.40625,
+      "nativePrediction": 170.03125
+    },
+    {
+      "count": 40,
+      "family": "Monaco",
+      "font": "14px / 21px Monaco",
+      "point": 14,
+      "width": 338.0625,
+      "zeroWidth": 8.40625,
+      "nativePrediction": 338.0625
+    },
+    {
+      "count": 1,
+      "family": "Monaco",
+      "font": "20px / 30px Monaco",
+      "point": 20,
+      "width": 14.015625,
+      "zeroWidth": 12.015625,
+      "nativePrediction": 14.015625
+    },
+    {
+      "count": 2,
+      "family": "Monaco",
+      "font": "20px / 30px Monaco",
+      "point": 20,
+      "width": 26.015625,
+      "zeroWidth": 12.015625,
+      "nativePrediction": 26.015625
+    },
+    {
+      "count": 10,
+      "family": "Monaco",
+      "font": "20px / 30px Monaco",
+      "point": 20,
+      "width": 122.03125,
+      "zeroWidth": 12.015625,
+      "nativePrediction": 122.03125
+    },
+    {
+      "count": 20,
+      "family": "Monaco",
+      "font": "20px / 30px Monaco",
+      "point": 20,
+      "width": 242.046875,
+      "zeroWidth": 12.015625,
+      "nativePrediction": 242.046875
+    },
+    {
+      "count": 40,
+      "family": "Monaco",
+      "font": "20px / 30px Monaco",
+      "point": 20,
+      "width": 482.078125,
+      "zeroWidth": 12.015625,
+      "nativePrediction": 482.078125
+    },
+    {
+      "count": 1,
+      "family": "Helvetica",
+      "font": "12px / 18px Helvetica",
+      "point": 12,
+      "width": 8.6875,
+      "zeroWidth": 6.6875,
+      "nativePrediction": 8.6875
+    },
+    {
+      "count": 2,
+      "family": "Helvetica",
+      "font": "12px / 18px Helvetica",
+      "point": 12,
+      "width": 15.359375,
+      "zeroWidth": 6.6875,
+      "nativePrediction": 15.359375
+    },
+    {
+      "count": 10,
+      "family": "Helvetica",
+      "font": "12px / 18px Helvetica",
+      "point": 12,
+      "width": 68.75,
+      "zeroWidth": 6.6875,
+      "nativePrediction": 68.75
+    },
+    {
+      "count": 20,
+      "family": "Helvetica",
+      "font": "12px / 18px Helvetica",
+      "point": 12,
+      "width": 135.484375,
+      "zeroWidth": 6.6875,
+      "nativePrediction": 135.484375
+    },
+    {
+      "count": 40,
+      "family": "Helvetica",
+      "font": "12px / 18px Helvetica",
+      "point": 12,
+      "width": 268.953125,
+      "zeroWidth": 6.6875,
+      "nativePrediction": 268.953125
+    },
+    {
+      "count": 1,
+      "family": "Helvetica",
+      "font": "14px / 21px Helvetica",
+      "point": 14,
+      "width": 9.796875,
+      "zeroWidth": 7.796875,
+      "nativePrediction": 9.796875
+    },
+    {
+      "count": 2,
+      "family": "Helvetica",
+      "font": "14px / 21px Helvetica",
+      "point": 14,
+      "width": 17.578125,
+      "zeroWidth": 7.796875,
+      "nativePrediction": 17.578125
+    },
+    {
+      "count": 10,
+      "family": "Helvetica",
+      "font": "14px / 21px Helvetica",
+      "point": 14,
+      "width": 79.875,
+      "zeroWidth": 7.796875,
+      "nativePrediction": 79.875
+    },
+    {
+      "count": 20,
+      "family": "Helvetica",
+      "font": "14px / 21px Helvetica",
+      "point": 14,
+      "width": 157.734375,
+      "zeroWidth": 7.796875,
+      "nativePrediction": 157.734375
+    },
+    {
+      "count": 40,
+      "family": "Helvetica",
+      "font": "14px / 21px Helvetica",
+      "point": 14,
+      "width": 313.453125,
+      "zeroWidth": 7.796875,
+      "nativePrediction": 313.453125
+    },
+    {
+      "count": 1,
+      "family": "Helvetica",
+      "font": "20px / 30px Helvetica",
+      "point": 20,
+      "width": 13.125,
+      "zeroWidth": 11.125,
+      "nativePrediction": 13.125
+    },
+    {
+      "count": 2,
+      "family": "Helvetica",
+      "font": "20px / 30px Helvetica",
+      "point": 20,
+      "width": 24.25,
+      "zeroWidth": 11.125,
+      "nativePrediction": 24.25
+    },
+    {
+      "count": 10,
+      "family": "Helvetica",
+      "font": "20px / 30px Helvetica",
+      "point": 20,
+      "width": 113.234375,
+      "zeroWidth": 11.125,
+      "nativePrediction": 113.234375
+    },
+    {
+      "count": 20,
+      "family": "Helvetica",
+      "font": "20px / 30px Helvetica",
+      "point": 20,
+      "width": 224.46875,
+      "zeroWidth": 11.125,
+      "nativePrediction": 224.46875
+    },
+    {
+      "count": 40,
+      "family": "Helvetica",
+      "font": "20px / 30px Helvetica",
+      "point": 20,
+      "width": 446.921875,
+      "zeroWidth": 11.125,
+      "nativePrediction": 446.921875
+    },
+    {
+      "count": 1,
+      "family": "American Typewriter",
+      "font": "12px / 18px \"American Typewriter\"",
+      "point": 12,
+      "width": 9.65625,
+      "zeroWidth": 7.65625,
+      "nativePrediction": 9.65625
+    },
+    {
+      "count": 2,
+      "family": "American Typewriter",
+      "font": "12px / 18px \"American Typewriter\"",
+      "point": 12,
+      "width": 17.296875,
+      "zeroWidth": 7.65625,
+      "nativePrediction": 17.296875
+    },
+    {
+      "count": 10,
+      "family": "American Typewriter",
+      "font": "12px / 18px \"American Typewriter\"",
+      "point": 12,
+      "width": 78.453125,
+      "zeroWidth": 7.65625,
+      "nativePrediction": 78.453125
+    },
+    {
+      "count": 20,
+      "family": "American Typewriter",
+      "font": "12px / 18px \"American Typewriter\"",
+      "point": 12,
+      "width": 154.890625,
+      "zeroWidth": 7.65625,
+      "nativePrediction": 154.890625
+    },
+    {
+      "count": 40,
+      "family": "American Typewriter",
+      "font": "12px / 18px \"American Typewriter\"",
+      "point": 12,
+      "width": 307.765625,
+      "zeroWidth": 7.65625,
+      "nativePrediction": 307.765625
+    },
+    {
+      "count": 1,
+      "family": "American Typewriter",
+      "font": "14px / 21px \"American Typewriter\"",
+      "point": 14,
+      "width": 10.921875,
+      "zeroWidth": 8.921875,
+      "nativePrediction": 10.921875
+    },
+    {
+      "count": 2,
+      "family": "American Typewriter",
+      "font": "14px / 21px \"American Typewriter\"",
+      "point": 14,
+      "width": 19.84375,
+      "zeroWidth": 8.921875,
+      "nativePrediction": 19.84375
+    },
+    {
+      "count": 10,
+      "family": "American Typewriter",
+      "font": "14px / 21px \"American Typewriter\"",
+      "point": 14,
+      "width": 91.1875,
+      "zeroWidth": 8.921875,
+      "nativePrediction": 91.1875
+    },
+    {
+      "count": 20,
+      "family": "American Typewriter",
+      "font": "14px / 21px \"American Typewriter\"",
+      "point": 14,
+      "width": 180.375,
+      "zeroWidth": 8.921875,
+      "nativePrediction": 180.375
+    },
+    {
+      "count": 40,
+      "family": "American Typewriter",
+      "font": "14px / 21px \"American Typewriter\"",
+      "point": 14,
+      "width": 358.734375,
+      "zeroWidth": 8.921875,
+      "nativePrediction": 358.734375
+    },
+    {
+      "count": 1,
+      "family": "American Typewriter",
+      "font": "20px / 30px \"American Typewriter\"",
+      "point": 20,
+      "width": 14.75,
+      "zeroWidth": 12.75,
+      "nativePrediction": 14.75
+    },
+    {
+      "count": 2,
+      "family": "American Typewriter",
+      "font": "20px / 30px \"American Typewriter\"",
+      "point": 20,
+      "width": 27.484375,
+      "zeroWidth": 12.75,
+      "nativePrediction": 27.484375
+    },
+    {
+      "count": 10,
+      "family": "American Typewriter",
+      "font": "20px / 30px \"American Typewriter\"",
+      "point": 20,
+      "width": 129.40625,
+      "zeroWidth": 12.75,
+      "nativePrediction": 129.40625
+    },
+    {
+      "count": 20,
+      "family": "American Typewriter",
+      "font": "20px / 30px \"American Typewriter\"",
+      "point": 20,
+      "width": 256.8125,
+      "zeroWidth": 12.75,
+      "nativePrediction": 256.8125
+    },
+    {
+      "count": 40,
+      "family": "American Typewriter",
+      "font": "20px / 30px \"American Typewriter\"",
+      "point": 20,
+      "width": 511.609375,
+      "zeroWidth": 12.75,
+      "nativePrediction": 511.609375
+    }
+  ],
+  "files": [
+    {
+      "path": "outputs/source-probes/input-metrics-extra-webkit/RDM-OWNED-SOURCE-PROBE",
+      "sha256": "26e2c69eeb651596364d4f0809c71f575e1d1cf835067d7be94033333bcef0ec"
+    },
+    {
+      "path": "outputs/source-probes/input-metrics-extra-webkit/compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/input-metrics-extra-webkit/probe",
+      "sha256": "9edec39c7287c6f140e1325ae8018d0bf0cf7c29043f4ff91095642bd9f08cce"
+    },
+    {
+      "path": "outputs/source-probes/input-metrics-extra-webkit/probe.swift",
+      "sha256": "c0143e632fce9f7ec860a6d86927b3e7a8460c54d25b43151e882ed59f7a92dc"
+    },
+    {
+      "path": "outputs/source-probes/input-metrics-extra-webkit/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/input-metrics-extra-webkit/stdout.json",
+      "sha256": "7c55349431141f20b0cf765de24e31af49744268e3963c02478b6ff61492c9c7"
+    }
+  ]
+}

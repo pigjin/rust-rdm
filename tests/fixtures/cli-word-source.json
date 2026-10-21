@@ -1,0 +1,486 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "cases": [
+    {
+      "name": "plain",
+      "input": "foo bar",
+      "cols": 12,
+      "rows": 42,
+      "col": 1,
+      "row": 0,
+      "text": "foo",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        3,
+        0
+      ]
+    },
+    {
+      "name": "whitespace",
+      "input": "foo   bar",
+      "cols": 12,
+      "rows": 42,
+      "col": 4,
+      "row": 0,
+      "text": "   ",
+      "start": [
+        3,
+        0
+      ],
+      "end": [
+        6,
+        0
+      ]
+    },
+    {
+      "name": "padding",
+      "input": "foo",
+      "cols": 12,
+      "rows": 42,
+      "col": 8,
+      "row": 0,
+      "text": "",
+      "start": [
+        3,
+        0
+      ],
+      "end": [
+        12,
+        0
+      ]
+    },
+    {
+      "name": "punctuation",
+      "input": "foo:bar/key_x-y.z",
+      "cols": 24,
+      "rows": 42,
+      "col": 5,
+      "row": 0,
+      "text": "foo:bar/key_x-y.z",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        17,
+        0
+      ]
+    },
+    {
+      "name": "backslash",
+      "input": "C:\\path\\key",
+      "cols": 24,
+      "rows": 42,
+      "col": 5,
+      "row": 0,
+      "text": "C:\\path\\key",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        11,
+        0
+      ]
+    },
+    {
+      "name": "comma-on-char",
+      "input": "foo,bar",
+      "cols": 12,
+      "rows": 42,
+      "col": 3,
+      "row": 0,
+      "text": "foo,bar",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        7,
+        0
+      ]
+    },
+    {
+      "name": "comma-before",
+      "input": "foo,bar",
+      "cols": 12,
+      "rows": 42,
+      "col": 1,
+      "row": 0,
+      "text": "foo",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        3,
+        0
+      ]
+    },
+    {
+      "name": "quotes",
+      "input": "\"foo\" bar",
+      "cols": 12,
+      "rows": 42,
+      "col": 0,
+      "row": 0,
+      "text": "\"foo",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        4,
+        0
+      ]
+    },
+    {
+      "name": "quoted-word",
+      "input": "\"foo\" bar",
+      "cols": 12,
+      "rows": 42,
+      "col": 2,
+      "row": 0,
+      "text": "foo",
+      "start": [
+        1,
+        0
+      ],
+      "end": [
+        4,
+        0
+      ]
+    },
+    {
+      "name": "brackets",
+      "input": "[foo] [bar]",
+      "cols": 16,
+      "rows": 42,
+      "col": 4,
+      "row": 0,
+      "text": "foo]",
+      "start": [
+        1,
+        0
+      ],
+      "end": [
+        5,
+        0
+      ]
+    },
+    {
+      "name": "chinese",
+      "input": "用户abc 后缀",
+      "cols": 16,
+      "rows": 42,
+      "col": 0,
+      "row": 0,
+      "text": "用户abc",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        7,
+        0
+      ]
+    },
+    {
+      "name": "chinese-continuation",
+      "input": "用户abc 后缀",
+      "cols": 16,
+      "rows": 42,
+      "col": 1,
+      "row": 0,
+      "text": "用户abc",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        7,
+        0
+      ]
+    },
+    {
+      "name": "emoji",
+      "input": "A😀B 😀",
+      "cols": 16,
+      "rows": 42,
+      "col": 2,
+      "row": 0,
+      "text": "A😀B",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        3,
+        0
+      ]
+    },
+    {
+      "name": "combining",
+      "input": "áb foo",
+      "cols": 12,
+      "rows": 42,
+      "col": 1,
+      "row": 0,
+      "text": "áb",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        2,
+        0
+      ]
+    },
+    {
+      "name": "nbsp",
+      "input": "foo bar",
+      "cols": 12,
+      "rows": 42,
+      "col": 3,
+      "row": 0,
+      "text": "foo bar",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        7,
+        0
+      ]
+    },
+    {
+      "name": "ansi",
+      "input": "\u001b[31mfoo\u001b[0m bar",
+      "cols": 12,
+      "rows": 42,
+      "col": 2,
+      "row": 0,
+      "text": "foo",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        3,
+        0
+      ]
+    },
+    {
+      "name": "wrapped-before",
+      "input": "abcdefghijklmnopqrstuvwxyz",
+      "cols": 12,
+      "rows": 42,
+      "col": 8,
+      "row": 0,
+      "text": "abcdefghijklmnopqrstuvwxyz",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        2,
+        2
+      ]
+    },
+    {
+      "name": "wrapped-middle",
+      "input": "abcdefghijklmnopqrstuvwxyz",
+      "cols": 12,
+      "rows": 42,
+      "col": 3,
+      "row": 1,
+      "text": "abcdefghijklmnopqrstuvwxyz",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        2,
+        2
+      ]
+    },
+    {
+      "name": "wrapped-after",
+      "input": "abcdefghijklmnopqrstuvwxyz",
+      "cols": 12,
+      "rows": 42,
+      "col": 1,
+      "row": 2,
+      "text": "abcdefghijklmnopqrstuvwxyz",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        2,
+        2
+      ]
+    },
+    {
+      "name": "wrapped-space",
+      "input": "abcdefghij  klmnop",
+      "cols": 12,
+      "rows": 42,
+      "col": 2,
+      "row": 1,
+      "text": "klmnop",
+      "start": [
+        0,
+        1
+      ],
+      "end": [
+        6,
+        1
+      ]
+    },
+    {
+      "name": "wrapped-separator",
+      "input": "abcdefghijk,more",
+      "cols": 12,
+      "rows": 42,
+      "col": 1,
+      "row": 1,
+      "text": "abcdefghijk,more",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        4,
+        1
+      ]
+    },
+    {
+      "name": "explicit-trailing-spaces",
+      "input": "foo  ",
+      "cols": 12,
+      "rows": 42,
+      "col": 3,
+      "row": 0,
+      "text": "  ",
+      "start": [
+        3,
+        0
+      ],
+      "end": [
+        12,
+        0
+      ]
+    },
+    {
+      "name": "line-break",
+      "input": "foo\r\nbar",
+      "cols": 12,
+      "rows": 42,
+      "col": 1,
+      "row": 1,
+      "text": "bar",
+      "start": [
+        0,
+        1
+      ],
+      "end": [
+        3,
+        1
+      ]
+    },
+    {
+      "name": "out-of-cols",
+      "input": "foo",
+      "cols": 12,
+      "rows": 42,
+      "col": 12,
+      "row": 0,
+      "text": ""
+    },
+    {
+      "name": "line",
+      "input": "foo  ",
+      "cols": 12,
+      "rows": 42,
+      "col": 0,
+      "row": 0,
+      "selection": "line",
+      "text": "foo  ",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        12,
+        0
+      ]
+    },
+    {
+      "name": "wrapped-line",
+      "input": "abcdefghijklmnopqrstuvwxyz",
+      "cols": 12,
+      "rows": 42,
+      "col": 0,
+      "row": 1,
+      "selection": "line",
+      "text": "abcdefghijklmnopqrstuvwxyz",
+      "start": [
+        0,
+        0
+      ],
+      "end": [
+        12,
+        2
+      ]
+    },
+    {
+      "name": "after-hard-break",
+      "input": "foo\r\nbar",
+      "cols": 12,
+      "rows": 42,
+      "col": 0,
+      "row": 1,
+      "selection": "line",
+      "text": "bar",
+      "start": [
+        0,
+        1
+      ],
+      "end": [
+        12,
+        1
+      ]
+    }
+  ],
+  "mouse": {
+    "input": "foo,bar 用户abc A😀B",
+    "text": "bar",
+    "start": [
+      4,
+      0
+    ],
+    "end": [
+      7,
+      0
+    ]
+  },
+  "triple": {
+    "text": "foo,bar 用户abc A😀B"
+  },
+  "drags": [
+    {
+      "from": 4.25,
+      "to": 12.25,
+      "text": "bar 用户abc"
+    },
+    {
+      "from": 4.25,
+      "to": 1.25,
+      "text": "foo,bar"
+    }
+  ]
+}

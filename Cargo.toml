@@ -5,9 +5,15 @@ edition = "2024"
 license = "GPL-3.0-only"
 description = "Tiny RDM rebuilt with Rust and GPUI"
 
+[workspace]
+members = ["vendor/gpui-base", "vendor/gpui-apple"]
+default-members = ["."]
+resolver = "2"
+
 [features]
 default = ["desktop"]
-desktop = ["dep:gpui", "dep:gpui-component", "dep:gpui-component-assets"]
+desktop = ["dep:gpui", "dep:gpui-platform", "dep:gpui-base", "dep:gpui-component", "dep:gpui-component-assets", "dep:objc2", "dep:objc2-app-kit", "dep:objc2-foundation", "dep:block2", "dep:raw-window-handle", "dep:unicode-segmentation", "dep:unicode-linebreak"]
+ui-qa = ["desktop", "gpui/test-support", "gpui-platform/test-support", "gpui-component/test-support"]
 
 [dependencies]
 anyhow = "1"
@@ -18,6 +24,8 @@ csv = "1"
 base64 = "0.22"
 hex = "0.4"
 flate2 = "1"
+# Preserve duplicate entry order used by the original Go archive reader.
+zip = { version = "=0.6.6", default-features = false, features = ["deflate"] }
 zstd = "0.13"
 lz4_flex = "0.11"
 brotli = "8"
@@ -25,26 +33,61 @@ rmp-serde = "1"
 serde-pickle = "1"
 quick-xml = "0.38"
 native-tls = "0.2"
-ssh2 = "0.9"
+ssh2 = { version = "0.9", features = ["vendored-openssl"] }
 socks = "0.3"
 url = "2"
 directories = "6"
 chrono = { version = "0.4", features = ["serde"] }
-parking_lot = "0.12"
+parking_lot = { version = "0.12", features = ["arc_lock"] }
+indexmap = "2"
+tempfile = "3"
 futures = "0.3"
 ureq = { version = "3", features = ["json"] }
-gpui = { version = "=0.2.2", features = ["runtime_shaders"], optional = true }
-gpui-component = { version = "=0.5.1", optional = true }
-gpui-component-assets = { version = "=0.5.1", optional = true }
-rust-embed = "8"
+gpui = { package = "gpui-pre", version = "=0.3.9", optional = true }
+gpui-platform = { package = "gpui-pre-platform", version = "=0.3.9", features = ["runtime_shaders", "font-kit"], optional = true }
+gpui-base = { version = "=0.7.3", optional = true }
+gpui-component = { version = "=0.7.3", features = ["tree-sitter", "tree-sitter-yaml", "tree-sitter-html"], optional = true }
+gpui-component-assets = { package = "gpui-kit-assets", version = "=0.7.3", optional = true }
+rust-embed = { version = "8", features = ["debug-embed"] }
+unicode-properties = { version = "0.1.4", default-features = false, features = ["general-category"] }
+vt100 = "=0.16.2"
+unicode-width = "=0.2.2"
+unicode-script = "0.5"
+unicode-segmentation = { version = "=1.13.3", optional = true }
+unicode-linebreak = { version = "=0.1.5", optional = true }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = { version = "=0.6.5", optional = true }
+objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["NSApplication", "NSOpenPanel", "NSSavePanel", "NSPanel", "NSResponder", "NSView", "NSWindow", "NSFont", "objc2-core-foundation", "block2"], optional = true }
+objc2-foundation = { version = "=0.3.2", default-features = false, features = ["NSArray", "NSString", "NSURL", "NSRange", "block2", "std"], optional = true }
+block2 = { version = "=0.6.2", optional = true }
+raw-window-handle = { version = "=0.6.2", optional = true }
+
+[dev-dependencies]
+tempfile = "3"
+
+[patch.crates-io]
+gpui-base = { path = "vendor/gpui-base" }
+gpui-component = { path = "vendor/gpui-component" }
+gpui-pre-apple = { path = "vendor/gpui-apple" }
+vt100 = { path = "vendor/vt100" }
 
 [[bin]]
 name = "rust-rdm"
 path = "src/main.rs"
 required-features = ["desktop"]
 
+[[example]]
+name = "render_qa"
+required-features = ["ui-qa"]
+
 [profile.dev]
-debug = 1
+debug = 0
+incremental = false
+
+[profile.test]
+debug = 0
+incremental = false
 
 [profile.release]
 lto = "thin"

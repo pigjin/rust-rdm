@@ -1,0 +1,2222 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Original overlap hover showing both JSON diagnostics and actual View Problem click opening/closing marker navigation, light/dark. Direct exact model input /*; controlled local RPCs. Source-only evidence; native hover/navigation parity is pending.",
+  "records": [
+    {
+      "name": "json-diagnostic-hover-overlap",
+      "text": "Unexpected end of comment.json(257)\nComments are not permitted in JSON.(521)\nView Problem (⌥F8)\nNo quick fixes available",
+      "bounds": {
+        "x": 720,
+        "y": 198.1875,
+        "width": 289,
+        "height": 126
+      },
+      "metrics": [
+        {
+          "tag": "DIV",
+          "class": "monaco-hover",
+          "text": "Unexpected end of comment.json(257)Comments are not permitted in JSON.(521)View Problem (⌥F8)No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 720,
+            "y": 198.1875,
+            "width": 289,
+            "height": 126
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgb(243, 243, 243)",
+          "color": "rgb(97, 97, 97)",
+          "border": "1px solid rgb(200, 200, 200)"
+        },
+        {
+          "tag": "DIV",
+          "class": "monaco-scrollable-element  mac",
+          "text": "Unexpected end of comment.json(257)Comments are not permitted in JSON.(521)View Problem (⌥F8)No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 199.1875,
+            "width": 287,
+            "height": 126
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "monaco-hover-content",
+          "text": "Unexpected end of comment.json(257)Comments are not permitted in JSON.(521)View Problem (⌥F8)No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 199.1875,
+            "width": 289,
+            "height": 126
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "hover-row",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 199.1875,
+            "width": 289,
+            "height": 50
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "marker hover-contents",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 199.1875,
+            "width": 289,
+            "height": 50
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "text": "Unexpected end of comment.",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 205.1875,
+            "width": 151.734375,
+            "height": 37
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "text": "json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 796.4375,
+            "y": 226.1875,
+            "width": 81.859375,
+            "height": 16
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "hover-row",
+          "text": "Comments are not permitted in JSON.(521)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 249.1875,
+            "width": 289,
+            "height": 51
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "marker hover-contents",
+          "text": "Comments are not permitted in JSON.(521)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 250.1875,
+            "width": 289,
+            "height": 50
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "text": "Comments are not permitted in JSON.",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 256.1875,
+            "width": 252.875,
+            "height": 37
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "text": "(521)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 771.15625,
+            "y": 277.1875,
+            "width": 48.15625,
+            "height": 16
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "hover-row status-bar",
+          "text": "View Problem (⌥F8)No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 300.1875,
+            "width": 289,
+            "height": 23
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "actions",
+          "text": "View Problem (⌥F8)No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 301.1875,
+            "width": 289,
+            "height": 22
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgb(231, 231, 231)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "action-container",
+          "text": "View Problem (⌥F8)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 301.1875,
+            "width": 115.984375,
+            "height": 22
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "A",
+          "class": "action",
+          "text": "View Problem (⌥F8)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 304.1875,
+            "width": 115.984375,
+            "height": 15
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 106, 177)",
+          "border": "0px none rgb(0, 106, 177)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "text": "View Problem (⌥F8)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 304.1875,
+            "width": 115.984375,
+            "height": 15
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 106, 177)",
+          "border": "0px none rgb(0, 106, 177)"
+        },
+        {
+          "tag": "DIV",
+          "class": "",
+          "text": "No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 860.984375,
+            "y": 301.1875,
+            "width": 132.234375,
+            "height": 22
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "invisible scrollbar horizontal",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 315.1875,
+            "width": 279,
+            "height": 10
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "slider",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 315.1875,
+            "width": 279,
+            "height": 10
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(100, 100, 100, 0.4)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "invisible scrollbar vertical",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 998,
+            "y": 199.1875,
+            "width": 10,
+            "height": 126
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "slider",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 998,
+            "y": 199.1875,
+            "width": 10,
+            "height": 126
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(100, 100, 100, 0.4)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "shadow",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "shadow",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "DIV",
+          "class": "shadow",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        }
+      ],
+      "dark": false,
+      "model": {
+        "value": "/*",
+        "markers": [
+          {
+            "resource": {
+              "scheme": "inmemory",
+              "authority": "model",
+              "path": "/1",
+              "query": "",
+              "fragment": "",
+              "_formatted": "inmemory://model/1",
+              "_fsPath": null
+            },
+            "owner": "json",
+            "code": "257",
+            "severity": 8,
+            "message": "Unexpected end of comment.",
+            "source": "json",
+            "startLineNumber": 1,
+            "startColumn": 1,
+            "endLineNumber": 1,
+            "endColumn": 3
+          },
+          {
+            "resource": {
+              "scheme": "inmemory",
+              "authority": "model",
+              "path": "/1",
+              "query": "",
+              "fragment": "",
+              "_formatted": "inmemory://model/1",
+              "_fsPath": null
+            },
+            "owner": "json",
+            "code": "521",
+            "severity": 8,
+            "message": "Comments are not permitted in JSON.",
+            "startLineNumber": 1,
+            "startColumn": 1,
+            "endLineNumber": 1,
+            "endColumn": 3
+          }
+        ],
+        "position": {
+          "lineNumber": 1,
+          "column": 1
+        },
+        "selection": {
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 1,
+          "selectionStartLineNumber": 1,
+          "selectionStartColumn": 1,
+          "positionLineNumber": 1,
+          "positionColumn": 1
+        },
+        "hoverOption": {
+          "enabled": true,
+          "delay": 300,
+          "hidingDelay": 300,
+          "sticky": true,
+          "above": true
+        }
+      }
+    },
+    {
+      "name": "json-diagnostic-navigation",
+      "text": "1\n1 of 2 problems\nUnexpected end of comment.json(257)",
+      "bounds": {
+        "x": 709,
+        "y": 345.1875,
+        "width": 279,
+        "height": 84
+      },
+      "metrics": [
+        {
+          "tag": "DIV",
+          "class": "zone-widget",
+          "text": "11 of 2 problemsUnexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 345.1875,
+            "width": 279,
+            "height": 84
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "zone-widget-container peekview-widget",
+          "text": "11 of 2 problemsUnexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 352.1875,
+            "width": 279,
+            "height": 68
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "head",
+          "text": "11 of 2 problems",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 353.1875,
+            "width": 279,
+            "height": 26
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(229, 20, 0, 0.1)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "peekview-title",
+          "text": "11 of 2 problems",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 353.1875,
+            "width": 117.109375,
+            "height": 26
+          },
+          "font": "13px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "codicon codicon codicon-error",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 358.1875,
+            "width": 16,
+            "height": 16
+          },
+          "font": "16px / 16px codicon",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(229, 20, 0)",
+          "border": "0px none rgb(229, 20, 0)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "filename",
+          "text": "1",
+          "title": "1",
+          "ariaLabel": null,
+          "bounds": {
+            "x": 749,
+            "y": 353.1875,
+            "width": 5.96875,
+            "height": 26
+          },
+          "font": "13px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "dirname",
+          "text": "1 of 2 problems",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 760.8125,
+            "y": 354.1875,
+            "width": 85.296875,
+            "height": 26
+          },
+          "font": "11.7px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(97, 97, 97)",
+          "border": "0px none rgb(97, 97, 97)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "meta",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 846.109375,
+            "y": 371.1875,
+            "width": 0,
+            "height": 0
+          },
+          "font": "13px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "peekview-actions",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 846.109375,
+            "y": 353.1875,
+            "width": 141.890625,
+            "height": 26
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "monaco-action-bar",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 920,
+            "y": 353.1875,
+            "width": 66,
+            "height": 26
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "UL",
+          "class": "actions-container",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 920,
+            "y": 353.1875,
+            "width": 66,
+            "height": 26
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "LI",
+          "class": "action-item menu-entry",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 920,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "A",
+          "class": "action-label codicon codicon-marker-navigation-next",
+          "text": "",
+          "title": null,
+          "ariaLabel": "Go to Next Problem (Error, Warning, Info) (⌥F8)",
+          "bounds": {
+            "x": 920,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "16px / 16px codicon",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "LI",
+          "class": "action-item menu-entry",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 942,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "A",
+          "class": "action-label codicon codicon-marker-navigation-previous",
+          "text": "",
+          "title": null,
+          "ariaLabel": "Go to Previous Problem (Error, Warning, Info) (⇧⌥F8)",
+          "bounds": {
+            "x": 942,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "16px / 16px codicon",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "LI",
+          "class": "action-item",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 964,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "A",
+          "class": "action-label codicon codicon-close",
+          "text": "",
+          "title": null,
+          "ariaLabel": "Close",
+          "bounds": {
+            "x": 964,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "16px / 16px codicon",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "body marker-widget",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 379.1875,
+            "width": 279,
+            "height": 39
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgb(255, 255, 254)",
+          "color": "rgb(0, 0, 0)",
+          "border": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 380.1875,
+            "width": 279,
+            "height": 38
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "monaco-scrollable-element  mac",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 380.1875,
+            "width": 279,
+            "height": 38
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "descriptioncontainer",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 380.1875,
+            "width": 333.03125,
+            "height": 29
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "message",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": "/*, Error at 1:1. ",
+          "bounds": {
+            "x": 729,
+            "y": 388.1875,
+            "width": 301.03125,
+            "height": 21
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 388.1875,
+            "width": 301.03125,
+            "height": 21
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "details",
+          "text": "json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 948.15625,
+            "y": 390.1875,
+            "width": 81.875,
+            "height": 16
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "source",
+          "text": "json",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 954.15625,
+            "y": 390.1875,
+            "width": 33.71875,
+            "height": 16
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "code",
+          "text": "(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 987.875,
+            "y": 390.1875,
+            "width": 42.15625,
+            "height": 16
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 409.1875,
+            "width": 301.03125,
+            "height": 0
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "visible scrollbar horizontal",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 412.1875,
+            "width": 273,
+            "height": 6
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "slider",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 412.1875,
+            "width": 206,
+            "height": 6
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(100, 100, 100, 0.4)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "invisible scrollbar vertical",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 982,
+            "y": 380.1875,
+            "width": 6,
+            "height": 38
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "slider",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 982,
+            "y": 380.1875,
+            "width": 6,
+            "height": 38
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(100, 100, 100, 0.4)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        },
+        {
+          "tag": "DIV",
+          "class": "monaco-sash mac horizontal disabled",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 418.1875,
+            "width": 289,
+            "height": 4
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "border": "0px none rgb(0, 0, 0)"
+        }
+      ],
+      "dark": false,
+      "model": {
+        "value": "/*",
+        "markers": [
+          {
+            "resource": {
+              "scheme": "inmemory",
+              "authority": "model",
+              "path": "/1",
+              "query": "",
+              "fragment": "",
+              "_formatted": "inmemory://model/1",
+              "_fsPath": null
+            },
+            "owner": "json",
+            "code": "257",
+            "severity": 8,
+            "message": "Unexpected end of comment.",
+            "source": "json",
+            "startLineNumber": 1,
+            "startColumn": 1,
+            "endLineNumber": 1,
+            "endColumn": 3
+          },
+          {
+            "resource": {
+              "scheme": "inmemory",
+              "authority": "model",
+              "path": "/1",
+              "query": "",
+              "fragment": "",
+              "_formatted": "inmemory://model/1",
+              "_fsPath": null
+            },
+            "owner": "json",
+            "code": "521",
+            "severity": 8,
+            "message": "Comments are not permitted in JSON.",
+            "startLineNumber": 1,
+            "startColumn": 1,
+            "endLineNumber": 1,
+            "endColumn": 3
+          }
+        ],
+        "position": {
+          "lineNumber": 1,
+          "column": 1
+        },
+        "selection": {
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 1,
+          "selectionStartLineNumber": 1,
+          "selectionStartColumn": 1,
+          "positionLineNumber": 1,
+          "positionColumn": 1
+        },
+        "hoverOption": {
+          "enabled": true,
+          "delay": 300,
+          "hidingDelay": 300,
+          "sticky": true,
+          "above": true
+        }
+      }
+    },
+    {
+      "name": "json-diagnostic-hover-overlap-dark",
+      "text": "Unexpected end of comment.json(257)\nComments are not permitted in JSON.(521)\nView Problem (⌥F8)\nNo quick fixes available",
+      "bounds": {
+        "x": 720,
+        "y": 198.1875,
+        "width": 289,
+        "height": 126
+      },
+      "metrics": [
+        {
+          "tag": "DIV",
+          "class": "monaco-hover",
+          "text": "Unexpected end of comment.json(257)Comments are not permitted in JSON.(521)View Problem (⌥F8)No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 720,
+            "y": 198.1875,
+            "width": 289,
+            "height": 126
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgb(37, 37, 38)",
+          "color": "rgb(204, 204, 204)",
+          "border": "1px solid rgb(69, 69, 69)"
+        },
+        {
+          "tag": "DIV",
+          "class": "monaco-scrollable-element  mac",
+          "text": "Unexpected end of comment.json(257)Comments are not permitted in JSON.(521)View Problem (⌥F8)No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 199.1875,
+            "width": 287,
+            "height": 126
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "monaco-hover-content",
+          "text": "Unexpected end of comment.json(257)Comments are not permitted in JSON.(521)View Problem (⌥F8)No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 199.1875,
+            "width": 289,
+            "height": 126
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "hover-row",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 199.1875,
+            "width": 289,
+            "height": 50
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "marker hover-contents",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 199.1875,
+            "width": 289,
+            "height": 50
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "text": "Unexpected end of comment.",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 205.1875,
+            "width": 151.734375,
+            "height": 37
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "text": "json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 796.4375,
+            "y": 226.1875,
+            "width": 81.859375,
+            "height": 16
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "hover-row",
+          "text": "Comments are not permitted in JSON.(521)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 249.1875,
+            "width": 289,
+            "height": 51
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "marker hover-contents",
+          "text": "Comments are not permitted in JSON.(521)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 250.1875,
+            "width": 289,
+            "height": 50
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "text": "Comments are not permitted in JSON.",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 256.1875,
+            "width": 252.875,
+            "height": 37
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "text": "(521)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 771.15625,
+            "y": 277.1875,
+            "width": 48.15625,
+            "height": 16
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "hover-row status-bar",
+          "text": "View Problem (⌥F8)No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 300.1875,
+            "width": 289,
+            "height": 23
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "actions",
+          "text": "View Problem (⌥F8)No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 301.1875,
+            "width": 289,
+            "height": 22
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgb(44, 44, 45)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "action-container",
+          "text": "View Problem (⌥F8)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 301.1875,
+            "width": 115.984375,
+            "height": 22
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "A",
+          "class": "action",
+          "text": "View Problem (⌥F8)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 304.1875,
+            "width": 115.984375,
+            "height": 15
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(55, 148, 255)",
+          "border": "0px none rgb(55, 148, 255)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "text": "View Problem (⌥F8)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 304.1875,
+            "width": 115.984375,
+            "height": 15
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(55, 148, 255)",
+          "border": "0px none rgb(55, 148, 255)"
+        },
+        {
+          "tag": "DIV",
+          "class": "",
+          "text": "No quick fixes available",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 860.984375,
+            "y": 301.1875,
+            "width": 132.234375,
+            "height": 22
+          },
+          "font": "12px / 22px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "invisible scrollbar horizontal",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 315.1875,
+            "width": 279,
+            "height": 10
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "slider",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 721,
+            "y": 315.1875,
+            "width": 279,
+            "height": 10
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(121, 121, 121, 0.4)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "invisible scrollbar vertical",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 998,
+            "y": 199.1875,
+            "width": 10,
+            "height": 126
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "slider",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 998,
+            "y": 199.1875,
+            "width": 10,
+            "height": 126
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(121, 121, 121, 0.4)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "shadow",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "shadow",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        },
+        {
+          "tag": "DIV",
+          "class": "shadow",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(204, 204, 204)",
+          "border": "0px none rgb(204, 204, 204)"
+        }
+      ],
+      "dark": true,
+      "model": {
+        "value": "/*",
+        "markers": [
+          {
+            "resource": {
+              "scheme": "inmemory",
+              "authority": "model",
+              "path": "/1",
+              "query": "",
+              "fragment": "",
+              "_formatted": "inmemory://model/1",
+              "_fsPath": null
+            },
+            "owner": "json",
+            "code": "257",
+            "severity": 8,
+            "message": "Unexpected end of comment.",
+            "source": "json",
+            "startLineNumber": 1,
+            "startColumn": 1,
+            "endLineNumber": 1,
+            "endColumn": 3
+          },
+          {
+            "resource": {
+              "scheme": "inmemory",
+              "authority": "model",
+              "path": "/1",
+              "query": "",
+              "fragment": "",
+              "_formatted": "inmemory://model/1",
+              "_fsPath": null
+            },
+            "owner": "json",
+            "code": "521",
+            "severity": 8,
+            "message": "Comments are not permitted in JSON.",
+            "startLineNumber": 1,
+            "startColumn": 1,
+            "endLineNumber": 1,
+            "endColumn": 3
+          }
+        ],
+        "position": {
+          "lineNumber": 1,
+          "column": 1
+        },
+        "selection": {
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 1,
+          "selectionStartLineNumber": 1,
+          "selectionStartColumn": 1,
+          "positionLineNumber": 1,
+          "positionColumn": 1
+        },
+        "hoverOption": {
+          "enabled": true,
+          "delay": 300,
+          "hidingDelay": 300,
+          "sticky": true,
+          "above": true
+        }
+      }
+    },
+    {
+      "name": "json-diagnostic-navigation-dark",
+      "text": "1\n1 of 2 problems\nUnexpected end of comment.json(257)",
+      "bounds": {
+        "x": 709,
+        "y": 345.1875,
+        "width": 279,
+        "height": 84
+      },
+      "metrics": [
+        {
+          "tag": "DIV",
+          "class": "zone-widget",
+          "text": "11 of 2 problemsUnexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 345.1875,
+            "width": 279,
+            "height": 84
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "zone-widget-container peekview-widget",
+          "text": "11 of 2 problemsUnexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 352.1875,
+            "width": 279,
+            "height": 68
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "head",
+          "text": "11 of 2 problems",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 353.1875,
+            "width": 279,
+            "height": 26
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(241, 76, 76, 0.1)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "peekview-title",
+          "text": "11 of 2 problems",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 353.1875,
+            "width": 117.109375,
+            "height": 26
+          },
+          "font": "13px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "codicon codicon codicon-error",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 358.1875,
+            "width": 16,
+            "height": 16
+          },
+          "font": "16px / 16px codicon",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(241, 76, 76)",
+          "border": "0px none rgb(241, 76, 76)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "filename",
+          "text": "1",
+          "title": "1",
+          "ariaLabel": null,
+          "bounds": {
+            "x": 749,
+            "y": 353.1875,
+            "width": 5.96875,
+            "height": 26
+          },
+          "font": "13px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 255, 255)",
+          "border": "0px none rgb(255, 255, 255)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "dirname",
+          "text": "1 of 2 problems",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 760.8125,
+            "y": 354.1875,
+            "width": 85.296875,
+            "height": 26
+          },
+          "font": "11.7px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgba(204, 204, 204, 0.7)",
+          "border": "0px none rgba(204, 204, 204, 0.7)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "meta",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 846.109375,
+            "y": 371.1875,
+            "width": 0,
+            "height": 0
+          },
+          "font": "13px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "peekview-actions",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 846.109375,
+            "y": 353.1875,
+            "width": 141.890625,
+            "height": 26
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "monaco-action-bar",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 920,
+            "y": 353.1875,
+            "width": 66,
+            "height": 26
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "UL",
+          "class": "actions-container",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 920,
+            "y": 353.1875,
+            "width": 66,
+            "height": 26
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "LI",
+          "class": "action-item menu-entry",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 920,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "A",
+          "class": "action-label codicon codicon-marker-navigation-next",
+          "text": "",
+          "title": null,
+          "ariaLabel": "Go to Next Problem (Error, Warning, Info) (⌥F8)",
+          "bounds": {
+            "x": 920,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "16px / 16px codicon",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "LI",
+          "class": "action-item menu-entry",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 942,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "A",
+          "class": "action-label codicon codicon-marker-navigation-previous",
+          "text": "",
+          "title": null,
+          "ariaLabel": "Go to Previous Problem (Error, Warning, Info) (⇧⌥F8)",
+          "bounds": {
+            "x": 942,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "16px / 16px codicon",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "LI",
+          "class": "action-item",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 964,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "14px / 26px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "A",
+          "class": "action-label codicon codicon-close",
+          "text": "",
+          "title": null,
+          "ariaLabel": "Close",
+          "bounds": {
+            "x": 964,
+            "y": 355.1875,
+            "width": 22,
+            "height": 22
+          },
+          "font": "16px / 16px codicon",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "body marker-widget",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 379.1875,
+            "width": 279,
+            "height": 39
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgb(30, 30, 30)",
+          "color": "rgb(212, 212, 212)",
+          "border": ""
+        },
+        {
+          "tag": "DIV",
+          "class": "",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 380.1875,
+            "width": 279,
+            "height": 38
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "monaco-scrollable-element  mac",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 380.1875,
+            "width": 279,
+            "height": 38
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "descriptioncontainer",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 380.1875,
+            "width": 333.03125,
+            "height": 29
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "message",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": "/*, Error at 1:1. ",
+          "bounds": {
+            "x": 729,
+            "y": 388.1875,
+            "width": 301.03125,
+            "height": 21
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "",
+          "text": "Unexpected end of comment.json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 388.1875,
+            "width": 301.03125,
+            "height": 21
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "details",
+          "text": "json(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 948.15625,
+            "y": 390.1875,
+            "width": 81.875,
+            "height": 16
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "source",
+          "text": "json",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 954.15625,
+            "y": 390.1875,
+            "width": 33.71875,
+            "height": 16
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "SPAN",
+          "class": "code",
+          "text": "(257)",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 987.875,
+            "y": 390.1875,
+            "width": 42.15625,
+            "height": 16
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 729,
+            "y": 409.1875,
+            "width": 301.03125,
+            "height": 0
+          },
+          "font": "",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "visible scrollbar horizontal",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 412.1875,
+            "width": 273,
+            "height": 6
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "slider",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 412.1875,
+            "width": 206,
+            "height": 6
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(121, 121, 121, 0.4)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "invisible scrollbar vertical",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 982,
+            "y": 380.1875,
+            "width": 6,
+            "height": 38
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "slider",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 982,
+            "y": 380.1875,
+            "width": 6,
+            "height": 38
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(121, 121, 121, 0.4)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        },
+        {
+          "tag": "DIV",
+          "class": "monaco-sash mac horizontal disabled",
+          "text": "",
+          "title": null,
+          "ariaLabel": null,
+          "bounds": {
+            "x": 709,
+            "y": 418.1875,
+            "width": 289,
+            "height": 4
+          },
+          "font": "14px / 21px -apple-system, \"system-ui\", \"Segoe WPC\", \"Segoe UI\", HelveticaNeue-Light, system-ui, Ubuntu, \"Droid Sans\", sans-serif",
+          "background": "rgba(0, 0, 0, 0)",
+          "color": "rgb(212, 212, 212)",
+          "border": "0px none rgb(212, 212, 212)"
+        }
+      ],
+      "dark": true,
+      "model": {
+        "value": "/*",
+        "markers": [
+          {
+            "resource": {
+              "scheme": "inmemory",
+              "authority": "model",
+              "path": "/1",
+              "query": "",
+              "fragment": "",
+              "_formatted": "inmemory://model/1",
+              "_fsPath": null
+            },
+            "owner": "json",
+            "code": "257",
+            "severity": 8,
+            "message": "Unexpected end of comment.",
+            "source": "json",
+            "startLineNumber": 1,
+            "startColumn": 1,
+            "endLineNumber": 1,
+            "endColumn": 3
+          },
+          {
+            "resource": {
+              "scheme": "inmemory",
+              "authority": "model",
+              "path": "/1",
+              "query": "",
+              "fragment": "",
+              "_formatted": "inmemory://model/1",
+              "_fsPath": null
+            },
+            "owner": "json",
+            "code": "521",
+            "severity": 8,
+            "message": "Comments are not permitted in JSON.",
+            "startLineNumber": 1,
+            "startColumn": 1,
+            "endLineNumber": 1,
+            "endColumn": 3
+          }
+        ],
+        "position": {
+          "lineNumber": 1,
+          "column": 1
+        },
+        "selection": {
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 1,
+          "selectionStartLineNumber": 1,
+          "selectionStartColumn": 1,
+          "positionLineNumber": 1,
+          "positionColumn": 1
+        },
+        "hoverOption": {
+          "enabled": true,
+          "delay": 300,
+          "hidingDelay": 300,
+          "sticky": true,
+          "above": true
+        }
+      }
+    }
+  ]
+}

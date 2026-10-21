@@ -1,0 +1,899 @@
+{
+  "source_commit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "source_function": "backend/utils/string/any_convert.go:SplitCmd",
+  "cases": [
+    {
+      "input": "",
+      "args_hex": []
+    },
+    {
+      "input": "  ",
+      "args_hex": []
+    },
+    {
+      "input": "PING",
+      "args_hex": [
+        "50494e47"
+      ]
+    },
+    {
+      "input": " PING ",
+      "args_hex": [
+        "50494e47"
+      ]
+    },
+    {
+      "input": "SET key value",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "76616c7565"
+      ]
+    },
+    {
+      "input": "SET  key value",
+      "args_hex": [
+        "534554",
+        "",
+        "6b6579",
+        "76616c7565"
+      ]
+    },
+    {
+      "input": "SET key  value",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "",
+        "76616c7565"
+      ]
+    },
+    {
+      "input": "SET key \"\"",
+      "args_hex": [
+        "534554",
+        "6b6579"
+      ]
+    },
+    {
+      "input": "SET \"\" value",
+      "args_hex": [
+        "534554",
+        "",
+        "76616c7565"
+      ]
+    },
+    {
+      "input": "SET \"\" \"\"",
+      "args_hex": [
+        "534554",
+        ""
+      ]
+    },
+    {
+      "input": "\"\"",
+      "args_hex": []
+    },
+    {
+      "input": "\"\" PING",
+      "args_hex": [
+        "50494e47"
+      ]
+    },
+    {
+      "input": "GET\tkey",
+      "args_hex": [
+        "474554096b6579"
+      ]
+    },
+    {
+      "input": "SET\nkey value",
+      "args_hex": [
+        "5345540a6b6579",
+        "76616c7565"
+      ]
+    },
+    {
+      "input": "SET key \"unclosed",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "756e636c6f736564"
+      ]
+    },
+    {
+      "input": "SET key 'unclosed",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "756e636c6f736564"
+      ]
+    },
+    {
+      "input": "SET key \"quoted 'part'\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "71756f74656420277061727427"
+      ]
+    },
+    {
+      "input": "SET key 'quoted \"part\"'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "71756f74656420227061727422"
+      ]
+    },
+    {
+      "input": "SET key \"one\"two",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "6f6e6574776f"
+      ]
+    },
+    {
+      "input": "SET key 用户",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "e794a8e688b7"
+      ]
+    },
+    {
+      "input": "PING",
+      "args_hex": [
+        "50494e47"
+      ]
+    },
+    {
+      "input": " PING ",
+      "args_hex": [
+        "50494e47"
+      ]
+    },
+    {
+      "input": "\u001cPING\u001c",
+      "args_hex": [
+        "1c50494e471c"
+      ]
+    },
+    {
+      "input": "SET key \\",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c"
+      ]
+    },
+    {
+      "input": "SET key a\\\"b",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "612262"
+      ]
+    },
+    {
+      "input": "SET key a\\\\\"b",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "615c5c2262"
+      ]
+    },
+    {
+      "input": "SET key \\n",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0a"
+      ]
+    },
+    {
+      "input": "SET key \"\\n\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0a"
+      ]
+    },
+    {
+      "input": "SET key '\\n'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0a"
+      ]
+    },
+    {
+      "input": "SET key \\r",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0d"
+      ]
+    },
+    {
+      "input": "SET key \"\\r\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0d"
+      ]
+    },
+    {
+      "input": "SET key '\\r'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0d"
+      ]
+    },
+    {
+      "input": "SET key \\t",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "09"
+      ]
+    },
+    {
+      "input": "SET key \"\\t\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "09"
+      ]
+    },
+    {
+      "input": "SET key '\\t'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "09"
+      ]
+    },
+    {
+      "input": "SET key \\a",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "07"
+      ]
+    },
+    {
+      "input": "SET key \"\\a\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "07"
+      ]
+    },
+    {
+      "input": "SET key '\\a'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "07"
+      ]
+    },
+    {
+      "input": "SET key \\b",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "08"
+      ]
+    },
+    {
+      "input": "SET key \"\\b\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "08"
+      ]
+    },
+    {
+      "input": "SET key '\\b'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "08"
+      ]
+    },
+    {
+      "input": "SET key \\f",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0c"
+      ]
+    },
+    {
+      "input": "SET key \"\\f\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0c"
+      ]
+    },
+    {
+      "input": "SET key '\\f'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0c"
+      ]
+    },
+    {
+      "input": "SET key \\v",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0b"
+      ]
+    },
+    {
+      "input": "SET key \"\\v\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0b"
+      ]
+    },
+    {
+      "input": "SET key '\\v'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0b"
+      ]
+    },
+    {
+      "input": "SET key \\\\",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c"
+      ]
+    },
+    {
+      "input": "SET key \"\\\\\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c5c22"
+      ]
+    },
+    {
+      "input": "SET key '\\\\'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c27"
+      ]
+    },
+    {
+      "input": "SET key \\\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "22"
+      ]
+    },
+    {
+      "input": "SET key \"\\\"\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "22"
+      ]
+    },
+    {
+      "input": "SET key '\\\"'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "22"
+      ]
+    },
+    {
+      "input": "SET key \\'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c27"
+      ]
+    },
+    {
+      "input": "SET key \"\\'\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c27"
+      ]
+    },
+    {
+      "input": "SET key '\\''",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c27"
+      ]
+    },
+    {
+      "input": "SET key \\0",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c30"
+      ]
+    },
+    {
+      "input": "SET key \"\\0\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c30"
+      ]
+    },
+    {
+      "input": "SET key '\\0'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c30"
+      ]
+    },
+    {
+      "input": "SET key \\00",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c3030"
+      ]
+    },
+    {
+      "input": "SET key \"\\00\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c3030"
+      ]
+    },
+    {
+      "input": "SET key '\\00'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c3030"
+      ]
+    },
+    {
+      "input": "SET key \\000",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "00"
+      ]
+    },
+    {
+      "input": "SET key \"\\000\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "00"
+      ]
+    },
+    {
+      "input": "SET key '\\000'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "00"
+      ]
+    },
+    {
+      "input": "SET key \\012",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0a"
+      ]
+    },
+    {
+      "input": "SET key \"\\012\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0a"
+      ]
+    },
+    {
+      "input": "SET key '\\012'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0a"
+      ]
+    },
+    {
+      "input": "SET key \\377",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "ff"
+      ]
+    },
+    {
+      "input": "SET key \"\\377\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "ff"
+      ]
+    },
+    {
+      "input": "SET key '\\377'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "ff"
+      ]
+    },
+    {
+      "input": "SET key \\400",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c343030"
+      ]
+    },
+    {
+      "input": "SET key \"\\400\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c343030"
+      ]
+    },
+    {
+      "input": "SET key '\\400'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c343030"
+      ]
+    },
+    {
+      "input": "SET key \\777",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c373737"
+      ]
+    },
+    {
+      "input": "SET key \"\\777\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c373737"
+      ]
+    },
+    {
+      "input": "SET key '\\777'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c373737"
+      ]
+    },
+    {
+      "input": "SET key \\x00",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "00"
+      ]
+    },
+    {
+      "input": "SET key \"\\x00\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "00"
+      ]
+    },
+    {
+      "input": "SET key '\\x00'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "00"
+      ]
+    },
+    {
+      "input": "SET key \\xFF",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "ff"
+      ]
+    },
+    {
+      "input": "SET key \"\\xFF\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "ff"
+      ]
+    },
+    {
+      "input": "SET key '\\xFF'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "ff"
+      ]
+    },
+    {
+      "input": "SET key \\x4",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c7834"
+      ]
+    },
+    {
+      "input": "SET key \"\\x4\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c7834"
+      ]
+    },
+    {
+      "input": "SET key '\\x4'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c7834"
+      ]
+    },
+    {
+      "input": "SET key \\xzz",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c787a7a"
+      ]
+    },
+    {
+      "input": "SET key \"\\xzz\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c787a7a"
+      ]
+    },
+    {
+      "input": "SET key '\\xzz'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c787a7a"
+      ]
+    },
+    {
+      "input": "SET key \\u0041",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "41"
+      ]
+    },
+    {
+      "input": "SET key \"\\u0041\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "41"
+      ]
+    },
+    {
+      "input": "SET key '\\u0041'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "41"
+      ]
+    },
+    {
+      "input": "SET key \\u4e2d",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "e4b8ad"
+      ]
+    },
+    {
+      "input": "SET key \"\\u4e2d\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "e4b8ad"
+      ]
+    },
+    {
+      "input": "SET key '\\u4e2d'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "e4b8ad"
+      ]
+    },
+    {
+      "input": "SET key \\uD800",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c7544383030"
+      ]
+    },
+    {
+      "input": "SET key \"\\uD800\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c7544383030"
+      ]
+    },
+    {
+      "input": "SET key '\\uD800'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c7544383030"
+      ]
+    },
+    {
+      "input": "SET key \\U0001F600",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "f09f9880"
+      ]
+    },
+    {
+      "input": "SET key \"\\U0001F600\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "f09f9880"
+      ]
+    },
+    {
+      "input": "SET key '\\U0001F600'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "f09f9880"
+      ]
+    },
+    {
+      "input": "SET key \\U00110000",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c553030313130303030"
+      ]
+    },
+    {
+      "input": "SET key \"\\U00110000\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c553030313130303030"
+      ]
+    },
+    {
+      "input": "SET key '\\U00110000'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c553030313130303030"
+      ]
+    },
+    {
+      "input": "SET key \\q",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c71"
+      ]
+    },
+    {
+      "input": "SET key \"\\q\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c71"
+      ]
+    },
+    {
+      "input": "SET key '\\q'",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "5c71"
+      ]
+    },
+    {
+      "input": "SET key \"\t\\n\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "090a"
+      ]
+    },
+    {
+      "input": "SET key \"\n\\n\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0a5c6e"
+      ]
+    },
+    {
+      "input": "SET key \"\r\\n\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "0d0a"
+      ]
+    },
+    {
+      "input": "SET key \"\u0000\\n\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "000a"
+      ]
+    },
+    {
+      "input": "SET key \"\u0001\\n\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "010a"
+      ]
+    },
+    {
+      "input": "SET key \"\u001f\\n\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "1f0a"
+      ]
+    },
+    {
+      "input": "SET key \"\\n\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "7f0a"
+      ]
+    },
+    {
+      "input": "SET key \" \\n\"",
+      "args_hex": [
+        "534554",
+        "6b6579",
+        "e280a80a"
+      ]
+    }
+  ]
+}

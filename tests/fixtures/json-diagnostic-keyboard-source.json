@@ -1,0 +1,1578 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Original component: actual browser mouse selection and key events, delivered locally to a hidden WKWebView via hit-tested NSView methods/NSWindow.sendEvent, with an independent isolated headless Chromium run. Keyboard-show hover, controlled marker after waiting for the JSON worker, timer rAF and finite-animation completion. No global input, clipboard operations, original Wails native-window or whole-image acceptance. Expansion results are source evidence; GPUI expansion parity is not claimed.",
+  "modelValue": "/*",
+  "controlledMessage": "中文🙂  alpha\nsecond\tline",
+  "controlledCode": "777",
+  "expectedSavedRequest": {
+    "server": "localhost",
+    "db": 0,
+    "key": "aahash",
+    "field": "old",
+    "newField": "old",
+    "value": "/*",
+    "decode": "None",
+    "format": "JSON",
+    "retDecode": "",
+    "retFormat": ""
+  },
+  "wkWebView": {
+    "records": [
+      {
+        "name": "after-local-AppKit-drag",
+        "activeClass": "monaco-hover",
+        "activeTag": "DIV",
+        "anchorOffset": 0,
+        "anchorText": "中文🙂  alpha",
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "editorSelection": {
+          "endColumn": 1,
+          "endLineNumber": 1,
+          "positionColumn": 1,
+          "positionLineNumber": 1,
+          "selectionStartColumn": 1,
+          "selectionStartLineNumber": 1,
+          "startColumn": 1,
+          "startLineNumber": 1
+        },
+        "entryVisible": true,
+        "events": [],
+        "focusOffset": 4,
+        "focusText": "中文🙂  alpha",
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "markerBox": {
+          "height": 50,
+          "width": 282,
+          "x": 728,
+          "y": 250
+        },
+        "markers": [
+          {
+            "code": "777",
+            "endColumn": 3,
+            "endLineNumber": 1,
+            "message": "中文🙂  alpha\nsecond\tline",
+            "owner": "selection-qa",
+            "resource": {
+              "$mid": 1,
+              "authority": "model",
+              "external": "inmemory://model/1",
+              "path": "/1",
+              "scheme": "inmemory"
+            },
+            "severity": 8,
+            "source": "json",
+            "startColumn": 1,
+            "startLineNumber": 1
+          }
+        ],
+        "pointerEvents": [
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mousedown",
+            "x": 736,
+            "y": 264
+          },
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mouseup",
+            "x": 783,
+            "y": 264
+          }
+        ],
+        "requests": [],
+        "saveCalls": [],
+        "selected": "中文🙂",
+        "selectedRects": [
+          {
+            "height": 16,
+            "width": 47,
+            "x": 736,
+            "y": 256
+          }
+        ],
+        "selectionType": "Range",
+        "spinContentOpacity": "1",
+        "value": "/*"
+      },
+      {
+        "name": "cmd-a",
+        "activeClass": "monaco-hover",
+        "activeTag": "DIV",
+        "anchorOffset": 0,
+        "anchorText": "中文🙂  alpha",
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "editorSelection": {
+          "endColumn": 1,
+          "endLineNumber": 1,
+          "positionColumn": 1,
+          "positionLineNumber": 1,
+          "selectionStartColumn": 1,
+          "selectionStartLineNumber": 1,
+          "startColumn": 1,
+          "startLineNumber": 1
+        },
+        "entryVisible": true,
+        "events": [
+          {
+            "alt": false,
+            "code": "KeyA",
+            "finalPrevented": true,
+            "initialPrevented": false,
+            "key": "a",
+            "meta": true,
+            "shift": false,
+            "target": "monaco-hover",
+            "trusted": true
+          }
+        ],
+        "focusOffset": 4,
+        "focusText": "中文🙂  alpha",
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "markerBox": {
+          "height": 50,
+          "width": 282,
+          "x": 728,
+          "y": 250
+        },
+        "markers": [
+          {
+            "code": "777",
+            "endColumn": 3,
+            "endLineNumber": 1,
+            "message": "中文🙂  alpha\nsecond\tline",
+            "owner": "selection-qa",
+            "resource": {
+              "$mid": 1,
+              "authority": "model",
+              "external": "inmemory://model/1",
+              "path": "/1",
+              "scheme": "inmemory"
+            },
+            "severity": 8,
+            "source": "json",
+            "startColumn": 1,
+            "startLineNumber": 1
+          }
+        ],
+        "pointerEvents": [
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mousedown",
+            "x": 736,
+            "y": 264
+          },
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mouseup",
+            "x": 783,
+            "y": 264
+          }
+        ],
+        "requests": [],
+        "saveCalls": [],
+        "selected": "中文🙂",
+        "selectedRects": [
+          {
+            "height": 16,
+            "width": 47,
+            "x": 736,
+            "y": 256
+          }
+        ],
+        "selectionType": "Range",
+        "spinContentOpacity": "1",
+        "value": "/*"
+      },
+      {
+        "name": "shift-right",
+        "activeClass": "monaco-hover",
+        "activeTag": "DIV",
+        "anchorOffset": 0,
+        "anchorText": "中文🙂  alpha",
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "editorSelection": {
+          "endColumn": 1,
+          "endLineNumber": 1,
+          "positionColumn": 1,
+          "positionLineNumber": 1,
+          "selectionStartColumn": 1,
+          "selectionStartLineNumber": 1,
+          "startColumn": 1,
+          "startLineNumber": 1
+        },
+        "entryVisible": true,
+        "events": [
+          {
+            "alt": false,
+            "code": "KeyA",
+            "finalPrevented": true,
+            "initialPrevented": false,
+            "key": "a",
+            "meta": true,
+            "shift": false,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": false,
+            "code": "ArrowRight",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          }
+        ],
+        "focusOffset": 5,
+        "focusText": "中文🙂  alpha",
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "markerBox": {
+          "height": 50,
+          "width": 282,
+          "x": 728,
+          "y": 250
+        },
+        "markers": [
+          {
+            "code": "777",
+            "endColumn": 3,
+            "endLineNumber": 1,
+            "message": "中文🙂  alpha\nsecond\tline",
+            "owner": "selection-qa",
+            "resource": {
+              "$mid": 1,
+              "authority": "model",
+              "external": "inmemory://model/1",
+              "path": "/1",
+              "scheme": "inmemory"
+            },
+            "severity": 8,
+            "source": "json",
+            "startColumn": 1,
+            "startLineNumber": 1
+          }
+        ],
+        "pointerEvents": [
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mousedown",
+            "x": 736,
+            "y": 264
+          },
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mouseup",
+            "x": 783,
+            "y": 264
+          }
+        ],
+        "requests": [],
+        "saveCalls": [],
+        "selected": "中文🙂 ",
+        "selectedRects": [
+          {
+            "height": 16,
+            "width": 56,
+            "x": 736,
+            "y": 256
+          }
+        ],
+        "selectionType": "Range",
+        "spinContentOpacity": "1",
+        "value": "/*"
+      },
+      {
+        "name": "alt-shift-right",
+        "activeClass": "monaco-hover",
+        "activeTag": "DIV",
+        "anchorOffset": 0,
+        "anchorText": "中文🙂  alpha",
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "editorSelection": {
+          "endColumn": 1,
+          "endLineNumber": 1,
+          "positionColumn": 1,
+          "positionLineNumber": 1,
+          "selectionStartColumn": 1,
+          "selectionStartLineNumber": 1,
+          "startColumn": 1,
+          "startLineNumber": 1
+        },
+        "entryVisible": true,
+        "events": [
+          {
+            "alt": false,
+            "code": "KeyA",
+            "finalPrevented": true,
+            "initialPrevented": false,
+            "key": "a",
+            "meta": true,
+            "shift": false,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": false,
+            "code": "ArrowRight",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": true,
+            "code": "ArrowRight",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          }
+        ],
+        "focusOffset": 11,
+        "focusText": "中文🙂  alpha",
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "markerBox": {
+          "height": 50,
+          "width": 282,
+          "x": 728,
+          "y": 250
+        },
+        "markers": [
+          {
+            "code": "777",
+            "endColumn": 3,
+            "endLineNumber": 1,
+            "message": "中文🙂  alpha\nsecond\tline",
+            "owner": "selection-qa",
+            "resource": {
+              "$mid": 1,
+              "authority": "model",
+              "external": "inmemory://model/1",
+              "path": "/1",
+              "scheme": "inmemory"
+            },
+            "severity": 8,
+            "source": "json",
+            "startColumn": 1,
+            "startLineNumber": 1
+          }
+        ],
+        "pointerEvents": [
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mousedown",
+            "x": 736,
+            "y": 264
+          },
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mouseup",
+            "x": 783,
+            "y": 264
+          }
+        ],
+        "requests": [],
+        "saveCalls": [],
+        "selected": "中文🙂  alpha",
+        "selectedRects": [
+          {
+            "height": 16,
+            "width": 106.0009765625,
+            "x": 736,
+            "y": 256
+          }
+        ],
+        "selectionType": "Range",
+        "spinContentOpacity": "1",
+        "value": "/*"
+      },
+      {
+        "name": "shift-left",
+        "activeClass": "monaco-hover",
+        "activeTag": "DIV",
+        "anchorOffset": 0,
+        "anchorText": "中文🙂  alpha",
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "editorSelection": {
+          "endColumn": 1,
+          "endLineNumber": 1,
+          "positionColumn": 1,
+          "positionLineNumber": 1,
+          "selectionStartColumn": 1,
+          "selectionStartLineNumber": 1,
+          "startColumn": 1,
+          "startLineNumber": 1
+        },
+        "entryVisible": true,
+        "events": [
+          {
+            "alt": false,
+            "code": "KeyA",
+            "finalPrevented": true,
+            "initialPrevented": false,
+            "key": "a",
+            "meta": true,
+            "shift": false,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": false,
+            "code": "ArrowRight",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": true,
+            "code": "ArrowRight",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": false,
+            "code": "ArrowLeft",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowLeft",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          }
+        ],
+        "focusOffset": 10,
+        "focusText": "中文🙂  alpha",
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "markerBox": {
+          "height": 50,
+          "width": 282,
+          "x": 728,
+          "y": 250
+        },
+        "markers": [
+          {
+            "code": "777",
+            "endColumn": 3,
+            "endLineNumber": 1,
+            "message": "中文🙂  alpha\nsecond\tline",
+            "owner": "selection-qa",
+            "resource": {
+              "$mid": 1,
+              "authority": "model",
+              "external": "inmemory://model/1",
+              "path": "/1",
+              "scheme": "inmemory"
+            },
+            "severity": 8,
+            "source": "json",
+            "startColumn": 1,
+            "startLineNumber": 1
+          }
+        ],
+        "pointerEvents": [
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mousedown",
+            "x": 736,
+            "y": 264
+          },
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mouseup",
+            "x": 783,
+            "y": 264
+          }
+        ],
+        "requests": [],
+        "saveCalls": [],
+        "selected": "中文🙂  alph",
+        "selectedRects": [
+          {
+            "height": 16,
+            "width": 98,
+            "x": 736,
+            "y": 256
+          }
+        ],
+        "selectionType": "Range",
+        "spinContentOpacity": "1",
+        "value": "/*"
+      },
+      {
+        "name": "cmd-shift-left",
+        "activeClass": "monaco-hover",
+        "activeTag": "DIV",
+        "anchorOffset": 0,
+        "anchorText": "中文🙂  alpha",
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "editorSelection": {
+          "endColumn": 1,
+          "endLineNumber": 1,
+          "positionColumn": 1,
+          "positionLineNumber": 1,
+          "selectionStartColumn": 1,
+          "selectionStartLineNumber": 1,
+          "startColumn": 1,
+          "startLineNumber": 1
+        },
+        "entryVisible": true,
+        "events": [
+          {
+            "alt": false,
+            "code": "KeyA",
+            "finalPrevented": true,
+            "initialPrevented": false,
+            "key": "a",
+            "meta": true,
+            "shift": false,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": false,
+            "code": "ArrowRight",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": true,
+            "code": "ArrowRight",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": false,
+            "code": "ArrowLeft",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowLeft",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": false,
+            "code": "ArrowLeft",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowLeft",
+            "meta": true,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          }
+        ],
+        "focusOffset": 10,
+        "focusText": "中文🙂  alpha",
+        "hoverBox": {
+          "height": 75,
+          "width": 282,
+          "x": 727,
+          "y": 249
+        },
+        "markerBox": {
+          "height": 50,
+          "width": 282,
+          "x": 728,
+          "y": 250
+        },
+        "markers": [
+          {
+            "code": "777",
+            "endColumn": 3,
+            "endLineNumber": 1,
+            "message": "中文🙂  alpha\nsecond\tline",
+            "owner": "selection-qa",
+            "resource": {
+              "$mid": 1,
+              "authority": "model",
+              "external": "inmemory://model/1",
+              "path": "/1",
+              "scheme": "inmemory"
+            },
+            "severity": 8,
+            "source": "json",
+            "startColumn": 1,
+            "startLineNumber": 1
+          }
+        ],
+        "pointerEvents": [
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mousedown",
+            "x": 736,
+            "y": 264
+          },
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mouseup",
+            "x": 783,
+            "y": 264
+          }
+        ],
+        "requests": [],
+        "saveCalls": [],
+        "selected": "中文🙂  alph",
+        "selectedRects": [
+          {
+            "height": 16,
+            "width": 98,
+            "x": 736,
+            "y": 256
+          }
+        ],
+        "selectionType": "Range",
+        "spinContentOpacity": "1",
+        "value": "/*"
+      },
+      {
+        "name": "cmd-s",
+        "activeClass": "monaco-hover hidden",
+        "activeTag": "DIV",
+        "anchorOffset": 0,
+        "anchorText": "中文🙂  alpha",
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "editorSelection": {
+          "endColumn": 1,
+          "endLineNumber": 1,
+          "positionColumn": 1,
+          "positionLineNumber": 1,
+          "selectionStartColumn": 1,
+          "selectionStartLineNumber": 1,
+          "startColumn": 1,
+          "startLineNumber": 1
+        },
+        "entryVisible": false,
+        "events": [
+          {
+            "alt": false,
+            "code": "KeyA",
+            "finalPrevented": true,
+            "initialPrevented": false,
+            "key": "a",
+            "meta": true,
+            "shift": false,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": false,
+            "code": "ArrowRight",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": true,
+            "code": "ArrowRight",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": false,
+            "code": "ArrowLeft",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowLeft",
+            "meta": false,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": false,
+            "code": "ArrowLeft",
+            "finalPrevented": false,
+            "initialPrevented": false,
+            "key": "ArrowLeft",
+            "meta": true,
+            "shift": true,
+            "target": "monaco-hover",
+            "trusted": true
+          },
+          {
+            "alt": false,
+            "code": "KeyS",
+            "finalPrevented": true,
+            "initialPrevented": false,
+            "key": "s",
+            "meta": true,
+            "shift": false,
+            "target": "monaco-hover",
+            "trusted": true
+          }
+        ],
+        "focusOffset": 10,
+        "focusText": "中文🙂  alpha",
+        "hoverBox": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "markerBox": {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0
+        },
+        "markers": [
+          {
+            "code": "777",
+            "endColumn": 3,
+            "endLineNumber": 1,
+            "message": "中文🙂  alpha\nsecond\tline",
+            "owner": "selection-qa",
+            "resource": {
+              "$mid": 1,
+              "authority": "model",
+              "external": "inmemory://model/1",
+              "path": "/1",
+              "scheme": "inmemory"
+            },
+            "severity": 8,
+            "source": "json",
+            "startColumn": 1,
+            "startLineNumber": 1
+          }
+        ],
+        "pointerEvents": [
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mousedown",
+            "x": 736,
+            "y": 264
+          },
+          {
+            "target": "",
+            "trusted": true,
+            "type": "mouseup",
+            "x": 783,
+            "y": 264
+          }
+        ],
+        "requests": [
+          {
+            "body": "{\"server\":\"localhost\",\"db\":0,\"key\":\"aahash\",\"field\":\"old\",\"newField\":\"old\",\"value\":\"/*\",\"decode\":\"None\",\"format\":\"JSON\",\"retDecode\":\"\",\"retFormat\":\"\"}",
+            "method": "POST",
+            "status": 200,
+            "url": "/api/browser/set-hash-value"
+          }
+        ],
+        "saveCalls": [
+          {
+            "editorHasTextFocus": false,
+            "selected": "中文🙂  alph"
+          }
+        ],
+        "selected": "",
+        "selectedRects": [],
+        "selectionType": "Range",
+        "spinContentOpacity": "1",
+        "value": ""
+      }
+    ],
+    "pointerDelivery": "Hit-tested local NSView mouseDown/mouseDragged/mouseUp, no global injection",
+    "keyDelivery": "Local NSWindow.sendEvent with AppKit NSEvent",
+    "hardwareOrOriginalWailsWindowAccepted": false
+  },
+  "chromium": {
+    "records": [
+      {
+        "name": "after-real-mouse-drag",
+        "selected": "中文🙂",
+        "editorValue": "/*",
+        "editorSelection": {
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 1,
+          "selectionStartLineNumber": 1,
+          "selectionStartColumn": 1,
+          "positionLineNumber": 1,
+          "positionColumn": 1
+        },
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "activeTag": "DIV",
+        "activeClass": "monaco-hover",
+        "entryVisible": true,
+        "saveCalls": [],
+        "events": []
+      },
+      {
+        "name": "cmd-a",
+        "selected": "中文🙂",
+        "editorValue": "/*",
+        "editorSelection": {
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 1,
+          "selectionStartLineNumber": 1,
+          "selectionStartColumn": 1,
+          "positionLineNumber": 1,
+          "positionColumn": 1
+        },
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "activeTag": "DIV",
+        "activeClass": "monaco-hover",
+        "entryVisible": true,
+        "saveCalls": [],
+        "events": [
+          {
+            "key": "Meta",
+            "code": "MetaLeft",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "a",
+            "code": "KeyA",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": true
+          }
+        ]
+      },
+      {
+        "name": "shift-right",
+        "selected": "中文🙂 ",
+        "editorValue": "/*",
+        "editorSelection": {
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 1,
+          "selectionStartLineNumber": 1,
+          "selectionStartColumn": 1,
+          "positionLineNumber": 1,
+          "positionColumn": 1
+        },
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "activeTag": "DIV",
+        "activeClass": "monaco-hover",
+        "entryVisible": true,
+        "saveCalls": [],
+        "events": [
+          {
+            "key": "Meta",
+            "code": "MetaLeft",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "a",
+            "code": "KeyA",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": true
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowRight",
+            "code": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          }
+        ]
+      },
+      {
+        "name": "alt-shift-right",
+        "selected": "中文🙂  alpha",
+        "editorValue": "/*",
+        "editorSelection": {
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 1,
+          "selectionStartLineNumber": 1,
+          "selectionStartColumn": 1,
+          "positionLineNumber": 1,
+          "positionColumn": 1
+        },
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "activeTag": "DIV",
+        "activeClass": "monaco-hover",
+        "entryVisible": true,
+        "saveCalls": [],
+        "events": [
+          {
+            "key": "Meta",
+            "code": "MetaLeft",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "a",
+            "code": "KeyA",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": true
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowRight",
+            "code": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Alt",
+            "code": "AltLeft",
+            "meta": false,
+            "shift": false,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowRight",
+            "code": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          }
+        ]
+      },
+      {
+        "name": "shift-left",
+        "selected": "中文🙂  alph",
+        "editorValue": "/*",
+        "editorSelection": {
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 1,
+          "selectionStartLineNumber": 1,
+          "selectionStartColumn": 1,
+          "positionLineNumber": 1,
+          "positionColumn": 1
+        },
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "activeTag": "DIV",
+        "activeClass": "monaco-hover",
+        "entryVisible": true,
+        "saveCalls": [],
+        "events": [
+          {
+            "key": "Meta",
+            "code": "MetaLeft",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "a",
+            "code": "KeyA",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": true
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowRight",
+            "code": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Alt",
+            "code": "AltLeft",
+            "meta": false,
+            "shift": false,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowRight",
+            "code": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowLeft",
+            "code": "ArrowLeft",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          }
+        ]
+      },
+      {
+        "name": "cmd-shift-left",
+        "selected": "中文🙂  alph",
+        "editorValue": "/*",
+        "editorSelection": {
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 1,
+          "selectionStartLineNumber": 1,
+          "selectionStartColumn": 1,
+          "positionLineNumber": 1,
+          "positionColumn": 1
+        },
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": true,
+        "activeTag": "DIV",
+        "activeClass": "monaco-hover",
+        "entryVisible": true,
+        "saveCalls": [],
+        "events": [
+          {
+            "key": "Meta",
+            "code": "MetaLeft",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "a",
+            "code": "KeyA",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": true
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowRight",
+            "code": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Alt",
+            "code": "AltLeft",
+            "meta": false,
+            "shift": false,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowRight",
+            "code": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowLeft",
+            "code": "ArrowLeft",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Meta",
+            "code": "MetaLeft",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": true,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowLeft",
+            "code": "ArrowLeft",
+            "meta": true,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          }
+        ]
+      },
+      {
+        "name": "cmd-s",
+        "selected": "",
+        "editorValue": "",
+        "editorSelection": {
+          "startLineNumber": 1,
+          "startColumn": 1,
+          "endLineNumber": 1,
+          "endColumn": 1,
+          "selectionStartLineNumber": 1,
+          "selectionStartColumn": 1,
+          "positionLineNumber": 1,
+          "positionColumn": 1
+        },
+        "editorHasTextFocus": false,
+        "editorHasWidgetFocus": false,
+        "activeTag": "BODY",
+        "activeClass": "enable-motion",
+        "entryVisible": false,
+        "saveCalls": [
+          {
+            "editorHasTextFocus": false,
+            "selected": "中文🙂  alph"
+          }
+        ],
+        "events": [
+          {
+            "key": "Meta",
+            "code": "MetaLeft",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "a",
+            "code": "KeyA",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": true
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowRight",
+            "code": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Alt",
+            "code": "AltLeft",
+            "meta": false,
+            "shift": false,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowRight",
+            "code": "ArrowRight",
+            "meta": false,
+            "shift": true,
+            "alt": true,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowLeft",
+            "code": "ArrowLeft",
+            "meta": false,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Meta",
+            "code": "MetaLeft",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Shift",
+            "code": "ShiftLeft",
+            "meta": true,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "ArrowLeft",
+            "code": "ArrowLeft",
+            "meta": true,
+            "shift": true,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "Meta",
+            "code": "MetaLeft",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": false
+          },
+          {
+            "key": "s",
+            "code": "KeyS",
+            "meta": true,
+            "shift": false,
+            "alt": false,
+            "trusted": true,
+            "target": "monaco-hover",
+            "initialPrevented": false,
+            "finalPrevented": true
+          }
+        ]
+      }
+    ],
+    "requests": [
+      {
+        "path": "/api/browser/set-hash-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aahash",
+          "field": "old",
+          "newField": "old",
+          "value": "/*",
+          "decode": "None",
+          "format": "JSON",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      }
+    ]
+  },
+  "gpuiAcceptance": "Source evidence only; product acceptance is recorded separately."
+}

@@ -1,0 +1,1878 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "sourceEngine": "macOS WKWebView",
+  "archiveDirectory": "outputs/source-probes/entry-controls-macos",
+  "rawReport": "outputs/entry-controls-source-raw.json",
+  "rawSHA256": "b8a59c520a6d1193d2a0bc57ab56563785210d0d4c88b0dae41544258a1ab752",
+  "preparation": "outputs/entry-controls-source-preparation.json",
+  "execution": "outputs/entry-controls-source-execution-attempt1.json",
+  "records": [
+    {
+      "configuration": {
+        "asideWidth": 300,
+        "draft": "",
+        "family": "",
+        "host": "entry",
+        "keyType": "",
+        "label": "name",
+        "name": "entry-control-system-matched",
+        "size": 14,
+        "theme": "light",
+        "windowWidth": 1024
+      },
+      "fullMatch": "name",
+      "inputFocused": false,
+      "inputValue": "",
+      "name": "entry-control-system-matched",
+      "scope": "Own hidden WKWebView actual original component normal matched/draft input and button paint, no tooltip present, fixed RPC; no hardware/native/Redis or full equality acceptance.",
+      "searchDisabled": true,
+      "sourceEventsAreTrusted": false,
+      "styles": [
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderColor": "rgb(51, 54, 57)",
+          "borderRadius": "0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input-group",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "group",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "static",
+          "tag": "DIV",
+          "text": "name筛选全文匹配",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 331,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderColor": "rgb(51, 54, 57)",
+          "borderRadius": "0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input__input-el",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 32px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "input",
+          "lineHeight": "32px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "static",
+          "tag": "INPUT",
+          "text": "",
+          "transform": "none",
+          "value": "",
+          "visibility": "visible",
+          "w": 155.5,
+          "x": 426.921875,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgb(255, 255, 255)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderColor": "rgb(51, 54, 57)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input n-input--medium-size __input-1lzl83h-m-1l4n697 n-input--resizable n-input--stateful",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "outer",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "relative",
+          "tag": "DIV",
+          "text": "name筛选",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252.421875,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgb(250, 250, 252)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderColor": "rgb(51, 54, 57)",
+          "borderRadius": "4px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-tag __tag-1lzl83h-dsc n-tag--closable",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "12px / 12px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "h": 22,
+          "id": "tag",
+          "lineHeight": "12px",
+          "opacity": "1",
+          "padding": "0px 7px",
+          "position": "relative",
+          "tag": "DIV",
+          "text": "name",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 60.921875,
+          "x": 362,
+          "y": 126,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderColor": "rgb(51, 54, 57)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "__button-1lzl83h-lmmd n-button n-button--default-type n-button--medium-type n-button--disabled",
+          "color": "rgb(51, 54, 57)",
+          "disabled": true,
+          "font": "14px / 14px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "search",
+          "lineHeight": "14px",
+          "opacity": "0.5",
+          "padding": "0px 12px",
+          "position": "relative",
+          "tag": "BUTTON",
+          "text": "全文匹配",
+          "transform": "none",
+          "value": "",
+          "visibility": "visible",
+          "w": 79.578125,
+          "x": 607.421875,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgb(224, 224, 230)",
+          "borderColor": "rgb(224, 224, 230)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-input__border",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "inputBorder",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252.421875,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(0, 0, 0, 0)",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-input__state-border",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "inputStateBorder",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252.421875,
+          "x": 356,
+          "y": 121,
+          "zIndex": "1"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgb(224, 224, 230)",
+          "borderColor": "rgb(224, 224, 230)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-button__border",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 14px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "buttonBorder",
+          "lineHeight": "14px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 79.578125,
+          "x": 607.421875,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(0, 0, 0, 0)",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-button__state-border",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 14px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "buttonStateBorder",
+          "lineHeight": "14px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 79.578125,
+          "x": 607.421875,
+          "y": 121,
+          "zIndex": "1"
+        }
+      ],
+      "tooltipVisible": false
+    },
+    {
+      "configuration": {
+        "asideWidth": 300,
+        "draft": "language",
+        "family": "",
+        "host": "entry",
+        "keyType": "",
+        "label": "name",
+        "name": "entry-control-system-draft",
+        "size": 14,
+        "theme": "light",
+        "windowWidth": 1024
+      },
+      "fullMatch": "name",
+      "inputFocused": false,
+      "inputValue": "language",
+      "name": "entry-control-system-draft",
+      "scope": "Own hidden WKWebView actual original component normal matched/draft input and button paint, no tooltip present, fixed RPC; no hardware/native/Redis or full equality acceptance.",
+      "searchDisabled": false,
+      "sourceEventsAreTrusted": false,
+      "styles": [
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderColor": "rgb(51, 54, 57)",
+          "borderRadius": "0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input-group",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "group",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "static",
+          "tag": "DIV",
+          "text": "name全文匹配",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 331,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderColor": "rgb(51, 54, 57)",
+          "borderRadius": "0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input__input-el",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 32px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "input",
+          "lineHeight": "32px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "static",
+          "tag": "INPUT",
+          "text": "",
+          "transform": "none",
+          "value": "language",
+          "visibility": "visible",
+          "w": 155.5,
+          "x": 426.921875,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgb(255, 255, 255)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderColor": "rgb(51, 54, 57)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input n-input--medium-size __input-1lzl83h-m-1l4n697 n-input--resizable n-input--stateful",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "outer",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "relative",
+          "tag": "DIV",
+          "text": "name",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252.421875,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgb(250, 250, 252)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderColor": "rgb(51, 54, 57)",
+          "borderRadius": "4px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-tag __tag-1lzl83h-dsc n-tag--closable",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "12px / 12px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "h": 22,
+          "id": "tag",
+          "lineHeight": "12px",
+          "opacity": "1",
+          "padding": "0px 7px",
+          "position": "relative",
+          "tag": "DIV",
+          "text": "name",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 60.921875,
+          "x": 362,
+          "y": 126,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(51, 54, 57)",
+          "borderColor": "rgb(51, 54, 57)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "__button-1lzl83h-lmmd n-button n-button--default-type n-button--medium-type",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 14px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "search",
+          "lineHeight": "14px",
+          "opacity": "1",
+          "padding": "0px 12px",
+          "position": "relative",
+          "tag": "BUTTON",
+          "text": "全文匹配",
+          "transform": "none",
+          "value": "",
+          "visibility": "visible",
+          "w": 79.578125,
+          "x": 607.421875,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgb(224, 224, 230)",
+          "borderColor": "rgb(224, 224, 230)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-input__border",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "inputBorder",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252.421875,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(0, 0, 0, 0)",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-input__state-border",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 21px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "inputStateBorder",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252.421875,
+          "x": 356,
+          "y": 121,
+          "zIndex": "1"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgb(224, 224, 230)",
+          "borderColor": "rgb(224, 224, 230)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-button__border",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 14px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "buttonBorder",
+          "lineHeight": "14px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 79.578125,
+          "x": 607.421875,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(0, 0, 0, 0)",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-button__state-border",
+          "color": "rgb(51, 54, 57)",
+          "disabled": false,
+          "font": "14px / 14px v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "buttonStateBorder",
+          "lineHeight": "14px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 79.578125,
+          "x": 607.421875,
+          "y": 121,
+          "zIndex": "1"
+        }
+      ],
+      "tooltipVisible": false
+    },
+    {
+      "configuration": {
+        "asideWidth": 300,
+        "draft": "",
+        "family": "Courier",
+        "host": "entry",
+        "keyType": "",
+        "label": "name",
+        "name": "entry-control-courier-matched",
+        "size": 20,
+        "theme": "dark",
+        "windowWidth": 1024
+      },
+      "fullMatch": "name",
+      "inputFocused": false,
+      "inputValue": "",
+      "name": "entry-control-courier-matched",
+      "scope": "Own hidden WKWebView actual original component normal matched/draft input and button paint, no tooltip present, fixed RPC; no hardware/native/Redis or full equality acceptance.",
+      "searchDisabled": true,
+      "sourceEventsAreTrusted": false,
+      "styles": [
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderColor": "rgba(255, 255, 255, 0.82)",
+          "borderRadius": "0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input-group",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "20px / 30px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "20px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "group",
+          "lineHeight": "30px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "static",
+          "tag": "DIV",
+          "text": "name筛选全文匹配",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 331,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderColor": "rgba(255, 255, 255, 0.82)",
+          "borderRadius": "0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input__input-el",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 32px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "input",
+          "lineHeight": "32px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "static",
+          "tag": "INPUT",
+          "text": "",
+          "transform": "none",
+          "value": "",
+          "visibility": "visible",
+          "w": 157.1875,
+          "x": 424.8125,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(255, 255, 255, 0.1)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderColor": "rgba(255, 255, 255, 0.82)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input n-input--medium-size __input-dark-1nc2yfq-m-1l4n697 n-input--resizable n-input--stateful",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 21px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "outer",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "relative",
+          "tag": "DIV",
+          "text": "name筛选",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderColor": "rgba(255, 255, 255, 0.82)",
+          "borderRadius": "4px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-tag __tag-dark-1nc2yfq-dsc n-tag--closable",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "12px / 12px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "h": 22,
+          "id": "tag",
+          "lineHeight": "12px",
+          "opacity": "1",
+          "padding": "0px 7px",
+          "position": "relative",
+          "tag": "DIV",
+          "text": "name",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 58.8125,
+          "x": 362,
+          "y": 126,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderColor": "rgba(255, 255, 255, 0.82)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "__button-dark-1nc2yfq-lmmd n-button n-button--default-type n-button--medium-type n-button--disabled",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": true,
+          "font": "14px / 14px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "search",
+          "lineHeight": "14px",
+          "opacity": "0.38",
+          "padding": "0px 12px",
+          "position": "relative",
+          "tag": "BUTTON",
+          "text": "全文匹配",
+          "transform": "none",
+          "value": "",
+          "visibility": "visible",
+          "w": 80,
+          "x": 607,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(0, 0, 0, 0)",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-input__border",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 21px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "inputBorder",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(0, 0, 0, 0)",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-input__state-border",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 21px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "inputStateBorder",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252,
+          "x": 356,
+          "y": 121,
+          "zIndex": "1"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgb(81, 81, 81)",
+          "borderColor": "rgb(81, 81, 81)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-button__border",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 14px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "buttonBorder",
+          "lineHeight": "14px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 80,
+          "x": 607,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(0, 0, 0, 0)",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-button__state-border",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 14px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "buttonStateBorder",
+          "lineHeight": "14px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 80,
+          "x": 607,
+          "y": 121,
+          "zIndex": "1"
+        }
+      ],
+      "tooltipVisible": false
+    },
+    {
+      "configuration": {
+        "asideWidth": 300,
+        "draft": "language",
+        "family": "Courier",
+        "host": "entry",
+        "keyType": "",
+        "label": "name",
+        "name": "entry-control-courier-draft",
+        "size": 20,
+        "theme": "dark",
+        "windowWidth": 1024
+      },
+      "fullMatch": "name",
+      "inputFocused": false,
+      "inputValue": "language",
+      "name": "entry-control-courier-draft",
+      "scope": "Own hidden WKWebView actual original component normal matched/draft input and button paint, no tooltip present, fixed RPC; no hardware/native/Redis or full equality acceptance.",
+      "searchDisabled": false,
+      "sourceEventsAreTrusted": false,
+      "styles": [
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderColor": "rgba(255, 255, 255, 0.82)",
+          "borderRadius": "0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input-group",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "20px / 30px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "20px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "group",
+          "lineHeight": "30px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "static",
+          "tag": "DIV",
+          "text": "name全文匹配",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 331,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderColor": "rgba(255, 255, 255, 0.82)",
+          "borderRadius": "0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input__input-el",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 32px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "input",
+          "lineHeight": "32px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "static",
+          "tag": "INPUT",
+          "text": "",
+          "transform": "none",
+          "value": "language",
+          "visibility": "visible",
+          "w": 157.1875,
+          "x": 424.8125,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(255, 255, 255, 0.1)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderColor": "rgba(255, 255, 255, 0.82)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-input n-input--medium-size __input-dark-1nc2yfq-m-1l4n697 n-input--resizable n-input--stateful",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 21px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "outer",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "relative",
+          "tag": "DIV",
+          "text": "name",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderColor": "rgba(255, 255, 255, 0.82)",
+          "borderRadius": "4px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "n-tag __tag-dark-1nc2yfq-dsc n-tag--closable",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "12px / 12px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "h": 22,
+          "id": "tag",
+          "lineHeight": "12px",
+          "opacity": "1",
+          "padding": "0px 7px",
+          "position": "relative",
+          "tag": "DIV",
+          "text": "name",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 58.8125,
+          "x": 362,
+          "y": 126,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgba(255, 255, 255, 0.82)",
+          "borderColor": "rgba(255, 255, 255, 0.82)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "0px",
+          "boxShadow": "none",
+          "class": "__button-dark-1nc2yfq-lmmd n-button n-button--default-type n-button--medium-type",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 14px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "search",
+          "lineHeight": "14px",
+          "opacity": "1",
+          "padding": "0px 12px",
+          "position": "relative",
+          "tag": "BUTTON",
+          "text": "全文匹配",
+          "transform": "none",
+          "value": "",
+          "visibility": "visible",
+          "w": 80,
+          "x": 607,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(0, 0, 0, 0)",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-input__border",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 21px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "inputBorder",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252,
+          "x": 356,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(0, 0, 0, 0)",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px 0px 0px 4px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-input__state-border",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 21px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "inputStateBorder",
+          "lineHeight": "21px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 252,
+          "x": 356,
+          "y": 121,
+          "zIndex": "1"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgb(81, 81, 81)",
+          "borderColor": "rgb(81, 81, 81)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-button__border",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 14px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "buttonBorder",
+          "lineHeight": "14px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 80,
+          "x": 607,
+          "y": 121,
+          "zIndex": "auto"
+        },
+        {
+          "background": "rgba(0, 0, 0, 0)",
+          "border": "1px solid rgba(0, 0, 0, 0)",
+          "borderColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px 4px 4px 0px",
+          "borderWidth": "1px",
+          "boxShadow": "none",
+          "class": "n-button__state-border",
+          "color": "rgba(255, 255, 255, 0.82)",
+          "disabled": false,
+          "font": "14px / 14px Courier",
+          "fontFamily": "Courier",
+          "fontSize": "14px",
+          "fontWeight": "400",
+          "h": 32,
+          "id": "buttonStateBorder",
+          "lineHeight": "14px",
+          "opacity": "1",
+          "padding": "0px",
+          "position": "absolute",
+          "tag": "DIV",
+          "text": "",
+          "transform": "none",
+          "value": null,
+          "visibility": "visible",
+          "w": 80,
+          "x": 607,
+          "y": 121,
+          "zIndex": "1"
+        }
+      ],
+      "tooltipVisible": false
+    }
+  ],
+  "pinnedFrontendSources": [
+    {
+      "path": "frontend/package-lock.json",
+      "sha256": "65eb89306afce33ef89f2aad0850647d093312be7fed83fe41f1fc6c29b5e40a"
+    },
+    {
+      "path": "frontend/package.json",
+      "sha256": "5ab2c410970d2d8b023fdbd551e4e3b976eb07c95270715a958498cfcf6f4f7e"
+    },
+    {
+      "path": "frontend/src/App.vue",
+      "sha256": "76703106c9c9d192f8e48672724e232e6d6cd866c8d2864a209bca508f17e7bf"
+    },
+    {
+      "path": "frontend/src/AppContent.vue",
+      "sha256": "c8189ab76b9afc24d67d4ae58a5cc997f7017bcd4c9755d41ffae4a2e0017571"
+    },
+    {
+      "path": "frontend/src/components/common/DropdownSelector.vue",
+      "sha256": "64eac087afca950623b6846861d484202aec9f4a000bb693ad814a547d00caab"
+    },
+    {
+      "path": "frontend/src/components/common/EditableTableColumn.vue",
+      "sha256": "2094730659772506af6f86a5eef4698c3e169d41459d69528ea78002b15495f5"
+    },
+    {
+      "path": "frontend/src/components/common/EditableTableRow.vue",
+      "sha256": "0c85fa46f5f6641b9482b0364324b5ccacd02b34b0b0ae304900be12d06f33f9"
+    },
+    {
+      "path": "frontend/src/components/common/IconButton.vue",
+      "sha256": "67fab10651cee9312f7d1b14fce32d8d1b89c685e19690f1f0d911e445b067b8"
+    },
+    {
+      "path": "frontend/src/components/common/RedisTypeSelector.vue",
+      "sha256": "4f0201858a5c02cff2130c39ccf34f3b8bc80a8fda9941e8bb1ff15f2b04a906"
+    },
+    {
+      "path": "frontend/src/components/common/SwitchButton.vue",
+      "sha256": "edc4f83acab5ecd56193934a65fe00b2e58745498db4d426d8eca8439f8d4c3e"
+    },
+    {
+      "path": "frontend/src/components/content/ContentPane.vue",
+      "sha256": "767fd677c9be12cca8a3becc1a18a48f0f5a0e348276477d61fbae3814773e2b"
+    },
+    {
+      "path": "frontend/src/components/content/ContentValueTab.vue",
+      "sha256": "26a0f4de32b3e82ee49f52da4cb54c7e87d55d716005f3af74a3a2b1169e88c6"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentEditor.vue",
+      "sha256": "3057d2ebe1241b44abb93dd6365a085f7acf11b3c7c354f274c71ba49ffc16d2"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentEntryEditor.vue",
+      "sha256": "8ed9f2a82e9410d47451d802f44a9dc5df9e346c99cef669f676fef58ec060c5"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentSearchInput.vue",
+      "sha256": "799eb107173ae9b8336b04231c59743c1d371fdc3e1d59bdcdf806f4d3fdf262"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentValueHash.vue",
+      "sha256": "4d1929bb035f0e7bf3180a84350bd49846f6a9fb959af2ac3c1ec5b5183bbf9c"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentValueList.vue",
+      "sha256": "802ff396c0460c44f89829d5d00cc0e7d13415494daa272d81223633611b6ed6"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentValueSet.vue",
+      "sha256": "6b879f9b7657371e2978498a0a3f0edc9081ee6a89e58863b474c05774517d7b"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentValueWrapper.vue",
+      "sha256": "f810c0df8f0e86198e886975851ec96306174ad1895706a3f3e2133413ae0a75"
+    },
+    {
+      "path": "frontend/src/components/content_value/ContentValueZSet.vue",
+      "sha256": "a96e74b58ce738109b7e0fa08ce7e070039975d22e91115976d57ce86bc7ac5c"
+    },
+    {
+      "path": "frontend/src/components/content_value/FormatSelector.vue",
+      "sha256": "25b5909dadfa29c72a7b6681ad1e2e10b3a26417ede9fbaea42bdba19fc1bcea"
+    },
+    {
+      "path": "frontend/src/components/icons/Search.vue",
+      "sha256": "74e1ce9c93e6a1b9d5bff448a79aa29247b4e4fe3fa36a81fda8756d62a2bac7"
+    },
+    {
+      "path": "frontend/src/components/icons/SpellCheck.vue",
+      "sha256": "a588541a063ffd7205c3a0bf8adde58eb20a4f71927290f2bf2427ef68304f5d"
+    },
+    {
+      "path": "frontend/src/components/sidebar/BrowserPane.vue",
+      "sha256": "a0a9ad364cc5c52aea6cb7c2b476e2a1f104972ec1b6fc0e3cd970a6e1a5ae6d"
+    },
+    {
+      "path": "frontend/src/components/sidebar/BrowserTree.vue",
+      "sha256": "b80e68b259d436de0975ea64f702c15ebe4a8ba4f1e76dba5c9beb3d7cdfc238"
+    },
+    {
+      "path": "frontend/src/components/sidebar/ConnectionTree.vue",
+      "sha256": "63cbc33778bbb35cd60ecf9c33b03075d2a99eb98bdecdb08873077a37121aa2"
+    },
+    {
+      "path": "frontend/src/consts/value_view_type.js",
+      "sha256": "c42b34cb2b5ff948525dd040a582228f986cdf41fed141b43268b2bfd555e01f"
+    },
+    {
+      "path": "frontend/src/langs/zh-cn.json",
+      "sha256": "f0ba025615c6209a1747b4ac4e7bead968572b0e194e54c0d5bc207f9bb52e40"
+    },
+    {
+      "path": "frontend/src/main.js",
+      "sha256": "20be92d5b6f578c9a025e514b864841298b873bc8e45c112c7a4de1bb04a2555"
+    },
+    {
+      "path": "frontend/src/objects/tabItem.js",
+      "sha256": "d43e3726050ed7c2ede096db631181e45155f35a37e6df4445bfe910ef84e6ea"
+    },
+    {
+      "path": "frontend/src/stores/browser.js",
+      "sha256": "9cac331de599eb66617d73fc181a2a3022a9d8bd75727f95a484bd97b8f60439"
+    },
+    {
+      "path": "frontend/src/stores/preferences.js",
+      "sha256": "07c6c9c9f8e181b1dd425e75af27012a4dfed06c21b6884ee39e25c56dfd40eb"
+    },
+    {
+      "path": "frontend/src/stores/tab.js",
+      "sha256": "541b342efc98403bf3c3fb9bb7255a6625c929349a43ce49a3a30273db6a4e15"
+    },
+    {
+      "path": "frontend/src/styles/style.scss",
+      "sha256": "e02b0b4ae424dbcbc74b7ca52aed3c1419d6138fff0f5875ac4d924337ebdc8b"
+    },
+    {
+      "path": "frontend/src/utils/discrete.js",
+      "sha256": "2e98196462802ffd2c67ad4107768264f89deb5007975bf42cfe492adef97ef7"
+    },
+    {
+      "path": "frontend/src/utils/monaco.js",
+      "sha256": "21da021e6fec497e01d521f9c3af4fc38ec3e5b8b9dea327722d84f038c301ea"
+    },
+    {
+      "path": "frontend/src/utils/theme.js",
+      "sha256": "256959896e81bf611d0497718d0d8efc55d8483b5689651539dcc2bbc4562629"
+    },
+    {
+      "path": "frontend/src/components/common/ResizeableWrapper.vue",
+      "sha256": "779c6dbdfc26e22574ebfabf1674a24eeaab2e2264d9c8c00777b7ed12267434"
+    }
+  ],
+  "installedDependencySources": [
+    {
+      "path": "naive-ui/es/_internal/clear/src/Clear.mjs",
+      "sha256": "ff557149fa6ba74e98b0473b28aa8d54961bbcbe4c39e5c72e759e583f2e324d"
+    },
+    {
+      "path": "naive-ui/es/_internal/clear/src/styles/index.cssr.mjs",
+      "sha256": "7e60c26751a21a8f4bd5509c7e58cd16cdb2932dff7f6bc5ee7d6513e5722f21"
+    },
+    {
+      "path": "naive-ui/es/_internal/close/src/Close.mjs",
+      "sha256": "1c95281b0c58eeccb90d9d717ac4750d489c39fc5bd847f1e66a3b32b46409a1"
+    },
+    {
+      "path": "naive-ui/es/_internal/icons/Close.mjs",
+      "sha256": "f3d217cb85b598147424b0ac007cd928e4247fffc7ce24876f5c40a2b9fa439e"
+    },
+    {
+      "path": "naive-ui/es/button/src/Button.mjs",
+      "sha256": "29b79803c70006e955c065079830fa365117b7572edf538f421afa713f5b0763"
+    },
+    {
+      "path": "naive-ui/es/button/src/styles/index.cssr.mjs",
+      "sha256": "5c617a73fcf03f0d3dc6a68c8be94135016327d4418158d0161aeb99cec0778e"
+    },
+    {
+      "path": "naive-ui/es/button/styles/light.mjs",
+      "sha256": "04e0cc66d072e1a3b69f4dab37a4e8b1a68d1ed20e69756f3edae50a5f97ca99"
+    },
+    {
+      "path": "naive-ui/es/data-table/src/DataTable.mjs",
+      "sha256": "9bbe7b691f7e5fa51970c47443a48b758feae62fb93378683f5611ccb9817115"
+    },
+    {
+      "path": "naive-ui/es/data-table/src/TableParts/Body.mjs",
+      "sha256": "6c350c4b168f9bae8c2bddc52453e60e5a74c794f7395dab39f8066d8b4e82c8"
+    },
+    {
+      "path": "naive-ui/es/data-table/src/TableParts/Header.mjs",
+      "sha256": "95a2c30126a7a264ed74256ca57e8faab44e3a2c66b93ed2bb2d85c79094bf25"
+    },
+    {
+      "path": "naive-ui/es/data-table/src/styles/index.cssr.mjs",
+      "sha256": "86ab49963fa8f543839c546c4f9fcfcb80d63604f4942f1dfa764b810d4ba34e"
+    },
+    {
+      "path": "naive-ui/es/data-table/styles/dark.mjs",
+      "sha256": "2158b19f6246c18a5c5c07b75060f7c232d24c245c0071bd60cb5dd406d0be28"
+    },
+    {
+      "path": "naive-ui/es/data-table/styles/light.mjs",
+      "sha256": "19ab90b76dc4c562cbcf5451bf663bb3cabb7fa68b8e966d8e31e6f78201c39d"
+    },
+    {
+      "path": "naive-ui/es/dropdown/src/Dropdown.mjs",
+      "sha256": "c3a5492041b70fc29c6c1f0505969494ed4f3d1a9f7e4ab11517a57eb6ff8484"
+    },
+    {
+      "path": "naive-ui/es/dropdown/src/styles/index.cssr.mjs",
+      "sha256": "19ade063c72ab5c76fbb06f724f36ffe46b385c5dd1e7320e748b36359867cc3"
+    },
+    {
+      "path": "naive-ui/es/input/src/Input.mjs",
+      "sha256": "67a7d0258e0fb8b7ce8f6b8a17159cd4a23fa9ff8d58c1d0e33e2f49a694623c"
+    },
+    {
+      "path": "naive-ui/es/input/src/styles/input-group.cssr.mjs",
+      "sha256": "86fa6e1e8917832f14a6259c3309c975ed10f9258ca88c01c9b7c0282d1287ac"
+    },
+    {
+      "path": "naive-ui/es/input/src/styles/input.cssr.mjs",
+      "sha256": "dfb9a98bb5e7f23f4a4b7f0387be18531c81b28b5299462b7cacff12581fe397"
+    },
+    {
+      "path": "naive-ui/es/input/styles/dark.mjs",
+      "sha256": "7fee02f13038283767c4f9f52fcbef380e9e7881df7dcffc9898d0dc3622b455"
+    },
+    {
+      "path": "naive-ui/es/input/styles/light.mjs",
+      "sha256": "530d06e348d591c83cb02aaff4df55cd606746aa89543c4c73a6dac36e565f00"
+    },
+    {
+      "path": "naive-ui/es/tabs/src/Tabs.mjs",
+      "sha256": "da11ee61ff8f99d5a102ce2298e32a5c75df31f09b742f4239204a103b3ecbde"
+    },
+    {
+      "path": "naive-ui/es/tabs/src/styles/index.cssr.mjs",
+      "sha256": "93d107fdb05c2c58f52b19a9484262f129c2d441b9872fc5b2a7384b21a546a1"
+    },
+    {
+      "path": "naive-ui/es/tag/src/Tag.mjs",
+      "sha256": "a25ec0d5d5053a3c51254cc6a7269898d86964dd71fd55b9bdff9f69d223d320"
+    },
+    {
+      "path": "naive-ui/es/tag/src/styles/index.cssr.mjs",
+      "sha256": "9bd14fa5bf3b20721d8547a2fc97e33452c07555d235f1329331e88a426c8f1c"
+    },
+    {
+      "path": "naive-ui/es/tag/styles/dark.mjs",
+      "sha256": "79a43c0d749bd383c353e76fd087ad57eafeb945e499dbb826e640ff8fea2146"
+    },
+    {
+      "path": "naive-ui/es/tag/styles/light.mjs",
+      "sha256": "f4f0f0bfe2b7758af5bfacc320aaec4cdc9a2ca98d79887fb0df5537cb8b1fea"
+    },
+    {
+      "path": "naive-ui/package.json",
+      "sha256": "9a3e440fc6c17fc286751e004213d6bf4f6be120af9bc7afed64b2367dfe0779"
+    },
+    {
+      "path": "vue/package.json",
+      "sha256": "a47a52a49abb476476237bfb7a6337fee5976d516bb5df1cf1354fd3b5eff288"
+    },
+    {
+      "path": "naive-ui/es/tooltip/src/Tooltip.mjs",
+      "sha256": "5f484689ecdbea32f8568bc2d746efc0024fea55db4e5d1f20a480e08383b819"
+    },
+    {
+      "path": "naive-ui/es/tooltip/styles/light.mjs",
+      "sha256": "636a61840309f285b0f47e960d18a0df3493e4b019368750a5f6f29596ff8e31"
+    },
+    {
+      "path": "naive-ui/es/tooltip/styles/dark.mjs",
+      "sha256": "0ab8d585209ce5f9330424e537ad6adcaddebf65785d4231a63d08a55a33725f"
+    },
+    {
+      "path": "naive-ui/es/popover/src/Popover.mjs",
+      "sha256": "c0fbee1b1d7f995be7424d1ab4f7f29b55d79c4ba9d2f53c371b0ff794a8c318"
+    },
+    {
+      "path": "naive-ui/es/popover/src/PopoverBody.mjs",
+      "sha256": "b2987cf5e194af3273fc318e85c2d4dd50d5718a06e39e2140fe272eaca74e80"
+    },
+    {
+      "path": "naive-ui/es/popover/src/styles/index.cssr.mjs",
+      "sha256": "27265f2a985c72d90784c82a96cfcd4d56e566029eb39c0f0400d46e250da213"
+    },
+    {
+      "path": "naive-ui/es/button/styles/dark.mjs",
+      "sha256": "65fba0076b0c333b88991ae229563a16f0b8ad99c1ef2121f2d29b6df1a2e043"
+    },
+    {
+      "path": "naive-ui/es/button/styles/_common.mjs",
+      "sha256": "f2ce2f10e0382e4503d7268bd03d27d003af7dcd657f718fbe48cca854f0d7be"
+    },
+    {
+      "path": "naive-ui/es/input/styles/_common.mjs",
+      "sha256": "5525d3b9d536d999a7f814d010c9ad7f90288b8a7f0770e00a68ea10714e0862"
+    },
+    {
+      "path": "naive-ui/es/_styles/common/light.mjs",
+      "sha256": "4a8ef4e79ab00756f8f5ff077874baa21973679803049da9e22150dd996459da"
+    },
+    {
+      "path": "naive-ui/es/_styles/common/dark.mjs",
+      "sha256": "1850e8cec49d6a1b44363b2e67fef5aebdbbf9e9ec1f79c4ee0d23fb86267aa9"
+    }
+  ],
+  "files": [
+    {
+      "path": "outputs/source-probes/entry-controls-macos/RDM-OWNED-SOURCE-PROBE",
+      "sha256": "603262399c4606d7cf7edcc6aa41c17ba679a3477285b0fc5a8a32a9424cd629"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/_internal/clear/src/Clear.mjs",
+      "sha256": "ff557149fa6ba74e98b0473b28aa8d54961bbcbe4c39e5c72e759e583f2e324d"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/_internal/clear/src/styles/index.cssr.mjs",
+      "sha256": "7e60c26751a21a8f4bd5509c7e58cd16cdb2932dff7f6bc5ee7d6513e5722f21"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/_internal/close/src/Close.mjs",
+      "sha256": "1c95281b0c58eeccb90d9d717ac4750d489c39fc5bd847f1e66a3b32b46409a1"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/_internal/icons/Close.mjs",
+      "sha256": "f3d217cb85b598147424b0ac007cd928e4247fffc7ce24876f5c40a2b9fa439e"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/_styles/common/dark.mjs",
+      "sha256": "1850e8cec49d6a1b44363b2e67fef5aebdbbf9e9ec1f79c4ee0d23fb86267aa9"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/_styles/common/light.mjs",
+      "sha256": "4a8ef4e79ab00756f8f5ff077874baa21973679803049da9e22150dd996459da"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/button/src/Button.mjs",
+      "sha256": "29b79803c70006e955c065079830fa365117b7572edf538f421afa713f5b0763"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/button/src/styles/index.cssr.mjs",
+      "sha256": "5c617a73fcf03f0d3dc6a68c8be94135016327d4418158d0161aeb99cec0778e"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/button/styles/_common.mjs",
+      "sha256": "f2ce2f10e0382e4503d7268bd03d27d003af7dcd657f718fbe48cca854f0d7be"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/button/styles/dark.mjs",
+      "sha256": "65fba0076b0c333b88991ae229563a16f0b8ad99c1ef2121f2d29b6df1a2e043"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/button/styles/light.mjs",
+      "sha256": "04e0cc66d072e1a3b69f4dab37a4e8b1a68d1ed20e69756f3edae50a5f97ca99"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/data-table/src/DataTable.mjs",
+      "sha256": "9bbe7b691f7e5fa51970c47443a48b758feae62fb93378683f5611ccb9817115"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/data-table/src/TableParts/Body.mjs",
+      "sha256": "6c350c4b168f9bae8c2bddc52453e60e5a74c794f7395dab39f8066d8b4e82c8"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/data-table/src/TableParts/Header.mjs",
+      "sha256": "95a2c30126a7a264ed74256ca57e8faab44e3a2c66b93ed2bb2d85c79094bf25"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/data-table/src/styles/index.cssr.mjs",
+      "sha256": "86ab49963fa8f543839c546c4f9fcfcb80d63604f4942f1dfa764b810d4ba34e"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/data-table/styles/dark.mjs",
+      "sha256": "2158b19f6246c18a5c5c07b75060f7c232d24c245c0071bd60cb5dd406d0be28"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/data-table/styles/light.mjs",
+      "sha256": "19ab90b76dc4c562cbcf5451bf663bb3cabb7fa68b8e966d8e31e6f78201c39d"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/dropdown/src/Dropdown.mjs",
+      "sha256": "c3a5492041b70fc29c6c1f0505969494ed4f3d1a9f7e4ab11517a57eb6ff8484"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/dropdown/src/styles/index.cssr.mjs",
+      "sha256": "19ade063c72ab5c76fbb06f724f36ffe46b385c5dd1e7320e748b36359867cc3"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/input/src/Input.mjs",
+      "sha256": "67a7d0258e0fb8b7ce8f6b8a17159cd4a23fa9ff8d58c1d0e33e2f49a694623c"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/input/src/styles/input-group.cssr.mjs",
+      "sha256": "86fa6e1e8917832f14a6259c3309c975ed10f9258ca88c01c9b7c0282d1287ac"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/input/src/styles/input.cssr.mjs",
+      "sha256": "dfb9a98bb5e7f23f4a4b7f0387be18531c81b28b5299462b7cacff12581fe397"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/input/styles/_common.mjs",
+      "sha256": "5525d3b9d536d999a7f814d010c9ad7f90288b8a7f0770e00a68ea10714e0862"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/input/styles/dark.mjs",
+      "sha256": "7fee02f13038283767c4f9f52fcbef380e9e7881df7dcffc9898d0dc3622b455"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/input/styles/light.mjs",
+      "sha256": "530d06e348d591c83cb02aaff4df55cd606746aa89543c4c73a6dac36e565f00"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/popover/src/Popover.mjs",
+      "sha256": "c0fbee1b1d7f995be7424d1ab4f7f29b55d79c4ba9d2f53c371b0ff794a8c318"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/popover/src/PopoverBody.mjs",
+      "sha256": "b2987cf5e194af3273fc318e85c2d4dd50d5718a06e39e2140fe272eaca74e80"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/popover/src/styles/index.cssr.mjs",
+      "sha256": "27265f2a985c72d90784c82a96cfcd4d56e566029eb39c0f0400d46e250da213"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/tabs/src/Tabs.mjs",
+      "sha256": "da11ee61ff8f99d5a102ce2298e32a5c75df31f09b742f4239204a103b3ecbde"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/tabs/src/styles/index.cssr.mjs",
+      "sha256": "93d107fdb05c2c58f52b19a9484262f129c2d441b9872fc5b2a7384b21a546a1"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/tag/src/Tag.mjs",
+      "sha256": "a25ec0d5d5053a3c51254cc6a7269898d86964dd71fd55b9bdff9f69d223d320"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/tag/src/styles/index.cssr.mjs",
+      "sha256": "9bd14fa5bf3b20721d8547a2fc97e33452c07555d235f1329331e88a426c8f1c"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/tag/styles/dark.mjs",
+      "sha256": "79a43c0d749bd383c353e76fd087ad57eafeb945e499dbb826e640ff8fea2146"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/tag/styles/light.mjs",
+      "sha256": "f4f0f0bfe2b7758af5bfacc320aaec4cdc9a2ca98d79887fb0df5537cb8b1fea"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/tooltip/src/Tooltip.mjs",
+      "sha256": "5f484689ecdbea32f8568bc2d746efc0024fea55db4e5d1f20a480e08383b819"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/tooltip/styles/dark.mjs",
+      "sha256": "0ab8d585209ce5f9330424e537ad6adcaddebf65785d4231a63d08a55a33725f"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/es/tooltip/styles/light.mjs",
+      "sha256": "636a61840309f285b0f47e960d18a0df3493e4b019368750a5f6f29596ff8e31"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/naive-ui/package.json",
+      "sha256": "9a3e440fc6c17fc286751e004213d6bf4f6be120af9bc7afed64b2367dfe0779"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/dependencies/vue/package.json",
+      "sha256": "a47a52a49abb476476237bfb7a6337fee5976d516bb5df1cf1354fd3b5eff288"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/entry-control-courier-draft.json",
+      "sha256": "188d4621805ef170bba52596ebd146f79b15f41c0a08464867399f088af011de"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/entry-control-courier-draft.png",
+      "sha256": "5209aee1be8bd5f0896105ba00d4767826c6a51c5bfc3ca8836ce79d25c7b729"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/entry-control-courier-matched.json",
+      "sha256": "363990bdfeb6ef5b2448df1e380805bbf49c89068a8bce5fd501a418eb6a6d4a"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/entry-control-courier-matched.png",
+      "sha256": "521209a9ec3f99ae26efcf30f1ad35e246be89231285d32e5d5f2d0376cd3f7d"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/entry-control-system-draft.json",
+      "sha256": "762c414269f9de8b20a0f8c94b4effff8bca504049d87a278ce51e1b336a9c19"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/entry-control-system-draft.png",
+      "sha256": "36504e3266c80cae3a48473cb4676a88830909f85403ba949744e6e212bb1c05"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/entry-control-system-matched.json",
+      "sha256": "9cd98ea379741fa6cbb4d7c87c53add13afd5601ab2db18ffeef3c1ffbeff060"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/entry-control-system-matched.png",
+      "sha256": "0afb72cc4e9b6983792ece9c43a3a35477849aef21b85c29f2ae19aecc2b4e04"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/package-lock.json",
+      "sha256": "65eb89306afce33ef89f2aad0850647d093312be7fed83fe41f1fc6c29b5e40a"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/package.json",
+      "sha256": "5ab2c410970d2d8b023fdbd551e4e3b976eb07c95270715a958498cfcf6f4f7e"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/App.vue",
+      "sha256": "76703106c9c9d192f8e48672724e232e6d6cd866c8d2864a209bca508f17e7bf"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/AppContent.vue",
+      "sha256": "c8189ab76b9afc24d67d4ae58a5cc997f7017bcd4c9755d41ffae4a2e0017571"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/common/DropdownSelector.vue",
+      "sha256": "64eac087afca950623b6846861d484202aec9f4a000bb693ad814a547d00caab"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/common/EditableTableColumn.vue",
+      "sha256": "2094730659772506af6f86a5eef4698c3e169d41459d69528ea78002b15495f5"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/common/EditableTableRow.vue",
+      "sha256": "0c85fa46f5f6641b9482b0364324b5ccacd02b34b0b0ae304900be12d06f33f9"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/common/IconButton.vue",
+      "sha256": "67fab10651cee9312f7d1b14fce32d8d1b89c685e19690f1f0d911e445b067b8"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/common/RedisTypeSelector.vue",
+      "sha256": "4f0201858a5c02cff2130c39ccf34f3b8bc80a8fda9941e8bb1ff15f2b04a906"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/common/ResizeableWrapper.vue",
+      "sha256": "779c6dbdfc26e22574ebfabf1674a24eeaab2e2264d9c8c00777b7ed12267434"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/common/SwitchButton.vue",
+      "sha256": "edc4f83acab5ecd56193934a65fe00b2e58745498db4d426d8eca8439f8d4c3e"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/content/ContentPane.vue",
+      "sha256": "767fd677c9be12cca8a3becc1a18a48f0f5a0e348276477d61fbae3814773e2b"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/content/ContentValueTab.vue",
+      "sha256": "26a0f4de32b3e82ee49f52da4cb54c7e87d55d716005f3af74a3a2b1169e88c6"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/content_value/ContentEditor.vue",
+      "sha256": "3057d2ebe1241b44abb93dd6365a085f7acf11b3c7c354f274c71ba49ffc16d2"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/content_value/ContentEntryEditor.vue",
+      "sha256": "8ed9f2a82e9410d47451d802f44a9dc5df9e346c99cef669f676fef58ec060c5"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/content_value/ContentSearchInput.vue",
+      "sha256": "799eb107173ae9b8336b04231c59743c1d371fdc3e1d59bdcdf806f4d3fdf262"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/content_value/ContentValueHash.vue",
+      "sha256": "4d1929bb035f0e7bf3180a84350bd49846f6a9fb959af2ac3c1ec5b5183bbf9c"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/content_value/ContentValueList.vue",
+      "sha256": "802ff396c0460c44f89829d5d00cc0e7d13415494daa272d81223633611b6ed6"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/content_value/ContentValueSet.vue",
+      "sha256": "6b879f9b7657371e2978498a0a3f0edc9081ee6a89e58863b474c05774517d7b"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/content_value/ContentValueWrapper.vue",
+      "sha256": "f810c0df8f0e86198e886975851ec96306174ad1895706a3f3e2133413ae0a75"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/content_value/ContentValueZSet.vue",
+      "sha256": "a96e74b58ce738109b7e0fa08ce7e070039975d22e91115976d57ce86bc7ac5c"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/content_value/FormatSelector.vue",
+      "sha256": "25b5909dadfa29c72a7b6681ad1e2e10b3a26417ede9fbaea42bdba19fc1bcea"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/icons/Search.vue",
+      "sha256": "74e1ce9c93e6a1b9d5bff448a79aa29247b4e4fe3fa36a81fda8756d62a2bac7"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/icons/SpellCheck.vue",
+      "sha256": "a588541a063ffd7205c3a0bf8adde58eb20a4f71927290f2bf2427ef68304f5d"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/sidebar/BrowserPane.vue",
+      "sha256": "a0a9ad364cc5c52aea6cb7c2b476e2a1f104972ec1b6fc0e3cd970a6e1a5ae6d"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/sidebar/BrowserTree.vue",
+      "sha256": "b80e68b259d436de0975ea64f702c15ebe4a8ba4f1e76dba5c9beb3d7cdfc238"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/components/sidebar/ConnectionTree.vue",
+      "sha256": "63cbc33778bbb35cd60ecf9c33b03075d2a99eb98bdecdb08873077a37121aa2"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/consts/value_view_type.js",
+      "sha256": "c42b34cb2b5ff948525dd040a582228f986cdf41fed141b43268b2bfd555e01f"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/langs/zh-cn.json",
+      "sha256": "f0ba025615c6209a1747b4ac4e7bead968572b0e194e54c0d5bc207f9bb52e40"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/main.js",
+      "sha256": "20be92d5b6f578c9a025e514b864841298b873bc8e45c112c7a4de1bb04a2555"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/objects/tabItem.js",
+      "sha256": "d43e3726050ed7c2ede096db631181e45155f35a37e6df4445bfe910ef84e6ea"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/stores/browser.js",
+      "sha256": "9cac331de599eb66617d73fc181a2a3022a9d8bd75727f95a484bd97b8f60439"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/stores/preferences.js",
+      "sha256": "07c6c9c9f8e181b1dd425e75af27012a4dfed06c21b6884ee39e25c56dfd40eb"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/stores/tab.js",
+      "sha256": "541b342efc98403bf3c3fb9bb7255a6625c929349a43ce49a3a30273db6a4e15"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/styles/style.scss",
+      "sha256": "e02b0b4ae424dbcbc74b7ca52aed3c1419d6138fff0f5875ac4d924337ebdc8b"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/utils/discrete.js",
+      "sha256": "2e98196462802ffd2c67ad4107768264f89deb5007975bf42cfe492adef97ef7"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/utils/monaco.js",
+      "sha256": "21da021e6fec497e01d521f9c3af4fc38ec3e5b8b9dea327722d84f038c301ea"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/frontend/src/utils/theme.js",
+      "sha256": "256959896e81bf611d0497718d0d8efc55d8483b5689651539dcc2bbc4562629"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/probe.swift",
+      "sha256": "5b625884e58b88af3f6faccdeb0297a23ff4344f2c62f4f344eb3709c2261543"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/raf.js",
+      "sha256": "e81e672f861cfbde2522b81fb717abfbeb56a7f4c312b8aa3c1d81eacc1c48e2"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/rdm-entry-controls-source-prepare.py",
+      "sha256": "ed91f1ea599527ee6c89acbc3ec7373b23ed55a7116b7352b9b8331af20dcebd"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/rdm-entry-controls-source-run.py",
+      "sha256": "98f75352a98bb4d426c53cefa7582df8743474001e97f56d50038d875393634b"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/rust-rdm-entry-controls-source-build-attempt1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/setup.js",
+      "sha256": "7dd549678087f87052e9c602dce6030829a066b641d345e831d766ab75b804f1"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/stderr-attempt1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/entry-controls-macos/stdout-attempt1.json",
+      "sha256": "b8a59c520a6d1193d2a0bc57ab56563785210d0d4c88b0dae41544258a1ab752"
+    }
+  ],
+  "scope": "Four original input/button states without tooltip/shadow: System14 light andCourier20 dark,matched-disabled andmatched+draft-enabled. Original controls and geometry only."
+}

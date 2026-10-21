@@ -1,0 +1,315 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "records": [
+    {
+      "field": "general.fontSize",
+      "raw": "",
+      "initial": "14",
+      "input": "",
+      "enter": "",
+      "blurred": "",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": null
+    },
+    {
+      "field": "general.fontSize",
+      "raw": "0",
+      "initial": "14",
+      "input": "0",
+      "enter": "1",
+      "blurred": "1",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 1
+    },
+    {
+      "field": "general.fontSize",
+      "raw": "65536",
+      "initial": "14",
+      "input": "65536",
+      "enter": "65535",
+      "blurred": "65535",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 65535
+    },
+    {
+      "field": "general.fontSize",
+      "raw": "junk",
+      "initial": "14",
+      "input": "junk",
+      "enter": "junk",
+      "blurred": "14",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 14
+    },
+    {
+      "field": "general.fontSize",
+      "raw": "14.5",
+      "initial": "14",
+      "input": "14.5",
+      "enter": "14.5",
+      "blurred": "14.5",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 14.5
+    },
+    {
+      "field": "general.fontSize",
+      "raw": "1e1",
+      "initial": "14",
+      "input": "10",
+      "enter": "10",
+      "blurred": "10",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 10
+    },
+    {
+      "field": "general.scanSize",
+      "raw": "",
+      "initial": "3000",
+      "input": "",
+      "enter": "",
+      "blurred": "",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": null
+    },
+    {
+      "field": "general.scanSize",
+      "raw": "0",
+      "initial": "3000",
+      "input": "0",
+      "enter": "1",
+      "blurred": "1",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 1
+    },
+    {
+      "field": "general.scanSize",
+      "raw": "junk",
+      "initial": "3000",
+      "input": "junk",
+      "enter": "junk",
+      "blurred": "3000",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 3000
+    },
+    {
+      "field": "general.scanSize",
+      "raw": "1.5",
+      "initial": "3000",
+      "input": "1.5",
+      "enter": "1.5",
+      "blurred": "1.5",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 1.5
+    },
+    {
+      "field": "general.scanSize",
+      "raw": "1e3",
+      "initial": "3000",
+      "input": "1000",
+      "enter": "1000",
+      "blurred": "1000",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 1000
+    },
+    {
+      "field": "editor.fontSize",
+      "raw": "",
+      "initial": "14",
+      "input": "",
+      "enter": "",
+      "blurred": "",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": null
+    },
+    {
+      "field": "editor.fontSize",
+      "raw": "0",
+      "initial": "14",
+      "input": "0",
+      "enter": "1",
+      "blurred": "1",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 1
+    },
+    {
+      "field": "editor.fontSize",
+      "raw": "junk",
+      "initial": "14",
+      "input": "junk",
+      "enter": "junk",
+      "blurred": "14",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 14
+    },
+    {
+      "field": "editor.fontSize",
+      "raw": "14.5",
+      "initial": "14",
+      "input": "14.5",
+      "enter": "14.5",
+      "blurred": "14.5",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 14.5
+    },
+    {
+      "field": "cli.fontSize",
+      "raw": "",
+      "initial": "14",
+      "input": "",
+      "enter": "",
+      "blurred": "",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": null
+    },
+    {
+      "field": "cli.fontSize",
+      "raw": "0",
+      "initial": "14",
+      "input": "0",
+      "enter": "1",
+      "blurred": "1",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 1
+    },
+    {
+      "field": "cli.fontSize",
+      "raw": "junk",
+      "initial": "14",
+      "input": "junk",
+      "enter": "junk",
+      "blurred": "14",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 14
+    },
+    {
+      "field": "cli.fontSize",
+      "raw": "14.5",
+      "initial": "14",
+      "input": "14.5",
+      "enter": "14.5",
+      "blurred": "14.5",
+      "enterFocus": {
+        "editing": true,
+        "wrapper": false,
+        "activated": true
+      },
+      "value": 14.5
+    }
+  ],
+  "focus": [
+    {
+      "raw": "6379",
+      "text": "6379",
+      "editing": true,
+      "wrapper": false,
+      "activated": true
+    },
+    {
+      "raw": "0",
+      "text": "1",
+      "editing": true,
+      "wrapper": false,
+      "activated": true
+    },
+    {
+      "raw": "70000",
+      "text": "65535",
+      "editing": true,
+      "wrapper": false,
+      "activated": true
+    },
+    {
+      "raw": "",
+      "text": "",
+      "editing": true,
+      "wrapper": false,
+      "activated": true
+    },
+    {
+      "raw": "junk",
+      "text": "junk",
+      "editing": true,
+      "wrapper": false,
+      "activated": true
+    },
+    {
+      "raw": "3.0",
+      "text": "3",
+      "editing": true,
+      "wrapper": false,
+      "activated": true
+    }
+  ]
+}

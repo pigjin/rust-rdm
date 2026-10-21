@@ -1,0 +1,3230 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "sourceSha256": "fd8d5bad4852366a94d7941e1e03eecb099a671adaf2fdf1d29669f1f4f88e86",
+  "methodSha256": {
+    "SetHashValue": "90c9b3155bd86f7f7e0ce8fb71e1bd4909468968cc3d43f720b68cc280e3cadd",
+    "SetListItem": "96d3edef6e7d333746a773b3680ab1b6e64291b38dbf3c4abbdedbffd9704ee7",
+    "UpdateSetItem": "36412ca19428a3061034e1956c15c86cc1ba5c24f04106f41798ceb6119a240d",
+    "UpdateZSetValue": "e24127ff52ffd576a0c712fbbcf9a5264a40fefc6bb243ff7bf88170ee024b77"
+  },
+  "method": "Four unchanged original Go edit methods, original types and conversion/string packages imported through a read-only local module replacement. No custom decoders configured; disposable marked empty DB15. Actual Redis byte snapshots, response, command order and TTL; no IO interruption or concurrent-pipeline claim.",
+  "records": [
+    {
+      "name": "hash-ordinary",
+      "kind": "HASH",
+      "setup": [
+        [
+          "HSET",
+          "old",
+          "before",
+          "other",
+          "kept"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "updated": [
+            {
+              "k": "old",
+              "v": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "old",
+          "next"
+        ]
+      ],
+      "pttl": 600000,
+      "type": "hash",
+      "snapshotHex": {
+        "6f6c64": "6e657874",
+        "6f74686572": "6b657074"
+      }
+    },
+    {
+      "name": "hash-wrong-type",
+      "kind": "HASH",
+      "setup": [
+        [
+          "SET",
+          "wrong"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "WRONGTYPE Operation against a key holding the wrong kind of value"
+      },
+      "wire": [
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "old",
+          "before"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshotHex": "77726f6e67"
+    },
+    {
+      "name": "hash-missing-key",
+      "kind": "HASH",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "k": "old",
+              "v": "before",
+              "dv": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "old",
+          "before"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6f6c64": "6265666f7265"
+      }
+    },
+    {
+      "name": "hash-invalid-hex",
+      "kind": "HASH",
+      "setup": [
+        [
+          "HSET",
+          "old",
+          "before",
+          "other",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "zz",
+        "newValue": "zz",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Hex",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "save to type \"Hex\" fail: invalid Hex data"
+      },
+      "wire": null,
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6f6c64": "6265666f7265",
+        "6f74686572": "6b657074"
+      }
+    },
+    {
+      "name": "hash-format-decoder-order",
+      "kind": "HASH",
+      "setup": [
+        [
+          "HSET",
+          "old",
+          "before",
+          "other",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": " { \"n\" : 1 } ",
+        "newValue": " { \"n\" : 1 } ",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "JSON",
+        "decode": "Base64",
+        "retFormat": "JSON",
+        "retDecode": "Base64"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "updated": [
+            {
+              "k": "old",
+              "v": "IHsgIm4iIDogMSB9IA==",
+              "dv": "{\n  \"n\": 1\n}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "old",
+          "IHsgIm4iIDogMSB9IA=="
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6f6c64": "49487367496d346949446f674d53423949413d3d",
+        "6f74686572": "6b657074"
+      }
+    },
+    {
+      "name": "list-ordinary",
+      "kind": "LIST",
+      "setup": [
+        [
+          "RPUSH",
+          "before",
+          "kept"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "index": 0,
+              "v": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "0",
+          "next"
+        ]
+      ],
+      "pttl": 600000,
+      "type": "list",
+      "snapshotHex": [
+        "6e657874",
+        "6b657074"
+      ]
+    },
+    {
+      "name": "list-wrong-type",
+      "kind": "LIST",
+      "setup": [
+        [
+          "SET",
+          "wrong"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "WRONGTYPE Operation against a key holding the wrong kind of value"
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "0",
+          "before"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshotHex": "77726f6e67"
+    },
+    {
+      "name": "list-missing-key",
+      "kind": "LIST",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "ERR no such key"
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "0",
+          "before"
+        ]
+      ],
+      "pttl": -2,
+      "type": "none",
+      "snapshotHex": null
+    },
+    {
+      "name": "list-invalid-hex",
+      "kind": "LIST",
+      "setup": [
+        [
+          "RPUSH",
+          "before",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "zz",
+        "newValue": "zz",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Hex",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "save to type \"Hex\" fail: invalid Hex data"
+      },
+      "wire": null,
+      "pttl": -1,
+      "type": "list",
+      "snapshotHex": [
+        "6265666f7265",
+        "6b657074"
+      ]
+    },
+    {
+      "name": "list-format-decoder-order",
+      "kind": "LIST",
+      "setup": [
+        [
+          "RPUSH",
+          "before",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": " { \"n\" : 1 } ",
+        "newValue": " { \"n\" : 1 } ",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "JSON",
+        "decode": "Base64",
+        "retFormat": "JSON",
+        "retDecode": "Base64"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "index": 0,
+              "v": "IHsgIm4iIDogMSB9IA==",
+              "dv": "{\n  \"n\": 1\n}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "0",
+          "IHsgIm4iIDogMSB9IA=="
+        ]
+      ],
+      "pttl": -1,
+      "type": "list",
+      "snapshotHex": [
+        "49487367496d346949446f674d53423949413d3d",
+        "6b657074"
+      ]
+    },
+    {
+      "name": "set-ordinary",
+      "kind": "SET",
+      "setup": [
+        [
+          "SADD",
+          "before",
+          "kept"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "v": "next",
+              "dv": "next"
+            }
+          ],
+          "removed": [
+            {
+              "v": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "sadd",
+          "edit-entries-probe:target",
+          "next"
+        ]
+      ],
+      "pttl": 600000,
+      "type": "set",
+      "snapshotHex": [
+        "6b657074",
+        "6e657874"
+      ]
+    },
+    {
+      "name": "set-wrong-type",
+      "kind": "SET",
+      "setup": [
+        [
+          "SET",
+          "wrong"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "sadd",
+          "edit-entries-probe:target",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshotHex": "77726f6e67"
+    },
+    {
+      "name": "set-missing-key",
+      "kind": "SET",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "v": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "sadd",
+          "edit-entries-probe:target",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "set",
+      "snapshotHex": [
+        "6e657874"
+      ]
+    },
+    {
+      "name": "set-invalid-hex",
+      "kind": "SET",
+      "setup": [
+        [
+          "SADD",
+          "before",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "zz",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Hex",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "save to type \"Hex\" fail: invalid Hex data"
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ]
+      ],
+      "pttl": -1,
+      "type": "set",
+      "snapshotHex": [
+        "6b657074"
+      ]
+    },
+    {
+      "name": "set-format-decoder-order",
+      "kind": "SET",
+      "setup": [
+        [
+          "SADD",
+          "before",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": " { \"n\" : 1 } ",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "JSON",
+        "decode": "Base64",
+        "retFormat": "JSON",
+        "retDecode": "Base64"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "v": "IHsgIm4iIDogMSB9IA==",
+              "dv": "{\n  \"n\": 1\n}"
+            }
+          ],
+          "removed": [
+            {
+              "v": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "sadd",
+          "edit-entries-probe:target",
+          "IHsgIm4iIDogMSB9IA=="
+        ]
+      ],
+      "pttl": -1,
+      "type": "set",
+      "snapshotHex": [
+        "6b657074",
+        "49487367496d346949446f674d53423949413d3d"
+      ]
+    },
+    {
+      "name": "zset-ordinary",
+      "kind": "ZSET",
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "before",
+          "3",
+          "kept"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "s": 2.5,
+              "v": "before",
+              "nv": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zrem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "zadd",
+          "edit-entries-probe:target",
+          "2.5",
+          "next"
+        ]
+      ],
+      "pttl": 599999,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "6e657874",
+          2.5
+        ],
+        [
+          "6b657074",
+          3
+        ]
+      ]
+    },
+    {
+      "name": "zset-wrong-type",
+      "kind": "ZSET",
+      "setup": [
+        [
+          "SET",
+          "wrong"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "WRONGTYPE Operation against a key holding the wrong kind of value"
+      },
+      "wire": [
+        [
+          "zrem",
+          "edit-entries-probe:target",
+          "before"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshotHex": "77726f6e67"
+    },
+    {
+      "name": "zset-missing-key",
+      "kind": "ZSET",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "s": 2.5,
+              "v": "before",
+              "nv": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zrem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "zadd",
+          "edit-entries-probe:target",
+          "2.5",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "6e657874",
+          2.5
+        ]
+      ]
+    },
+    {
+      "name": "zset-invalid-hex",
+      "kind": "ZSET",
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "before",
+          "3",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "zz",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Hex",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "save to type \"Hex\" fail: invalid Hex data"
+      },
+      "wire": null,
+      "pttl": -1,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "6265666f7265",
+          1
+        ],
+        [
+          "6b657074",
+          3
+        ]
+      ]
+    },
+    {
+      "name": "zset-format-decoder-order",
+      "kind": "ZSET",
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "before",
+          "3",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": " { \"n\" : 1 } ",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "JSON",
+        "decode": "Base64",
+        "retFormat": "JSON",
+        "retDecode": "Base64"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "s": 2.5,
+              "v": "before",
+              "nv": "IHsgIm4iIDogMSB9IA==",
+              "dv": "{\n  \"n\": 1\n}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zrem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "zadd",
+          "edit-entries-probe:target",
+          "2.5",
+          "IHsgIm4iIDogMSB9IA=="
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "49487367496d346949446f674d53423949413d3d",
+          2.5
+        ],
+        [
+          "6b657074",
+          3
+        ]
+      ]
+    },
+    {
+      "name": "hash-insert",
+      "kind": "HASH",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "",
+        "newField": "new",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "k": "new",
+              "v": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "new",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6e6577": "6e657874"
+      }
+    },
+    {
+      "name": "hash-rename-new",
+      "kind": "HASH",
+      "setup": [
+        [
+          "HSET",
+          "old",
+          "before",
+          "other",
+          "kept"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "renamed",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "k": "old",
+              "nk": "renamed",
+              "v": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hdel",
+          "edit-entries-probe:target",
+          "old"
+        ],
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "renamed",
+          "next"
+        ]
+      ],
+      "pttl": 599999,
+      "type": "hash",
+      "snapshotHex": {
+        "6f74686572": "6b657074",
+        "72656e616d6564": "6e657874"
+      }
+    },
+    {
+      "name": "hash-rename-last-loses-ttl",
+      "kind": "HASH",
+      "setup": [
+        [
+          "HSET",
+          "old",
+          "before"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "renamed",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "k": "old",
+              "nk": "renamed",
+              "v": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hdel",
+          "edit-entries-probe:target",
+          "old"
+        ],
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "renamed",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "72656e616d6564": "6e657874"
+      }
+    },
+    {
+      "name": "hash-rename-collision",
+      "kind": "HASH",
+      "setup": [
+        [
+          "HSET",
+          "old",
+          "before",
+          "other",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "other",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "removed": [
+            {
+              "k": "old",
+              "v": null
+            }
+          ],
+          "updated": [
+            {
+              "k": "other",
+              "v": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hdel",
+          "edit-entries-probe:target",
+          "old"
+        ],
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "other",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6f74686572": "6e657874"
+      }
+    },
+    {
+      "name": "hash-rename-missing-old",
+      "kind": "HASH",
+      "setup": [
+        [
+          "HSET",
+          "other",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "renamed",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "k": "old",
+              "nk": "renamed",
+              "v": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hdel",
+          "edit-entries-probe:target",
+          "old"
+        ],
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "renamed",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6f74686572": "6b657074",
+        "72656e616d6564": "6e657874"
+      }
+    },
+    {
+      "name": "hash-rename-wrong-type",
+      "kind": "HASH",
+      "setup": [
+        [
+          "SET",
+          "wrong"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "renamed",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "WRONGTYPE Operation against a key holding the wrong kind of value"
+      },
+      "wire": [
+        [
+          "hdel",
+          "edit-entries-probe:target",
+          "old"
+        ]
+      ],
+      "pttl": -1,
+      "type": "string",
+      "snapshotHex": "77726f6e67"
+    },
+    {
+      "name": "hash-delete",
+      "kind": "HASH",
+      "setup": [
+        [
+          "HSET",
+          "old",
+          "before",
+          "other",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "removed": [
+            {
+              "k": "old",
+              "v": null
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hdel",
+          "edit-entries-probe:target",
+          "old"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6f74686572": "6b657074"
+      }
+    },
+    {
+      "name": "hash-delete-missing",
+      "kind": "HASH",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "removed": [
+            {
+              "k": "old",
+              "v": null
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hdel",
+          "edit-entries-probe:target",
+          "old"
+        ]
+      ],
+      "pttl": -2,
+      "type": "none",
+      "snapshotHex": null
+    },
+    {
+      "name": "hash-empty-value",
+      "kind": "HASH",
+      "setup": [
+        [
+          "HSET",
+          "old",
+          "before"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "updated": [
+            {
+              "k": "old",
+              "v": ""
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "old",
+          ""
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6f6c64": ""
+      }
+    },
+    {
+      "name": "hash-rename-invalid-hex-preserves-old",
+      "kind": "HASH",
+      "setup": [
+        [
+          "HSET",
+          "old",
+          "before"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "zz",
+        "newValue": "next",
+        "field": "old",
+        "newField": "renamed",
+        "index": 0,
+        "score": 2.5,
+        "format": "Hex",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "save to type \"Hex\" fail: invalid Hex data"
+      },
+      "wire": null,
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6f6c64": "6265666f7265"
+      }
+    },
+    {
+      "name": "hash-malformed-json-minify",
+      "kind": "HASH",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": " { \"n\" : invalid, \"t\":\"a\nb\" } ",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "JSON",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "k": "old",
+              "v": "{\"n\":invalid,\"t\":\"ab\" } ",
+              "dv": "{\"n\":invalid,\"t\":\"ab\" } "
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "old",
+          "{\"n\":invalid,\"t\":\"ab\" } "
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6f6c64": "7b226e223a696e76616c69642c2274223a22616222207d20"
+      }
+    },
+    {
+      "name": "hash-invalid-hex-space",
+      "kind": "HASH",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "61 62",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Hex",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "save to type \"Hex\" fail: invalid Hex data"
+      },
+      "wire": null,
+      "pttl": -2,
+      "type": "none",
+      "snapshotHex": null
+    },
+    {
+      "name": "hash-unknown-decoder",
+      "kind": "HASH",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": " { \"n\" : 1 } ",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "JSON",
+        "decode": "Unknown",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "k": "old",
+              "v": "{\"n\":1}",
+              "dv": "{\"n\":1}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "old",
+          "{\"n\":1}"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6f6c64": "7b226e223a317d"
+      }
+    },
+    {
+      "name": "hash-unicode-field-and-key",
+      "kind": "HASH",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": [
+          255,
+          0,
+          65
+        ],
+        "value": "中文\n值",
+        "newValue": "next",
+        "field": "",
+        "newField": "中文\n字段",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "k": "中文\n字段",
+              "v": "中文\n值",
+              "dv": "中文\n值"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "�\u0000A",
+          "中文\n字段",
+          "中文\n值"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "e4b8ade696870ae5ad97e6aeb5": "e4b8ade696870ae580bc"
+      }
+    },
+    {
+      "name": "hash-binary-response",
+      "kind": "HASH",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": [
+          237,
+          160,
+          128,
+          255,
+          0,
+          65
+        ],
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "k": "old",
+              "v": "����\u0000A",
+              "dv": "����\u0000A"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "hset",
+          "edit-entries-probe:target",
+          "old",
+          "����\u0000A"
+        ]
+      ],
+      "pttl": -1,
+      "type": "hash",
+      "snapshotHex": {
+        "6f6c64": "eda080ff0041"
+      }
+    },
+    {
+      "name": "list-negative-index",
+      "kind": "LIST",
+      "setup": [
+        [
+          "RPUSH",
+          "before",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": -1,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "index": -1,
+              "v": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "-1",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "list",
+      "snapshotHex": [
+        "6265666f7265",
+        "6e657874"
+      ]
+    },
+    {
+      "name": "list-out-of-range",
+      "kind": "LIST",
+      "setup": [
+        [
+          "RPUSH",
+          "before"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 4,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "ERR index out of range"
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "4",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "list",
+      "snapshotHex": [
+        "6265666f7265"
+      ]
+    },
+    {
+      "name": "list-delete",
+      "kind": "LIST",
+      "setup": [
+        [
+          "RPUSH",
+          "before",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "removed": [
+            {
+              "index": 0
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "0",
+          "---VALUE_REMOVED_BY_TINY_RDM---"
+        ],
+        [
+          "lrem",
+          "edit-entries-probe:target",
+          "1",
+          "---VALUE_REMOVED_BY_TINY_RDM---"
+        ]
+      ],
+      "pttl": -1,
+      "type": "list",
+      "snapshotHex": [
+        "6b657074"
+      ]
+    },
+    {
+      "name": "list-delete-negative",
+      "kind": "LIST",
+      "setup": [
+        [
+          "RPUSH",
+          "before",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": -1,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "removed": [
+            {
+              "index": -1
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "-1",
+          "---VALUE_REMOVED_BY_TINY_RDM---"
+        ],
+        [
+          "lrem",
+          "edit-entries-probe:target",
+          "1",
+          "---VALUE_REMOVED_BY_TINY_RDM---"
+        ]
+      ],
+      "pttl": -1,
+      "type": "list",
+      "snapshotHex": [
+        "6265666f7265"
+      ]
+    },
+    {
+      "name": "list-delete-missing",
+      "kind": "LIST",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "ERR no such key"
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "0",
+          "---VALUE_REMOVED_BY_TINY_RDM---"
+        ]
+      ],
+      "pttl": -2,
+      "type": "none",
+      "snapshotHex": null
+    },
+    {
+      "name": "list-delete-marker-collision",
+      "kind": "LIST",
+      "setup": [
+        [
+          "RPUSH",
+          "---VALUE_REMOVED_BY_TINY_RDM---",
+          "target",
+          "last"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 1,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "removed": [
+            {
+              "index": 1
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "1",
+          "---VALUE_REMOVED_BY_TINY_RDM---"
+        ],
+        [
+          "lrem",
+          "edit-entries-probe:target",
+          "1",
+          "---VALUE_REMOVED_BY_TINY_RDM---"
+        ]
+      ],
+      "pttl": -1,
+      "type": "list",
+      "snapshotHex": [
+        "2d2d2d56414c55455f52454d4f5645445f42595f54494e595f52444d2d2d2d",
+        "6c617374"
+      ]
+    },
+    {
+      "name": "list-encoded-empty-keeps-entry",
+      "kind": "LIST",
+      "setup": [
+        [
+          "RPUSH",
+          "before",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "\\x",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Hex",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "index": 0,
+              "v": ""
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "0",
+          ""
+        ]
+      ],
+      "pttl": -1,
+      "type": "list",
+      "snapshotHex": [
+        "",
+        "6b657074"
+      ]
+    },
+    {
+      "name": "list-omitted-return-conversion",
+      "kind": "LIST",
+      "setup": [
+        [
+          "RPUSH",
+          "before"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": " { \"n\" : 1 } ",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "JSON",
+        "decode": "None",
+        "retFormat": "",
+        "retDecode": ""
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "index": 0,
+              "v": "{\"n\":1}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "0",
+          "{\"n\":1}"
+        ]
+      ],
+      "pttl": -1,
+      "type": "list",
+      "snapshotHex": [
+        "7b226e223a317d"
+      ]
+    },
+    {
+      "name": "list-binary-value",
+      "kind": "LIST",
+      "setup": [
+        [
+          "RPUSH",
+          "before"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": [
+          255,
+          0,
+          65
+        ],
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "index": 0,
+              "v": "�\u0000A",
+              "dv": "�\u0000A"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "lset",
+          "edit-entries-probe:target",
+          "0",
+          "�\u0000A"
+        ]
+      ],
+      "pttl": -1,
+      "type": "list",
+      "snapshotHex": [
+        "ff0041"
+      ]
+    },
+    {
+      "name": "set-same-member-last-loses-ttl",
+      "kind": "SET",
+      "setup": [
+        [
+          "SADD",
+          "before"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "before",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "v": "before",
+              "dv": "before"
+            }
+          ],
+          "removed": [
+            {
+              "v": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "sadd",
+          "edit-entries-probe:target",
+          "before"
+        ]
+      ],
+      "pttl": -1,
+      "type": "set",
+      "snapshotHex": [
+        "6265666f7265"
+      ]
+    },
+    {
+      "name": "set-same-member-with-other",
+      "kind": "SET",
+      "setup": [
+        [
+          "SADD",
+          "before",
+          "kept"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "before",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "v": "before",
+              "dv": "before"
+            }
+          ],
+          "removed": [
+            {
+              "v": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "sadd",
+          "edit-entries-probe:target",
+          "before"
+        ]
+      ],
+      "pttl": 600000,
+      "type": "set",
+      "snapshotHex": [
+        "6b657074",
+        "6265666f7265"
+      ]
+    },
+    {
+      "name": "set-rename-last-loses-ttl",
+      "kind": "SET",
+      "setup": [
+        [
+          "SADD",
+          "before"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "v": "next",
+              "dv": "next"
+            }
+          ],
+          "removed": [
+            {
+              "v": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "sadd",
+          "edit-entries-probe:target",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "set",
+      "snapshotHex": [
+        "6e657874"
+      ]
+    },
+    {
+      "name": "set-collision",
+      "kind": "SET",
+      "setup": [
+        [
+          "SADD",
+          "before",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "kept",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "removed": [
+            {
+              "v": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "sadd",
+          "edit-entries-probe:target",
+          "kept"
+        ]
+      ],
+      "pttl": -1,
+      "type": "set",
+      "snapshotHex": [
+        "6b657074"
+      ]
+    },
+    {
+      "name": "set-missing-old-existing-new",
+      "kind": "SET",
+      "setup": [
+        [
+          "SADD",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "absent",
+        "newValue": "kept",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "absent"
+        ],
+        [
+          "sadd",
+          "edit-entries-probe:target",
+          "kept"
+        ]
+      ],
+      "pttl": -1,
+      "type": "set",
+      "snapshotHex": [
+        "6b657074"
+      ]
+    },
+    {
+      "name": "set-empty-member",
+      "kind": "SET",
+      "setup": [
+        [
+          "SADD",
+          "before",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "v": ""
+            }
+          ],
+          "removed": [
+            {
+              "v": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "sadd",
+          "edit-entries-probe:target",
+          ""
+        ]
+      ],
+      "pttl": -1,
+      "type": "set",
+      "snapshotHex": [
+        "6b657074",
+        ""
+      ]
+    },
+    {
+      "name": "set-invalid-hex-removes-old-first",
+      "kind": "SET",
+      "setup": [
+        [
+          "SADD",
+          "before"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "zz",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Hex",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": false,
+        "msg": "save to type \"Hex\" fail: invalid Hex data"
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ]
+      ],
+      "pttl": -2,
+      "type": "none",
+      "snapshotHex": null
+    },
+    {
+      "name": "set-binary-value",
+      "kind": "SET",
+      "setup": [
+        [
+          "SADD",
+          "before"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": [
+          255,
+          0,
+          65
+        ],
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "v": "�\u0000A",
+              "dv": "�\u0000A"
+            }
+          ],
+          "removed": [
+            {
+              "v": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "srem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "sadd",
+          "edit-entries-probe:target",
+          "�\u0000A"
+        ]
+      ],
+      "pttl": -1,
+      "type": "set",
+      "snapshotHex": [
+        "ff0041"
+      ]
+    },
+    {
+      "name": "zset-score-only",
+      "kind": "ZSET",
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "before",
+          "3",
+          "kept"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "before",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": -2,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "updated": [
+            {
+              "s": -2,
+              "v": "before",
+              "dv": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zadd",
+          "edit-entries-probe:target",
+          "-2",
+          "before"
+        ]
+      ],
+      "pttl": 599999,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "6265666f7265",
+          -2
+        ],
+        [
+          "6b657074",
+          3
+        ]
+      ]
+    },
+    {
+      "name": "zset-same-missing",
+      "kind": "ZSET",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "next",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "added": [
+            {
+              "s": 2.5,
+              "v": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zadd",
+          "edit-entries-probe:target",
+          "2.5",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "6e657874",
+          2.5
+        ]
+      ]
+    },
+    {
+      "name": "zset-rename-last-loses-ttl",
+      "kind": "ZSET",
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "before"
+        ],
+        [
+          "EXPIRE",
+          "600"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "next",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "s": 2.5,
+              "v": "before",
+              "nv": "next",
+              "dv": "next"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zrem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "zadd",
+          "edit-entries-probe:target",
+          "2.5",
+          "next"
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "6e657874",
+          2.5
+        ]
+      ]
+    },
+    {
+      "name": "zset-collision",
+      "kind": "ZSET",
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "before",
+          "3",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "kept",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "updated": [
+            {
+              "s": 2.5,
+              "v": "kept",
+              "dv": "kept"
+            }
+          ],
+          "removed": [
+            {
+              "s": 0,
+              "v": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zrem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "zadd",
+          "edit-entries-probe:target",
+          "2.5",
+          "kept"
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "6b657074",
+          2.5
+        ]
+      ]
+    },
+    {
+      "name": "zset-remove",
+      "kind": "ZSET",
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "before",
+          "3",
+          "kept"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "removed": [
+            {
+              "s": 0,
+              "v": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zrem",
+          "edit-entries-probe:target",
+          "before"
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "6b657074",
+          3
+        ]
+      ]
+    },
+    {
+      "name": "zset-remove-missing",
+      "kind": "ZSET",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "absent",
+        "newValue": "",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {}
+      },
+      "wire": [
+        [
+          "zrem",
+          "edit-entries-probe:target",
+          "absent"
+        ]
+      ],
+      "pttl": -2,
+      "type": "none",
+      "snapshotHex": null
+    },
+    {
+      "name": "zset-encoded-empty-member",
+      "kind": "ZSET",
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "before"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "\\x",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Hex",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "s": 2.5,
+              "v": "before",
+              "nv": ""
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zrem",
+          "edit-entries-probe:target",
+          "before"
+        ],
+        [
+          "zadd",
+          "edit-entries-probe:target",
+          "2.5",
+          ""
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "",
+          2.5
+        ]
+      ]
+    },
+    {
+      "name": "zset-null-score",
+      "kind": "ZSET",
+      "setup": [
+        [
+          "ZADD",
+          "1",
+          "before"
+        ]
+      ],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "before",
+        "newValue": "before",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": null,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "updated": [
+            {
+              "s": 0,
+              "v": "before",
+              "dv": "before"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zadd",
+          "edit-entries-probe:target",
+          "0",
+          "before"
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "6265666f7265",
+          0
+        ]
+      ]
+    },
+    {
+      "name": "zset-auto-return-json",
+      "kind": "ZSET",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "old",
+        "newValue": "{\"n\":1}",
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "",
+        "retDecode": ""
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "s": 2.5,
+              "v": "old",
+              "nv": "{\"n\":1}",
+              "dv": "{\n  \"n\": 1\n}"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zrem",
+          "edit-entries-probe:target",
+          "old"
+        ],
+        [
+          "zadd",
+          "edit-entries-probe:target",
+          "2.5",
+          "{\"n\":1}"
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "7b226e223a317d",
+          2.5
+        ]
+      ]
+    },
+    {
+      "name": "zset-binary-response",
+      "kind": "ZSET",
+      "setup": [],
+      "param": {
+        "server": "localhost",
+        "db": 15,
+        "key": "edit-entries-probe:target",
+        "value": "old",
+        "newValue": [
+          255,
+          0,
+          65
+        ],
+        "field": "old",
+        "newField": "old",
+        "index": 0,
+        "score": 2.5,
+        "format": "Raw",
+        "decode": "None",
+        "retFormat": "Raw",
+        "retDecode": "None"
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "replaced": [
+            {
+              "s": 2.5,
+              "v": "old",
+              "nv": "�\u0000A",
+              "dv": "�\u0000A"
+            }
+          ]
+        }
+      },
+      "wire": [
+        [
+          "zrem",
+          "edit-entries-probe:target",
+          "old"
+        ],
+        [
+          "zadd",
+          "edit-entries-probe:target",
+          "2.5",
+          "�\u0000A"
+        ]
+      ],
+      "pttl": -1,
+      "type": "zset",
+      "snapshotHex": [
+        [
+          "ff0041",
+          2.5
+        ]
+      ]
+    }
+  ]
+}

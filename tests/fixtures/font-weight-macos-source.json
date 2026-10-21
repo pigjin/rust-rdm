@@ -1,0 +1,2106 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Pinned original body CSS in an own non-persistent WKWebView: seven sizes, nine CSS weights, four strings (252 single-font DOM advances), plus fourteen controlled mixed-weight DOM advances. No glyph bitmap, interaction or native-window acceptance. Native controls separately retain failures at larger Unicode sizes.",
+  "fontFamily": "v-sans, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+  "rawReport": "outputs/system-font-weight-expanded-mixed-source-raw.json",
+  "rawReportSHA256": "d70b4993967be08d231a9058e60593249ad0ff047aed885cbcc25169b69d411b",
+  "files": [
+    {
+      "path": "outputs/source-probes/system-font-weight/probe.swift",
+      "sha256": "21ddc94f8108782ddae2603b971e55f5d363ea4d38053cc3c95159fcd27ce419"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/probe",
+      "sha256": "f3f5dd4ad5f5a251b46ca912150438a91dda56d7af7869f8845e7c923156fa75"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/stdout.log",
+      "sha256": "b9481baaf872415fa64de5e6499b71ce9cda76346d790fb32b13c8f26b940e30"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/variation.swift",
+      "sha256": "fde3905e56bfd30e34245cf7a4075a9858f8863fb64baf29bd3dda4bd3396b1d"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/variation.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/variation.stderr.log",
+      "sha256": "54dcd1cfe66086e257d4ac3ef7b9fd3d9a650da181007460ab597e0e3b69693c"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/variation-v2.swift",
+      "sha256": "abb67fdefe8161b63fe5c8d8ec505ac9bcc38e182761a4b53e875fb8ee4aa59d"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/variation-v2",
+      "sha256": "c5947d8f28927a9b030658ac7b93cfc6d2046a0da100f798885555215e9b0c9e"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/variation-v2.stdout.log",
+      "sha256": "38215464438812081a7b03ce56b33945dc38b2e3bf34eab92d1689eca7d5b9eb"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/variation-v2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "frontend/src/styles/style.scss",
+      "path": "outputs/source-probes/system-font-weight/frontend/src/styles/style.scss",
+      "sha256": "e02b0b4ae424dbcbc74b7ca52aed3c1419d6138fff0f5875ac4d924337ebdc8b"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize.swift",
+      "sha256": "68c027aeb430d7ffc0b7a646513bcbc37167cf7732eab58fddb9386a99193e0e"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize",
+      "sha256": "a3c5120c62ea74c4dcc653cabb0355cc917f60419f8ceb206aa05b945ccc1fa2"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize.stdout.log",
+      "sha256": "7c79a94728b2eae6904085a8e7ae30c3c960ecb467f7a3f7d5a20f4ce1214bc9"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-epsilon.swift",
+      "sha256": "cbc8674cda4077f6b48e7625fe19dcb07753bb4be72e9cd23c9bb2c232fb4dd1"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-epsilon",
+      "sha256": "e9a562a683d852c1b1d8fd949d9e7f80a38cdf9c3f1426fcfe2bb5ab1c3d12e8"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-epsilon.stdout.log",
+      "sha256": "598118539436ef4387d3bfac91a7afe8999646af20be3659fedbfe0368f5a80d"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-epsilon.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-epsilon-v2.swift",
+      "sha256": "a41f65909637c29b4ad71f26a15e73c4aae0af3efe9d296b2b1cfe73a6f2524f"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-epsilon-v2",
+      "sha256": "f471ef4d18d985c02b9464779b0dc1539c5479a6bdcf5712525981aa03c88c1d"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-epsilon-v2.stdout.log",
+      "sha256": "5b54b3ff1343b3f581a16a47fa5377b79e5174c02a64c52db64c1eb195e6f48a"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-epsilon-v2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/expanded.swift",
+      "sha256": "ebaac82390a46537719898b6f16c30b618b6f877e5addedf37851b3333540a66"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/expanded",
+      "sha256": "c0dc67ce60894fe55d1ead32cbc036d355494bb3334df2dfad0db3c85a835dce"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/expanded.stdout.log",
+      "sha256": "d8da245cd3ba6ccc1043f0ac5e9cb77daa19517f4d06065aade87ea8762bc175"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/expanded.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/expanded-mixed.swift",
+      "sha256": "bc8dce1cfd6a6d296f75b17db24e5c208b3bae730e959d54aa6072be87622943"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/expanded-mixed",
+      "sha256": "ae211be3c0470521ad3921bff07053b4c77bcf9f4da398e7d06fcdfdbcd7c692"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/expanded-mixed.stdout.log",
+      "sha256": "b89a67192686140bb8c80464b4daacb493cde3a0aed5bd2eeaedf8791dfdee89"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/expanded-mixed.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-optical.swift",
+      "sha256": "14e93da608f7d96fc655d6e32c74cb16a9a5404c833e951fc7818e8dc6107548"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-optical",
+      "sha256": "e59b80e3fff7fafc650feddd4e072538d16df07abd16c2c9402bcb392a954e15"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-optical.stdout.log",
+      "sha256": "258c78a6ce4800ed94d33bf2a16dfe1d95f337ef12bb3d2691117c85672de183"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-optical.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-optical-expanded.swift",
+      "sha256": "ad30785330a8fbc4dd7f10499108dc1b25b8ef472e3db6269810fed6c29af976"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-optical-expanded",
+      "sha256": "e854a8d63bf32e5e4d254555f2455094f5d6ad971d2ca6ed0c5949130ad57f1f"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-optical-expanded.stdout.log",
+      "sha256": "414b008754ef312bcd0bd9212137112154f2ea0722c696aa1115b10422204e62"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/resize-optical-expanded.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/graphics.swift",
+      "sha256": "a13565bef0f143f1eda70644902db40069d06afd801e0f653277f86e6426a259"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/graphics",
+      "sha256": "017fb5c33efdd9660c260fc771864f9963996c57d4204bed0b5419f51a8e4566"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/graphics.stdout.log",
+      "sha256": "a2706d23705f8bfd99cfbe16627dbcb4104bdbb7168d27374ef4454b42a8a8ef"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/graphics.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/graphics-glyphs.swift",
+      "sha256": "8cd1f15f73f0a779842f8f40e03ad495fe0b4ef63181044f41298a12c96095ae"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/graphics-glyphs",
+      "sha256": "d48f86b46f08858701176880e8b97da583b6878d8c843611c9ff97585627b13c"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/graphics-glyphs.stdout.log",
+      "sha256": "f6ea90cc147dbb5caede0e895cd13aefa439720cb64dbf756c44a1392f66df28"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/graphics-glyphs.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/cascade.swift",
+      "sha256": "2254ad3366a7f3546aa8de8f0824e74eeba613a6be1fd200851d7564c6e80973"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/cascade",
+      "sha256": "b9b44c7959cca2b60ab8522ec3987f9ab8ce5ea9f25444ba2fcee7ed17816946"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/cascade.stdout.log",
+      "sha256": "c6f072db08f68949377678ea58a27463823091ba4202c710b1c65351d66cd652"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/cascade.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/cascade-named.swift",
+      "sha256": "1a90ddd11dc84425a5b5ca7a32eb5b48e86e77b5548da937177c75a19b8eb1e4"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/cascade-named",
+      "sha256": "97689686fa5a37c941393c19f0d66c03cdf053b89e80fcece8a0e23b31af10e6"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/cascade-named.stdout.log",
+      "sha256": "95cc596bc590b7ca87b25eceb72fedb220041d43172bac01f9915b37499a7267"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/cascade-named.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/segments.swift",
+      "sha256": "dd62ecdec75bea26885a8780d58fb5a6df41548af40fb7fe305bd80991116ad6"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/segments",
+      "sha256": "770ac91ee61d387f93e1048b48af9a5628620cd97c8d10a800783f8915330a50"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/segments.stdout.log",
+      "sha256": "4ed6ccdfcf75f8766f67f2134791c225fdcd0d79dae007c0fcf5863759c7fab5"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/segments.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/segments-native.swift",
+      "sha256": "4583681860b10385df30c16a442b6970c6902b430c6b27b6e120506b01299810"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/segments-native",
+      "sha256": "221c2c84e7e73f18adbb1ba4c0efa808d9fdd587320a7c378a8e2c6e56fc198c"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/segments-native.stdout.log",
+      "sha256": "1c7df16827451023030d46901c214b5b6b6db9ea5fdba95b2ce2c2dab7b7a7fa"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/segments-native.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-face.swift",
+      "sha256": "83f6e885a8284df9c510ecb982e8d067652975b26264014cea9bd3b4fad35f2b"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-face",
+      "sha256": "be9231e7b27ab1c3f1e2613c9b7e53c2a4c269d8df3ba1a922943df0b0a94470"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-face.stdout.log",
+      "sha256": "4c1ea55e14b47fbb2cceaa650a2c10fb4043aaa4d77287ef4c64c4b6d2c499c6"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-face.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-text-none.swift",
+      "sha256": "57910c7e69c7c5fb74410c5f16aa288603d65016d51aa7dbd84ec96c91cbfc98"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-text-none",
+      "sha256": "dc29da59af82126fc27c795ed4670312c8072fae292e78c84664f1bc91fd167c"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-text-none.stdout.log",
+      "sha256": "4c1ea55e14b47fbb2cceaa650a2c10fb4043aaa4d77287ef4c64c4b6d2c499c6"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-text-none.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-kern-zero.swift",
+      "sha256": "73447e36a153616628b9c523b8d8f65b629c10b848940d644dc41279e7ae325b"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-kern-zero",
+      "sha256": "e0b2b0b127f1deffff05d0ecb54ef2b02b4979d6722b968906fdf3149a5a56a6"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-kern-zero.stdout.log",
+      "sha256": "6bf257ca06cfb4ec15e8e4ff11f80cb2fdb598f1eeb77c900a58ef499cfccf01"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-kern-zero.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-css-axes.swift",
+      "sha256": "66f028930412bd1b0064c1820a6a1b1b9af76b845a74439ca8f0fa6b1704d627"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-css-axes",
+      "sha256": "fc0ef12e887459f672d7711605dc0460e14bcef3c3013565abf5efef6c9a6aec"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-css-axes.stdout.log",
+      "sha256": "654ec17b55c1f2013605f8b94dfb590c5f728f8166cbe8842a99178c42a65540"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-css-axes.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/full-traits.swift",
+      "sha256": "a3b178b4374a981fb3b366d9d4674b1322706a72b88ef677e7e7d380150359e9"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/full-traits",
+      "sha256": "b2d8ec832b4b44e9209c3c01669317aeb1485ae7c5d18ec1d44f1a0bae2cc836"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/full-traits.stdout.log",
+      "sha256": "4c1ea55e14b47fbb2cceaa650a2c10fb4043aaa4d77287ef4c64c4b6d2c499c6"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/full-traits.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-layout-face.swift",
+      "sha256": "d2d14e6daae29653c71a6c33f469e691ddd96c1e3851d79d9413aa0b9256287a"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-layout-face",
+      "sha256": "25dd71df28fb405360bccd89d21bfc17901756b621979a9b317613c35fb1c916"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-layout-face.stdout.log",
+      "sha256": "dd02940aeed29f563625ece7ba02fd1c5178e45de0737d0a7960632ef9a35653"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-layout-face.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-cg.swift",
+      "sha256": "51dfda0391f5c93abe70b3fa3ece82b815b5e7218e8c006ed5004737091747de"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-cg",
+      "sha256": "1d442bb26de268edc060260e6495e591549282bcfc92b106eca012d1ff34f472"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-cg.stdout.log",
+      "sha256": "1d7cf4c79c9233a3a8c9e2dcdb156fa2daef601cb7572a33ce3c1f5a209a85c8"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-cg.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-fixed-axes.swift",
+      "sha256": "9b635cbb3de1fbd23bade87e99b4eb6b30642f3f809160a9b0d9f07e9f519156"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-fixed-axes",
+      "sha256": "a0a23ef4cb7a8ccdbfdc343d8cb900d5fd4ecb9fd89f085217682b07239b1f94"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-fixed-axes.stdout.log",
+      "sha256": "7f7932e864c7dc92d172c49f3038483577adcd0835c811a407313481d7642cdc"
+    },
+    {
+      "path": "outputs/source-probes/system-font-weight/fallback-fixed-axes.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "samples": [
+    {
+      "fontSize": 12,
+      "weight": 100,
+      "text": "localhost",
+      "width": 49.828125
+    },
+    {
+      "fontSize": 12,
+      "weight": 100,
+      "text": "replica",
+      "width": 36.78125
+    },
+    {
+      "fontSize": 12,
+      "weight": 100,
+      "text": "Tiny RDM",
+      "width": 51.84375
+    },
+    {
+      "fontSize": 12,
+      "weight": 100,
+      "text": "中文🙂 alpha",
+      "width": 73.875
+    },
+    {
+      "fontSize": 12,
+      "weight": 200,
+      "text": "localhost",
+      "width": 50.296875
+    },
+    {
+      "fontSize": 12,
+      "weight": 200,
+      "text": "replica",
+      "width": 37.15625
+    },
+    {
+      "fontSize": 12,
+      "weight": 200,
+      "text": "Tiny RDM",
+      "width": 52.625
+    },
+    {
+      "fontSize": 12,
+      "weight": 200,
+      "text": "中文🙂 alpha",
+      "width": 74.203125
+    },
+    {
+      "fontSize": 12,
+      "weight": 300,
+      "text": "localhost",
+      "width": 50.765625
+    },
+    {
+      "fontSize": 12,
+      "weight": 300,
+      "text": "replica",
+      "width": 37.546875
+    },
+    {
+      "fontSize": 12,
+      "weight": 300,
+      "text": "Tiny RDM",
+      "width": 53.390625
+    },
+    {
+      "fontSize": 12,
+      "weight": 300,
+      "text": "中文🙂 alpha",
+      "width": 74.546875
+    },
+    {
+      "fontSize": 12,
+      "weight": 400,
+      "text": "localhost",
+      "width": 51.234375
+    },
+    {
+      "fontSize": 12,
+      "weight": 400,
+      "text": "replica",
+      "width": 37.921875
+    },
+    {
+      "fontSize": 12,
+      "weight": 400,
+      "text": "Tiny RDM",
+      "width": 54.171875
+    },
+    {
+      "fontSize": 12,
+      "weight": 400,
+      "text": "中文🙂 alpha",
+      "width": 74.875
+    },
+    {
+      "fontSize": 12,
+      "weight": 500,
+      "text": "localhost",
+      "width": 52.625
+    },
+    {
+      "fontSize": 12,
+      "weight": 500,
+      "text": "replica",
+      "width": 39
+    },
+    {
+      "fontSize": 12,
+      "weight": 500,
+      "text": "Tiny RDM",
+      "width": 55.125
+    },
+    {
+      "fontSize": 12,
+      "weight": 500,
+      "text": "中文🙂 alpha",
+      "width": 75.578125
+    },
+    {
+      "fontSize": 12,
+      "weight": 600,
+      "text": "localhost",
+      "width": 54
+    },
+    {
+      "fontSize": 12,
+      "weight": 600,
+      "text": "replica",
+      "width": 40.078125
+    },
+    {
+      "fontSize": 12,
+      "weight": 600,
+      "text": "Tiny RDM",
+      "width": 56.078125
+    },
+    {
+      "fontSize": 12,
+      "weight": 600,
+      "text": "中文🙂 alpha",
+      "width": 76.28125
+    },
+    {
+      "fontSize": 12,
+      "weight": 700,
+      "text": "localhost",
+      "width": 55.390625
+    },
+    {
+      "fontSize": 12,
+      "weight": 700,
+      "text": "replica",
+      "width": 41.15625
+    },
+    {
+      "fontSize": 12,
+      "weight": 700,
+      "text": "Tiny RDM",
+      "width": 57.046875
+    },
+    {
+      "fontSize": 12,
+      "weight": 700,
+      "text": "中文🙂 alpha",
+      "width": 76.96875
+    },
+    {
+      "fontSize": 12,
+      "weight": 800,
+      "text": "localhost",
+      "width": 56.765625
+    },
+    {
+      "fontSize": 12,
+      "weight": 800,
+      "text": "replica",
+      "width": 42.25
+    },
+    {
+      "fontSize": 12,
+      "weight": 800,
+      "text": "Tiny RDM",
+      "width": 58
+    },
+    {
+      "fontSize": 12,
+      "weight": 800,
+      "text": "中文🙂 alpha",
+      "width": 77.671875
+    },
+    {
+      "fontSize": 12,
+      "weight": 900,
+      "text": "localhost",
+      "width": 58.15625
+    },
+    {
+      "fontSize": 12,
+      "weight": 900,
+      "text": "replica",
+      "width": 43.328125
+    },
+    {
+      "fontSize": 12,
+      "weight": 900,
+      "text": "Tiny RDM",
+      "width": 58.96875
+    },
+    {
+      "fontSize": 12,
+      "weight": 900,
+      "text": "中文🙂 alpha",
+      "width": 78.375
+    },
+    {
+      "fontSize": 13,
+      "weight": 100,
+      "text": "localhost",
+      "width": 53.28125
+    },
+    {
+      "fontSize": 13,
+      "weight": 100,
+      "text": "replica",
+      "width": 39.3125
+    },
+    {
+      "fontSize": 13,
+      "weight": 100,
+      "text": "Tiny RDM",
+      "width": 55.5625
+    },
+    {
+      "fontSize": 13,
+      "weight": 100,
+      "text": "中文🙂 alpha",
+      "width": 80.125
+    },
+    {
+      "fontSize": 13,
+      "weight": 200,
+      "text": "localhost",
+      "width": 53.796875
+    },
+    {
+      "fontSize": 13,
+      "weight": 200,
+      "text": "replica",
+      "width": 39.71875
+    },
+    {
+      "fontSize": 13,
+      "weight": 200,
+      "text": "Tiny RDM",
+      "width": 56.390625
+    },
+    {
+      "fontSize": 13,
+      "weight": 200,
+      "text": "中文🙂 alpha",
+      "width": 80.5
+    },
+    {
+      "fontSize": 13,
+      "weight": 300,
+      "text": "localhost",
+      "width": 54.3125
+    },
+    {
+      "fontSize": 13,
+      "weight": 300,
+      "text": "replica",
+      "width": 40.140625
+    },
+    {
+      "fontSize": 13,
+      "weight": 300,
+      "text": "Tiny RDM",
+      "width": 57.234375
+    },
+    {
+      "fontSize": 13,
+      "weight": 300,
+      "text": "中文🙂 alpha",
+      "width": 80.859375
+    },
+    {
+      "fontSize": 13,
+      "weight": 400,
+      "text": "localhost",
+      "width": 54.8125
+    },
+    {
+      "fontSize": 13,
+      "weight": 400,
+      "text": "replica",
+      "width": 40.546875
+    },
+    {
+      "fontSize": 13,
+      "weight": 400,
+      "text": "Tiny RDM",
+      "width": 58.0625
+    },
+    {
+      "fontSize": 13,
+      "weight": 400,
+      "text": "中文🙂 alpha",
+      "width": 81.21875
+    },
+    {
+      "fontSize": 13,
+      "weight": 500,
+      "text": "localhost",
+      "width": 56.3125
+    },
+    {
+      "fontSize": 13,
+      "weight": 500,
+      "text": "replica",
+      "width": 41.71875
+    },
+    {
+      "fontSize": 13,
+      "weight": 500,
+      "text": "Tiny RDM",
+      "width": 59.109375
+    },
+    {
+      "fontSize": 13,
+      "weight": 500,
+      "text": "中文🙂 alpha",
+      "width": 81.984375
+    },
+    {
+      "fontSize": 13,
+      "weight": 600,
+      "text": "localhost",
+      "width": 57.8125
+    },
+    {
+      "fontSize": 13,
+      "weight": 600,
+      "text": "replica",
+      "width": 42.890625
+    },
+    {
+      "fontSize": 13,
+      "weight": 600,
+      "text": "Tiny RDM",
+      "width": 60.15625
+    },
+    {
+      "fontSize": 13,
+      "weight": 600,
+      "text": "中文🙂 alpha",
+      "width": 82.734375
+    },
+    {
+      "fontSize": 13,
+      "weight": 700,
+      "text": "localhost",
+      "width": 59.3125
+    },
+    {
+      "fontSize": 13,
+      "weight": 700,
+      "text": "replica",
+      "width": 44.0625
+    },
+    {
+      "fontSize": 13,
+      "weight": 700,
+      "text": "Tiny RDM",
+      "width": 61.1875
+    },
+    {
+      "fontSize": 13,
+      "weight": 700,
+      "text": "中文🙂 alpha",
+      "width": 83.484375
+    },
+    {
+      "fontSize": 13,
+      "weight": 800,
+      "text": "localhost",
+      "width": 60.8125
+    },
+    {
+      "fontSize": 13,
+      "weight": 800,
+      "text": "replica",
+      "width": 45.234375
+    },
+    {
+      "fontSize": 13,
+      "weight": 800,
+      "text": "Tiny RDM",
+      "width": 62.234375
+    },
+    {
+      "fontSize": 13,
+      "weight": 800,
+      "text": "中文🙂 alpha",
+      "width": 84.25
+    },
+    {
+      "fontSize": 13,
+      "weight": 900,
+      "text": "localhost",
+      "width": 62.3125
+    },
+    {
+      "fontSize": 13,
+      "weight": 900,
+      "text": "replica",
+      "width": 46.40625
+    },
+    {
+      "fontSize": 13,
+      "weight": 900,
+      "text": "Tiny RDM",
+      "width": 63.265625
+    },
+    {
+      "fontSize": 13,
+      "weight": 900,
+      "text": "中文🙂 alpha",
+      "width": 85
+    },
+    {
+      "fontSize": 14,
+      "weight": 100,
+      "text": "localhost",
+      "width": 56.765625
+    },
+    {
+      "fontSize": 14,
+      "weight": 100,
+      "text": "replica",
+      "width": 41.859375
+    },
+    {
+      "fontSize": 14,
+      "weight": 100,
+      "text": "Tiny RDM",
+      "width": 59.28125
+    },
+    {
+      "fontSize": 14,
+      "weight": 100,
+      "text": "中文🙂 alpha",
+      "width": 85.421875
+    },
+    {
+      "fontSize": 14,
+      "weight": 200,
+      "text": "localhost",
+      "width": 57.328125
+    },
+    {
+      "fontSize": 14,
+      "weight": 200,
+      "text": "replica",
+      "width": 42.296875
+    },
+    {
+      "fontSize": 14,
+      "weight": 200,
+      "text": "Tiny RDM",
+      "width": 60.1875
+    },
+    {
+      "fontSize": 14,
+      "weight": 200,
+      "text": "中文🙂 alpha",
+      "width": 85.8125
+    },
+    {
+      "fontSize": 14,
+      "weight": 300,
+      "text": "localhost",
+      "width": 57.875
+    },
+    {
+      "fontSize": 14,
+      "weight": 300,
+      "text": "replica",
+      "width": 42.75
+    },
+    {
+      "fontSize": 14,
+      "weight": 300,
+      "text": "Tiny RDM",
+      "width": 61.09375
+    },
+    {
+      "fontSize": 14,
+      "weight": 300,
+      "text": "中文🙂 alpha",
+      "width": 86.203125
+    },
+    {
+      "fontSize": 14,
+      "weight": 400,
+      "text": "localhost",
+      "width": 58.421875
+    },
+    {
+      "fontSize": 14,
+      "weight": 400,
+      "text": "replica",
+      "width": 43.1875
+    },
+    {
+      "fontSize": 14,
+      "weight": 400,
+      "text": "Tiny RDM",
+      "width": 61.984375
+    },
+    {
+      "fontSize": 14,
+      "weight": 400,
+      "text": "中文🙂 alpha",
+      "width": 86.59375
+    },
+    {
+      "fontSize": 14,
+      "weight": 500,
+      "text": "localhost",
+      "width": 60.03125
+    },
+    {
+      "fontSize": 14,
+      "weight": 500,
+      "text": "replica",
+      "width": 44.453125
+    },
+    {
+      "fontSize": 14,
+      "weight": 500,
+      "text": "Tiny RDM",
+      "width": 63.109375
+    },
+    {
+      "fontSize": 14,
+      "weight": 500,
+      "text": "中文🙂 alpha",
+      "width": 87.40625
+    },
+    {
+      "fontSize": 14,
+      "weight": 600,
+      "text": "localhost",
+      "width": 61.640625
+    },
+    {
+      "fontSize": 14,
+      "weight": 600,
+      "text": "replica",
+      "width": 45.703125
+    },
+    {
+      "fontSize": 14,
+      "weight": 600,
+      "text": "Tiny RDM",
+      "width": 64.234375
+    },
+    {
+      "fontSize": 14,
+      "weight": 600,
+      "text": "中文🙂 alpha",
+      "width": 88.234375
+    },
+    {
+      "fontSize": 14,
+      "weight": 700,
+      "text": "localhost",
+      "width": 63.265625
+    },
+    {
+      "fontSize": 14,
+      "weight": 700,
+      "text": "replica",
+      "width": 46.96875
+    },
+    {
+      "fontSize": 14,
+      "weight": 700,
+      "text": "Tiny RDM",
+      "width": 65.34375
+    },
+    {
+      "fontSize": 14,
+      "weight": 700,
+      "text": "中文🙂 alpha",
+      "width": 89.046875
+    },
+    {
+      "fontSize": 14,
+      "weight": 800,
+      "text": "localhost",
+      "width": 64.875
+    },
+    {
+      "fontSize": 14,
+      "weight": 800,
+      "text": "replica",
+      "width": 48.234375
+    },
+    {
+      "fontSize": 14,
+      "weight": 800,
+      "text": "Tiny RDM",
+      "width": 66.46875
+    },
+    {
+      "fontSize": 14,
+      "weight": 800,
+      "text": "中文🙂 alpha",
+      "width": 89.859375
+    },
+    {
+      "fontSize": 14,
+      "weight": 900,
+      "text": "localhost",
+      "width": 66.484375
+    },
+    {
+      "fontSize": 14,
+      "weight": 900,
+      "text": "replica",
+      "width": 49.5
+    },
+    {
+      "fontSize": 14,
+      "weight": 900,
+      "text": "Tiny RDM",
+      "width": 67.59375
+    },
+    {
+      "fontSize": 14,
+      "weight": 900,
+      "text": "中文🙂 alpha",
+      "width": 90.671875
+    },
+    {
+      "fontSize": 15,
+      "weight": 100,
+      "text": "localhost",
+      "width": 60.171875
+    },
+    {
+      "fontSize": 15,
+      "weight": 100,
+      "text": "replica",
+      "width": 44.34375
+    },
+    {
+      "fontSize": 15,
+      "weight": 100,
+      "text": "Tiny RDM",
+      "width": 62.9375
+    },
+    {
+      "fontSize": 15,
+      "weight": 100,
+      "text": "中文🙂 alpha",
+      "width": 90.65625
+    },
+    {
+      "fontSize": 15,
+      "weight": 200,
+      "text": "localhost",
+      "width": 60.75
+    },
+    {
+      "fontSize": 15,
+      "weight": 200,
+      "text": "replica",
+      "width": 44.8125
+    },
+    {
+      "fontSize": 15,
+      "weight": 200,
+      "text": "Tiny RDM",
+      "width": 63.90625
+    },
+    {
+      "fontSize": 15,
+      "weight": 200,
+      "text": "中文🙂 alpha",
+      "width": 91.078125
+    },
+    {
+      "fontSize": 15,
+      "weight": 300,
+      "text": "localhost",
+      "width": 61.34375
+    },
+    {
+      "fontSize": 15,
+      "weight": 300,
+      "text": "replica",
+      "width": 45.28125
+    },
+    {
+      "fontSize": 15,
+      "weight": 300,
+      "text": "Tiny RDM",
+      "width": 64.859375
+    },
+    {
+      "fontSize": 15,
+      "weight": 300,
+      "text": "中文🙂 alpha",
+      "width": 91.5
+    },
+    {
+      "fontSize": 15,
+      "weight": 400,
+      "text": "localhost",
+      "width": 61.9375
+    },
+    {
+      "fontSize": 15,
+      "weight": 400,
+      "text": "replica",
+      "width": 45.75
+    },
+    {
+      "fontSize": 15,
+      "weight": 400,
+      "text": "Tiny RDM",
+      "width": 65.828125
+    },
+    {
+      "fontSize": 15,
+      "weight": 400,
+      "text": "中文🙂 alpha",
+      "width": 91.921875
+    },
+    {
+      "fontSize": 15,
+      "weight": 500,
+      "text": "localhost",
+      "width": 63.65625
+    },
+    {
+      "fontSize": 15,
+      "weight": 500,
+      "text": "replica",
+      "width": 47.109375
+    },
+    {
+      "fontSize": 15,
+      "weight": 500,
+      "text": "Tiny RDM",
+      "width": 67.03125
+    },
+    {
+      "fontSize": 15,
+      "weight": 500,
+      "text": "中文🙂 alpha",
+      "width": 92.78125
+    },
+    {
+      "fontSize": 15,
+      "weight": 600,
+      "text": "localhost",
+      "width": 65.390625
+    },
+    {
+      "fontSize": 15,
+      "weight": 600,
+      "text": "replica",
+      "width": 48.453125
+    },
+    {
+      "fontSize": 15,
+      "weight": 600,
+      "text": "Tiny RDM",
+      "width": 68.234375
+    },
+    {
+      "fontSize": 15,
+      "weight": 600,
+      "text": "中文🙂 alpha",
+      "width": 93.65625
+    },
+    {
+      "fontSize": 15,
+      "weight": 700,
+      "text": "localhost",
+      "width": 67.125
+    },
+    {
+      "fontSize": 15,
+      "weight": 700,
+      "text": "replica",
+      "width": 49.8125
+    },
+    {
+      "fontSize": 15,
+      "weight": 700,
+      "text": "Tiny RDM",
+      "width": 69.4375
+    },
+    {
+      "fontSize": 15,
+      "weight": 700,
+      "text": "中文🙂 alpha",
+      "width": 94.53125
+    },
+    {
+      "fontSize": 15,
+      "weight": 800,
+      "text": "localhost",
+      "width": 68.84375
+    },
+    {
+      "fontSize": 15,
+      "weight": 800,
+      "text": "replica",
+      "width": 51.171875
+    },
+    {
+      "fontSize": 15,
+      "weight": 800,
+      "text": "Tiny RDM",
+      "width": 70.625
+    },
+    {
+      "fontSize": 15,
+      "weight": 800,
+      "text": "中文🙂 alpha",
+      "width": 95.40625
+    },
+    {
+      "fontSize": 15,
+      "weight": 900,
+      "text": "localhost",
+      "width": 70.578125
+    },
+    {
+      "fontSize": 15,
+      "weight": 900,
+      "text": "replica",
+      "width": 52.515625
+    },
+    {
+      "fontSize": 15,
+      "weight": 900,
+      "text": "Tiny RDM",
+      "width": 71.828125
+    },
+    {
+      "fontSize": 15,
+      "weight": 900,
+      "text": "中文🙂 alpha",
+      "width": 96.28125
+    },
+    {
+      "fontSize": 18,
+      "weight": 100,
+      "text": "localhost",
+      "width": 70.25
+    },
+    {
+      "fontSize": 18,
+      "weight": 100,
+      "text": "replica",
+      "width": 51.6875
+    },
+    {
+      "fontSize": 18,
+      "weight": 100,
+      "text": "Tiny RDM",
+      "width": 73.859375
+    },
+    {
+      "fontSize": 18,
+      "weight": 100,
+      "text": "中文🙂 alpha",
+      "width": 106.28125
+    },
+    {
+      "fontSize": 18,
+      "weight": 200,
+      "text": "localhost",
+      "width": 71
+    },
+    {
+      "fontSize": 18,
+      "weight": 200,
+      "text": "replica",
+      "width": 52.28125
+    },
+    {
+      "fontSize": 18,
+      "weight": 200,
+      "text": "Tiny RDM",
+      "width": 75.03125
+    },
+    {
+      "fontSize": 18,
+      "weight": 200,
+      "text": "中文🙂 alpha",
+      "width": 106.796875
+    },
+    {
+      "fontSize": 18,
+      "weight": 300,
+      "text": "localhost",
+      "width": 71.75
+    },
+    {
+      "fontSize": 18,
+      "weight": 300,
+      "text": "replica",
+      "width": 52.875
+    },
+    {
+      "fontSize": 18,
+      "weight": 300,
+      "text": "Tiny RDM",
+      "width": 76.203125
+    },
+    {
+      "fontSize": 18,
+      "weight": 300,
+      "text": "中文🙂 alpha",
+      "width": 107.328125
+    },
+    {
+      "fontSize": 18,
+      "weight": 400,
+      "text": "localhost",
+      "width": 72.5
+    },
+    {
+      "fontSize": 18,
+      "weight": 400,
+      "text": "replica",
+      "width": 53.46875
+    },
+    {
+      "fontSize": 18,
+      "weight": 400,
+      "text": "Tiny RDM",
+      "width": 77.390625
+    },
+    {
+      "fontSize": 18,
+      "weight": 400,
+      "text": "中文🙂 alpha",
+      "width": 107.84375
+    },
+    {
+      "fontSize": 18,
+      "weight": 500,
+      "text": "localhost",
+      "width": 74.578125
+    },
+    {
+      "fontSize": 18,
+      "weight": 500,
+      "text": "replica",
+      "width": 55.109375
+    },
+    {
+      "fontSize": 18,
+      "weight": 500,
+      "text": "Tiny RDM",
+      "width": 78.828125
+    },
+    {
+      "fontSize": 18,
+      "weight": 500,
+      "text": "中文🙂 alpha",
+      "width": 108.890625
+    },
+    {
+      "fontSize": 18,
+      "weight": 600,
+      "text": "localhost",
+      "width": 76.671875
+    },
+    {
+      "fontSize": 18,
+      "weight": 600,
+      "text": "replica",
+      "width": 56.734375
+    },
+    {
+      "fontSize": 18,
+      "weight": 600,
+      "text": "Tiny RDM",
+      "width": 80.265625
+    },
+    {
+      "fontSize": 18,
+      "weight": 600,
+      "text": "中文🙂 alpha",
+      "width": 109.953125
+    },
+    {
+      "fontSize": 18,
+      "weight": 700,
+      "text": "localhost",
+      "width": 78.765625
+    },
+    {
+      "fontSize": 18,
+      "weight": 700,
+      "text": "replica",
+      "width": 58.375
+    },
+    {
+      "fontSize": 18,
+      "weight": 700,
+      "text": "Tiny RDM",
+      "width": 81.703125
+    },
+    {
+      "fontSize": 18,
+      "weight": 700,
+      "text": "中文🙂 alpha",
+      "width": 111.015625
+    },
+    {
+      "fontSize": 18,
+      "weight": 800,
+      "text": "localhost",
+      "width": 80.84375
+    },
+    {
+      "fontSize": 18,
+      "weight": 800,
+      "text": "replica",
+      "width": 60
+    },
+    {
+      "fontSize": 18,
+      "weight": 800,
+      "text": "Tiny RDM",
+      "width": 83.140625
+    },
+    {
+      "fontSize": 18,
+      "weight": 800,
+      "text": "中文🙂 alpha",
+      "width": 112.0625
+    },
+    {
+      "fontSize": 18,
+      "weight": 900,
+      "text": "localhost",
+      "width": 82.9375
+    },
+    {
+      "fontSize": 18,
+      "weight": 900,
+      "text": "replica",
+      "width": 61.640625
+    },
+    {
+      "fontSize": 18,
+      "weight": 900,
+      "text": "Tiny RDM",
+      "width": 84.578125
+    },
+    {
+      "fontSize": 18,
+      "weight": 900,
+      "text": "中文🙂 alpha",
+      "width": 113.125
+    },
+    {
+      "fontSize": 24,
+      "weight": 100,
+      "text": "localhost",
+      "width": 87.859375
+    },
+    {
+      "fontSize": 24,
+      "weight": 100,
+      "text": "replica",
+      "width": 64.296875
+    },
+    {
+      "fontSize": 24,
+      "weight": 100,
+      "text": "Tiny RDM",
+      "width": 94.6875
+    },
+    {
+      "fontSize": 24,
+      "weight": 100,
+      "text": "中文🙂 alpha",
+      "width": 133.34375
+    },
+    {
+      "fontSize": 24,
+      "weight": 200,
+      "text": "localhost",
+      "width": 89.71875
+    },
+    {
+      "fontSize": 24,
+      "weight": 200,
+      "text": "replica",
+      "width": 65.6875
+    },
+    {
+      "fontSize": 24,
+      "weight": 200,
+      "text": "Tiny RDM",
+      "width": 96.65625
+    },
+    {
+      "fontSize": 24,
+      "weight": 200,
+      "text": "中文🙂 alpha",
+      "width": 134.296875
+    },
+    {
+      "fontSize": 24,
+      "weight": 300,
+      "text": "localhost",
+      "width": 91.59375
+    },
+    {
+      "fontSize": 24,
+      "weight": 300,
+      "text": "replica",
+      "width": 67.0625
+    },
+    {
+      "fontSize": 24,
+      "weight": 300,
+      "text": "Tiny RDM",
+      "width": 98.609375
+    },
+    {
+      "fontSize": 24,
+      "weight": 300,
+      "text": "中文🙂 alpha",
+      "width": 135.265625
+    },
+    {
+      "fontSize": 24,
+      "weight": 400,
+      "text": "localhost",
+      "width": 93.46875
+    },
+    {
+      "fontSize": 24,
+      "weight": 400,
+      "text": "replica",
+      "width": 68.453125
+    },
+    {
+      "fontSize": 24,
+      "weight": 400,
+      "text": "Tiny RDM",
+      "width": 100.578125
+    },
+    {
+      "fontSize": 24,
+      "weight": 400,
+      "text": "中文🙂 alpha",
+      "width": 136.21875
+    },
+    {
+      "fontSize": 24,
+      "weight": 500,
+      "text": "localhost",
+      "width": 96.5625
+    },
+    {
+      "fontSize": 24,
+      "weight": 500,
+      "text": "replica",
+      "width": 70.875
+    },
+    {
+      "fontSize": 24,
+      "weight": 500,
+      "text": "Tiny RDM",
+      "width": 102.5
+    },
+    {
+      "fontSize": 24,
+      "weight": 500,
+      "text": "中文🙂 alpha",
+      "width": 137.859375
+    },
+    {
+      "fontSize": 24,
+      "weight": 600,
+      "text": "localhost",
+      "width": 99.671875
+    },
+    {
+      "fontSize": 24,
+      "weight": 600,
+      "text": "replica",
+      "width": 73.3125
+    },
+    {
+      "fontSize": 24,
+      "weight": 600,
+      "text": "Tiny RDM",
+      "width": 104.4375
+    },
+    {
+      "fontSize": 24,
+      "weight": 600,
+      "text": "中文🙂 alpha",
+      "width": 139.484375
+    },
+    {
+      "fontSize": 24,
+      "weight": 700,
+      "text": "localhost",
+      "width": 102.78125
+    },
+    {
+      "fontSize": 24,
+      "weight": 700,
+      "text": "replica",
+      "width": 75.734375
+    },
+    {
+      "fontSize": 24,
+      "weight": 700,
+      "text": "Tiny RDM",
+      "width": 106.375
+    },
+    {
+      "fontSize": 24,
+      "weight": 700,
+      "text": "中文🙂 alpha",
+      "width": 141.109375
+    },
+    {
+      "fontSize": 24,
+      "weight": 800,
+      "text": "localhost",
+      "width": 105.875
+    },
+    {
+      "fontSize": 24,
+      "weight": 800,
+      "text": "replica",
+      "width": 78.171875
+    },
+    {
+      "fontSize": 24,
+      "weight": 800,
+      "text": "Tiny RDM",
+      "width": 108.296875
+    },
+    {
+      "fontSize": 24,
+      "weight": 800,
+      "text": "中文🙂 alpha",
+      "width": 142.75
+    },
+    {
+      "fontSize": 24,
+      "weight": 900,
+      "text": "localhost",
+      "width": 108.984375
+    },
+    {
+      "fontSize": 24,
+      "weight": 900,
+      "text": "replica",
+      "width": 80.609375
+    },
+    {
+      "fontSize": 24,
+      "weight": 900,
+      "text": "Tiny RDM",
+      "width": 110.234375
+    },
+    {
+      "fontSize": 24,
+      "weight": 900,
+      "text": "中文🙂 alpha",
+      "width": 144.375
+    },
+    {
+      "fontSize": 32,
+      "weight": 100,
+      "text": "localhost",
+      "width": 116.28125
+    },
+    {
+      "fontSize": 32,
+      "weight": 100,
+      "text": "replica",
+      "width": 85.03125
+    },
+    {
+      "fontSize": 32,
+      "weight": 100,
+      "text": "Tiny RDM",
+      "width": 125.921875
+    },
+    {
+      "fontSize": 32,
+      "weight": 100,
+      "text": "中文🙂 alpha",
+      "width": 177.203125
+    },
+    {
+      "fontSize": 32,
+      "weight": 200,
+      "text": "localhost",
+      "width": 119.046875
+    },
+    {
+      "fontSize": 32,
+      "weight": 200,
+      "text": "replica",
+      "width": 87.0625
+    },
+    {
+      "fontSize": 32,
+      "weight": 200,
+      "text": "Tiny RDM",
+      "width": 128.65625
+    },
+    {
+      "fontSize": 32,
+      "weight": 200,
+      "text": "中文🙂 alpha",
+      "width": 178.5625
+    },
+    {
+      "fontSize": 32,
+      "weight": 300,
+      "text": "localhost",
+      "width": 121.8125
+    },
+    {
+      "fontSize": 32,
+      "weight": 300,
+      "text": "replica",
+      "width": 89.09375
+    },
+    {
+      "fontSize": 32,
+      "weight": 300,
+      "text": "Tiny RDM",
+      "width": 131.390625
+    },
+    {
+      "fontSize": 32,
+      "weight": 300,
+      "text": "中文🙂 alpha",
+      "width": 179.9375
+    },
+    {
+      "fontSize": 32,
+      "weight": 400,
+      "text": "localhost",
+      "width": 124.5625
+    },
+    {
+      "fontSize": 32,
+      "weight": 400,
+      "text": "replica",
+      "width": 91.109375
+    },
+    {
+      "fontSize": 32,
+      "weight": 400,
+      "text": "Tiny RDM",
+      "width": 134.125
+    },
+    {
+      "fontSize": 32,
+      "weight": 400,
+      "text": "中文🙂 alpha",
+      "width": 181.3125
+    },
+    {
+      "fontSize": 32,
+      "weight": 500,
+      "text": "localhost",
+      "width": 128.8125
+    },
+    {
+      "fontSize": 32,
+      "weight": 500,
+      "text": "replica",
+      "width": 94.4375
+    },
+    {
+      "fontSize": 32,
+      "weight": 500,
+      "text": "Tiny RDM",
+      "width": 136.71875
+    },
+    {
+      "fontSize": 32,
+      "weight": 500,
+      "text": "中文🙂 alpha",
+      "width": 183.546875
+    },
+    {
+      "fontSize": 32,
+      "weight": 600,
+      "text": "localhost",
+      "width": 133.046875
+    },
+    {
+      "fontSize": 32,
+      "weight": 600,
+      "text": "replica",
+      "width": 97.75
+    },
+    {
+      "fontSize": 32,
+      "weight": 600,
+      "text": "Tiny RDM",
+      "width": 139.28125
+    },
+    {
+      "fontSize": 32,
+      "weight": 600,
+      "text": "中文🙂 alpha",
+      "width": 185.796875
+    },
+    {
+      "fontSize": 32,
+      "weight": 700,
+      "text": "localhost",
+      "width": 137.28125
+    },
+    {
+      "fontSize": 32,
+      "weight": 700,
+      "text": "replica",
+      "width": 101.078125
+    },
+    {
+      "fontSize": 32,
+      "weight": 700,
+      "text": "Tiny RDM",
+      "width": 141.859375
+    },
+    {
+      "fontSize": 32,
+      "weight": 700,
+      "text": "中文🙂 alpha",
+      "width": 188.03125
+    },
+    {
+      "fontSize": 32,
+      "weight": 800,
+      "text": "localhost",
+      "width": 141.53125
+    },
+    {
+      "fontSize": 32,
+      "weight": 800,
+      "text": "replica",
+      "width": 104.40625
+    },
+    {
+      "fontSize": 32,
+      "weight": 800,
+      "text": "Tiny RDM",
+      "width": 144.453125
+    },
+    {
+      "fontSize": 32,
+      "weight": 800,
+      "text": "中文🙂 alpha",
+      "width": 190.28125
+    },
+    {
+      "fontSize": 32,
+      "weight": 900,
+      "text": "localhost",
+      "width": 145.765625
+    },
+    {
+      "fontSize": 32,
+      "weight": 900,
+      "text": "replica",
+      "width": 107.71875
+    },
+    {
+      "fontSize": 32,
+      "weight": 900,
+      "text": "Tiny RDM",
+      "width": 147.015625
+    },
+    {
+      "fontSize": 32,
+      "weight": 900,
+      "text": "中文🙂 alpha",
+      "width": 192.515625
+    }
+  ],
+  "mixedSamples": [
+    {
+      "fontSize": 12,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 400
+        },
+        {
+          "text": "replica",
+          "weight": 800
+        }
+      ],
+      "width": 96.84375
+    },
+    {
+      "fontSize": 12,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 800
+        },
+        {
+          "text": "replica",
+          "weight": 400
+        }
+      ],
+      "width": 97.671875
+    },
+    {
+      "fontSize": 13,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 400
+        },
+        {
+          "text": "replica",
+          "weight": 800
+        }
+      ],
+      "width": 103.625
+    },
+    {
+      "fontSize": 13,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 800
+        },
+        {
+          "text": "replica",
+          "weight": 400
+        }
+      ],
+      "width": 104.515625
+    },
+    {
+      "fontSize": 14,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 400
+        },
+        {
+          "text": "replica",
+          "weight": 800
+        }
+      ],
+      "width": 110.4375
+    },
+    {
+      "fontSize": 14,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 800
+        },
+        {
+          "text": "replica",
+          "weight": 400
+        }
+      ],
+      "width": 111.40625
+    },
+    {
+      "fontSize": 15,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 400
+        },
+        {
+          "text": "replica",
+          "weight": 800
+        }
+      ],
+      "width": 117.078125
+    },
+    {
+      "fontSize": 15,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 800
+        },
+        {
+          "text": "replica",
+          "weight": 400
+        }
+      ],
+      "width": 118.109375
+    },
+    {
+      "fontSize": 18,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 400
+        },
+        {
+          "text": "replica",
+          "weight": 800
+        }
+      ],
+      "width": 137.046875
+    },
+    {
+      "fontSize": 18,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 800
+        },
+        {
+          "text": "replica",
+          "weight": 400
+        }
+      ],
+      "width": 138.328125
+    },
+    {
+      "fontSize": 24,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 400
+        },
+        {
+          "text": "replica",
+          "weight": 800
+        }
+      ],
+      "width": 176.953125
+    },
+    {
+      "fontSize": 24,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 800
+        },
+        {
+          "text": "replica",
+          "weight": 400
+        }
+      ],
+      "width": 179.3125
+    },
+    {
+      "fontSize": 32,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 400
+        },
+        {
+          "text": "replica",
+          "weight": 800
+        }
+      ],
+      "width": 235.9375
+    },
+    {
+      "fontSize": 32,
+      "runs": [
+        {
+          "text": "localhost ",
+          "weight": 800
+        },
+        {
+          "text": "replica",
+          "weight": 400
+        }
+      ],
+      "width": 239.296875
+    }
+  ]
+}

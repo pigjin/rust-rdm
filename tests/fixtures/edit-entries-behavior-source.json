@@ -1,0 +1,666 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Unchanged content components with controlled local API responses; actual field/editor/button events. Score samples use the same parseFloat and JSON null-to-Go-zero boundary. Does not prove native Monaco/IME, all races, or all formats.",
+  "checks": [
+    {
+      "name": "hash-failure-closes",
+      "request": {
+        "path": "/api/browser/set-hash-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aahash",
+          "field": "old",
+          "newField": "old",
+          "value": "next",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      },
+      "open": false,
+      "enabled": null,
+      "reads": [],
+      "tabs": [
+        {
+          "key": "aahash",
+          "value": [
+            {
+              "k": "old",
+              "v": "before"
+            },
+            {
+              "k": "other",
+              "v": "kept"
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "hash-pinned-success",
+      "request": {
+        "path": "/api/browser/set-hash-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aahash",
+          "field": "old",
+          "newField": "old",
+          "value": "next",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      },
+      "open": true,
+      "enabled": false,
+      "reads": [
+        {
+          "path": "/api/browser/get-key-summary",
+          "body": {
+            "server": "localhost",
+            "db": 0,
+            "key": "aahash"
+          }
+        }
+      ],
+      "tabs": [
+        {
+          "key": "aahash",
+          "value": [
+            {
+              "k": "old",
+              "v": "next"
+            },
+            {
+              "k": "other",
+              "v": "kept"
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "list-failure-closes",
+      "request": {
+        "path": "/api/browser/set-list-item",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aalist",
+          "index": 0,
+          "value": "next",
+          "decode": "None",
+          "format": "Raw"
+        }
+      },
+      "open": false,
+      "enabled": null,
+      "reads": [],
+      "tabs": [
+        {
+          "key": "aalist",
+          "value": [
+            {
+              "index": 0,
+              "v": "before"
+            },
+            {
+              "index": 1,
+              "v": "kept"
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "list-pinned-success",
+      "request": {
+        "path": "/api/browser/set-list-item",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aalist",
+          "index": 0,
+          "value": "next",
+          "decode": "None",
+          "format": "Raw"
+        }
+      },
+      "open": true,
+      "enabled": true,
+      "reads": [
+        {
+          "path": "/api/browser/get-key-summary",
+          "body": {
+            "server": "localhost",
+            "db": 0,
+            "key": "aalist"
+          }
+        }
+      ],
+      "tabs": [
+        {
+          "key": "aalist",
+          "value": [
+            {
+              "index": 0,
+              "v": "next"
+            },
+            {
+              "index": 1,
+              "v": "kept"
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "set-failure-closes",
+      "request": {
+        "path": "/api/browser/update-set-item",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aaset",
+          "value": "before",
+          "newValue": "next",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      },
+      "open": false,
+      "enabled": null,
+      "reads": [],
+      "tabs": [
+        {
+          "key": "aaset",
+          "value": [
+            {
+              "v": "before"
+            },
+            {
+              "v": "kept"
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "set-pinned-success",
+      "request": {
+        "path": "/api/browser/update-set-item",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aaset",
+          "value": "before",
+          "newValue": "next",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      },
+      "open": true,
+      "enabled": true,
+      "reads": [
+        {
+          "path": "/api/browser/get-key-summary",
+          "body": {
+            "server": "localhost",
+            "db": 0,
+            "key": "aaset"
+          }
+        }
+      ],
+      "tabs": [
+        {
+          "key": "aaset",
+          "value": [
+            {
+              "v": "kept"
+            },
+            {
+              "v": "next"
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "zset-failure-closes",
+      "request": {
+        "path": "/api/browser/update-zset-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aazset",
+          "value": "before",
+          "newValue": "next",
+          "score": 1,
+          "decode": "None",
+          "format": "Raw"
+        }
+      },
+      "open": false,
+      "enabled": null,
+      "reads": [],
+      "tabs": [
+        {
+          "key": "aazset",
+          "value": [
+            {
+              "v": "before",
+              "s": 1
+            },
+            {
+              "v": "kept",
+              "s": 3
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "zset-pinned-success",
+      "request": {
+        "path": "/api/browser/update-zset-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aazset",
+          "value": "before",
+          "newValue": "next",
+          "score": 1,
+          "decode": "None",
+          "format": "Raw"
+        }
+      },
+      "open": true,
+      "enabled": true,
+      "reads": [
+        {
+          "path": "/api/browser/get-key-summary",
+          "body": {
+            "server": "localhost",
+            "db": 0,
+            "key": "aazset"
+          }
+        }
+      ],
+      "tabs": [
+        {
+          "key": "aazset",
+          "value": [
+            {
+              "v": "next",
+              "s": 1
+            },
+            {
+              "v": "kept",
+              "s": 3
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "hash-empty-value",
+      "request": {
+        "path": "/api/browser/set-hash-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aahash",
+          "field": "old",
+          "newField": "old",
+          "value": "",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      },
+      "open": false,
+      "enabled": null,
+      "reads": [],
+      "tabs": [
+        {
+          "key": "aahash",
+          "value": [
+            {
+              "k": "old",
+              "v": "before"
+            },
+            {
+              "k": "other",
+              "v": "kept"
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "list-empty-value",
+      "request": {
+        "path": "/api/browser/set-list-item",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aalist",
+          "index": 0,
+          "value": "before",
+          "decode": "None",
+          "format": "Raw"
+        }
+      },
+      "open": false,
+      "enabled": null,
+      "reads": [],
+      "tabs": [
+        {
+          "key": "aalist",
+          "value": [
+            {
+              "index": 0,
+              "v": "before"
+            },
+            {
+              "index": 1,
+              "v": "kept"
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "set-empty-value",
+      "request": {
+        "path": "/api/browser/update-set-item",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aaset",
+          "value": "before",
+          "newValue": "",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      },
+      "open": false,
+      "enabled": null,
+      "reads": [],
+      "tabs": [
+        {
+          "key": "aaset",
+          "value": [
+            {
+              "v": "before"
+            },
+            {
+              "v": "kept"
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "zset-empty-value",
+      "request": {
+        "path": "/api/browser/update-zset-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aazset",
+          "value": "before",
+          "newValue": "before",
+          "score": 2.5,
+          "decode": "None",
+          "format": "Raw"
+        }
+      },
+      "open": false,
+      "enabled": null,
+      "reads": [],
+      "tabs": [
+        {
+          "key": "aazset",
+          "value": [
+            {
+              "v": "before",
+              "s": 1
+            },
+            {
+              "v": "kept",
+              "s": 3
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "zset-invalid-score",
+      "request": {
+        "path": "/api/browser/update-zset-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aazset",
+          "value": "before",
+          "newValue": "before",
+          "score": null,
+          "decode": "None",
+          "format": "Raw"
+        }
+      },
+      "open": false,
+      "enabled": null,
+      "reads": [],
+      "tabs": [
+        {
+          "key": "aazset",
+          "value": [
+            {
+              "v": "before",
+              "s": 1
+            },
+            {
+              "v": "kept",
+              "s": 3
+            }
+          ],
+          "length": 2
+        }
+      ]
+    },
+    {
+      "name": "unpinned-closes-before-io",
+      "closed": true,
+      "request": {
+        "path": "/api/browser/set-hash-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aahash",
+          "field": "old",
+          "newField": "old",
+          "value": "pending",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      }
+    },
+    {
+      "name": "pinned-save-enabled-during-io",
+      "enabled": true,
+      "request": {
+        "path": "/api/browser/set-hash-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aahash",
+          "field": "old",
+          "newField": "old",
+          "value": "pending",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      }
+    },
+    {
+      "name": "format-change-discards-draft",
+      "conversion": {
+        "value": "before",
+        "decode": "None",
+        "format": "JSON"
+      },
+      "field": "old"
+    }
+  ],
+  "scoreSamples": [
+    {
+      "input": "",
+      "value": 0
+    },
+    {
+      "input": "invalid",
+      "value": 0
+    },
+    {
+      "input": "2.5suffix",
+      "value": 2.5
+    },
+    {
+      "input": "0x10",
+      "value": 0
+    },
+    {
+      "input": "+2.5e-2x",
+      "value": 0.025
+    },
+    {
+      "input": "2e+",
+      "value": 2
+    },
+    {
+      "input": "-.5",
+      "value": -0.5
+    },
+    {
+      "input": "Infinity",
+      "value": 0
+    },
+    {
+      "input": "-Infinity",
+      "value": 0
+    },
+    {
+      "input": "1e999",
+      "value": 0
+    },
+    {
+      "input": "-0",
+      "value": 0
+    },
+    {
+      "input": "01",
+      "value": 1
+    },
+    {
+      "input": "1_2",
+      "value": 1
+    },
+    {
+      "input": "+",
+      "value": 0
+    },
+    {
+      "input": "  7tail",
+      "value": 7
+    },
+    {
+      "input": "1",
+      "value": 0
+    },
+    {
+      "input": "﻿1",
+      "value": 1
+    },
+    {
+      "input": " 1",
+      "value": 1
+    },
+    {
+      "input": " 1",
+      "value": 1
+    },
+    {
+      "input": "​1",
+      "value": 0
+    },
+    {
+      "input": "\u001c1",
+      "value": 0
+    },
+    {
+      "input": " 1",
+      "value": 1
+    },
+    {
+      "input": "1.2.3",
+      "value": 1.2
+    },
+    {
+      "input": "1E-2end",
+      "value": 0.01
+    },
+    {
+      "input": "+.5e+2x",
+      "value": 50
+    },
+    {
+      "input": "NaN",
+      "value": 0
+    },
+    {
+      "input": "+Infinity",
+      "value": 0
+    },
+    {
+      "input": "infinity",
+      "value": 0
+    },
+    {
+      "input": "1e-999",
+      "value": 0
+    },
+    {
+      "input": "\t\n-1tail",
+      "value": -1
+    }
+  ]
+}

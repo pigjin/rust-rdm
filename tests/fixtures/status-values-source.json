@@ -1,0 +1,422 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "rawReport": "outputs/source-probes/status-values-original/raw.json",
+  "rawSHA256": "562d425021221634a2e3bc1cd033c5376623149a819dde74ba457222552d9eef",
+  "files": [
+    {
+      "path": "outputs/source-probes/status-values-original/ContentServerStatus.vue",
+      "sha256": "1cb4d3e68a206c96ce6df367066be94117fc27305ece068fef0bfe5c3d6a9ac2"
+    },
+    {
+      "path": "outputs/source-probes/status-values-original/byte_convert.js",
+      "sha256": "1f117eb7508dac03790bb9cabfcae66b274c3f8c9a95f90729e6290ffe2740f9"
+    },
+    {
+      "path": "outputs/source-probes/status-values-original/raw.json",
+      "sha256": "562d425021221634a2e3bc1cd033c5376623149a819dde74ba457222552d9eef"
+    },
+    {
+      "path": "outputs/source-probes/status-values-original/source-evaluate.mjs",
+      "sha256": "c1c7f39ad0692a4e802fcbaff5320e8aeb39a5b52a88ae64ed866ec30a35b4fa"
+    }
+  ],
+  "substitutions": [
+    "Vue computed/ref unwrapped",
+    "get, slice, toRaw and cloneDeep supplied as pure data operations",
+    "dayjs and chrono clocks fixed at12:00:00",
+    "RdmApp translation returns localization keys",
+    "Only numeric status inputs used, not arbitrary INFO error formats"
+  ],
+  "specReferences": [
+    "https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-number.prototype.tofixed",
+    "https://tc39.es/ecma262/multipage/global-object.html#sec-parseint-string-radix"
+  ],
+  "records": {
+    "uptime": [
+      {
+        "seconds": 0,
+        "value": 0,
+        "unitKey": "common.unit_minute"
+      },
+      {
+        "seconds": 1,
+        "value": 0,
+        "unitKey": "common.unit_minute"
+      },
+      {
+        "seconds": 59,
+        "value": 0,
+        "unitKey": "common.unit_minute"
+      },
+      {
+        "seconds": 60,
+        "value": 1,
+        "unitKey": "common.unit_minute"
+      },
+      {
+        "seconds": 61,
+        "value": 1,
+        "unitKey": "common.unit_minute"
+      },
+      {
+        "seconds": 3599,
+        "value": 59,
+        "unitKey": "common.unit_minute"
+      },
+      {
+        "seconds": 3600,
+        "value": 1,
+        "unitKey": "common.unit_hour"
+      },
+      {
+        "seconds": 86399,
+        "value": 23,
+        "unitKey": "common.unit_hour"
+      },
+      {
+        "seconds": 86400,
+        "value": 24,
+        "unitKey": "common.unit_hour"
+      },
+      {
+        "seconds": 172800,
+        "value": 48,
+        "unitKey": "common.unit_hour"
+      },
+      {
+        "seconds": 215999,
+        "value": 59,
+        "unitKey": "common.unit_hour"
+      },
+      {
+        "seconds": 216000,
+        "value": 2,
+        "unitKey": "common.unit_day"
+      },
+      {
+        "seconds": 259200,
+        "value": 3,
+        "unitKey": "common.unit_day"
+      },
+      {
+        "seconds": 604800,
+        "value": 7,
+        "unitKey": "common.unit_day"
+      }
+    ],
+    "memory": [
+      {
+        "bytes": 0,
+        "value": "0",
+        "unit": "B",
+        "expected": "0 B"
+      },
+      {
+        "bytes": 1,
+        "value": "1",
+        "unit": "B",
+        "expected": "1 B"
+      },
+      {
+        "bytes": 1023,
+        "value": "1023",
+        "unit": "B",
+        "expected": "1023 B"
+      },
+      {
+        "bytes": 1024,
+        "value": "1",
+        "unit": "KB",
+        "expected": "1 KB"
+      },
+      {
+        "bytes": 1152,
+        "value": "1.13",
+        "unit": "KB",
+        "expected": "1.13 KB"
+      },
+      {
+        "bytes": 1280,
+        "value": "1.25",
+        "unit": "KB",
+        "expected": "1.25 KB"
+      },
+      {
+        "bytes": 1408,
+        "value": "1.38",
+        "unit": "KB",
+        "expected": "1.38 KB"
+      },
+      {
+        "bytes": 1536,
+        "value": "1.5",
+        "unit": "KB",
+        "expected": "1.5 KB"
+      },
+      {
+        "bytes": 2624,
+        "value": "2.56",
+        "unit": "KB",
+        "expected": "2.56 KB"
+      },
+      {
+        "bytes": 11520,
+        "value": "11.25",
+        "unit": "KB",
+        "expected": "11.25 KB"
+      },
+      {
+        "bytes": 1048576,
+        "value": "1",
+        "unit": "MB",
+        "expected": "1 MB"
+      },
+      {
+        "bytes": 1179648,
+        "value": "1.13",
+        "unit": "MB",
+        "expected": "1.13 MB"
+      },
+      {
+        "bytes": 1180160,
+        "value": "1.13",
+        "unit": "MB",
+        "expected": "1.13 MB"
+      },
+      {
+        "bytes": 10485760,
+        "value": "10",
+        "unit": "MB",
+        "expected": "10 MB"
+      },
+      {
+        "bytes": 1073741824,
+        "value": "1",
+        "unit": "GB",
+        "expected": "1 GB"
+      },
+      {
+        "bytes": 1190133760,
+        "value": "1.11",
+        "unit": "GB",
+        "expected": "1.11 GB"
+      },
+      {
+        "bytes": 1099511627776,
+        "value": "1",
+        "unit": "TB",
+        "expected": "1 TB"
+      },
+      {
+        "bytes": 1125899906842624,
+        "value": "1024",
+        "unit": "TB",
+        "expected": "1024 TB"
+      }
+    ],
+    "chartBytes": [
+      {
+        "bytes": -1,
+        "expected": "0B"
+      },
+      {
+        "bytes": 0,
+        "expected": "0B"
+      },
+      {
+        "bytes": 0.5,
+        "expected": "NaN"
+      },
+      {
+        "bytes": 1,
+        "expected": "1B"
+      },
+      {
+        "bytes": 12,
+        "expected": "12B"
+      },
+      {
+        "bytes": 1023,
+        "expected": "1023B"
+      },
+      {
+        "bytes": 1024,
+        "expected": "1KB"
+      },
+      {
+        "bytes": 1152,
+        "expected": "1.1KB"
+      },
+      {
+        "bytes": 1280,
+        "expected": "1.3KB"
+      },
+      {
+        "bytes": 1536,
+        "expected": "1.5KB"
+      },
+      {
+        "bytes": 1048576,
+        "expected": "1MB"
+      },
+      {
+        "bytes": 1179648,
+        "expected": "1.1MB"
+      },
+      {
+        "bytes": 1073741824,
+        "expected": "1GB"
+      },
+      {
+        "bytes": 1099511627776,
+        "expected": "1TB"
+      }
+    ],
+    "integerParsing": [
+      {
+        "raw": "0",
+        "value": 0,
+        "negativeZero": false
+      },
+      {
+        "raw": "0.75",
+        "value": 0,
+        "negativeZero": false
+      },
+      {
+        "raw": "1.25",
+        "value": 1,
+        "negativeZero": false
+      },
+      {
+        "raw": "11.90",
+        "value": 11,
+        "negativeZero": false
+      },
+      {
+        "raw": "2048.75",
+        "value": 2048,
+        "negativeZero": false
+      },
+      {
+        "raw": "2.5",
+        "value": 2,
+        "negativeZero": false
+      },
+      {
+        "raw": "-0.75",
+        "value": 0,
+        "negativeZero": true
+      },
+      {
+        "raw": "  +12.75kb",
+        "value": 12,
+        "negativeZero": false
+      },
+      {
+        "raw": "1e3",
+        "value": 1,
+        "negativeZero": false
+      },
+      {
+        "raw": "0012",
+        "value": 12,
+        "negativeZero": false
+      },
+      {
+        "raw": "0x10",
+        "value": 16,
+        "negativeZero": false
+      },
+      {
+        "raw": "-0X10",
+        "value": -16,
+        "negativeZero": false
+      },
+      {
+        "raw": "0b10",
+        "value": 0,
+        "negativeZero": false
+      },
+      {
+        "raw": "17foo",
+        "value": 17,
+        "negativeZero": false
+      },
+      {
+        "raw": "",
+        "value": null,
+        "negativeZero": false
+      },
+      {
+        "raw": "foo",
+        "value": null,
+        "negativeZero": false
+      },
+      {
+        "raw": "Infinity",
+        "value": null,
+        "negativeZero": false
+      },
+      {
+        "raw": "18446744073709551615",
+        "value": 18446744073709552000,
+        "negativeZero": false
+      },
+      {
+        "raw": "9007199254740993",
+        "value": 9007199254740992,
+        "negativeZero": false
+      },
+      {
+        "raw": "﻿42",
+        "value": 42,
+        "negativeZero": false
+      },
+      {
+        "raw": "42",
+        "value": null,
+        "negativeZero": false
+      }
+    ],
+    "samples": [
+      {
+        "raw": "0.75",
+        "input": 0,
+        "output": 0,
+        "historyLength": 1
+      },
+      {
+        "raw": "1.25",
+        "input": 1,
+        "output": 1,
+        "historyLength": 2
+      },
+      {
+        "raw": "11.90",
+        "input": 11,
+        "output": 11,
+        "historyLength": 3
+      },
+      {
+        "raw": "2048.75",
+        "input": 2048,
+        "output": 2048,
+        "historyLength": 4
+      },
+      {
+        "raw": "0.5",
+        "input": 0,
+        "output": 0,
+        "historyLength": 5
+      },
+      {
+        "raw": "2.5",
+        "input": 2,
+        "output": 2,
+        "historyLength": 5
+      }
+    ]
+  },
+  "scope": "Pinned original component computation,byte functions andactual _updateChart executed withcontrolled pure wrappers. No original native/rendered scene orchart geometry acceptance."
+}

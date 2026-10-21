@@ -1,0 +1,613 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "source": "backend/types/connection.go and yaml.v3 used by backend/storage/connections.go",
+  "records": [
+    {
+      "name": "name-only",
+      "yaml": "- name: minimal\n",
+      "loaded": {
+        "addr": "",
+        "alias": {},
+        "cluster": {
+          "enable": false
+        },
+        "connTimeout": 0,
+        "connections": [],
+        "dbFilterList": [],
+        "dbFilterType": "",
+        "defaultFilter": "",
+        "execTimeout": 0,
+        "group": "",
+        "keySeparator": "",
+        "keyView": 0,
+        "lastDB": 0,
+        "loadSize": 0,
+        "markColor": "",
+        "name": "minimal",
+        "network": "",
+        "password": "",
+        "port": 0,
+        "proxy": {
+          "addr": "",
+          "password": "",
+          "port": 0,
+          "schema": "",
+          "type": 0,
+          "username": ""
+        },
+        "refreshInterval": 0,
+        "sentinel": {
+          "enable": false,
+          "master": "",
+          "password": "",
+          "username": ""
+        },
+        "sock": "",
+        "ssh": {
+          "addr": "",
+          "enable": false,
+          "loginType": "",
+          "passphrase": "",
+          "password": "",
+          "pkFile": "",
+          "port": 0,
+          "username": ""
+        },
+        "ssl": {
+          "allowInsecure": false,
+          "caFile": "",
+          "certFile": "",
+          "enable": false,
+          "keyFile": "",
+          "sni": ""
+        },
+        "type": "",
+        "username": ""
+      },
+      "rpc": {
+        "name": "minimal",
+        "lastDB": 0,
+        "dbFilterType": "",
+        "dbFilterList": null,
+        "ssl": {},
+        "ssh": {},
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {}
+      },
+      "form": {
+        "name": "minimal",
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "ssl": {},
+        "ssh": {
+          "loginType": "pwd"
+        },
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {
+          "auth": false
+        },
+        "lastDB": 0
+      },
+      "formBeforeWatch": {
+        "name": "minimal",
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "ssl": {},
+        "ssh": {},
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {},
+        "lastDB": 0
+      }
+    },
+    {
+      "name": "unix",
+      "yaml": "- name: socket\n  network: unix\n  sock: /tmp/redis.sock\n",
+      "loaded": {
+        "addr": "",
+        "alias": {},
+        "cluster": {
+          "enable": false
+        },
+        "connTimeout": 0,
+        "connections": [],
+        "dbFilterList": [],
+        "dbFilterType": "",
+        "defaultFilter": "",
+        "execTimeout": 0,
+        "group": "",
+        "keySeparator": "",
+        "keyView": 0,
+        "lastDB": 0,
+        "loadSize": 0,
+        "markColor": "",
+        "name": "socket",
+        "network": "unix",
+        "password": "",
+        "port": 0,
+        "proxy": {
+          "addr": "",
+          "password": "",
+          "port": 0,
+          "schema": "",
+          "type": 0,
+          "username": ""
+        },
+        "refreshInterval": 0,
+        "sentinel": {
+          "enable": false,
+          "master": "",
+          "password": "",
+          "username": ""
+        },
+        "sock": "/tmp/redis.sock",
+        "ssh": {
+          "addr": "",
+          "enable": false,
+          "loginType": "",
+          "passphrase": "",
+          "password": "",
+          "pkFile": "",
+          "port": 0,
+          "username": ""
+        },
+        "ssl": {
+          "allowInsecure": false,
+          "caFile": "",
+          "certFile": "",
+          "enable": false,
+          "keyFile": "",
+          "sni": ""
+        },
+        "type": "",
+        "username": ""
+      },
+      "rpc": {
+        "name": "socket",
+        "lastDB": 0,
+        "network": "unix",
+        "sock": "/tmp/redis.sock",
+        "dbFilterType": "",
+        "dbFilterList": null,
+        "ssl": {},
+        "ssh": {},
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {}
+      },
+      "form": {
+        "name": "socket",
+        "network": "unix",
+        "sock": "/tmp/redis.sock",
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "ssl": {},
+        "ssh": {
+          "loginType": "pwd"
+        },
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {
+          "auth": false
+        },
+        "lastDB": 0
+      },
+      "formBeforeWatch": {
+        "name": "socket",
+        "network": "unix",
+        "sock": "/tmp/redis.sock",
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "ssl": {},
+        "ssh": {},
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {},
+        "lastDB": 0
+      }
+    },
+    {
+      "name": "partial-ssh",
+      "yaml": "- name: tunnel\n  ssh: {enable: true, username: user}\n",
+      "loaded": {
+        "addr": "",
+        "alias": {},
+        "cluster": {
+          "enable": false
+        },
+        "connTimeout": 0,
+        "connections": [],
+        "dbFilterList": [],
+        "dbFilterType": "",
+        "defaultFilter": "",
+        "execTimeout": 0,
+        "group": "",
+        "keySeparator": "",
+        "keyView": 0,
+        "lastDB": 0,
+        "loadSize": 0,
+        "markColor": "",
+        "name": "tunnel",
+        "network": "",
+        "password": "",
+        "port": 0,
+        "proxy": {
+          "addr": "",
+          "password": "",
+          "port": 0,
+          "schema": "",
+          "type": 0,
+          "username": ""
+        },
+        "refreshInterval": 0,
+        "sentinel": {
+          "enable": false,
+          "master": "",
+          "password": "",
+          "username": ""
+        },
+        "sock": "",
+        "ssh": {
+          "addr": "",
+          "enable": true,
+          "loginType": "",
+          "passphrase": "",
+          "password": "",
+          "pkFile": "",
+          "port": 0,
+          "username": "user"
+        },
+        "ssl": {
+          "allowInsecure": false,
+          "caFile": "",
+          "certFile": "",
+          "enable": false,
+          "keyFile": "",
+          "sni": ""
+        },
+        "type": "",
+        "username": ""
+      },
+      "rpc": {
+        "name": "tunnel",
+        "lastDB": 0,
+        "dbFilterType": "",
+        "dbFilterList": null,
+        "ssl": {},
+        "ssh": {
+          "enable": true,
+          "username": "user"
+        },
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {}
+      },
+      "form": {
+        "name": "tunnel",
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "ssl": {},
+        "ssh": {
+          "enable": true,
+          "loginType": "pwd",
+          "username": "user"
+        },
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {
+          "auth": false
+        },
+        "lastDB": 0
+      },
+      "formBeforeWatch": {
+        "name": "tunnel",
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "ssl": {},
+        "ssh": {
+          "enable": true,
+          "username": "user"
+        },
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {},
+        "lastDB": 0
+      }
+    },
+    {
+      "name": "zero-advanced",
+      "yaml": "- name: explicit\n  port: 0\n  default_filter: \"\"\n  key_separator: \"\"\n  conn_timeout: 0\n  load_size: 0\n  ssl: {enable: true}\n",
+      "loaded": {
+        "addr": "",
+        "alias": {},
+        "cluster": {
+          "enable": false
+        },
+        "connTimeout": 0,
+        "connections": [],
+        "dbFilterList": [],
+        "dbFilterType": "",
+        "defaultFilter": "",
+        "execTimeout": 0,
+        "group": "",
+        "keySeparator": "",
+        "keyView": 0,
+        "lastDB": 0,
+        "loadSize": 0,
+        "markColor": "",
+        "name": "explicit",
+        "network": "",
+        "password": "",
+        "port": 0,
+        "proxy": {
+          "addr": "",
+          "password": "",
+          "port": 0,
+          "schema": "",
+          "type": 0,
+          "username": ""
+        },
+        "refreshInterval": 0,
+        "sentinel": {
+          "enable": false,
+          "master": "",
+          "password": "",
+          "username": ""
+        },
+        "sock": "",
+        "ssh": {
+          "addr": "",
+          "enable": false,
+          "loginType": "",
+          "passphrase": "",
+          "password": "",
+          "pkFile": "",
+          "port": 0,
+          "username": ""
+        },
+        "ssl": {
+          "allowInsecure": false,
+          "caFile": "",
+          "certFile": "",
+          "enable": true,
+          "keyFile": "",
+          "sni": ""
+        },
+        "type": "",
+        "username": ""
+      },
+      "rpc": {
+        "name": "explicit",
+        "lastDB": 0,
+        "dbFilterType": "",
+        "dbFilterList": null,
+        "ssl": {
+          "enable": true
+        },
+        "ssh": {},
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {}
+      },
+      "form": {
+        "name": "explicit",
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "ssl": {
+          "enable": true
+        },
+        "ssh": {
+          "loginType": "pwd"
+        },
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {
+          "auth": false
+        },
+        "lastDB": 0
+      },
+      "formBeforeWatch": {
+        "name": "explicit",
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "ssl": {
+          "enable": true
+        },
+        "ssh": {},
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {},
+        "lastDB": 0
+      }
+    },
+    {
+      "name": "full",
+      "yaml": "- name: full\n  network: tcp\n  addr: example\n  port: 6380\n  ssh: {enable: true, login_type: agent, port: 2222}\n  sentinel: {enable: true, master: primary}\n  refresh_interval: -1\n",
+      "loaded": {
+        "addr": "example",
+        "alias": {},
+        "cluster": {
+          "enable": false
+        },
+        "connTimeout": 0,
+        "connections": [],
+        "dbFilterList": [],
+        "dbFilterType": "",
+        "defaultFilter": "",
+        "execTimeout": 0,
+        "group": "",
+        "keySeparator": "",
+        "keyView": 0,
+        "lastDB": 0,
+        "loadSize": 0,
+        "markColor": "",
+        "name": "full",
+        "network": "tcp",
+        "password": "",
+        "port": 6380,
+        "proxy": {
+          "addr": "",
+          "password": "",
+          "port": 0,
+          "schema": "",
+          "type": 0,
+          "username": ""
+        },
+        "refreshInterval": -1,
+        "sentinel": {
+          "enable": true,
+          "master": "primary",
+          "password": "",
+          "username": ""
+        },
+        "sock": "",
+        "ssh": {
+          "addr": "",
+          "enable": true,
+          "loginType": "agent",
+          "passphrase": "",
+          "password": "",
+          "pkFile": "",
+          "port": 2222,
+          "username": ""
+        },
+        "ssl": {
+          "allowInsecure": false,
+          "caFile": "",
+          "certFile": "",
+          "enable": false,
+          "keyFile": "",
+          "sni": ""
+        },
+        "type": "",
+        "username": ""
+      },
+      "rpc": {
+        "name": "full",
+        "lastDB": 0,
+        "network": "tcp",
+        "addr": "example",
+        "port": 6380,
+        "dbFilterType": "",
+        "dbFilterList": null,
+        "refreshInterval": -1,
+        "ssl": {},
+        "ssh": {
+          "enable": true,
+          "port": 2222,
+          "loginType": "agent"
+        },
+        "sentinel": {
+          "enable": true,
+          "master": "primary"
+        },
+        "cluster": {},
+        "proxy": {}
+      },
+      "form": {
+        "name": "full",
+        "network": "tcp",
+        "addr": "example",
+        "port": 6380,
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "ssl": {},
+        "ssh": {
+          "enable": true,
+          "port": 2222,
+          "loginType": "agent"
+        },
+        "sentinel": {
+          "enable": true,
+          "master": "primary"
+        },
+        "cluster": {},
+        "proxy": {
+          "auth": false
+        },
+        "lastDB": 0,
+        "refreshInterval": -1
+      },
+      "formBeforeWatch": {
+        "name": "full",
+        "network": "tcp",
+        "addr": "example",
+        "port": 6380,
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "ssl": {},
+        "ssh": {
+          "enable": true,
+          "port": 2222,
+          "loginType": "agent"
+        },
+        "sentinel": {
+          "enable": true,
+          "master": "primary"
+        },
+        "cluster": {},
+        "proxy": {},
+        "lastDB": 0,
+        "refreshInterval": -1
+      }
+    }
+  ],
+  "formDefault": {
+    "group": "",
+    "name": "",
+    "network": "tcp",
+    "sock": "/tmp/redis.sock",
+    "addr": "127.0.0.1",
+    "port": 6379,
+    "username": "",
+    "password": "",
+    "defaultFilter": "*",
+    "keySeparator": ":",
+    "connTimeout": 60,
+    "execTimeout": 60,
+    "dbFilterType": "none",
+    "dbFilterList": [],
+    "keyView": 0,
+    "loadSize": 10000,
+    "markColor": "",
+    "alias": {},
+    "ssl": {
+      "enable": false,
+      "allowInsecure": true,
+      "sni": "",
+      "certFile": "",
+      "keyFile": "",
+      "caFile": ""
+    },
+    "ssh": {
+      "enable": false,
+      "addr": "",
+      "port": 22,
+      "loginType": "pwd",
+      "username": "",
+      "password": "",
+      "pkFile": "",
+      "passphrase": ""
+    },
+    "sentinel": {
+      "enable": false,
+      "master": "mymaster",
+      "username": "",
+      "password": ""
+    },
+    "cluster": {
+      "enable": false
+    },
+    "proxy": {
+      "type": 0,
+      "schema": "http",
+      "addr": "",
+      "port": 0,
+      "auth": false,
+      "username": "",
+      "password": ""
+    }
+  }
+}

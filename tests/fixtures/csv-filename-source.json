@@ -1,0 +1,51 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "method": "Unchanged original ExportKeyDialog and FileSaveInput; Date controlled and SaveFile RPC arguments recorded, returning the desktop empty cancel path.",
+  "records": [
+    {
+      "name": "idle-after-open",
+      "title": null,
+      "filename": "export_20261015130000.csv",
+      "extensions": [
+        "csv"
+      ],
+      "at": "2026-10-15T05:01:00.000Z"
+    },
+    {
+      "name": "cancel-without-change",
+      "title": null,
+      "filename": "export_20261015130000.csv",
+      "extensions": [
+        "csv"
+      ],
+      "at": "2026-10-15T05:02:00.000Z"
+    },
+    {
+      "name": "after-path-edit",
+      "title": null,
+      "filename": "export_20261015130300.csv",
+      "extensions": [
+        "csv"
+      ],
+      "at": "2026-10-15T05:04:00.000Z"
+    },
+    {
+      "name": "after-expire-toggle",
+      "title": null,
+      "filename": "export_20261015130400.csv",
+      "extensions": [
+        "csv"
+      ],
+      "at": "2026-10-15T05:06:00.000Z"
+    },
+    {
+      "name": "after-reopen",
+      "title": null,
+      "filename": "export_20261015130700.csv",
+      "extensions": [
+        "csv"
+      ],
+      "at": "2026-10-15T05:08:00.000Z"
+    }
+  ]
+}

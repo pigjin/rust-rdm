@@ -1,0 +1,361 @@
+{
+  "sourceKind": "Independent hidden macOS WKWebView CSS font-box measurement,not original app interaction states",
+  "rawReport": "outputs/source-probes/css-baseline-metrics/stdout-attempt1.json",
+  "rawSHA256": "04c9cee863b2715710278634ed78c74f5ec52a67e551fac687d2bce3bf2b3a21",
+  "diagnosticReport": "outputs/css-baseline-metrics-diagnostic.json",
+  "sourceAppStates": 0,
+  "pointSizes": [
+    9,
+    10,
+    12,
+    14,
+    16,
+    20,
+    24
+  ],
+  "records": [
+    {
+      "family": "Times",
+      "size": 9,
+      "webkitFontBoxAscent": 8,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 7
+    },
+    {
+      "family": "Times",
+      "size": 10,
+      "webkitFontBoxAscent": 10,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 8
+    },
+    {
+      "family": "Times",
+      "size": 12,
+      "webkitFontBoxAscent": 11,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 10
+    },
+    {
+      "family": "Times",
+      "size": 14,
+      "webkitFontBoxAscent": 13,
+      "webkitFontBoxDescent": 4,
+      "webkitBaselineOffset": 11
+    },
+    {
+      "family": "Times",
+      "size": 16,
+      "webkitFontBoxAscent": 14,
+      "webkitFontBoxDescent": 4,
+      "webkitBaselineOffset": 13
+    },
+    {
+      "family": "Times",
+      "size": 20,
+      "webkitFontBoxAscent": 18,
+      "webkitFontBoxDescent": 5,
+      "webkitBaselineOffset": 16
+    },
+    {
+      "family": "Times",
+      "size": 24,
+      "webkitFontBoxAscent": 22,
+      "webkitFontBoxDescent": 6,
+      "webkitBaselineOffset": 20
+    },
+    {
+      "family": "Helvetica",
+      "size": 9,
+      "webkitFontBoxAscent": 8,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 7
+    },
+    {
+      "family": "Helvetica",
+      "size": 10,
+      "webkitFontBoxAscent": 10,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 9
+    },
+    {
+      "family": "Helvetica",
+      "size": 12,
+      "webkitFontBoxAscent": 11,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 10
+    },
+    {
+      "family": "Helvetica",
+      "size": 14,
+      "webkitFontBoxAscent": 13,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 12
+    },
+    {
+      "family": "Helvetica",
+      "size": 16,
+      "webkitFontBoxAscent": 14,
+      "webkitFontBoxDescent": 4,
+      "webkitBaselineOffset": 13
+    },
+    {
+      "family": "Helvetica",
+      "size": 20,
+      "webkitFontBoxAscent": 18,
+      "webkitFontBoxDescent": 5,
+      "webkitBaselineOffset": 16
+    },
+    {
+      "family": "Helvetica",
+      "size": 24,
+      "webkitFontBoxAscent": 22,
+      "webkitFontBoxDescent": 6,
+      "webkitBaselineOffset": 20
+    },
+    {
+      "family": "Courier",
+      "size": 9,
+      "webkitFontBoxAscent": 8,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 7
+    },
+    {
+      "family": "Courier",
+      "size": 10,
+      "webkitFontBoxAscent": 10,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 9
+    },
+    {
+      "family": "Courier",
+      "size": 12,
+      "webkitFontBoxAscent": 11,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 10
+    },
+    {
+      "family": "Courier",
+      "size": 14,
+      "webkitFontBoxAscent": 13,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 12
+    },
+    {
+      "family": "Courier",
+      "size": 16,
+      "webkitFontBoxAscent": 14,
+      "webkitFontBoxDescent": 4,
+      "webkitBaselineOffset": 13
+    },
+    {
+      "family": "Courier",
+      "size": 20,
+      "webkitFontBoxAscent": 18,
+      "webkitFontBoxDescent": 5,
+      "webkitBaselineOffset": 16
+    },
+    {
+      "family": "Courier",
+      "size": 24,
+      "webkitFontBoxAscent": 22,
+      "webkitFontBoxDescent": 6,
+      "webkitBaselineOffset": 20
+    },
+    {
+      "family": "Times New Roman",
+      "size": 9,
+      "webkitFontBoxAscent": 8,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 7
+    },
+    {
+      "family": "Times New Roman",
+      "size": 10,
+      "webkitFontBoxAscent": 9,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 8
+    },
+    {
+      "family": "Times New Roman",
+      "size": 12,
+      "webkitFontBoxAscent": 11,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 10
+    },
+    {
+      "family": "Times New Roman",
+      "size": 14,
+      "webkitFontBoxAscent": 12,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 11
+    },
+    {
+      "family": "Times New Roman",
+      "size": 16,
+      "webkitFontBoxAscent": 14,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 13
+    },
+    {
+      "family": "Times New Roman",
+      "size": 20,
+      "webkitFontBoxAscent": 18,
+      "webkitFontBoxDescent": 4,
+      "webkitBaselineOffset": 17
+    },
+    {
+      "family": "Times New Roman",
+      "size": 24,
+      "webkitFontBoxAscent": 21,
+      "webkitFontBoxDescent": 5,
+      "webkitBaselineOffset": 20
+    },
+    {
+      "family": "Arial",
+      "size": 9,
+      "webkitFontBoxAscent": 8,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 7
+    },
+    {
+      "family": "Arial",
+      "size": 10,
+      "webkitFontBoxAscent": 9,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 8
+    },
+    {
+      "family": "Arial",
+      "size": 12,
+      "webkitFontBoxAscent": 11,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 10
+    },
+    {
+      "family": "Arial",
+      "size": 14,
+      "webkitFontBoxAscent": 13,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 12
+    },
+    {
+      "family": "Arial",
+      "size": 16,
+      "webkitFontBoxAscent": 14,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 13
+    },
+    {
+      "family": "Arial",
+      "size": 20,
+      "webkitFontBoxAscent": 18,
+      "webkitFontBoxDescent": 4,
+      "webkitBaselineOffset": 17
+    },
+    {
+      "family": "Arial",
+      "size": 24,
+      "webkitFontBoxAscent": 22,
+      "webkitFontBoxDescent": 5,
+      "webkitBaselineOffset": 20
+    },
+    {
+      "family": "Menlo",
+      "size": 9,
+      "webkitFontBoxAscent": 8,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 7
+    },
+    {
+      "family": "Menlo",
+      "size": 10,
+      "webkitFontBoxAscent": 9,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 8
+    },
+    {
+      "family": "Menlo",
+      "size": 12,
+      "webkitFontBoxAscent": 11,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 10
+    },
+    {
+      "family": "Menlo",
+      "size": 14,
+      "webkitFontBoxAscent": 13,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 12
+    },
+    {
+      "family": "Menlo",
+      "size": 16,
+      "webkitFontBoxAscent": 15,
+      "webkitFontBoxDescent": 4,
+      "webkitBaselineOffset": 13
+    },
+    {
+      "family": "Menlo",
+      "size": 20,
+      "webkitFontBoxAscent": 19,
+      "webkitFontBoxDescent": 5,
+      "webkitBaselineOffset": 17
+    },
+    {
+      "family": "Menlo",
+      "size": 24,
+      "webkitFontBoxAscent": 22,
+      "webkitFontBoxDescent": 6,
+      "webkitBaselineOffset": 20
+    },
+    {
+      "family": "-apple-system",
+      "size": 9,
+      "webkitFontBoxAscent": 9,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 8
+    },
+    {
+      "family": "-apple-system",
+      "size": 10,
+      "webkitFontBoxAscent": 10,
+      "webkitFontBoxDescent": 2,
+      "webkitBaselineOffset": 9
+    },
+    {
+      "family": "-apple-system",
+      "size": 12,
+      "webkitFontBoxAscent": 12,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 10
+    },
+    {
+      "family": "-apple-system",
+      "size": 14,
+      "webkitFontBoxAscent": 14,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 12
+    },
+    {
+      "family": "-apple-system",
+      "size": 16,
+      "webkitFontBoxAscent": 15,
+      "webkitFontBoxDescent": 3,
+      "webkitBaselineOffset": 14
+    },
+    {
+      "family": "-apple-system",
+      "size": 20,
+      "webkitFontBoxAscent": 19,
+      "webkitFontBoxDescent": 4,
+      "webkitBaselineOffset": 17
+    },
+    {
+      "family": "-apple-system",
+      "size": 24,
+      "webkitFontBoxAscent": 23,
+      "webkitFontBoxDescent": 5,
+      "webkitBaselineOffset": 21
+    }
+  ]
+}

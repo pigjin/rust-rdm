@@ -1,0 +1,434 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "method": "Mechanically extracted original Go service methods with dialog calls returning an empty cancelled path; native panel policy from pinned Wails Objective-C source. CSV filename follows original Vue defaultPath expression.",
+  "fixedLocalTime": "2026-10-15T13:24:56+08:00",
+  "sourceSha256": {
+    "backend/services/connection_service.go": "fc8934bb2603eb27e38e57639bfe2ec9a172d479be9b33dc8163bf5fe7af95fe",
+    "backend/services/system_service.go": "adbad1a90fc5cfde2983d698947d3626c1e97f495bea8e44d41a19a34ba59932",
+    "backend/services/monitor_service.go": "805498ad1365bee5b86bac2f51bc60788fb9eae235b9e6dac8cc6c0e68f5d022",
+    "frontend/src/components/common/FileOpenInput.vue": "22b5426afe0496ab77e9e33099b887b575a549b6c004a68d6675748f80b46901",
+    "frontend/src/components/common/FileSaveInput.vue": "119030ed62dfd3f71aed68f2e8e26a22a1de2c9403d5ba933d9ea38a4aeee305",
+    "frontend/src/components/dialogs/ExportKeyDialog.vue": "9fcc8897a53fc7de88e11e17aa0803fe78c741b5bd57ca535511c5a3c7011f3d"
+  },
+  "wails": {
+    "version": "v2.13.0",
+    "sourceSha256": {
+      "internal/frontend/desktop/darwin/WailsContext.m": "2c443e5210c2bc91180f2adeaac56e120a6012719c973bccc5d332b78b6fe530",
+      "internal/frontend/desktop/darwin/dialog.go": "02799430d5d54a6117de280df030803086d8b2868ea11f40ee6b69b839fe69be",
+      "internal/frontend/desktop/darwin/calloc.go": "0b97e0deb0e4b3bd5aacec1dcd9af420bdd6cb0195e95c1ad1c4c847c34b4a61",
+      "internal/frontend/desktop/darwin/Application.m": "322ded4809ed966e21c75b71bcaa64a35a4dd341a9a2ba4db48f5664fbd20db6"
+    },
+    "parent": "mainWindow sheet",
+    "multiple": false,
+    "files": true,
+    "directories": false,
+    "extensionHidden": false,
+    "canSelectHiddenExtension": true
+  },
+  "records": [
+    {
+      "name": "OpenConnectionBackup",
+      "save": false,
+      "options": {
+        "Title": "",
+        "DefaultFilename": "",
+        "DefaultDirectory": "",
+        "CanCreateDirectories": false,
+        "TreatPackagesAsDirectories": false,
+        "ResolvesAliases": false,
+        "ShowHiddenFiles": true,
+        "Filters": [
+          {
+            "Pattern": "*.zip"
+          }
+        ]
+      },
+      "result": {
+        "success": false,
+        "msg": "open : no such file or directory"
+      }
+    },
+    {
+      "name": "SaveConnectionBackup",
+      "save": true,
+      "options": {
+        "Title": "",
+        "DefaultFilename": "connections_20261015132456.zip",
+        "DefaultDirectory": "",
+        "CanCreateDirectories": false,
+        "TreatPackagesAsDirectories": false,
+        "ResolvesAliases": false,
+        "ShowHiddenFiles": true,
+        "Filters": [
+          {
+            "Pattern": "*.zip"
+          }
+        ]
+      },
+      "result": {
+        "success": false,
+        "msg": "open : no such file or directory"
+      }
+    },
+    {
+      "name": "OpenCsv",
+      "save": false,
+      "options": {
+        "Title": "",
+        "DefaultFilename": "",
+        "DefaultDirectory": "",
+        "CanCreateDirectories": false,
+        "TreatPackagesAsDirectories": false,
+        "ResolvesAliases": false,
+        "ShowHiddenFiles": true,
+        "Filters": [
+          {
+            "Pattern": "*.csv"
+          }
+        ]
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "path": ""
+        }
+      }
+    },
+    {
+      "name": "SaveCsv",
+      "save": true,
+      "options": {
+        "Title": "",
+        "DefaultFilename": "export_20261015132456.csv",
+        "DefaultDirectory": "",
+        "CanCreateDirectories": false,
+        "TreatPackagesAsDirectories": false,
+        "ResolvesAliases": false,
+        "ShowHiddenFiles": true,
+        "Filters": [
+          {
+            "Pattern": "*.csv"
+          }
+        ]
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "path": ""
+        }
+      }
+    },
+    {
+      "name": "OpenFile",
+      "save": false,
+      "options": {
+        "Title": "",
+        "DefaultFilename": "",
+        "DefaultDirectory": "",
+        "CanCreateDirectories": false,
+        "TreatPackagesAsDirectories": false,
+        "ResolvesAliases": false,
+        "ShowHiddenFiles": true,
+        "Filters": []
+      },
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "path": ""
+        }
+      }
+    },
+    {
+      "name": "SaveMonitorLog",
+      "save": true,
+      "options": {
+        "Title": "",
+        "DefaultFilename": "monitor_log_20261015132456.txt",
+        "DefaultDirectory": "",
+        "CanCreateDirectories": false,
+        "TreatPackagesAsDirectories": false,
+        "ResolvesAliases": false,
+        "ShowHiddenFiles": false,
+        "Filters": [
+          {
+            "Pattern": "*.txt"
+          }
+        ]
+      },
+      "result": {
+        "success": false,
+        "msg": "open : no such file or directory"
+      }
+    },
+    {
+      "name": "SaveMonitorLogSelected",
+      "save": true,
+      "options": {
+        "Title": "",
+        "DefaultFilename": "monitor_log_20261015132456.txt",
+        "DefaultDirectory": "",
+        "CanCreateDirectories": false,
+        "TreatPackagesAsDirectories": false,
+        "ResolvesAliases": false,
+        "ShowHiddenFiles": false,
+        "Filters": [
+          {
+            "Pattern": "*.txt"
+          }
+        ]
+      },
+      "result": {
+        "success": true,
+        "msg": ""
+      },
+      "content": "one\n中文\n"
+    }
+  ],
+  "frontend": {
+    "method": "Original Vue FileOpenInput and FileSaveInput mounted unchanged; only Wails RPC binding responses stubbed with desktop service results.",
+    "records": [
+      {
+        "save": false,
+        "name": "cancel",
+        "response": {
+          "success": true,
+          "data": {
+            "path": ""
+          }
+        },
+        "before": "before.csv",
+        "value": "",
+        "call": {
+          "title": "",
+          "extensions": [
+            "csv"
+          ]
+        }
+      },
+      {
+        "save": false,
+        "name": "selected",
+        "response": {
+          "success": true,
+          "data": {
+            "path": "/tmp/chosen.csv"
+          }
+        },
+        "before": "before.csv",
+        "value": "/tmp/chosen.csv",
+        "call": {
+          "title": "",
+          "extensions": [
+            "csv"
+          ]
+        }
+      },
+      {
+        "save": false,
+        "name": "missing",
+        "response": {
+          "success": true,
+          "data": {}
+        },
+        "before": "before.csv",
+        "value": "",
+        "call": {
+          "title": "",
+          "extensions": [
+            "csv"
+          ]
+        }
+      },
+      {
+        "save": false,
+        "name": "rpc-error",
+        "response": {
+          "success": false,
+          "msg": "fixture error"
+        },
+        "before": "before.csv",
+        "value": "before.csv",
+        "call": {
+          "title": "",
+          "extensions": [
+            "csv"
+          ]
+        }
+      },
+      {
+        "save": true,
+        "name": "cancel",
+        "response": {
+          "success": true,
+          "data": {
+            "path": ""
+          }
+        },
+        "before": "before.csv",
+        "value": "",
+        "call": {
+          "title": null,
+          "filename": "export_20261015132456.csv",
+          "extensions": [
+            "csv"
+          ]
+        }
+      },
+      {
+        "save": true,
+        "name": "selected",
+        "response": {
+          "success": true,
+          "data": {
+            "path": "/tmp/chosen.csv"
+          }
+        },
+        "before": "before.csv",
+        "value": "/tmp/chosen.csv",
+        "call": {
+          "title": null,
+          "filename": "export_20261015132456.csv",
+          "extensions": [
+            "csv"
+          ]
+        }
+      },
+      {
+        "save": true,
+        "name": "missing",
+        "response": {
+          "success": true,
+          "data": {}
+        },
+        "before": "before.csv",
+        "value": "",
+        "call": {
+          "title": null,
+          "filename": "export_20261015132456.csv",
+          "extensions": [
+            "csv"
+          ]
+        }
+      },
+      {
+        "save": true,
+        "name": "rpc-error",
+        "response": {
+          "success": false,
+          "msg": "fixture error"
+        },
+        "before": "before.csv",
+        "value": "",
+        "call": {
+          "title": null,
+          "filename": "export_20261015132456.csv",
+          "extensions": [
+            "csv"
+          ]
+        }
+      }
+    ]
+  },
+  "native": {
+    "method": "NSSavePanel/NSOpenPanel setup code mechanically extracted from WailsContext.m, without showing a panel. Getter values read on macOS 26; absolute OS default directory omitted.",
+    "records": [
+      {
+        "extensions": [
+          "zip"
+        ],
+        "name": "OpenConnectionBackup",
+        "filename": "Untitled",
+        "showHidden": true,
+        "multiple": false,
+        "files": true,
+        "canCreateDirectories": false,
+        "title": "Open",
+        "directories": false,
+        "resolveAliases": false,
+        "allowsOther": false,
+        "treatPackagesAsDirectories": false,
+        "directoryIsNil": true
+      },
+      {
+        "extensions": [
+          "zip"
+        ],
+        "canSelectHiddenExtension": true,
+        "allowsOther": false,
+        "treatPackagesAsDirectories": false,
+        "canCreateDirectories": false,
+        "title": "Save",
+        "filename": "connections_20261015132456.zip",
+        "extensionHidden": false,
+        "showHidden": true,
+        "name": "SaveConnectionBackup",
+        "directoryIsNil": false
+      },
+      {
+        "extensions": [
+          "csv"
+        ],
+        "name": "OpenCsv",
+        "filename": "Untitled",
+        "showHidden": true,
+        "multiple": false,
+        "files": true,
+        "canCreateDirectories": false,
+        "title": "Open",
+        "directories": false,
+        "resolveAliases": false,
+        "allowsOther": false,
+        "treatPackagesAsDirectories": false,
+        "directoryIsNil": true
+      },
+      {
+        "extensions": [
+          "csv"
+        ],
+        "canSelectHiddenExtension": true,
+        "allowsOther": false,
+        "treatPackagesAsDirectories": false,
+        "canCreateDirectories": false,
+        "title": "Save",
+        "filename": "export_20261015132456.csv",
+        "extensionHidden": false,
+        "showHidden": true,
+        "name": "SaveCsv",
+        "directoryIsNil": false
+      },
+      {
+        "extensions": [],
+        "name": "OpenFile",
+        "filename": "Untitled",
+        "showHidden": true,
+        "multiple": false,
+        "files": true,
+        "canCreateDirectories": false,
+        "title": "Open",
+        "directories": false,
+        "resolveAliases": false,
+        "allowsOther": true,
+        "treatPackagesAsDirectories": false,
+        "directoryIsNil": true
+      },
+      {
+        "extensions": [
+          "txt"
+        ],
+        "canSelectHiddenExtension": true,
+        "allowsOther": false,
+        "treatPackagesAsDirectories": false,
+        "canCreateDirectories": false,
+        "title": "Save",
+        "filename": "monitor_log_20261015132456.txt",
+        "extensionHidden": false,
+        "showHidden": false,
+        "name": "SaveMonitorLog",
+        "directoryIsNil": false
+      }
+    ]
+  }
+}

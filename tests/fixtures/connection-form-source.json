@@ -1,0 +1,301 @@
+{
+  "source_commit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "records": [
+    {
+      "name": "missing-general",
+      "input": {
+        "name": "",
+        "addr": ""
+      },
+      "visible": true,
+      "tab": "常规配置",
+      "errors": [
+        "此项不能为空",
+        "此项不能为空"
+      ],
+      "saved": false
+    },
+    {
+      "name": "illegal-name",
+      "input": {
+        "name": "bad/name"
+      },
+      "visible": true,
+      "tab": "常规配置",
+      "errors": [
+        "包含非法字符"
+      ],
+      "saved": false
+    },
+    {
+      "name": "illegal-backslash",
+      "input": {
+        "name": "bad\\name"
+      },
+      "visible": true,
+      "tab": "常规配置",
+      "errors": [
+        "包含非法字符"
+      ],
+      "saved": false
+    },
+    {
+      "name": "missing-advanced",
+      "input": {
+        "name": "qa valid",
+        "defaultFilter": "",
+        "keySeparator": ""
+      },
+      "visible": true,
+      "tab": "高级配置",
+      "errors": [
+        "此项不能为空",
+        "此项不能为空"
+      ],
+      "saved": false
+    },
+    {
+      "name": "missing-both",
+      "input": {
+        "name": "",
+        "defaultFilter": "",
+        "keySeparator": ""
+      },
+      "visible": true,
+      "tab": "常规配置",
+      "errors": [
+        "此项不能为空"
+      ],
+      "saved": false
+    },
+    {
+      "name": "space-values",
+      "input": {
+        "name": "  ",
+        "addr": " "
+      },
+      "visible": false,
+      "tab": "常规配置",
+      "errors": [],
+      "saved": true,
+      "param": {
+        "group": "",
+        "name": "  ",
+        "network": "tcp",
+        "sock": "",
+        "addr": "",
+        "port": 6379,
+        "username": "",
+        "password": "",
+        "defaultFilter": "*",
+        "keySeparator": ":",
+        "connTimeout": 60,
+        "execTimeout": 60,
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "keyView": 0,
+        "loadSize": 10000,
+        "markColor": "",
+        "alias": {},
+        "ssl": {},
+        "ssh": {},
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {
+          "type": 0,
+          "schema": "",
+          "addr": "",
+          "port": 0,
+          "auth": false,
+          "username": "",
+          "password": ""
+        }
+      }
+    },
+    {
+      "name": "empty-socket",
+      "input": {
+        "name": "qa socket",
+        "network": "unix",
+        "sock": ""
+      },
+      "visible": false,
+      "tab": "常规配置",
+      "errors": [],
+      "saved": true,
+      "param": {
+        "group": "",
+        "name": "qa socket",
+        "network": "unix",
+        "sock": "",
+        "addr": "",
+        "port": 0,
+        "username": "",
+        "password": "",
+        "defaultFilter": "*",
+        "keySeparator": ":",
+        "connTimeout": 60,
+        "execTimeout": 60,
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "keyView": 0,
+        "loadSize": 10000,
+        "markColor": "",
+        "alias": {},
+        "ssl": {},
+        "ssh": {},
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {
+          "type": 0,
+          "schema": "",
+          "addr": "",
+          "port": 0,
+          "auth": false,
+          "username": "",
+          "password": ""
+        }
+      }
+    },
+    {
+      "name": "unix-empty-hidden-address",
+      "input": {
+        "name": "qa socket",
+        "network": "unix",
+        "addr": "",
+        "sock": "/tmp/redis.sock"
+      },
+      "visible": true,
+      "tab": "常规配置",
+      "errors": [
+        "此项不能为空"
+      ],
+      "saved": false
+    },
+    {
+      "name": "empty-port",
+      "input": {
+        "name": "qa port",
+        "port": null
+      },
+      "visible": false,
+      "tab": "常规配置",
+      "errors": [],
+      "saved": true,
+      "param": {
+        "group": "",
+        "name": "qa port",
+        "network": "tcp",
+        "sock": "",
+        "addr": "127.0.0.1",
+        "port": null,
+        "username": "",
+        "password": "",
+        "defaultFilter": "*",
+        "keySeparator": ":",
+        "connTimeout": 60,
+        "execTimeout": 60,
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "keyView": 0,
+        "loadSize": 10000,
+        "markColor": "",
+        "alias": {},
+        "ssl": {},
+        "ssh": {},
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {
+          "type": 0,
+          "schema": "",
+          "addr": "",
+          "port": 0,
+          "auth": false,
+          "username": "",
+          "password": ""
+        }
+      }
+    },
+    {
+      "name": "empty-ssh",
+      "input": {
+        "name": "qa ssh",
+        "ssh": {
+          "enable": true,
+          "loginType": "pwd",
+          "addr": "",
+          "port": 22,
+          "username": "",
+          "password": ""
+        }
+      },
+      "visible": false,
+      "tab": "常规配置",
+      "errors": [],
+      "saved": true,
+      "param": {
+        "group": "",
+        "name": "qa ssh",
+        "network": "tcp",
+        "sock": "",
+        "addr": "127.0.0.1",
+        "port": 6379,
+        "username": "",
+        "password": "",
+        "defaultFilter": "*",
+        "keySeparator": ":",
+        "connTimeout": 60,
+        "execTimeout": 60,
+        "dbFilterType": "none",
+        "dbFilterList": [],
+        "keyView": 0,
+        "loadSize": 10000,
+        "markColor": "",
+        "alias": {},
+        "ssl": {},
+        "ssh": {
+          "enable": true,
+          "loginType": "pwd",
+          "addr": "",
+          "port": 22,
+          "username": "",
+          "password": "",
+          "pkFile": "",
+          "passphrase": ""
+        },
+        "sentinel": {},
+        "cluster": {},
+        "proxy": {
+          "type": 0,
+          "schema": "",
+          "addr": "",
+          "port": 0,
+          "auth": false,
+          "username": "",
+          "password": ""
+        }
+      }
+    },
+    {
+      "name": "input-illegal-name",
+      "visible": true,
+      "tab": "常规配置",
+      "errors": [
+        "包含非法字符"
+      ]
+    },
+    {
+      "name": "input-fixed-name",
+      "visible": true,
+      "tab": "常规配置",
+      "errors": []
+    },
+    {
+      "name": "test-without-name",
+      "visible": true,
+      "tab": "常规配置",
+      "errors": [],
+      "tested": 1
+    }
+  ]
+}

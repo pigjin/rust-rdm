@@ -1,0 +1,21 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Original pointer hover over navigation view-zone header, body and next control, with a 650ms dwell; local HTTP controlled fixtures; source-only evidence.",
+  "records": [
+    {
+      "name": "header",
+      "hover": 0,
+      "widget": true
+    },
+    {
+      "name": "body",
+      "hover": 0,
+      "widget": true
+    },
+    {
+      "name": "next",
+      "hover": 0,
+      "widget": true
+    }
+  ]
+}

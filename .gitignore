@@ -1,4 +1,5 @@
 /target/
+**/target/
 /.cargo-home/
 /outputs/
 /.rdm-data/

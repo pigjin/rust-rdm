@@ -1,0 +1,505 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "sourceSha256": "fd8d5bad4852366a94d7941e1e03eecb099a671adaf2fdf1d29669f1f4f88e86",
+  "method": "Original ExportKey and ImportCSV methods mechanically extracted, using original go-redis v9.21.0 against marked disposable Redis DB14/15. Wails events are recorded and cancel on the first export or import progress event when requested. Redis DUMP hex is replaced by $DUMP for runtime substitution.",
+  "value": "source-csv-fixture",
+  "records": [
+    {
+      "name": "export-without-expire",
+      "kind": "export",
+      "cancel": false,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "exported": 1,
+          "failed": 0
+        }
+      },
+      "rows": [
+        [
+          "6373762d736f757263653a76616c7565",
+          "$DUMP"
+        ]
+      ],
+      "events": [
+        {
+          "data": [
+            {
+              "processing": "csv-source:value",
+              "progress": 1,
+              "total": 1
+            }
+          ],
+          "name": "exporting:$PATH"
+        }
+      ],
+      "destinationCount": 0
+    },
+    {
+      "name": "export-with-expire",
+      "kind": "export",
+      "cancel": false,
+      "includeExpire": true,
+      "conflict": 0,
+      "ttl": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "exported": 1,
+          "failed": 0
+        }
+      },
+      "rows": [
+        [
+          "6373762d736f757263653a76616c7565",
+          "$DUMP",
+          "-1"
+        ]
+      ],
+      "events": [
+        {
+          "data": [
+            {
+              "processing": "csv-source:value",
+              "progress": 1,
+              "total": 1
+            }
+          ],
+          "name": "exporting:$PATH"
+        }
+      ],
+      "destinationCount": 0
+    },
+    {
+      "name": "export-missing-key",
+      "kind": "export",
+      "cancel": false,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "exported": 1,
+          "failed": 0
+        }
+      },
+      "rows": [
+        [
+          "6373762d736f757263653a6d697373696e67",
+          ""
+        ]
+      ],
+      "events": [
+        {
+          "data": [
+            {
+              "processing": "csv-source:missing",
+              "progress": 1,
+              "total": 1
+            }
+          ],
+          "name": "exporting:$PATH"
+        }
+      ],
+      "destinationCount": 0
+    },
+    {
+      "name": "export-cancel-first",
+      "kind": "export",
+      "cancel": true,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": 0,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": true,
+          "exported": 0,
+          "failed": 0
+        }
+      },
+      "events": [
+        {
+          "data": [
+            {
+              "processing": "csv-source:value",
+              "progress": 1,
+              "total": 1
+            }
+          ],
+          "name": "exporting:$PATH"
+        }
+      ],
+      "destinationCount": 0
+    },
+    {
+      "name": "import-valid",
+      "kind": "import",
+      "cancel": false,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": -1,
+      "input": [
+        [
+          "6373762d736f757263653a76616c7565",
+          "$DUMP"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "events": [
+        {
+          "data": [
+            {
+              "ignored": 0,
+              "imported": 1
+            }
+          ],
+          "name": "importing:$PATH"
+        }
+      ],
+      "value": "source-csv-fixture",
+      "destinationCount": 1
+    },
+    {
+      "name": "import-cancel-last",
+      "kind": "import",
+      "cancel": true,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": -1,
+      "input": [
+        [
+          "6373762d736f757263653a76616c7565",
+          "$DUMP"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "events": [
+        {
+          "data": [
+            {
+              "ignored": 0,
+              "imported": 1
+            }
+          ],
+          "name": "importing:$PATH"
+        }
+      ],
+      "value": "source-csv-fixture",
+      "destinationCount": 1
+    },
+    {
+      "name": "import-cancel-before-second",
+      "kind": "import",
+      "cancel": true,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": -1,
+      "input": [
+        [
+          "6373762d736f757263653a76616c7565",
+          "$DUMP"
+        ],
+        [
+          "6373762d736f757263653a7468697264",
+          "$DUMP"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": true,
+          "imported": 1,
+          "ignored": 1
+        }
+      },
+      "events": [
+        {
+          "data": [
+            {
+              "ignored": 0,
+              "imported": 1
+            }
+          ],
+          "name": "importing:$PATH"
+        }
+      ],
+      "value": "source-csv-fixture",
+      "destinationCount": 1
+    },
+    {
+      "name": "import-conflict-ignore",
+      "kind": "import",
+      "cancel": false,
+      "includeExpire": false,
+      "conflict": 1,
+      "ttl": 0,
+      "input": [
+        [
+          "6373762d736f757263653a76616c7565",
+          "$DUMP"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "events": [
+        {
+          "data": [
+            {
+              "ignored": 1,
+              "imported": 0
+            }
+          ],
+          "name": "importing:$PATH"
+        }
+      ],
+      "value": "before",
+      "destinationCount": 1
+    },
+    {
+      "name": "import-invalid-hex-then-valid",
+      "kind": "import",
+      "cancel": false,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": -1,
+      "input": [
+        [
+          "zz",
+          "$DUMP"
+        ],
+        [
+          "6373762d736f757263653a76616c7565",
+          "$DUMP"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "events": [
+        {
+          "data": [
+            {
+              "ignored": 0,
+              "imported": 1
+            }
+          ],
+          "name": "importing:$PATH"
+        }
+      ],
+      "value": "source-csv-fixture",
+      "destinationCount": 1
+    },
+    {
+      "name": "import-invalid-dump",
+      "kind": "import",
+      "cancel": false,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": -1,
+      "input": [
+        [
+          "6373762d736f757263653a76616c7565",
+          "00"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "events": [
+        {
+          "data": [
+            {
+              "ignored": 1,
+              "imported": 0
+            }
+          ],
+          "name": "importing:$PATH"
+        }
+      ],
+      "destinationCount": 0
+    },
+    {
+      "name": "import-field-count-mismatch",
+      "kind": "import",
+      "cancel": false,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": -1,
+      "input": [
+        [
+          "6373762d736f757263653a76616c7565",
+          "$DUMP"
+        ],
+        [
+          "6373762d736f757263653a7468697264",
+          "$DUMP",
+          "-1"
+        ],
+        [
+          "6373762d736f757263653a7468697264",
+          "$DUMP"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 1,
+          "ignored": 0
+        }
+      },
+      "events": [
+        {
+          "data": [
+            {
+              "ignored": 0,
+              "imported": 1
+            }
+          ],
+          "name": "importing:$PATH"
+        }
+      ],
+      "value": "source-csv-fixture",
+      "destinationCount": 1
+    },
+    {
+      "name": "import-expired",
+      "kind": "import",
+      "cancel": false,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": -1,
+      "input": [
+        [
+          "6373762d736f757263653a76616c7565",
+          "$DUMP",
+          "1"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "events": [
+        {
+          "data": [
+            {
+              "ignored": 1,
+              "imported": 0
+            }
+          ],
+          "name": "importing:$PATH"
+        }
+      ],
+      "destinationCount": 0
+    },
+    {
+      "name": "import-custom-overflow",
+      "kind": "import",
+      "cancel": false,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": 10000000000,
+      "input": [
+        [
+          "6373762d736f757263653a76616c7565",
+          "$DUMP"
+        ]
+      ],
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 1
+        }
+      },
+      "events": [
+        {
+          "data": [
+            {
+              "ignored": 1,
+              "imported": 0
+            }
+          ],
+          "name": "importing:$PATH"
+        }
+      ],
+      "destinationCount": 0
+    },
+    {
+      "name": "import-broken-csv",
+      "kind": "import",
+      "cancel": false,
+      "includeExpire": false,
+      "conflict": 0,
+      "ttl": -1,
+      "result": {
+        "success": true,
+        "msg": "",
+        "data": {
+          "canceled": false,
+          "imported": 0,
+          "ignored": 0
+        }
+      },
+      "events": null,
+      "destinationCount": 0
+    }
+  ]
+}

@@ -1,0 +1,1083 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "sourceEngine": "macOS WKWebView",
+  "scope": "Sixty independent zero-border/padding text-control widths (four families,three font sizes,five size attributes). Separate native table arithmetic only; no product or actual native input acceptance. Twelve initial native estimates retained as failed controls.",
+  "rawReport": "outputs/input-metrics-webkit-source-raw.json",
+  "rawSHA256": "8ac6d47c86714dbcab0b9278794990d45fb4c2bdfa6d5beda268057ad9b01bda",
+  "preparation": "outputs/input-metrics-webkit-preparation.json",
+  "execution": "outputs/input-metrics-webkit-execution.json",
+  "samples": [
+    {
+      "family": "system-ui",
+      "point": 12,
+      "count": 1,
+      "width": 9.5625,
+      "zeroWidth": 7.5625
+    },
+    {
+      "family": "system-ui",
+      "point": 12,
+      "count": 2,
+      "width": 17.125,
+      "zeroWidth": 7.5625
+    },
+    {
+      "family": "system-ui",
+      "point": 12,
+      "count": 10,
+      "width": 77.59375,
+      "zeroWidth": 7.5625
+    },
+    {
+      "family": "system-ui",
+      "point": 12,
+      "count": 20,
+      "width": 153.171875,
+      "zeroWidth": 7.5625
+    },
+    {
+      "family": "system-ui",
+      "point": 12,
+      "count": 40,
+      "width": 304.34375,
+      "zeroWidth": 7.5625
+    },
+    {
+      "family": "system-ui",
+      "point": 14,
+      "count": 1,
+      "width": 10.671875,
+      "zeroWidth": 8.671875
+    },
+    {
+      "family": "system-ui",
+      "point": 14,
+      "count": 2,
+      "width": 19.34375,
+      "zeroWidth": 8.671875
+    },
+    {
+      "family": "system-ui",
+      "point": 14,
+      "count": 10,
+      "width": 88.6875,
+      "zeroWidth": 8.671875
+    },
+    {
+      "family": "system-ui",
+      "point": 14,
+      "count": 20,
+      "width": 175.359375,
+      "zeroWidth": 8.671875
+    },
+    {
+      "family": "system-ui",
+      "point": 14,
+      "count": 40,
+      "width": 348.71875,
+      "zeroWidth": 8.671875
+    },
+    {
+      "family": "system-ui",
+      "point": 20,
+      "count": 1,
+      "width": 14.046875,
+      "zeroWidth": 12.046875
+    },
+    {
+      "family": "system-ui",
+      "point": 20,
+      "count": 2,
+      "width": 26.078125,
+      "zeroWidth": 12.046875
+    },
+    {
+      "family": "system-ui",
+      "point": 20,
+      "count": 10,
+      "width": 122.390625,
+      "zeroWidth": 12.046875
+    },
+    {
+      "family": "system-ui",
+      "point": 20,
+      "count": 20,
+      "width": 242.765625,
+      "zeroWidth": 12.046875
+    },
+    {
+      "family": "system-ui",
+      "point": 20,
+      "count": 40,
+      "width": 483.515625,
+      "zeroWidth": 12.046875
+    },
+    {
+      "family": "Menlo",
+      "point": 12,
+      "count": 1,
+      "width": 17,
+      "zeroWidth": 7.234375
+    },
+    {
+      "family": "Menlo",
+      "point": 12,
+      "count": 2,
+      "width": 24,
+      "zeroWidth": 7.234375
+    },
+    {
+      "family": "Menlo",
+      "point": 12,
+      "count": 10,
+      "width": 80,
+      "zeroWidth": 7.234375
+    },
+    {
+      "family": "Menlo",
+      "point": 12,
+      "count": 20,
+      "width": 150,
+      "zeroWidth": 7.234375
+    },
+    {
+      "family": "Menlo",
+      "point": 12,
+      "count": 40,
+      "width": 290,
+      "zeroWidth": 7.234375
+    },
+    {
+      "family": "Menlo",
+      "point": 14,
+      "count": 1,
+      "width": 20,
+      "zeroWidth": 8.4375
+    },
+    {
+      "family": "Menlo",
+      "point": 14,
+      "count": 2,
+      "width": 28,
+      "zeroWidth": 8.4375
+    },
+    {
+      "family": "Menlo",
+      "point": 14,
+      "count": 10,
+      "width": 92,
+      "zeroWidth": 8.4375
+    },
+    {
+      "family": "Menlo",
+      "point": 14,
+      "count": 20,
+      "width": 172,
+      "zeroWidth": 8.4375
+    },
+    {
+      "family": "Menlo",
+      "point": 14,
+      "count": 40,
+      "width": 332,
+      "zeroWidth": 8.4375
+    },
+    {
+      "family": "Menlo",
+      "point": 20,
+      "count": 1,
+      "width": 28,
+      "zeroWidth": 12.046875
+    },
+    {
+      "family": "Menlo",
+      "point": 20,
+      "count": 2,
+      "width": 40,
+      "zeroWidth": 12.046875
+    },
+    {
+      "family": "Menlo",
+      "point": 20,
+      "count": 10,
+      "width": 136,
+      "zeroWidth": 12.046875
+    },
+    {
+      "family": "Menlo",
+      "point": 20,
+      "count": 20,
+      "width": 256,
+      "zeroWidth": 12.046875
+    },
+    {
+      "family": "Menlo",
+      "point": 20,
+      "count": 40,
+      "width": 496,
+      "zeroWidth": 12.046875
+    },
+    {
+      "family": "Arial",
+      "point": 12,
+      "count": 1,
+      "width": 34,
+      "zeroWidth": 6.6875
+    },
+    {
+      "family": "Arial",
+      "point": 12,
+      "count": 2,
+      "width": 39,
+      "zeroWidth": 6.6875
+    },
+    {
+      "family": "Arial",
+      "point": 12,
+      "count": 10,
+      "width": 79,
+      "zeroWidth": 6.6875
+    },
+    {
+      "family": "Arial",
+      "point": 12,
+      "count": 20,
+      "width": 129,
+      "zeroWidth": 6.6875
+    },
+    {
+      "family": "Arial",
+      "point": 12,
+      "count": 40,
+      "width": 229,
+      "zeroWidth": 6.6875
+    },
+    {
+      "family": "Arial",
+      "point": 14,
+      "count": 1,
+      "width": 39,
+      "zeroWidth": 7.796875
+    },
+    {
+      "family": "Arial",
+      "point": 14,
+      "count": 2,
+      "width": 45,
+      "zeroWidth": 7.796875
+    },
+    {
+      "family": "Arial",
+      "point": 14,
+      "count": 10,
+      "width": 93,
+      "zeroWidth": 7.796875
+    },
+    {
+      "family": "Arial",
+      "point": 14,
+      "count": 20,
+      "width": 153,
+      "zeroWidth": 7.796875
+    },
+    {
+      "family": "Arial",
+      "point": 14,
+      "count": 40,
+      "width": 273,
+      "zeroWidth": 7.796875
+    },
+    {
+      "family": "Arial",
+      "point": 20,
+      "count": 1,
+      "width": 55,
+      "zeroWidth": 11.125
+    },
+    {
+      "family": "Arial",
+      "point": 20,
+      "count": 2,
+      "width": 64,
+      "zeroWidth": 11.125
+    },
+    {
+      "family": "Arial",
+      "point": 20,
+      "count": 10,
+      "width": 136,
+      "zeroWidth": 11.125
+    },
+    {
+      "family": "Arial",
+      "point": 20,
+      "count": 20,
+      "width": 226,
+      "zeroWidth": 11.125
+    },
+    {
+      "family": "Arial",
+      "point": 20,
+      "count": 40,
+      "width": 406,
+      "zeroWidth": 11.125
+    },
+    {
+      "family": "Courier",
+      "point": 12,
+      "count": 1,
+      "width": 9.203125,
+      "zeroWidth": 7.203125
+    },
+    {
+      "family": "Courier",
+      "point": 12,
+      "count": 2,
+      "width": 16.40625,
+      "zeroWidth": 7.203125
+    },
+    {
+      "family": "Courier",
+      "point": 12,
+      "count": 10,
+      "width": 74.015625,
+      "zeroWidth": 7.203125
+    },
+    {
+      "family": "Courier",
+      "point": 12,
+      "count": 20,
+      "width": 146.03125,
+      "zeroWidth": 7.203125
+    },
+    {
+      "family": "Courier",
+      "point": 12,
+      "count": 40,
+      "width": 290.046875,
+      "zeroWidth": 7.203125
+    },
+    {
+      "family": "Courier",
+      "point": 14,
+      "count": 1,
+      "width": 10.40625,
+      "zeroWidth": 8.40625
+    },
+    {
+      "family": "Courier",
+      "point": 14,
+      "count": 2,
+      "width": 18.8125,
+      "zeroWidth": 8.40625
+    },
+    {
+      "family": "Courier",
+      "point": 14,
+      "count": 10,
+      "width": 86.015625,
+      "zeroWidth": 8.40625
+    },
+    {
+      "family": "Courier",
+      "point": 14,
+      "count": 20,
+      "width": 170.03125,
+      "zeroWidth": 8.40625
+    },
+    {
+      "family": "Courier",
+      "point": 14,
+      "count": 40,
+      "width": 338.0625,
+      "zeroWidth": 8.40625
+    },
+    {
+      "family": "Courier",
+      "point": 20,
+      "count": 1,
+      "width": 14.015625,
+      "zeroWidth": 12.015625
+    },
+    {
+      "family": "Courier",
+      "point": 20,
+      "count": 2,
+      "width": 26.015625,
+      "zeroWidth": 12.015625
+    },
+    {
+      "family": "Courier",
+      "point": 20,
+      "count": 10,
+      "width": 122.03125,
+      "zeroWidth": 12.015625
+    },
+    {
+      "family": "Courier",
+      "point": 20,
+      "count": 20,
+      "width": 242.046875,
+      "zeroWidth": 12.015625
+    },
+    {
+      "family": "Courier",
+      "point": 20,
+      "count": 40,
+      "width": 482.078125,
+      "zeroWidth": 12.015625
+    }
+  ],
+  "nativeTablePredictions": [
+    {
+      "count": 1,
+      "family": "system-ui",
+      "font": "12px / 18px system-ui",
+      "point": 12,
+      "width": 9.5625,
+      "zeroWidth": 7.5625,
+      "nativePrediction": 9.5625
+    },
+    {
+      "count": 2,
+      "family": "system-ui",
+      "font": "12px / 18px system-ui",
+      "point": 12,
+      "width": 17.125,
+      "zeroWidth": 7.5625,
+      "nativePrediction": 17.125
+    },
+    {
+      "count": 10,
+      "family": "system-ui",
+      "font": "12px / 18px system-ui",
+      "point": 12,
+      "width": 77.59375,
+      "zeroWidth": 7.5625,
+      "nativePrediction": 77.59375
+    },
+    {
+      "count": 20,
+      "family": "system-ui",
+      "font": "12px / 18px system-ui",
+      "point": 12,
+      "width": 153.171875,
+      "zeroWidth": 7.5625,
+      "nativePrediction": 153.171875
+    },
+    {
+      "count": 40,
+      "family": "system-ui",
+      "font": "12px / 18px system-ui",
+      "point": 12,
+      "width": 304.34375,
+      "zeroWidth": 7.5625,
+      "nativePrediction": 304.34375
+    },
+    {
+      "count": 1,
+      "family": "system-ui",
+      "font": "14px / 21px system-ui",
+      "point": 14,
+      "width": 10.671875,
+      "zeroWidth": 8.671875,
+      "nativePrediction": 10.671875
+    },
+    {
+      "count": 2,
+      "family": "system-ui",
+      "font": "14px / 21px system-ui",
+      "point": 14,
+      "width": 19.34375,
+      "zeroWidth": 8.671875,
+      "nativePrediction": 19.34375
+    },
+    {
+      "count": 10,
+      "family": "system-ui",
+      "font": "14px / 21px system-ui",
+      "point": 14,
+      "width": 88.6875,
+      "zeroWidth": 8.671875,
+      "nativePrediction": 88.6875
+    },
+    {
+      "count": 20,
+      "family": "system-ui",
+      "font": "14px / 21px system-ui",
+      "point": 14,
+      "width": 175.359375,
+      "zeroWidth": 8.671875,
+      "nativePrediction": 175.359375
+    },
+    {
+      "count": 40,
+      "family": "system-ui",
+      "font": "14px / 21px system-ui",
+      "point": 14,
+      "width": 348.71875,
+      "zeroWidth": 8.671875,
+      "nativePrediction": 348.71875
+    },
+    {
+      "count": 1,
+      "family": "system-ui",
+      "font": "20px / 30px system-ui",
+      "point": 20,
+      "width": 14.046875,
+      "zeroWidth": 12.046875,
+      "nativePrediction": 14.046875
+    },
+    {
+      "count": 2,
+      "family": "system-ui",
+      "font": "20px / 30px system-ui",
+      "point": 20,
+      "width": 26.078125,
+      "zeroWidth": 12.046875,
+      "nativePrediction": 26.078125
+    },
+    {
+      "count": 10,
+      "family": "system-ui",
+      "font": "20px / 30px system-ui",
+      "point": 20,
+      "width": 122.390625,
+      "zeroWidth": 12.046875,
+      "nativePrediction": 122.390625
+    },
+    {
+      "count": 20,
+      "family": "system-ui",
+      "font": "20px / 30px system-ui",
+      "point": 20,
+      "width": 242.765625,
+      "zeroWidth": 12.046875,
+      "nativePrediction": 242.765625
+    },
+    {
+      "count": 40,
+      "family": "system-ui",
+      "font": "20px / 30px system-ui",
+      "point": 20,
+      "width": 483.515625,
+      "zeroWidth": 12.046875,
+      "nativePrediction": 483.515625
+    },
+    {
+      "count": 1,
+      "family": "Menlo",
+      "font": "12px / 18px Menlo",
+      "point": 12,
+      "width": 17,
+      "zeroWidth": 7.234375,
+      "nativePrediction": 17.0
+    },
+    {
+      "count": 2,
+      "family": "Menlo",
+      "font": "12px / 18px Menlo",
+      "point": 12,
+      "width": 24,
+      "zeroWidth": 7.234375,
+      "nativePrediction": 24.0
+    },
+    {
+      "count": 10,
+      "family": "Menlo",
+      "font": "12px / 18px Menlo",
+      "point": 12,
+      "width": 80,
+      "zeroWidth": 7.234375,
+      "nativePrediction": 80.0
+    },
+    {
+      "count": 20,
+      "family": "Menlo",
+      "font": "12px / 18px Menlo",
+      "point": 12,
+      "width": 150,
+      "zeroWidth": 7.234375,
+      "nativePrediction": 150.0
+    },
+    {
+      "count": 40,
+      "family": "Menlo",
+      "font": "12px / 18px Menlo",
+      "point": 12,
+      "width": 290,
+      "zeroWidth": 7.234375,
+      "nativePrediction": 290.0
+    },
+    {
+      "count": 1,
+      "family": "Menlo",
+      "font": "14px / 21px Menlo",
+      "point": 14,
+      "width": 20,
+      "zeroWidth": 8.4375,
+      "nativePrediction": 20.0
+    },
+    {
+      "count": 2,
+      "family": "Menlo",
+      "font": "14px / 21px Menlo",
+      "point": 14,
+      "width": 28,
+      "zeroWidth": 8.4375,
+      "nativePrediction": 28.0
+    },
+    {
+      "count": 10,
+      "family": "Menlo",
+      "font": "14px / 21px Menlo",
+      "point": 14,
+      "width": 92,
+      "zeroWidth": 8.4375,
+      "nativePrediction": 92.0
+    },
+    {
+      "count": 20,
+      "family": "Menlo",
+      "font": "14px / 21px Menlo",
+      "point": 14,
+      "width": 172,
+      "zeroWidth": 8.4375,
+      "nativePrediction": 172.0
+    },
+    {
+      "count": 40,
+      "family": "Menlo",
+      "font": "14px / 21px Menlo",
+      "point": 14,
+      "width": 332,
+      "zeroWidth": 8.4375,
+      "nativePrediction": 332.0
+    },
+    {
+      "count": 1,
+      "family": "Menlo",
+      "font": "20px / 30px Menlo",
+      "point": 20,
+      "width": 28,
+      "zeroWidth": 12.046875,
+      "nativePrediction": 28.0
+    },
+    {
+      "count": 2,
+      "family": "Menlo",
+      "font": "20px / 30px Menlo",
+      "point": 20,
+      "width": 40,
+      "zeroWidth": 12.046875,
+      "nativePrediction": 40.0
+    },
+    {
+      "count": 10,
+      "family": "Menlo",
+      "font": "20px / 30px Menlo",
+      "point": 20,
+      "width": 136,
+      "zeroWidth": 12.046875,
+      "nativePrediction": 136.0
+    },
+    {
+      "count": 20,
+      "family": "Menlo",
+      "font": "20px / 30px Menlo",
+      "point": 20,
+      "width": 256,
+      "zeroWidth": 12.046875,
+      "nativePrediction": 256.0
+    },
+    {
+      "count": 40,
+      "family": "Menlo",
+      "font": "20px / 30px Menlo",
+      "point": 20,
+      "width": 496,
+      "zeroWidth": 12.046875,
+      "nativePrediction": 496.0
+    },
+    {
+      "count": 1,
+      "family": "Arial",
+      "font": "12px / 18px Arial",
+      "point": 12,
+      "width": 34,
+      "zeroWidth": 6.6875,
+      "nativePrediction": 34.0
+    },
+    {
+      "count": 2,
+      "family": "Arial",
+      "font": "12px / 18px Arial",
+      "point": 12,
+      "width": 39,
+      "zeroWidth": 6.6875,
+      "nativePrediction": 39.0
+    },
+    {
+      "count": 10,
+      "family": "Arial",
+      "font": "12px / 18px Arial",
+      "point": 12,
+      "width": 79,
+      "zeroWidth": 6.6875,
+      "nativePrediction": 79.0
+    },
+    {
+      "count": 20,
+      "family": "Arial",
+      "font": "12px / 18px Arial",
+      "point": 12,
+      "width": 129,
+      "zeroWidth": 6.6875,
+      "nativePrediction": 129.0
+    },
+    {
+      "count": 40,
+      "family": "Arial",
+      "font": "12px / 18px Arial",
+      "point": 12,
+      "width": 229,
+      "zeroWidth": 6.6875,
+      "nativePrediction": 229.0
+    },
+    {
+      "count": 1,
+      "family": "Arial",
+      "font": "14px / 21px Arial",
+      "point": 14,
+      "width": 39,
+      "zeroWidth": 7.796875,
+      "nativePrediction": 39.0
+    },
+    {
+      "count": 2,
+      "family": "Arial",
+      "font": "14px / 21px Arial",
+      "point": 14,
+      "width": 45,
+      "zeroWidth": 7.796875,
+      "nativePrediction": 45.0
+    },
+    {
+      "count": 10,
+      "family": "Arial",
+      "font": "14px / 21px Arial",
+      "point": 14,
+      "width": 93,
+      "zeroWidth": 7.796875,
+      "nativePrediction": 93.0
+    },
+    {
+      "count": 20,
+      "family": "Arial",
+      "font": "14px / 21px Arial",
+      "point": 14,
+      "width": 153,
+      "zeroWidth": 7.796875,
+      "nativePrediction": 153.0
+    },
+    {
+      "count": 40,
+      "family": "Arial",
+      "font": "14px / 21px Arial",
+      "point": 14,
+      "width": 273,
+      "zeroWidth": 7.796875,
+      "nativePrediction": 273.0
+    },
+    {
+      "count": 1,
+      "family": "Arial",
+      "font": "20px / 30px Arial",
+      "point": 20,
+      "width": 55,
+      "zeroWidth": 11.125,
+      "nativePrediction": 55.0
+    },
+    {
+      "count": 2,
+      "family": "Arial",
+      "font": "20px / 30px Arial",
+      "point": 20,
+      "width": 64,
+      "zeroWidth": 11.125,
+      "nativePrediction": 64.0
+    },
+    {
+      "count": 10,
+      "family": "Arial",
+      "font": "20px / 30px Arial",
+      "point": 20,
+      "width": 136,
+      "zeroWidth": 11.125,
+      "nativePrediction": 136.0
+    },
+    {
+      "count": 20,
+      "family": "Arial",
+      "font": "20px / 30px Arial",
+      "point": 20,
+      "width": 226,
+      "zeroWidth": 11.125,
+      "nativePrediction": 226.0
+    },
+    {
+      "count": 40,
+      "family": "Arial",
+      "font": "20px / 30px Arial",
+      "point": 20,
+      "width": 406,
+      "zeroWidth": 11.125,
+      "nativePrediction": 406.0
+    },
+    {
+      "count": 1,
+      "family": "Courier",
+      "font": "12px / 18px Courier",
+      "point": 12,
+      "width": 9.203125,
+      "zeroWidth": 7.203125,
+      "nativePrediction": 9.203125
+    },
+    {
+      "count": 2,
+      "family": "Courier",
+      "font": "12px / 18px Courier",
+      "point": 12,
+      "width": 16.40625,
+      "zeroWidth": 7.203125,
+      "nativePrediction": 16.40625
+    },
+    {
+      "count": 10,
+      "family": "Courier",
+      "font": "12px / 18px Courier",
+      "point": 12,
+      "width": 74.015625,
+      "zeroWidth": 7.203125,
+      "nativePrediction": 74.015625
+    },
+    {
+      "count": 20,
+      "family": "Courier",
+      "font": "12px / 18px Courier",
+      "point": 12,
+      "width": 146.03125,
+      "zeroWidth": 7.203125,
+      "nativePrediction": 146.03125
+    },
+    {
+      "count": 40,
+      "family": "Courier",
+      "font": "12px / 18px Courier",
+      "point": 12,
+      "width": 290.046875,
+      "zeroWidth": 7.203125,
+      "nativePrediction": 290.046875
+    },
+    {
+      "count": 1,
+      "family": "Courier",
+      "font": "14px / 21px Courier",
+      "point": 14,
+      "width": 10.40625,
+      "zeroWidth": 8.40625,
+      "nativePrediction": 10.40625
+    },
+    {
+      "count": 2,
+      "family": "Courier",
+      "font": "14px / 21px Courier",
+      "point": 14,
+      "width": 18.8125,
+      "zeroWidth": 8.40625,
+      "nativePrediction": 18.8125
+    },
+    {
+      "count": 10,
+      "family": "Courier",
+      "font": "14px / 21px Courier",
+      "point": 14,
+      "width": 86.015625,
+      "zeroWidth": 8.40625,
+      "nativePrediction": 86.015625
+    },
+    {
+      "count": 20,
+      "family": "Courier",
+      "font": "14px / 21px Courier",
+      "point": 14,
+      "width": 170.03125,
+      "zeroWidth": 8.40625,
+      "nativePrediction": 170.03125
+    },
+    {
+      "count": 40,
+      "family": "Courier",
+      "font": "14px / 21px Courier",
+      "point": 14,
+      "width": 338.0625,
+      "zeroWidth": 8.40625,
+      "nativePrediction": 338.0625
+    },
+    {
+      "count": 1,
+      "family": "Courier",
+      "font": "20px / 30px Courier",
+      "point": 20,
+      "width": 14.015625,
+      "zeroWidth": 12.015625,
+      "nativePrediction": 14.015625
+    },
+    {
+      "count": 2,
+      "family": "Courier",
+      "font": "20px / 30px Courier",
+      "point": 20,
+      "width": 26.015625,
+      "zeroWidth": 12.015625,
+      "nativePrediction": 26.015625
+    },
+    {
+      "count": 10,
+      "family": "Courier",
+      "font": "20px / 30px Courier",
+      "point": 20,
+      "width": 122.03125,
+      "zeroWidth": 12.015625,
+      "nativePrediction": 122.03125
+    },
+    {
+      "count": 20,
+      "family": "Courier",
+      "font": "20px / 30px Courier",
+      "point": 20,
+      "width": 242.046875,
+      "zeroWidth": 12.015625,
+      "nativePrediction": 242.046875
+    },
+    {
+      "count": 40,
+      "family": "Courier",
+      "font": "20px / 30px Courier",
+      "point": 20,
+      "width": 482.078125,
+      "zeroWidth": 12.015625,
+      "nativePrediction": 482.078125
+    }
+  ],
+  "negativeNativeEstimates": [
+    {
+      "family": "system-ui",
+      "point": 12,
+      "naiveNativeWidth": 170.140625,
+      "sourceWidth": 153.171875
+    },
+    {
+      "family": "system-ui",
+      "point": 14,
+      "naiveNativeWidth": 199.171875,
+      "sourceWidth": 175.359375
+    },
+    {
+      "family": "system-ui",
+      "point": 20,
+      "naiveNativeWidth": 283.25,
+      "sourceWidth": 242.765625
+    },
+    {
+      "family": "Menlo",
+      "point": 12,
+      "naiveNativeWidth": 153.265625,
+      "sourceWidth": 150
+    },
+    {
+      "family": "Menlo",
+      "point": 14,
+      "naiveNativeWidth": 179.140625,
+      "sourceWidth": 172
+    },
+    {
+      "family": "Menlo",
+      "point": 20,
+      "naiveNativeWidth": 255.78125,
+      "sourceWidth": 256
+    },
+    {
+      "family": "Arial",
+      "point": 12,
+      "naiveNativeWidth": 133.640625,
+      "sourceWidth": 129
+    },
+    {
+      "family": "Arial",
+      "point": 14,
+      "naiveNativeWidth": 155.40625,
+      "sourceWidth": 153
+    },
+    {
+      "family": "Arial",
+      "point": 20,
+      "naiveNativeWidth": 221.734375,
+      "sourceWidth": 226
+    },
+    {
+      "family": "Courier",
+      "point": 12,
+      "naiveNativeWidth": 158.828125,
+      "sourceWidth": 146.03125
+    },
+    {
+      "family": "Courier",
+      "point": 14,
+      "naiveNativeWidth": 184.625,
+      "sourceWidth": 170.03125
+    },
+    {
+      "family": "Courier",
+      "point": 20,
+      "naiveNativeWidth": 263.03125,
+      "sourceWidth": 242.046875
+    }
+  ],
+  "researchSources": [
+    "https://github.com/WebKit/WebKit/blob/main/Source/WebCore/rendering/RenderTextControl.cpp",
+    "https://github.com/WebKit/WebKit/blob/main/Source/WebCore/rendering/RenderTextControlSingleLine.cpp",
+    "https://github.com/WebKit/WebKit/blob/main/Source/WebCore/platform/graphics/FontCascade.cpp",
+    "https://github.com/WebKit/WebKit/blob/main/Source/WebCore/platform/graphics/coretext/FontCoreText.cpp"
+  ],
+  "files": [
+    {
+      "path": "outputs/source-probes/input-metrics-webkit/RDM-OWNED-SOURCE-PROBE",
+      "sha256": "5cf077c9cd52a1119d27d3bb9183cc18c04323910c939edd40051f25a356d129"
+    },
+    {
+      "path": "outputs/source-probes/input-metrics-webkit/compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/input-metrics-webkit/native-compile-attempt1.swift",
+      "sha256": "2c0b46ab70e8554390868e4805b795b1a5f0b5107c437c330e2c4b3cbcf79a31"
+    },
+    {
+      "path": "outputs/source-probes/input-metrics-webkit/probe",
+      "sha256": "58e9e7a9617591a7caa49d4dc5f7d1a88a4ac38e0c0513480d8ec56e89eb80ac"
+    },
+    {
+      "path": "outputs/source-probes/input-metrics-webkit/probe.swift",
+      "sha256": "6fa62ba234b230d6cc176c2ee016af83276e9685fc008ad4bb2eceb434b23481"
+    },
+    {
+      "path": "outputs/source-probes/input-metrics-webkit/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "outputs/source-probes/input-metrics-webkit/stdout.json",
+      "sha256": "22b32423dfc4aaeed275ceed767e186b00db92964a319452660ada88b338388d"
+    }
+  ]
+}

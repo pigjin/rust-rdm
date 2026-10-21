@@ -1,0 +1,109 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Unchanged original ContentEntryEditor and four parents; actual Monaco shortcut, buttons and readonly input against controlled local RPCs. Save button disabled state does not prevent the editor shortcut from emitting save.",
+  "checks": [
+    {
+      "name": "hash-unchanged-editor-shortcut",
+      "request": {
+        "path": "/api/browser/set-hash-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aahash",
+          "field": "old",
+          "newField": "old",
+          "value": "before",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      },
+      "closed": true
+    },
+    {
+      "name": "list-unchanged-editor-shortcut",
+      "request": {
+        "path": "/api/browser/set-list-item",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aalist",
+          "index": 0,
+          "value": "before",
+          "decode": "None",
+          "format": "Raw"
+        }
+      },
+      "closed": true
+    },
+    {
+      "name": "set-unchanged-editor-shortcut",
+      "request": {
+        "path": "/api/browser/update-set-item",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aaset",
+          "value": "before",
+          "newValue": "before",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      },
+      "closed": true
+    },
+    {
+      "name": "zset-unchanged-editor-shortcut",
+      "request": {
+        "path": "/api/browser/update-zset-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aazset",
+          "value": "before",
+          "newValue": "before",
+          "score": 1,
+          "decode": "None",
+          "format": "Raw"
+        }
+      },
+      "closed": true
+    },
+    {
+      "name": "pinned-unchanged-shortcut",
+      "request": {
+        "path": "/api/browser/set-hash-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aahash",
+          "field": "old",
+          "newField": "old",
+          "value": "before",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      },
+      "closed": false,
+      "saveButtonEnabled": false
+    },
+    {
+      "name": "readonly-index-input",
+      "value": "1"
+    },
+    {
+      "name": "pin-full-restore-close",
+      "closed": true
+    },
+    {
+      "name": "field-input-shortcut-does-not-save",
+      "requestCount": 0,
+      "field": "next-field"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "records": [
+    {
+      "raw": "",
+      "initial": "0",
+      "input": "",
+      "enter": "",
+      "blurred": "",
+      "alias": {
+        "null": "fixture"
+      }
+    },
+    {
+      "raw": "-10",
+      "initial": "0",
+      "input": "-10",
+      "enter": "0",
+      "blurred": "0",
+      "alias": {
+        "0": "fixture"
+      }
+    },
+    {
+      "raw": "junk",
+      "initial": "0",
+      "input": "junk",
+      "enter": "junk",
+      "blurred": "0",
+      "alias": {
+        "0": "fixture"
+      }
+    },
+    {
+      "raw": "1e2",
+      "initial": "0",
+      "input": "100",
+      "enter": "100",
+      "blurred": "100",
+      "alias": {
+        "100": "fixture"
+      }
+    },
+    {
+      "raw": "3.0",
+      "initial": "0",
+      "input": "3.0",
+      "enter": "3",
+      "blurred": "3",
+      "alias": {
+        "3": "fixture"
+      }
+    },
+    {
+      "raw": "1.5",
+      "initial": "0",
+      "input": "1.5",
+      "enter": "1.5",
+      "blurred": "1.5",
+      "alias": {
+        "1.5": "fixture"
+      }
+    },
+    {
+      "raw": "0x10",
+      "initial": "0",
+      "input": "16",
+      "enter": "16",
+      "blurred": "16",
+      "alias": {
+        "16": "fixture"
+      }
+    },
+    {
+      "raw": "-",
+      "initial": "0",
+      "input": "-",
+      "enter": "-",
+      "blurred": "0",
+      "alias": {
+        "0": "fixture"
+      }
+    },
+    {
+      "raw": "-0",
+      "initial": "0",
+      "input": "-0",
+      "enter": "0",
+      "blurred": "0",
+      "alias": {
+        "0": "fixture"
+      }
+    }
+  ]
+}

@@ -1,0 +1,609 @@
+{
+  "records": [
+    {
+      "case": {
+        "name": "custom-http",
+        "mode": "",
+        "schema": "http",
+        "username": "proxy-user",
+        "password": "proxy-pass",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": null
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\nAuthorization: Basic cHJveHktdXNlcjpwcm94eS1wYXNz\r\nProxy-Authorization: Basic cHJveHktdXNlcjpwcm94eS1wYXNz\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "custom-https",
+        "mode": "",
+        "schema": "https",
+        "username": "proxy-user",
+        "password": "proxy-pass",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": null
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\nAuthorization: Basic cHJveHktdXNlcjpwcm94eS1wYXNz\r\nProxy-Authorization: Basic cHJveHktdXNlcjpwcm94eS1wYXNz\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "custom-unknown",
+        "mode": "",
+        "schema": "unknown",
+        "username": "proxy-user",
+        "password": "proxy-pass",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": null
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\nAuthorization: Basic cHJveHktdXNlcjpwcm94eS1wYXNz\r\nProxy-Authorization: Basic cHJveHktdXNlcjpwcm94eS1wYXNz\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "custom-socks5",
+        "mode": "",
+        "schema": "socks5",
+        "username": "proxy-user",
+        "password": "proxy-pass",
+        "target": "redis.example:6379",
+        "method": 2,
+        "env": null
+      },
+      "forward": "proxy.example:3128",
+      "greeting": "05020002",
+      "auth": "010a70726f78792d757365720a70726f78792d70617373",
+      "request": "050100030d72656469732e6578616d706c6518eb"
+    },
+    {
+      "case": {
+        "name": "custom-socks5h",
+        "mode": "",
+        "schema": "socks5h",
+        "username": "proxy-user",
+        "password": "proxy-pass",
+        "target": "redis.example:6379",
+        "method": 2,
+        "env": null
+      },
+      "forward": "proxy.example:3128",
+      "greeting": "05020002",
+      "auth": "010a70726f78792d757365720a70726f78792d70617373",
+      "request": "050100030d72656469732e6578616d706c6518eb"
+    },
+    {
+      "case": {
+        "name": "socks-auth-optional",
+        "mode": "",
+        "schema": "socks5",
+        "username": "proxy-user",
+        "password": "proxy-pass",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": null
+      },
+      "forward": "proxy.example:3128",
+      "greeting": "05020002",
+      "request": "050100030d72656469732e6578616d706c6518eb"
+    },
+    {
+      "case": {
+        "name": "socks-ipv4",
+        "mode": "",
+        "schema": "socks5",
+        "username": "",
+        "password": "",
+        "target": "127.0.0.1:6379",
+        "method": 0,
+        "env": null
+      },
+      "forward": "proxy.example:3128",
+      "greeting": "050100",
+      "request": "050100017f00000118eb"
+    },
+    {
+      "case": {
+        "name": "socks-ipv6",
+        "mode": "",
+        "schema": "socks5",
+        "username": "",
+        "password": "",
+        "target": "[2001:db8::1]:6379",
+        "method": 0,
+        "env": null
+      },
+      "forward": "proxy.example:3128",
+      "greeting": "050100",
+      "request": "0501000420010db800000000000000000000000118eb"
+    },
+    {
+      "case": {
+        "name": "socks-empty-password",
+        "mode": "",
+        "schema": "socks5",
+        "username": "proxy-user",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 2,
+        "env": null
+      },
+      "forward": "proxy.example:3128",
+      "greeting": "05020002",
+      "auth": "010a70726f78792d7573657200",
+      "request": "050100030d72656469732e6578616d706c6518eb"
+    },
+    {
+      "case": {
+        "name": "http-empty-user",
+        "mode": "",
+        "schema": "http",
+        "username": "",
+        "password": "ignored",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": null
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "upper-all",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://upper.example:3128",
+          "all_proxy": "http://lower.example:3129"
+        }
+      },
+      "forward": "upper.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "lower-all",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "all_proxy": "https://lower.example:3129"
+        }
+      },
+      "forward": "lower.example:3129",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "http-only-ignored",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "HTTPS_PROXY": "https://ignored.example:3129",
+          "HTTP_PROXY": "http://ignored.example:3128"
+        }
+      },
+      "forward": "redis.example:6379"
+    },
+    {
+      "case": {
+        "name": "unknown-all-direct",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "unknown://proxy.example:3128"
+        }
+      },
+      "forward": "redis.example:6379"
+    },
+    {
+      "case": {
+        "name": "encoded-nonascii-host",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://%bad"
+        }
+      },
+      "forward": "�d",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "malformed-all-direct",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://%zz"
+        }
+      },
+      "forward": "redis.example:6379"
+    },
+    {
+      "case": {
+        "name": "uppercase-scheme-direct",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "HTTP://proxy.example:3128"
+        }
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "encoded-ascii-host-direct",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://%41.example:3128"
+        }
+      },
+      "forward": "redis.example:6379"
+    },
+    {
+      "case": {
+        "name": "http-no-default-port",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example"
+        }
+      },
+      "forward": "proxy.example",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "http-empty-password",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy-user@proxy.example:3128"
+        }
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\nAuthorization: Basic cHJveHktdXNlcjo=\r\nProxy-Authorization: Basic cHJveHktdXNlcjo=\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "http-empty-userinfo",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://@proxy.example:3128"
+        }
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\nAuthorization: Basic Og==\r\nProxy-Authorization: Basic Og==\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "http-password-only",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://:proxy-pass@proxy.example:3128"
+        }
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\nAuthorization: Basic OnByb3h5LXBhc3M=\r\nProxy-Authorization: Basic OnByb3h5LXBhc3M=\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "exact-host-bypass",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "redis.example"
+        }
+      },
+      "forward": "redis.example:6379"
+    },
+    {
+      "case": {
+        "name": "wildcard-zone-bypass",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "cache.redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "*.redis.example"
+        }
+      },
+      "forward": "cache.redis.example:6379"
+    },
+    {
+      "case": {
+        "name": "wildcard-root-bypass",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "*.redis.example"
+        }
+      },
+      "forward": "redis.example:6379"
+    },
+    {
+      "case": {
+        "name": "plain-zone-no-subdomain",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "cache.redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "redis.example"
+        }
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT cache.redis.example:6379 HTTP/1.1\r\nHost: cache.redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "case-sensitive-host",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "REDIS.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "redis.example"
+        }
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT REDIS.example:6379 HTTP/1.1\r\nHost: REDIS.example:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "ip-bypass",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "127.0.0.1:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "127.0.0.1"
+        }
+      },
+      "forward": "127.0.0.1:6379"
+    },
+    {
+      "case": {
+        "name": "cidr-bypass",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "127.2.3.4:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "127.0.0.0/8"
+        }
+      },
+      "forward": "127.2.3.4:6379"
+    },
+    {
+      "case": {
+        "name": "ipv6-cidr-bypass",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "[2001:db8::1]:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "2001:db8::/32"
+        }
+      },
+      "forward": "[2001:db8::1]:6379"
+    },
+    {
+      "case": {
+        "name": "mapped-ip-bypass",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "[::ffff:127.0.0.1]:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "127.0.0.1"
+        }
+      },
+      "forward": "[::ffff:127.0.0.1]:6379"
+    },
+    {
+      "case": {
+        "name": "asterisk-literal",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "*"
+        }
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "dot-zone-literal",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "cache.redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": ".redis.example"
+        }
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT cache.redis.example:6379 HTTP/1.1\r\nHost: cache.redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "port-in-bypass-literal",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "redis.example:6379"
+        }
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "trailing-dot-host",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example.:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "NO_PROXY": "redis.example."
+        }
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example.:6379 HTTP/1.1\r\nHost: redis.example.:6379\r\nUser-Agent: Go-http-client/1.1\r\n\r\n"
+    },
+    {
+      "case": {
+        "name": "lower-no-proxy",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy.example:3128",
+          "no_proxy": "redis.example"
+        }
+      },
+      "forward": "redis.example:6379"
+    },
+    {
+      "case": {
+        "name": "system-socks-default-port",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 2,
+        "env": {
+          "ALL_PROXY": "socks5://proxy-user:proxy-pass@proxy.example"
+        }
+      },
+      "forward": "proxy.example:1080",
+      "greeting": "05020002",
+      "auth": "010a70726f78792d757365720a70726f78792d70617373",
+      "request": "050100030d72656469732e6578616d706c6518eb"
+    },
+    {
+      "case": {
+        "name": "system-url-auth",
+        "mode": "system",
+        "schema": "",
+        "username": "",
+        "password": "",
+        "target": "redis.example:6379",
+        "method": 0,
+        "env": {
+          "ALL_PROXY": "http://proxy%2Duser:proxy%2Dpass@proxy.example:3128"
+        }
+      },
+      "forward": "proxy.example:3128",
+      "http": "CONNECT redis.example:6379 HTTP/1.1\r\nHost: redis.example:6379\r\nUser-Agent: Go-http-client/1.1\r\nAuthorization: Basic cHJveHktdXNlcjpwcm94eS1wYXNz\r\nProxy-Authorization: Basic cHJveHktdXNlcjpwcm94eS1wYXNz\r\n\r\n"
+    }
+  ],
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "xNetVersion": "v0.57.0"
+}

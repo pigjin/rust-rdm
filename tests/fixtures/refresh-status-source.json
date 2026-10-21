@@ -1,0 +1,102 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "backend": "Local integer-argument mock; frontend components and stores unchanged",
+  "records": [
+    {
+      "name": "initial",
+      "input": "5",
+      "on": true,
+      "disabled": true,
+      "profile": 5,
+      "persisted": 5
+    },
+    {
+      "name": "fraction-enabled",
+      "input": "1.5",
+      "on": true,
+      "disabled": true,
+      "profile": 1.5,
+      "persisted": -1
+    },
+    {
+      "name": "fraction-reopened",
+      "input": "1.5",
+      "on": true,
+      "disabled": true,
+      "profile": 1.5,
+      "persisted": -1
+    },
+    {
+      "name": "off-reopened",
+      "input": "5",
+      "on": false,
+      "disabled": false,
+      "profile": -1,
+      "persisted": -1
+    },
+    {
+      "name": "integer-enabled",
+      "input": "3",
+      "on": true,
+      "disabled": true,
+      "profile": 3,
+      "persisted": 3
+    },
+    {
+      "name": "integer-reopened",
+      "input": "3",
+      "on": true,
+      "disabled": true,
+      "profile": 3,
+      "persisted": 3
+    },
+    {
+      "name": "empty-enabled",
+      "input": "5",
+      "on": true,
+      "disabled": true,
+      "profile": 5,
+      "persisted": 5
+    },
+    {
+      "name": "fraction-after-profile-reload",
+      "input": "5",
+      "on": false,
+      "disabled": false,
+      "profile": -1,
+      "persisted": -1
+    },
+    {
+      "name": "profile-get-reopened",
+      "input": "5",
+      "on": true,
+      "disabled": true,
+      "profile": 5,
+      "persisted": 5
+    },
+    {
+      "name": "zero-reopened",
+      "input": "5",
+      "on": true,
+      "disabled": true,
+      "profile": 5,
+      "persisted": 5
+    }
+  ],
+  "calls": [
+    5,
+    -1,
+    1.5,
+    1.5,
+    -1,
+    3,
+    3,
+    -1,
+    5,
+    -1,
+    1.5,
+    5,
+    -1,
+    5
+  ]
+}

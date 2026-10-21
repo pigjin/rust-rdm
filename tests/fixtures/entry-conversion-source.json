@@ -1,0 +1,527 @@
+{
+  "sourceCommit": "4ddb94a3c55f3401dbc66870f0d21cf0d6203cbc",
+  "scope": "Controlled delayed local RPCs with untouched original frontend. Empty loading editor, editable controls, request count and response-order observations; response text is deliberately synthetic, not backend conversion proof.",
+  "records": [
+    {
+      "name": "entry-conversion-pending",
+      "field": "draft-field",
+      "lines": [
+        ""
+      ],
+      "enabled": true,
+      "format": "Raw",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "focusOwner": "BODY",
+      "geometry": {
+        "panel": {
+          "x": 687,
+          "y": 165.1875,
+          "width": 331,
+          "height": 559.8125
+        },
+        "card": {
+          "x": 689,
+          "y": 165.1875,
+          "width": 329,
+          "height": 559.8125
+        },
+        "field": {
+          "x": 718,
+          "y": 245.1875,
+          "width": 271,
+          "height": 32
+        },
+        "editor": {
+          "x": 709,
+          "y": 324.1875,
+          "width": 289,
+          "height": 305.8125
+        }
+      }
+    },
+    {
+      "name": "entry-conversion-followup",
+      "field": "old",
+      "lines": [
+        ""
+      ],
+      "enabled": true,
+      "format": "JSON",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "focusOwner": "BODY",
+      "geometry": {
+        "panel": {
+          "x": 687,
+          "y": 165.1875,
+          "width": 331,
+          "height": 559.8125
+        },
+        "card": {
+          "x": 689,
+          "y": 165.1875,
+          "width": 329,
+          "height": 559.8125
+        },
+        "field": {
+          "x": 718,
+          "y": 245.1875,
+          "width": 271,
+          "height": 32
+        },
+        "editor": {
+          "x": 709,
+          "y": 324.1875,
+          "width": 289,
+          "height": 305.8125
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "name": "entry-conversion-pending",
+      "field": "draft-field",
+      "lines": [
+        ""
+      ],
+      "enabled": true,
+      "format": "Raw",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "focusOwner": "BODY"
+    },
+    {
+      "name": "entry-conversion-followup",
+      "field": "old",
+      "lines": [
+        ""
+      ],
+      "enabled": true,
+      "format": "JSON",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "focusOwner": "BODY"
+    },
+    {
+      "name": "entry-conversion-settled",
+      "field": "old",
+      "lines": [
+        "second converted",
+        "value"
+      ],
+      "enabled": false,
+      "format": "JSON",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "focusOwner": "BODY"
+    },
+    {
+      "name": "two-selections-pending",
+      "field": "draft-field",
+      "lines": [
+        ""
+      ],
+      "enabled": true,
+      "format": "Raw",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        }
+      ],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        }
+      ],
+      "focusOwner": "BODY"
+    },
+    {
+      "name": "newer-first-reply",
+      "field": "old",
+      "lines": [
+        ""
+      ],
+      "enabled": true,
+      "format": "YAML",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        }
+      ],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        }
+      ],
+      "focusOwner": "BODY"
+    },
+    {
+      "name": "older-late-reply",
+      "field": "old",
+      "lines": [
+        ""
+      ],
+      "enabled": true,
+      "format": "JSON",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "focusOwner": "BODY"
+    },
+    {
+      "name": "race-followup-chain",
+      "field": "old",
+      "lines": [
+        ""
+      ],
+      "enabled": true,
+      "format": "JSON",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "focusOwner": "BODY"
+    },
+    {
+      "name": "race-settled-after-concurrent-drain",
+      "field": "old",
+      "lines": [
+        ""
+      ],
+      "enabled": true,
+      "format": "YAML",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "YAML"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "focusOwner": "BODY"
+    },
+    {
+      "name": "entry-conversion-edit-while-pending",
+      "field": "draft-field",
+      "lines": [
+        "typed while waiting"
+      ],
+      "enabled": true,
+      "format": "Raw",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "focusOwner": "TEXTAREA"
+    },
+    {
+      "name": "save-while-converting",
+      "request": {
+        "path": "/api/browser/set-hash-value",
+        "body": {
+          "server": "localhost",
+          "db": 0,
+          "key": "aahash",
+          "field": "old",
+          "newField": "draft-field",
+          "value": "typed while waiting",
+          "decode": "None",
+          "format": "Raw",
+          "retDecode": "",
+          "retFormat": ""
+        }
+      },
+      "editorClosed": true,
+      "pendingConversions": 1
+    },
+    {
+      "name": "conversion-finishes-under-settings",
+      "field": "old",
+      "lines": [
+        "under settings final"
+      ],
+      "enabled": false,
+      "format": "JSON",
+      "decode": "None",
+      "formatDisabled": false,
+      "decodeDisabled": false,
+      "pending": [],
+      "requests": [
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        },
+        {
+          "value": "before",
+          "decode": "None",
+          "format": "JSON"
+        }
+      ],
+      "focusOwner": "BODY"
+    }
+  ]
+}
