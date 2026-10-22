@@ -301,3 +301,57 @@ pub(crate) trait ManagedTooltipExt:
 }
 
 impl<E: StatefulInteractiveElement + crate::ElementExt> ManagedTooltipExt for E {}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use gpui::InteractiveElement as _;
+
+    #[gpui::test]
+    fn keyboard_activation_dismisses_managed_tooltip(cx: &mut gpui::TestAppContext) {
+        struct Harness(Rc<Cell<usize>>);
+        impl Render for Harness {
+            fn render(&mut self, _: &mut Window, _: &mut Context<Self>) -> impl IntoElement {
+                let clicks = self.0.clone();
+                div().tab_group().child(crate::button::Button::new("trigger")
+                    .label("Export").tooltip("Save log").size(px(100.))
+                    .on_click(move |_, _, _| clicks.set(clicks.get() + 1)))
+            }
+        }
+
+        cx.update(crate::init);
+        let clicks = Rc::new(Cell::new(0));
+        let (_, cx) = cx.add_window_view({
+            let clicks = clicks.clone();
+            move |window, cx| {
+                let view = cx.new(|_| Harness(clicks));
+                crate::Root::new(view, window, cx)
+            }
+        });
+        cx.update(|window, cx| {
+            WindowState::tooltip_overlay(window, cx).unwrap().update(cx, |overlay, _| {
+                *overlay = BaseTooltipOverlay::new().render_with(|view, _, _, _|
+                    div().id("tooltip-probe").debug_selector(|| "tooltip-probe".into()).size(px(30.)).child(view).into_any_element());
+            });
+            window.draw(cx).clear(cx);
+        });
+        cx.update(|window, cx| {
+            WindowState::tooltip_overlay(window, cx).unwrap().update(cx, |overlay, cx| {
+                overlay.request_show(BaseTooltipRequest::new(
+                    Bounds::new(gpui::point(px(0.), px(0.)), gpui::size(px(100.), px(100.))),
+                    |_, cx| cx.new(|_| gpui::Empty).into(),
+                ).with_show_delay(Duration::ZERO), window, cx);
+            });
+        });
+        cx.update(|window, cx| window.draw(cx).clear(cx));
+        assert!(cx.debug_bounds("tooltip-probe").is_some());
+
+        cx.update(|window, cx| { window.focus_next(cx); window.draw(cx).clear(cx); });
+        let keystroke = gpui::Keystroke::parse("enter").unwrap();
+        cx.simulate_event(gpui::KeyDownEvent { keystroke: keystroke.clone(), is_held: false, prefer_character_input: false });
+        cx.simulate_event(gpui::KeyUpEvent { keystroke });
+        cx.update(|window, cx| window.draw(cx).clear(cx));
+        assert_eq!(clicks.get(), 1);
+        assert!(cx.debug_bounds("tooltip-probe").is_none(), "keyboard/accessibility clicks must dismiss tooltips without mouse-down");
+    }
+}

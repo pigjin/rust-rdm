@@ -89,6 +89,7 @@ pub(super) enum DialogKind {
     Export,
     About,
     Community,
+    CleanLog,
 }
 #[derive(Clone)]
 struct Row {
@@ -456,6 +457,15 @@ impl RdmApp {
                         if key == "path" && let Some(dialog)=&mut app.dialog
                             && let Some(cache)=&mut dialog.csv_filename {
                             cache.path_changed(text_input(state,cx),chrono::Local::now());
+                        }
+                        if key == "pattern"
+                            && let Some(dialog) = &mut app.dialog
+                            && matches!(dialog.kind, DialogKind::DeleteKeys)
+                        {
+                            dialog.previewed = false;
+                            if let Some(target) = &mut dialog.target {
+                                target.keys.clear();
+                            }
                         }
                     }
                 }
@@ -1259,6 +1269,7 @@ impl RdmApp {
         if let Some(dialog) = &mut self.dialog && let Some(target) = &mut dialog.target {
             target.keys = keys;
             dialog.previewed = true;
+            set_json_boolean(&mut dialog.data, "checked", true);
         }
     }
     pub(super) fn open_dialog(
@@ -1284,8 +1295,12 @@ impl RdmApp {
         let target = self.index().map(|i| {
             let t = &self.tabs[i];
             let key = t.current_key.clone().unwrap_or_default();
-            let mut keys = t.selected.iter().cloned().collect::<Vec<_>>();
-            if keys.is_empty() && !key.is_empty() {
+            let mut keys = if matches!(kind, DialogKind::DeleteKeys) {
+                Vec::new()
+            } else {
+                t.selected.iter().cloned().collect::<Vec<_>>()
+            };
+            if !matches!(kind, DialogKind::DeleteKeys) && keys.is_empty() && !key.is_empty() {
                 keys.push(key.clone());
             }
             Target {
@@ -1318,14 +1333,15 @@ impl RdmApp {
                 c.form_data(),
                 "general",
             ),
-            DialogKind::ConfirmEdit(_) | DialogKind::DeleteKey(_) => (self.tr("common.warning"), Json::Null, "general"),
+            DialogKind::ConfirmEdit(_) | DialogKind::DeleteKey(_) | DialogKind::CleanLog => {
+                (self.tr("common.warning"), Json::Null, "general")
+            }
             DialogKind::Group(old) => (
-                if old.is_some() {
-                    "重命名分组"
+                self.tr(if old.is_some() {
+                    "dialogue.group.rename"
                 } else {
-                    "新建分组"
-                }
-                .into(),
+                    "dialogue.group.new"
+                }),
                 serde_json::json!({"name":old.clone().unwrap_or_default()}),
                 "general",
             ),
@@ -1373,24 +1389,39 @@ impl RdmApp {
                     "general",
                 )
             }
-            DialogKind::Rename => (
-                self.tr("interface.rename_key"),
-                serde_json::json!({"key":target.as_ref().map(|t|display_bytes(&t.key)).unwrap_or_default(),"new_key":""}),
-                "general",
-            ),
-            DialogKind::Ttl => (
-                "设置 TTL".into(),
-                serde_json::json!({"ttl":self.index().and_then(|i|self.tabs[i].detail.as_ref().map(|d|d.ttl)).unwrap_or(-1),"unit":1,"key":target.as_ref().map(|t|display_bytes(&t.key)).unwrap_or_default(),"batch":self.index().is_some_and(|i|self.tabs[i].check_mode && !self.tabs[i].selected.is_empty()),"pattern":"*"}),
-                "general",
-            ),
+            DialogKind::Rename => {
+                let current_key = target
+                    .as_ref()
+                    .map(|t| display_bytes(&t.key))
+                    .unwrap_or_default();
+                (
+                    self.tr("interface.rename_key"),
+                    serde_json::json!({"key":current_key,"new_key":current_key}),
+                    "general",
+                )
+            }
+            DialogKind::Ttl => {
+                let batch = self
+                    .index()
+                    .is_some_and(|i| self.tabs[i].check_mode && !self.tabs[i].selected.is_empty());
+                (
+                    self.tr(if batch {
+                        "dialogue.ttl.title_batch"
+                    } else {
+                        "dialogue.ttl.title"
+                    }).replace("{count}", &target.as_ref().map(|target| target.keys.len()).unwrap_or(0).to_string()),
+                    serde_json::json!({"ttl":self.index().and_then(|i|self.tabs[i].detail.as_ref().map(|d|d.ttl)).unwrap_or(-1),"unit":1,"key":target.as_ref().map(|t|display_bytes(&t.key)).unwrap_or_default(),"batch":batch,"pattern":"*"}),
+                    "general",
+                )
+            }
             DialogKind::DeleteKeys => (
-                self.tr("interface.delete_key"),
-                serde_json::json!({"pattern":"*","async":true,"direct":false}),
+                self.tr("interface.batch_delete_key"),
+                serde_json::json!({"server":target.as_ref().map(|t|t.conn.name.clone()).unwrap_or_default(),"db":target.as_ref().map(|t|t.db).unwrap_or_default(),"pattern":"*","async":true,"direct":false,"checked":false}),
                 "general",
             ),
             DialogKind::Flush => (
                 self.tr("interface.flush_db"),
-                serde_json::json!({"confirm":false,"async":true}),
+                serde_json::json!({"server":target.as_ref().map(|t|t.conn.name.clone()).unwrap_or_default(),"db":target.as_ref().map(|t|t.db).unwrap_or_default(),"confirm":false,"async":true}),
                 "general",
             ),
             DialogKind::Import => (
@@ -1673,8 +1704,17 @@ impl RdmApp {
         if matches!(kind, DialogKind::Import | DialogKind::Export) {
             fields.get("path").unwrap().update(cx, |field, cx| field.set_placeholder(self.tr(if matches!(kind, DialogKind::Import) {"dialogue.import.open_csv_file_tip"} else {"dialogue.export.save_file_tip"}), window, cx));
         }
-        let focus = if matches!(kind, DialogKind::Import | DialogKind::Export) {fields.get("server").cloned()}
-            else {fields.get("name").or_else(|| fields.get("key")).cloned()};
+        let focus = if matches!(kind, DialogKind::Import | DialogKind::Export) {
+            fields.get("server").cloned()
+        } else if matches!(kind, DialogKind::Rename) {
+            fields.get("new_key").cloned()
+        } else if matches!(kind, DialogKind::Ttl) && data["batch"].as_bool() == Some(true) {
+            fields.get("ttl").cloned()
+        } else if matches!(kind, DialogKind::Flush | DialogKind::DeleteKeys) {
+            fields.get("server").cloned()
+        } else {
+            fields.get("name").or_else(|| fields.get("key")).cloned()
+        };
         if matches!(
             kind,
             DialogKind::Connection(_) | DialogKind::ConnectionCopy(_)
@@ -1777,6 +1817,16 @@ impl RdmApp {
         }
         cx.notify();
     }
+    fn simple_dialog_input(&self, key: &str, label: &str, window: &Window, cx: &Context<Self>) -> AnyElement {
+        let dialog = self.dialog.as_ref().unwrap();
+        let state = &dialog.fields[key];
+        let field = form_input(state)
+            .id(format!("simple-field-{key}"))
+            .readonly(key == "key" || matches!(key, "server" | "db"))
+            .aria_label(localized(label));
+        self.form_field_for(key, label, self.styled_form_input(field, state, window, cx).into_any_element(), cx)
+    }
+
     fn dialog_input(&self, key: &str, label: &str, multi: bool, cx: &Context<Self>) -> AnyElement {
         let Some(d) = &self.dialog else {
             return div().into_any_element();
@@ -1797,7 +1847,11 @@ impl RdmApp {
             .when(self.connection_field_disabled(key, cx), |field| {
                 field.bg(disabled_control_background(cx))
             })
-            .readonly(key == "key" && matches!(d.kind, DialogKind::Ttl | DialogKind::Rename))
+            .readonly(
+                (key == "key" && matches!(d.kind, DialogKind::Ttl | DialogKind::Rename))
+                    || (matches!(key, "server" | "db")
+                        && matches!(d.kind, DialogKind::Flush | DialogKind::DeleteKeys)),
+            )
             .aria_label(localized(label))
             .when(
                 key.ends_with("password") || key.ends_with("passphrase"),
@@ -1819,7 +1873,7 @@ impl RdmApp {
     fn form_field(&self, label: &str, control: AnyElement, cx: &Context<Self>) -> AnyElement {
         self.form_field_for("", label, control, cx)
     }
-    fn control_placeholder(&self, select: bool) -> &'static str {
+    pub(super) fn control_placeholder(&self, select: bool) -> &'static str {
         match (
             matches!(self.current_language().as_str(), "zh" | "zh-cn"),
             select,
@@ -1870,34 +1924,36 @@ impl RdmApp {
             .flex_col()
             .gap(px(5.))
             .mb(px(if error.is_some() { 0. } else { 18. }))
-            .child(
-                div()
-                    .flex()
-                    .items_center()
-                    .gap(px(5.))
-                    .text_size(px(13.))
-                    .line_height(px(16.25))
-                    .font_weight(FontWeight(450.))
-                    .text_color(rgb(0x717880))
-                    .pl(px(2.))
-                    .child(localized(label))
-                    .when_some(help, |heading, tip| {
-                        heading.child(
-                            self.icon_btn(
-                                format!("help-{tip}"),
-                                "help",
-                                self.tr(tip),
-                                cx,
-                                |_, _, _| {},
+            .when(!label.is_empty(), |item| {
+                item.child(
+                    div()
+                        .flex()
+                        .items_center()
+                        .gap(px(5.))
+                        .text_size(px(13.))
+                        .line_height(px(16.25))
+                        .font_weight(FontWeight(450.))
+                        .text_color(rgb(0x717880))
+                        .pl(px(2.))
+                        .child(localized(label))
+                        .when_some(help, |heading, tip| {
+                            heading.child(
+                                self.icon_btn(
+                                    format!("help-{tip}"),
+                                    "help",
+                                    self.tr(tip),
+                                    cx,
+                                    |_, _, _| {},
+                                )
+                                .with_size(gpui_component::Size::Size(px(18.6667)))
+                                .size(px(14.))
+                                .p_0()
+                                .tab_stop(false)
+                                .text_color(rgb(0x717880)),
                             )
-                            .with_size(gpui_component::Size::Size(px(18.6667)))
-                            .size(px(14.))
-                            .p_0()
-                            .tab_stop(false)
-                            .text_color(rgb(0x717880)),
-                        )
-                    }),
-            )
+                        }),
+                )
+            })
             .child(
                 div()
                     .flex()
@@ -1991,7 +2047,7 @@ impl RdmApp {
         control = control.child(buttons);
         self.form_field(label, control.into_any_element(), cx)
     }
-    fn dialog_ttl(&self, cx: &Context<Self>) -> AnyElement {
+    fn dialog_ttl(&self, window: &Window, cx: &Context<Self>) -> AnyElement {
         let d = self.dialog.as_ref().unwrap();
         let unit = d.value("unit", cx).parse::<i64>().unwrap_or(1);
         let unit_name = match unit {
@@ -2007,38 +2063,45 @@ impl RdmApp {
             (3600, self.tr("common.hour")),
             (86400, self.tr("common.day")),
         ];
-        div()
-            .flex()
-            .flex_col()
-            .gap_1()
-            .mb_4()
-            .child(self.tr("interface.ttl"))
-            .child(
-                div()
-                    .flex()
-                    .items_center()
-                    .gap_1()
-                    .child(form_input(d.fields.get("ttl").unwrap()).w_full())
-                    .child(
-                        self.btn("ttl-unit", self.tr(unit_name), "down", cx, |_, _, _| {})
-                            .w(px(110.))
-                            .flex_shrink_0()
-                            .dropdown_menu(move |mut menu, _, _| {
-                                for (unit, label) in &units {
-                                    let unit = *unit;
-                                    menu = menu.item(menu_action(
-                                        label.clone(),
-                                        weak.clone(),
-                                        move |a, w, cx| {
-                                            a.set_dialog_field("unit", unit.to_string(), w, cx)
-                                        },
-                                    ));
-                                }
-                                menu
-                            }),
-                    ),
-            )
-            .into_any_element()
+        self.form_field(
+            &self.tr("interface.ttl"),
+            div()
+                .flex()
+                .items_center()
+                .child(
+                    self.styled_form_input(form_input(d.fields.get("ttl").unwrap()),d.fields.get("ttl").unwrap(),window,cx)
+                        .flex_1()
+                        .min_w_0()
+                        .rounded_r(px(0.)),
+                )
+                .child(
+                    self.diagnostic_outline(self.btn("ttl-unit", "", "", cx, |_, _, _| {}),cx)
+                        .accessibility_label(self.tr(unit_name))
+                        .child(div().flex_1().text_left().child(self.tr(unit_name)))
+                        .child(icon("select-chevron").size(px(16.)).text_color(if self.dark(cx){rgba(0xffffff61)}else{rgb(0xc2c2c2)}))
+                        .w(px(150.))
+                        .px(px(11.))
+                        .when(self.dark(cx), |button| button.bg(Self::diagnostic_fade(0xffffff, 0x2c2c32, 0.1)).border_color(Hsla::transparent_black()))
+                        .flex_shrink_0()
+                        .rounded_l(px(0.))
+                        .ml(px(-1.))
+                        .dropdown_menu(move |mut menu, _, _| {
+                            for (unit, label) in &units {
+                                let unit = *unit;
+                                menu = menu.item(menu_action(
+                                    label.clone(),
+                                    weak.clone(),
+                                    move |a, w, cx| {
+                                        a.set_dialog_field("unit", unit.to_string(), w, cx)
+                                    },
+                                ));
+                            }
+                            menu
+                        }),
+                )
+                .into_any_element(),
+            cx,
+        )
     }
     fn toggle_dialog_font(
         &mut self,
@@ -3402,10 +3465,36 @@ impl RdmApp {
     }
     pub(super) fn render_dialog(&self, window: &mut Window, cx: &Context<Self>) -> AnyElement {
         let d = self.dialog.as_ref().unwrap();
+        let simple_dialog = matches!(d.kind, DialogKind::Group(_) | DialogKind::Rename | DialogKind::Ttl | DialogKind::DeleteKeys | DialogKind::Flush);
         if matches!(d.kind, DialogKind::NewKey) { return self.render_new_key(window, cx); }
         if matches!(d.kind, DialogKind::AddEntries) { return self.render_add_entries(window, cx); }
         if matches!(d.kind, DialogKind::Import | DialogKind::Export) {return self.render_csv_dialog(window,cx);}
-        if let DialogKind::DeleteKey(key) = &d.kind { return self.render_key_delete_warning(key, cx); }
+        if let DialogKind::DeleteKey(key) = &d.kind {
+            let message = self
+                .tr("dialogue.remove_tip")
+                .replace("{type}", "")
+                .replace("{name}", &display_bytes(key))
+                .trim()
+                .to_string();
+            return self.render_warning_dialog(message, cx);
+        }
+        if matches!(d.kind, DialogKind::ConfirmEdit(_)) {
+            return self.render_warning_dialog(self.tr("dialogue.edit_close_confirm"), cx);
+        }
+        if let DialogKind::DeleteConnection(name) = &d.kind {
+            let message = self
+                .tr("dialogue.remove_tip")
+                .replace("{type}", &self.tr("dialogue.connection.conn_name"))
+                .replace("{name}", name);
+            return self.render_warning_dialog(message, cx);
+        }
+        if let DialogKind::DeleteGroup(name) = &d.kind {
+            let message = self.tr("dialogue.remove_group_tip").replace("{name}", name);
+            return self.render_warning_dialog(message, cx);
+        }
+        if matches!(d.kind, DialogKind::CleanLog) {
+            return self.render_warning_dialog(self.tr("log.confirm_clean_log"), cx);
+        }
         if matches!(d.kind, DialogKind::Community) {
             let images = div()
                 .id("community-images")
@@ -3457,8 +3546,11 @@ impl RdmApp {
         let mut body = div().flex().flex_col();
         let mut sections = vec![];
         match &d.kind {
-            DialogKind::ConfirmEdit(_) => body = body.child(self.tr("dialogue.edit_close_confirm")),
-            DialogKind::DeleteKey(_) => unreachable!("single key removal uses its warning dialog"),
+            DialogKind::ConfirmEdit(_)
+            | DialogKind::DeleteKey(_)
+            | DialogKind::DeleteConnection(_)
+            | DialogKind::DeleteGroup(_)
+            | DialogKind::CleanLog => unreachable!("warning dialogs use render_warning_dialog"),
             DialogKind::Connection(_) | DialogKind::ConnectionCopy(_) => {
                 sections = vec![
                     ("general", "dialogue.connection.general"),
@@ -3678,7 +3770,7 @@ impl RdmApp {
                                 cx,
                             ),
                         )
-                        .child(self.dialog_ttl(cx));
+                        .child(self.dialog_ttl(window, cx));
                 }
                 if matches!(kind, KeyType::String | KeyType::Json) {
                     body = body.child(self.dialog_input("value", "值", true, cx));
@@ -3758,17 +3850,15 @@ impl RdmApp {
                 }
             }
             DialogKind::Rename => {
-                body = body
-                    .child(self.dialog_input("key", "原键名", false, cx))
-                    .child(self.dialog_input("new_key", "新键名", false, cx))
+                body = body.child(self.simple_dialog_input("new_key", "", window, cx))
             }
             DialogKind::Ttl => {
                 body = body
                     .when(!d.boolean("batch"), |body| {
-                        body.child(self.dialog_input("key", &self.tr("common.key"), false, cx))
+                        body.child(self.simple_dialog_input("key", &self.tr("common.key"), window, cx))
                     })
-                    .child(self.dialog_ttl(cx));
-                let mut quick = div().flex().flex_wrap().gap_2();
+                    .child(self.dialog_ttl(window, cx));
+                let mut quick = div().h(px(32.)).flex().items_center().flex_wrap().gap(px(12.));
                 for (value, unit, label) in [
                     (-1, 1, "interface.forever"),
                     (10, 1, "common.second"),
@@ -3784,7 +3874,7 @@ impl RdmApp {
                     quick = quick.child(
                         self.btn(
                             format!("ttl-quick-{value}-{unit}"),
-                            text,
+                            "",
                             "",
                             cx,
                             move |a, w, cx| {
@@ -3793,69 +3883,172 @@ impl RdmApp {
                             },
                         )
                         .small()
+                        .accessibility_label(text.clone())
+                        .content_style(div().text_size(px(14.)).style().clone(),gpui_component::Size::Size(px(18.)))
+                        .child(text::ScriptLabel{text:text.clone()})
+                        .text_color(if self.dark(cx){rgba(0xffffffd1)}else{rgb(0x333639)})
+                        .h(px(28.))
+                        .w(px(text::script_width(&text, gpui::font(".SystemUIFont"), 14., window) + 28.))
+                        .text_size(px(14.))
+                        .border_0()
+                        .bg(if self.dark(cx) {
+                            rgba(0xffffff14)
+                        } else {
+                            rgba(0x2e33380d)
+                        })
                         .rounded_full(),
                     );
                 }
-                body = body
-                    .child(div().mb_2().child(self.tr("dialogue.ttl.quick_set")))
-                    .child(quick);
+                body = body.child(div().flex().flex_col()
+                    .child(div().h(px(21.)).pb(px(5.)).pl(px(2.)).text_size(px(13.)).line_height(px(16.25))
+                        .font_weight(FontWeight(450.)).text_color(rgb(0x717880)).child(self.tr("dialogue.ttl.quick_set")))
+                    .child(quick));
             }
             DialogKind::DeleteKeys => {
+                body = body.child(self.form_pair(
+                    self.simple_dialog_input("server", &self.tr("dialogue.key.server"), window, cx),
+                    self.simple_dialog_input("db", &self.tr("dialogue.key.db_index"), window, cx),
+                ));
+                if !d.boolean("checked") {
+                    body = body.child(self.simple_dialog_input("pattern", &self.tr("dialogue.key.key_expression"), window, cx));
+                }
                 if !d.previewed {
-                    body = body
-                        .child(self.dialog_input(
-                            "pattern",
-                            &self.tr("dialogue.key.key_expression"),
-                            false,
-                            cx,
-                        ))
-                        .child(self.dialog_checkbox(
-                            "direct",
-                            &self.tr("dialogue.key.direct_delete"),
-                            cx,
-                        ));
+                    body = body.child(self.dialog_checkbox(
+                        "direct",
+                        &self.tr("dialogue.key.direct_delete"),
+                        cx,
+                    ));
                 } else if let Some(target) = &d.target {
-                    body = body
-                        .child(div().mb_2().child(format!(
-                            "{} ({})",
-                            self.tr("dialogue.key.affected_key"),
-                            target.keys.len()
-                        )))
-                        .child(
-                            div()
-                                .id("affected-keys")
-                                .max_h(px(180.))
-                                .overflow_y_scroll()
-                                .children(
-                                    target
-                                        .keys
-                                        .iter()
-                                        .map(|k| div().h(px(25.)).child(display_bytes(k))),
+                    body = body.child(
+                        div()
+                            .border_1()
+                            .border_color(if self.dark(cx) {
+                                rgba(0xffffff17).into()
+                            } else {
+                                cx.theme().border
+                            })
+                            .rounded(px(3.))
+                            .bg(if self.dark(cx) {
+                                rgb(0x2c2c32)
+                            } else {
+                                rgb(0xfafafc)
+                            })
+                            .child(
+                                div()
+                                    .h(px(48.))
+                                    .px(px(16.))
+                                    .py(px(12.))
+                                    .text_size(px(16.))
+                                    .line_height(px(24.))
+                                    .font_weight(FontWeight::MEDIUM)
+                                    .when(self.dark(cx), |heading| {
+                                        heading.text_color(rgba(0xffffffe6))
+                                    })
+                                    .child(format!(
+                                        "{}({})",
+                                        self.tr("dialogue.key.affected_key"),
+                                        target.keys.len()
+                                    )),
+                            )
+                            .child(
+                                div().px(px(16.)).pb(px(12.)).child(
+                                    div()
+                                        .id("affected-keys")
+                                        .max_h(px(180.))
+                                        .overflow_y_scroll()
+                                        .children(target.keys.iter().map(|k| {
+                                            div()
+                                                .h(px(25.))
+                                                .line_height(px(22.4))
+                                                .child(display_bytes(k))
+                                        })),
                                 ),
-                        );
+                            ),
+                    );
                 }
             }
             DialogKind::Flush => {
+                let confirm_checked = d.boolean("confirm");
+                let weak = cx.weak_entity();
+                let confirm_box = gpui_base::Checkbox::new("check-confirm")
+                    .accessibility_label(self.tr("dialogue.key.confirm_flush"))
+                    .checked(confirm_checked)
+                    .flex()
+                    .items_center()
+                    .gap(px(8.))
+                    .text_size(px(14.))
+                    .line_height(px(21.))
+                    .cursor_pointer()
+                    .child(
+                        div()
+                            .size(px(16.))
+                            .flex_shrink_0()
+                            .rounded(px(3.))
+                            .border_1()
+                            .border_color(if confirm_checked {
+                                cx.theme().primary
+                            } else {
+                                cx.theme().border
+                            })
+                            .bg(if confirm_checked {
+                                cx.theme().primary
+                            } else {
+                                cx.theme().background
+                            })
+                            .when(confirm_checked, |indicator| {
+                                indicator.child(
+                                    Icon::new(IconName::Check)
+                                        .size(px(14.))
+                                        .text_color(rgb(0xffffff)),
+                                )
+                            }),
+                    )
+                    .child(
+                        div()
+                            .text_color(self.form_error_color(cx))
+                            .font_weight(FontWeight::BOLD)
+                            .child(self.tr("dialogue.key.confirm_flush")),
+                    )
+                    .on_change(move |state, _, _, cx| {
+                        let _ = weak.update(cx, |app, cx| {
+                            if let Some(dialog) = &mut app.dialog {
+                                set_json_boolean(
+                                    &mut dialog.data,
+                                    "confirm",
+                                    state == gpui_base::CheckboxState::Checked,
+                                );
+                                cx.notify();
+                            }
+                        });
+                    })
+                    .into_any_element();
                 body = body
-                    .child(div().mb_4().child(format!(
-                            "{}: {} / db{}",
-                            self.tr("dialogue.key.server"),
-                            d.target
-                                .as_ref()
-                                .map(|t| t.conn.name.clone())
-                                .unwrap_or_default(),
-                            d.target.as_ref().map(|t| t.db).unwrap_or_default()
-                        )))
-                    .child(self.dialog_checkbox(
-                        "async",
-                        &self.tr("dialogue.key.async_delete_title"),
+                    .child(self.simple_dialog_input("server", &self.tr("dialogue.key.server"), window, cx))
+                    .child(self.simple_dialog_input("db", &self.tr("dialogue.key.db_index"), window, cx))
+                    .child(self.form_field(
+                        &self.tr("dialogue.key.async_delete"),
+                        div()
+                            .h(px(32.))
+                            .flex()
+                            .items_center()
+                            .child(self.dialog_checkbox(
+                                "async",
+                                &self.tr("dialogue.key.async_delete_title"),
+                                cx,
+                            ))
+                            .into_any_element(),
                         cx,
                     ))
-                    .child(self.dialog_checkbox(
-                        "confirm",
-                        &self.tr("dialogue.key.confirm_flush"),
+                    .child(self.form_field(
+                        &self.tr("common.warning"),
+                        div()
+                            .h(px(32.))
+                            .flex()
+                            .items_center()
+                            .child(confirm_box)
+                            .into_any_element(),
                         cx,
-                    ))
+                    ));
             }
             DialogKind::Import => {
                 body = body
@@ -3871,11 +4064,7 @@ impl RdmApp {
                     .child(self.dialog_input("pattern", "键名匹配表达式", false, cx))
             }
             DialogKind::Group(_) => {
-                body = body.child(self.dialog_input("name", "分组名", false, cx))
-            }
-            DialogKind::DeleteConnection(n) => body = body.child(format!("确认删除连接 {n}？")),
-            DialogKind::DeleteGroup(n) => {
-                body = body.child(self.tr("dialogue.remove_group_tip").replace("{name}", n))
+                body = body.child(self.simple_dialog_input("name", "", window, cx))
             }
             DialogKind::About => {
                 body = body
@@ -3989,7 +4178,7 @@ impl RdmApp {
             d.kind,
             DialogKind::Connection(_) | DialogKind::ConnectionCopy(_)
         );
-        let mut footer = div().flex().items_center().gap(px(12.)).pt(px(16.));
+        let mut footer = div().id("dialog-footer").test_support().flex().items_center().gap(px(12.)).pt(px(16.));
         if matches!(
             d.kind,
             DialogKind::Connection(_) | DialogKind::ConnectionCopy(_)
@@ -4040,30 +4229,58 @@ impl RdmApp {
                     a.close_dialog(w, cx);
                     cx.notify();
                 },
-            ));
+            ).when(simple_dialog, |button| self.diagnostic_button(button)
+                .px(px(11.))
+                .border_color(if self.dark(cx){rgba(0xffffff3d)}else{rgb(0xe0e0e6)})
+                .w(px(text::script_width(&self.tr("common.cancel"), gpui::font(".SystemUIFont"), 14., window) + 24.))
+                .when(simple_dialog, |button| button.bg(Hsla::transparent_black()).text_color(if self.dark(cx){rgba(0xffffffd1)}else{rgb(0x333639)}))));
         if !special {
-            let label =
-                if matches!(d.kind, DialogKind::DeleteKeys) && !d.previewed && !d.boolean("direct")
-                {
+            let label = if matches!(d.kind, DialogKind::DeleteKeys) {
+                if d.boolean("direct") {
+                    self.tr("dialogue.key.confirm_delete")
+                } else if !d.previewed {
                     self.tr("dialogue.key.show_affected_key")
-                } else if matches!(d.kind, DialogKind::Preferences | DialogKind::Ttl) {
-                    self.tr("common.save")
-                } else if matches!(d.kind, DialogKind::Connection(Some(_))) {
-                    self.tr("preferences.general.update")
                 } else {
-                    self.tr("common.confirm")
-                };
+                    self.tr("dialogue.key.confirm_delete_key").replace(
+                        "{num}",
+                        &d.target
+                            .as_ref()
+                            .map(|t| t.keys.len())
+                            .unwrap_or_default()
+                            .to_string(),
+                    )
+                }
+            } else if matches!(d.kind, DialogKind::Flush) {
+                self.tr("dialogue.key.confirm_flush_db")
+            } else if matches!(d.kind, DialogKind::Preferences | DialogKind::Ttl) {
+                self.tr("common.save")
+            } else if matches!(d.kind, DialogKind::Connection(Some(_))) {
+                self.tr("preferences.general.update")
+            } else {
+                self.tr("common.confirm")
+            };
             footer = footer.child(
-                self.btn("dialog-save", label, "", cx, |a, w, cx| {
+                self.btn("dialog-save", if simple_dialog {String::new()} else {label.clone()}, "", cx, |a, w, cx| {
                     a.submit_dialog(w, cx)
                 })
                 .primary()
+                .when(simple_dialog, |button| self.diagnostic_button(button).accessibility_label(label.clone())
+                    .child(text::ScriptLabel{text:label.clone()})
+                    .w(px(text::script_width(&label, gpui::font(".SystemUIFont"), 14., window) + 24.)))
+                .when(simple_dialog && self.dark(cx), |button| button.text_color(rgb(0)))
+                .when(matches!(d.kind, DialogKind::Flush) && !d.boolean("confirm"), |button| {
+                    button.bg(Self::diagnostic_fade(0xd33a31, if self.dark(cx){0x2c2c32}else{0xffffff}, if self.dark(cx){0.38}else{0.5}))
+                        .text_color(Self::diagnostic_fade(if self.dark(cx){0}else{0xffffff},if self.dark(cx){0x2c2c32}else{0xffffff},if self.dark(cx){0.38}else{0.5}))
+                })
                 .disabled(
                     self.transfer.is_some()
                         || matches!(d.kind, DialogKind::Flush) && !d.boolean("confirm")
                         || matches!(d.kind, DialogKind::DeleteKeys)
-                            && d.previewed
-                            && d.target.as_ref().is_some_and(|t| t.keys.is_empty()),
+                            && ((d.previewed
+                                && d.target.as_ref().is_some_and(|t| t.keys.is_empty()))
+                                || (d.boolean("direct")
+                                    && !d.boolean("checked")
+                                    && d.value("pattern", cx).trim().is_empty())),
                 ),
             );
         }
@@ -4087,6 +4304,8 @@ impl RdmApp {
                         640.
                     } else if has_sections {
                         600.
+                    } else if simple_dialog {
+                        446.
                     } else {
                         450.
                     }))
@@ -4095,7 +4314,7 @@ impl RdmApp {
                     .pt(px(16.))
                     .pb(px(20.))
                     .rounded(px(4.))
-                    .bg(cx.theme().background)
+                    .bg(if simple_dialog && self.dark(cx) {rgb(0x2c2c32).into()} else {cx.theme().background})
                     .font({
                         let mut font = gpui::font(".SystemUIFont");
                         font.fallbacks = Some(FontFallbacks::default());
@@ -4107,13 +4326,23 @@ impl RdmApp {
                     .flex_col()
                     .child(
                         div()
+                            .id("dialog-title")
+                            .test_support()
+                            .role(Role::Label)
+                            .aria_label(d.title.clone())
                             .flex()
                             .items_center()
-                            .mb(px(12.5))
-                            .line_height(px(22.5))
-                            .font_weight(FontWeight::SEMIBOLD)
+                            .mb(px(if simple_dialog { 8. } else { 12.5 }))
+                            .line_height(px(if simple_dialog { 27. } else { 22.5 }))
+                            .when(simple_dialog, |title| title.h(px(27.)))
+                            .font_weight(if simple_dialog { FontWeight::MEDIUM } else { FontWeight::SEMIBOLD })
+                            .when(simple_dialog, |title| title.text_color(if self.dark(cx){rgba(0xffffffe6)}else{rgb(0x1f2225)}))
                             .text_size(px(18.))
-                            .child(d.title.clone()),
+                            .child(if simple_dialog && text::script_runs(&d.title).len() > 1 {
+                                text::ScriptLabel { text: d.title.clone() }.into_any_element()
+                            } else {
+                                d.title.clone().into_any_element()
+                            }),
                     )
                     .child(
                         div()
@@ -4131,6 +4360,7 @@ impl RdmApp {
                             .child(
                                 div()
                                     .id("dialog-body")
+                                    .test_support()
                                     .flex_1()
                                     .min_w_0()
                                     .overflow_y_scroll()
@@ -4421,6 +4651,11 @@ impl RdmApp {
                 if let Some(t) = self.tabs.iter().find(|t| t.conn.name == *name) {
                     self.close_tab(t.id, window, cx);
                 }
+            }
+            DialogKind::CleanLog => {
+                self.service.history.lock().clear();
+                self.dialog = None;
+                self.toast(self.tr("log.clean_success"), false);
             }
             DialogKind::DeleteGroup(name) => {
                 if let Some(i) = self

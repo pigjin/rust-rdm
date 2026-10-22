@@ -57,26 +57,6 @@ impl RdmApp {
             .w(px(28.))
             .flex_shrink_0()
     }
-    fn column_header(
-        &self,
-        id: u64,
-        key: &'static str,
-        label: String,
-        width: f32,
-        cx: &Context<Self>,
-    ) -> AnyElement {
-        div()
-            .relative()
-            .w(px(width))
-            .h(px(32.))
-            .flex_shrink_0()
-            .flex()
-            .items_center()
-            .justify_center()
-            .child(label)
-            .child(self.resize_handle(id, key, width, cx))
-            .into_any_element()
-    }
     pub(super) fn resize_handle(
         &self,
         id: u64,
@@ -159,6 +139,11 @@ impl RdmApp {
                     return;
                 }
                 if let Some((id, key, x, width)) = a.column_drag.clone() {
+                    if key == "log-command" {
+                        a.log_command_width = Some((width + event.position.x.as_f32() - x).clamp(60., 1800.));
+                        cx.notify();
+                        return;
+                    }
                     if let Some(i) = a.tab_index(id) {
                         a.tabs[i].column_widths.insert(
                             key,
@@ -524,6 +509,17 @@ impl RdmApp {
                             cx,
                             move |app, _, cx| {
                                 app.nav = nav;
+                                if nav == Nav::Log {
+                                    let count = app
+                                        .service
+                                        .history
+                                        .try_lock()
+                                        .map(|h| h.len())
+                                        .unwrap_or(0);
+                                    if count > 0 {
+                                        app.log_scroll.scroll_to_item(count - 1);
+                                    }
+                                }
                                 cx.notify();
                             },
                         )
@@ -1561,8 +1557,8 @@ impl RdmApp {
             Pane::Detail => self.render_detail(i, window, cx),
             Pane::Cli => self.render_cli(i, cx),
             Pane::Slow => self.render_slow(i, cx),
-            Pane::Monitor => self.render_stream(i, false, cx),
-            Pane::Pubsub => self.render_stream(i, true, cx),
+            Pane::Monitor => self.render_stream(i, false, window, cx),
+            Pane::Pubsub => self.render_stream(i, true, window, cx),
         };
         div()
             .flex()
@@ -2099,583 +2095,267 @@ impl RdmApp {
         let command_width = t.column_widths.get("slow-command").copied();
         let keyword = text_input(&t.slow_keyword, cx);
         let client = text_input(&t.slow_client, cx);
-        let mut logs = t
-            .slow
-            .iter()
-            .filter(|log| {
-                (keyword.is_empty() || log.args.contains(&keyword))
-                    && (client.is_empty() || log.name == client || log.address == client)
-            })
-            .collect::<Vec<_>>();
-        logs.sort_by_key(|log| log.time);
-        if !t.slow_ascending {
-            logs.reverse();
+        let mut logs = t.slow.iter().filter(|log| (keyword.is_empty() || log.args.contains(&keyword))
+            && (client.is_empty() || log.name == client || log.address == client)).collect::<Vec<_>>();
+        if let Some(ascending) = t.slow_ascending {
+            logs.sort_by_key(|log| log.time);
+            if !ascending { logs.reverse(); }
         }
-        let mut list = div().id("slow-list").overflow_y_scroll().flex_1().min_h_0();
+        let mut list = div().id("slow-list").test_support().overflow_y_scroll().flex_1().min_h_0();
+        if logs.is_empty() {
+            list = list.child(self.diagnostic_empty(cx));
+        }
+        let count = logs.len();
         for (index, log) in logs.into_iter().enumerate() {
-            let time = chrono::DateTime::from_timestamp(log.time, 0)
-                .map(|d| {
-                    d.with_timezone(&chrono::Local)
-                        .format("%Y-%m-%d %H:%M:%S")
-                        .to_string()
-                })
-                .unwrap_or_default();
-            let cost = if log.duration < 1_000_000 {
-                format!("{} ms", log.duration / 1000)
-            } else {
-                format!("{} s", log.duration / 1_000_000)
-            };
+            let time = chrono::DateTime::from_timestamp(log.time, 0).map(|d| d.with_timezone(&chrono::Local).format("%Y-%m-%d %H:%M:%S").to_string()).unwrap_or_default();
+            let cost = if log.duration < 1_000_000 { format!("{} ms", log.duration / 1000) } else { format!("{} s", log.duration / 1_000_000) };
             let client = match (log.name.is_empty(), log.address.is_empty()) {
-                (true, _) => log.address.clone(),
-                (_, true) => log.name.clone(),
-                _ => format!("{} - {}", log.name, log.address),
+                (true, _) => log.address.clone(), (_, true) => log.name.clone(), _ => format!("{} - {}", log.name, log.address),
             };
-            list = list.child(
-                div()
-                    .flex()
-                    .w_full()
-                    .items_center()
-                    .border_b_1()
-                    .border_color(cx.theme().border)
-                    .py_2()
-                    .gap_2()
-                    .when(index % 2 == 1, |d| d.bg(cx.theme().muted))
-                    .child(div().w(px(180.)).flex_shrink_0().text_center().child(time))
-                    .child(
-                        div()
-                            .w(px(client_width))
-                            .flex_shrink_0()
-                            .text_center()
-                            .truncate()
-                            .child(client),
-                    )
-                    .child(
-                        div()
-                            .when_some(command_width, |cell, width| {
-                                cell.w(px(width)).flex_shrink_0()
-                            })
-                            .when(command_width.is_none(), |cell| cell.flex_1())
-                            .min_w_0()
-                            .font_family(
-                                self.pref
-                                    .cli
-                                    .font_family
-                                    .first()
-                                    .cloned()
-                                    .unwrap_or_else(|| "monospace".into()),
-                            )
-                            .child(log.args.clone()),
-                    )
-                    .child(div().w(px(100.)).flex_shrink_0().text_center().child(cost)),
-            );
+            list = list.child(self.diagnostic_row("slow", index, count, [time, client, log.args.clone(), cost],
+                [Some(180.), Some(client_width), command_width, Some(100.)], t.slow_ascending.is_some(), true, cx));
         }
+        let mut steps = div().absolute().right(px(8.)).top_0().h_full().flex().items_center();
+        for (symbol, delta) in [("−", -1i64), ("+", 1)] {
+            steps = steps.child(self.btn(format!("slow-limit-step-{delta}"), symbol, "", cx, move |app, w, cx| {
+                if let Some(i) = app.tab_index(id) {
+                    let current = text_input(&app.tabs[i].slow_limit, cx).parse::<i64>().unwrap_or(20);
+                    set_input(&app.tabs[i].slow_limit, (current + delta).clamp(1, 9999).to_string(), w, cx);
+                    app.load_slow(id, w, cx);
+                }
+            }).ghost().border_0().w(px(18.)).h(px(18.)).px_0());
+        }
+        let limit = div().id("keypages-count").test_support().relative().w(px(120.)).h(px(32.))
+            .child(self.diagnostic_input(&t.slow_limit, 32., cx).pr(px(40.))).child(steps);
+        let query = div().id("keypages-filter").test_support().w(px(self.diagnostic_filter_width(cx)))
+            .child(self.diagnostic_input(&t.slow_keyword, 32., cx).cleanable(true));
+        let form = div().id("keypages-form").test_support().flex().items_start().gap(px(18.))
+            .child(self.diagnostic_field(self.tr("slog.limit"), limit.into_any_element()))
+            .child(self.diagnostic_field(self.tr("slog.filter"), query.into_any_element()))
+            .child(self.diagnostic_field(String::new(), self.refresh_control(id, RefreshTarget::Slow, cx)));
         let weak = cx.weak_entity();
-        div()
-            .flex()
-            .flex_col()
-            .size_full()
-            .child(
-                div()
-                    .flex()
-                    .items_center()
-                    .gap_2()
-                    .p_2()
-                    .child(self.tr("slog.limit"))
-                    .child(div().w(px(120.)).child(Input::new(&t.slow_limit).small()))
-                    .child(self.tr("slog.filter"))
-                    .child(
-                        div()
-                            .w(px(220.))
-                            .child(Input::new(&t.slow_keyword).small().cleanable(true)),
-                    )
-                    .child(self.refresh_control(id, RefreshTarget::Slow, cx)),
-            )
-            .child(
-                div()
-                    .flex()
-                    .items_center()
-                    .gap_2()
-                    .bg(cx.theme().muted)
-                    .child(
-                        self.btn(
-                            "slow-sort-time",
-                            format!(
-                                "{} {}",
-                                self.tr("slog.exec_time"),
-                                if t.slow_ascending { "▴" } else { "▾" }
-                            ),
-                            "",
-                            cx,
-                            move |a, _, cx| {
-                                if let Some(i) = a.tab_index(id) {
-                                    a.tabs[i].slow_ascending = !a.tabs[i].slow_ascending;
-                                    cx.notify();
-                                }
-                            },
-                        )
-                        .ghost()
-                        .w(px(180.))
-                        .flex_shrink_0(),
-                    )
-                    .child(
-                        div()
-                            .relative()
-                            .w(px(client_width))
-                            .flex_shrink_0()
-                            .child(
-                                gpui_component::popover::Popover::new("slow-client-filter")
-                                    .trigger(
-                                        Button::new("slow-client-header")
-                                            .label(self.tr("slog.client"))
-                                            .ghost()
-                                            .w(px(client_width)),
-                                    )
-                                    .content(move |_, _, cx| {
-                                        weak.update(cx, |a, _| {
-                                            let Some(i) = a.tab_index(id) else {
-                                                return div().into_any_element();
-                                            };
-                                            div()
-                                                .w(px(200.))
-                                                .child(
-                                                    Input::new(&a.tabs[i].slow_client)
-                                                        .small()
-                                                        .cleanable(true),
-                                                )
-                                                .into_any_element()
-                                        })
-                                        .unwrap_or_else(|_| div().into_any_element())
-                                    }),
-                            )
-                            .child(self.resize_handle(id, "slow-client", client_width, cx)),
-                    )
-                    .child(
-                        div()
-                            .when_some(command_width, |cell, width| {
-                                cell.w(px(width)).flex_shrink_0()
-                            })
-                            .when(command_width.is_none(), |cell| cell.flex_1())
-                            .child(
-                                self.column_header(
-                                    id,
-                                    "slow-command",
-                                    self.tr("slog.cmd"),
-                                    command_width.unwrap_or(
-                                        (self.viewport_width
-                                            - self.pref.behavior.aside_width
-                                            - 350.
-                                            - client_width)
-                                            .max(100.),
-                                    ),
-                                    cx,
-                                ),
-                            ),
-                    )
-                    .child(
-                        div()
-                            .w(px(100.))
-                            .text_center()
-                            .child(self.tr("slog.cost_time")),
-                    ),
-            )
-            .child(list)
+        let client_header = div().id("slow-header-1").test_support().relative().w(px(client_width)).flex_shrink_0().h(px(46.))
+            .child(gpui_component::popover::Popover::new("slow-client-filter")
+                .trigger(self.diagnostic_button(self.btn("slow-client-header",self.tr("slog.client"),"",cx,|_,_,_|{})).ghost().border_0()
+                    .w(px(client_width)).h(px(46.)).font_weight(FontWeight::MEDIUM)
+                    .text_color(if self.dark(cx){rgba(0xffffffe6)}else{rgb(0x1f2225)}))
+                .content(move |_, _, cx| weak.update(cx, |app, cx| {
+                    let Some(i) = app.tab_index(id) else { return div().into_any_element(); };
+                    div().w(px(200.)).child(app.diagnostic_input(&app.tabs[i].slow_client, 32., cx).cleanable(true)).into_any_element()
+                }).unwrap_or_else(|_| div().into_any_element())))
+            .child(self.resize_handle(id, "slow-client", client_width, cx))
+            .child(self.diagnostic_separator(cx));
+        let header = div().id("keypages-table-header").test_support().flex().items_center().h(px(46.)).flex_shrink_0()
+            .border_b_1().border_color(self.diagnostic_border(cx)).bg(self.diagnostic_header_background(false, cx))
+            .font_weight(FontWeight::MEDIUM).text_color(if self.dark(cx) { rgba(0xffffffe6) } else { rgb(0x1f2225) })
+            .child(self.diagnostic_sort_header("slow-sort-time", self.tr("slog.exec_time"), t.slow_ascending, 46., cx, move |app, _, cx| {
+                if let Some(i) = app.tab_index(id) { app.tabs[i].slow_ascending = match app.tabs[i].slow_ascending { None => Some(false), Some(false) => Some(true), Some(true) => None }; cx.notify(); }
+            }))
+            .child(client_header)
+            .child(div().id("slow-header-2").test_support().relative().min_w_0().h(px(46.)).flex().items_center().justify_center()
+                .when_some(command_width, |cell, width| cell.w(px(width)).flex_shrink_0()).when(command_width.is_none(), |cell| cell.flex_1())
+                .child(self.tr("slog.cmd"))
+                .child(self.diagnostic_separator(cx))
+                .child(self.resize_handle(id, "slow-command", command_width.unwrap_or((self.viewport_width-self.pref.behavior.aside_width-374.-client_width).max(1.)), cx)))
+            .child(div().id("slow-header-3").test_support().w(px(100.)).h(px(46.)).flex_shrink_0().flex().items_center().justify_center().child(self.tr("slog.cost_time")));
+        div().id("keypages-root").test_support().flex().flex_col().size_full().p(px(20.))
+            .text_size(px(14.)).line_height(px(21.))
+            .child(form)
+            .child(div().id("keypages-table").test_support().flex_1().min_h_0().flex().flex_col()
+                .border_1().border_color(self.diagnostic_border(cx)).rounded(px(3.)).overflow_hidden()
+                .bg(rgb(if self.dark(cx) { 0x1e1e1e } else { 0xffffff })).child(header).child(list))
             .into_any_element()
     }
-    fn render_stream(&self, i: usize, pubsub: bool, cx: &Context<Self>) -> AnyElement {
+    fn render_stream(&self, i: usize, pubsub: bool, window: &Window, cx: &Context<Self>) -> AnyElement {
         let t = &self.tabs[i];
         let id = t.id;
         let stream = if pubsub { &t.pubsub } else { &t.monitor };
         let running = stream.as_ref().is_some_and(|s| s.running);
         let auto_last = stream.as_ref().is_none_or(|s| s.auto_last);
-        let mut controls = div().flex().items_center().gap_2().child(self.btn(
-            "stream-start",
-            self.tr(if pubsub {
-                if running {
-                    "pubsub.unsubscribe"
-                } else {
-                    "pubsub.subscribe"
-                }
-            } else if running {
-                "monitor.stop"
-            } else {
-                "monitor.start"
-            }),
-            if running {
-                "pause"
-            } else if pubsub {
-                "subscribe"
-            } else {
-                "play"
-            },
-            cx,
-            move |a, w, cx| a.stream_toggle(id, pubsub, w, cx),
-        ));
-        if !pubsub {
-            controls = controls
-                .child(self.icon_btn(
-                    "stream-copy",
-                    "copy",
-                    self.tr("monitor.copy_log"),
-                    cx,
-                    move |a, _, cx| {
-                        if let Some(i) = a.tab_index(id)
-                            && let Some(s) = &a.tabs[i].monitor
-                        {
-                            cx.write_to_clipboard(ClipboardItem::new_string(
-                                s.lines
-                                    .iter()
-                                    .map(StreamLine::export)
-                                    .collect::<Vec<_>>()
-                                    .join("\n"),
-                            ));
-                        }
-                    },
-                ))
-                .child(self.icon_btn(
-                    "stream-export",
-                    "export",
-                    self.tr("monitor.save_log"),
-                    cx,
-                    move |a, w, cx| a.export_stream(id, w, cx),
-                ));
-        }
-        controls = controls
-            .child(
-                self.icon_btn(
-                    "stream-last",
-                    "bottom",
-                    self.tr("monitor.always_show_last"),
-                    cx,
-                    move |a, _, cx| {
-                        if let Some(i) = a.tab_index(id) {
-                            let state = if pubsub {
-                                &mut a.tabs[i].pubsub
-                            } else {
-                                &mut a.tabs[i].monitor
-                            };
-                            if let Some(s) = state {
-                                s.auto_last = !s.auto_last;
-                                cx.notify();
-                            }
-                        }
-                    },
-                )
-                .selected(auto_last),
-            )
-            .child(div().flex_1())
-            .child(self.icon_btn(
-                "stream-clear",
-                "delete",
-                self.tr(if pubsub {
-                    "pubsub.clear"
-                } else {
-                    "monitor.clean_log"
-                }),
-                cx,
-                move |a, _, cx| {
-                    if let Some(i) = a.tab_index(id) {
-                        let state = if pubsub {
-                            &mut a.tabs[i].pubsub
-                        } else {
-                            &mut a.tabs[i].monitor
-                        };
-                        if let Some(s) = state {
-                            s.lines.clear();
-                            s.list.reset(0);
-                            cx.notify();
-                        }
-                    }
-                },
-            ));
-        let mut content = div()
-            .flex()
-            .flex_col()
-            .size_full()
-            .p_3()
-            .gap_2()
-            .child(controls);
-        if !pubsub {
-            content = content
-                .child(
-                    div()
-                        .text_size(px(12.))
-                        .text_color(cx.theme().muted_foreground)
-                        .child(self.tr("monitor.warning")),
-                )
-                .child(
-                    div()
-                        .flex()
-                        .items_center()
-                        .gap_2()
-                        .child(self.tr("monitor.search"))
-                        .child(Input::new(&t.stream_filter).cleanable(true)),
-                );
-        }
-        if pubsub {
-            content = content.child(
-                div()
-                    .flex()
-                    .bg(cx.theme().muted)
-                    .py_2()
-                    .child(
-                        div()
-                            .w(px(200.))
-                            .text_center()
-                            .child(self.tr("pubsub.time")),
-                    )
-                    .child(
-                        div()
-                            .w(px(200.))
-                            .text_center()
-                            .child(self.tr("pubsub.channel")),
-                    )
-                    .child(
-                        div()
-                            .flex_1()
-                            .text_center()
-                            .child(self.tr("pubsub.message")),
-                    )
-                    .child(
-                        div()
-                            .w(px(60.))
-                            .text_center()
-                            .child(self.tr("interface.action")),
-                    ),
-            );
-        }
-        let filter = if pubsub {
-            String::new()
-        } else {
-            text_input(&t.stream_filter, cx)
+        let dark = self.dark(cx);
+        let (start_bg, start_fg) = match (running,dark) {
+            (true,false)=>(rgba(0xf0a02029),rgb(0xf0a020)),(true,true)=>(rgba(0xf2c97d29),rgb(0xf2c97d)),
+            (false,false)=>(rgba(0x18a05829),rgb(0x18a058)),(false,true)=>(rgba(0x63e2b729),rgb(0x63e2b7)),
         };
-        if let Some(s) = stream {
-            let rows = s
-                .lines
-                .iter()
-                .enumerate()
-                .filter(|(_, line)| filter.is_empty() || line.text.contains(&filter))
-                .map(|(n, _)| n)
-                .collect::<Vec<_>>();
-            let count = rows.len();
-            if s.list.item_count() != count {
-                s.list.reset(count);
-                if s.auto_last && count > 0 {
-                    s.list.scroll_to_reveal_item(count - 1);
-                }
-            }
-            content = content.child(
-                list(
-                    s.list.clone(),
-                    cx.processor(move |a, index, _, cx| {
-                        let Some(i) = a.tab_index(id) else {
-                            return div().into_any_element();
-                        };
-                        let stream = if pubsub {
-                            &a.tabs[i].pubsub
-                        } else {
-                            &a.tabs[i].monitor
-                        };
-                        let Some(line) = stream
-                            .as_ref()
-                            .and_then(|s| rows.get(index).and_then(|n| s.lines.get(*n)))
-                        else {
-                            return div().into_any_element();
-                        };
-                        let message = line.text.clone();
-                        if pubsub {
-                            div()
-                                .flex()
-                                .items_start()
-                                .py_2()
-                                .border_b_1()
-                                .border_color(cx.theme().border)
-                                .child(
-                                    div()
-                                        .w(px(200.))
-                                        .flex_shrink_0()
-                                        .text_center()
-                                        .child(line.time.clone()),
-                                )
-                                .child(
-                                    div()
-                                        .w(px(200.))
-                                        .flex_shrink_0()
-                                        .text_center()
-                                        .child(line.channel.clone().unwrap_or_default()),
-                                )
-                                .child(div().flex_1().min_w_0().child(line.text.clone()))
-                                .child(a.icon_btn(
-                                    format!("message-copy-{index}"),
-                                    "copy",
-                                    a.tr("interface.copy_value"),
-                                    cx,
-                                    move |_, _, cx| {
-                                        cx.write_to_clipboard(ClipboardItem::new_string(
-                                            message.clone(),
-                                        ))
-                                    },
-                                ))
-                                .into_any_element()
-                        } else {
-                            div()
-                                .min_h(px(25.))
-                                .font_family("Menlo")
-                                .text_size(px(12.))
-                                .child(format!("> {}", line.text))
-                                .into_any_element()
-                        }
-                    }),
-                )
-                .flex_1()
-                .min_h_0(),
-            );
-        } else {
-            content = content.child(div().flex_1());
+        let start_label = self.tr(if pubsub { if running {"pubsub.unsubscribe"} else {"pubsub.subscribe"} } else if running {"monitor.stop"} else {"monitor.start"});
+        let mut button_font=gpui::font(".SystemUIFont");button_font.weight=FontWeight::MEDIUM;
+        let start_width=text::script_width(&start_label,button_font,14.,window)+40.;
+        let mut controls=div().h(px(28.)).flex().items_center().gap(px(12.)).child(
+            self.diagnostic_button(self.btn("stream-start",start_label,if running {"pause"}else if pubsub{"subscribe"}else{"play"},cx,move|a,w,cx|a.stream_toggle(id,pubsub,w,cx)))
+                .h(px(28.)).w(px(start_width)).px(px(8.)).gap(px(6.)).border_0().bg(start_bg).text_color(start_fg).font_weight(FontWeight::MEDIUM));
+        if !pubsub {
+            controls=controls.child(div().flex().items_center()
+                .child(self.diagnostic_outline(self.icon_btn("stream-copy","copy",self.tr("monitor.copy_log"),cx,move|a,_,cx|{
+                    if let Some(i)=a.tab_index(id){let value=a.tabs[i].monitor.as_ref().map(|s|s.lines.iter().map(StreamLine::export).collect::<Vec<_>>().join("\n")).unwrap_or_default();cx.write_to_clipboard(ClipboardItem::new_string(value));a.toast(a.tr("interface.copy_succ"),false);}
+                }),cx).w(px(34.)).h(px(28.)).px_0().rounded_r(px(0.)))
+                .child(self.diagnostic_outline(self.icon_btn("stream-export","export",self.tr("monitor.save_log"),cx,move|a,w,cx|a.export_stream(id,w,cx)),cx)
+                    .w(px(34.)).h(px(28.)).px_0().rounded_l(px(0.))));
         }
+        controls=controls.child(self.diagnostic_outline(self.icon_btn("stream-last","bottom",self.tr("monitor.always_show_last"),cx,move|a,_,cx|{
+            if let Some(i)=a.tab_index(id){let current=if pubsub{&mut a.tabs[i].pubsub}else{&mut a.tabs[i].monitor};if let Some(s)=current{s.auto_last=!s.auto_last;cx.notify();}}
+        }),cx).w(px(34.)).h(px(28.)).px_0().when(auto_last,|b|b.border_0().bg(cx.theme().primary.opacity(0.16)).text_color(cx.theme().primary)))
+            .child(div().flex_1())
+            .child(self.diagnostic_outline(self.icon_btn("stream-clear","delete",self.tr(if pubsub{"pubsub.clear"}else{"monitor.clean_log"}),cx,move|a,_,cx|{
+                if let Some(i)=a.tab_index(id){let current=if pubsub{&mut a.tabs[i].pubsub}else{&mut a.tabs[i].monitor};if let Some(s)=current{s.lines.clear();s.list.reset(0);cx.notify();}}
+            }),cx).w(px(34.)).h(px(28.)).px_0());
+        let form=if pubsub {
+            div().id("keypages-form").test_support().h(px(46.)).pb(px(18.)).child(controls).into_any_element()
+        } else {
+            let label_width=text::script_width(&self.tr("monitor.actions"),self.preference_font("general",".SystemUIFont",cx),14.,window)
+                .max(text::script_width(&self.tr("monitor.search"),self.preference_font("general",".SystemUIFont",cx),14.,window))+12.;
+            div().id("keypages-form").test_support().flex().flex_col().h(px(92.))
+                .child(div().flex().items_start()
+                    .child(div().w(px(label_width)).h(px(28.)).flex_shrink_0().flex().items_center().text_color(rgb(0x717880)).child(self.tr("monitor.actions")))
+                    .child(div().flex_1().min_w_0().flex().flex_col().child(controls)
+                        .child(div().h(px(18.)).pt(px(4.)).text_size(px(11.)).line_height(px(14.)).text_color(rgb(0x717880)).child(self.tr("monitor.warning")))))
+                .child(div().flex().items_start().pb(px(18.))
+                    .child(div().w(px(label_width)).h(px(28.)).flex_shrink_0().flex().items_center().text_color(rgb(0x717880)).child(self.tr("monitor.search")))
+                    .child(div().id("keypages-filter").test_support().flex_1().min_w_0().child(self.diagnostic_input(&t.stream_filter,28., cx).cleanable(true))))
+                .into_any_element()
+        };
+        let mut content=div().id("keypages-root").test_support().flex().flex_col().size_full().p(px(20.)).text_size(px(14.)).line_height(px(21.))
+            .text_color(if dark{rgba(0xffffffd1)}else{rgb(0x333639)}).child(form);
+        let filter=if pubsub{String::new()}else{text_input(&t.stream_filter,cx)};
+        let rows=stream.as_ref().map(|s|s.lines.iter().enumerate().filter(|(_,line)|filter.is_empty()||line.text.contains(&filter)).map(|(n,_)|n).collect::<Vec<_>>()).unwrap_or_default();
+        let count=rows.len();
+        if let Some(s)=stream && s.list.item_count()!=count {s.list.reset(count);if s.auto_last && count>0{s.list.scroll_to_reveal_item(count-1);}}
         if pubsub {
-            let weak = cx.weak_entity();
-            let history = t.pub_history.clone();
-            let channel = div()
-                .w(px(200.))
-                .child(Input::new(&t.pub_channel))
-                .context_menu(move |mut menu, _, _| {
-                    for channel in &history {
-                        let channel = channel.clone();
-                        menu = menu.item(menu_action(
-                            channel.clone(),
-                            weak.clone(),
-                            move |a, w, cx| {
-                                if let Some(i) = a.tab_index(id) {
-                                    set_input(&a.tabs[i].pub_channel, channel.clone(), w, cx);
-                                }
-                            },
-                        ));
-                    }
-                    menu
-                });
-            content = content
-                .child(
-                    self.tr("pubsub.receive_message").replace(
-                        "{total}",
-                        &stream
-                            .as_ref()
-                            .map(|s| s.lines.len())
-                            .unwrap_or_default()
-                            .to_string(),
-                    ),
-                )
-                .child(
-                    div()
-                        .flex()
-                        .items_center()
-                        .gap_2()
-                        .child(channel)
-                        .child(Input::new(&t.pub_message).when_some(
-                            t.pub_received.as_ref(),
-                            |input, (n, _)| {
-                                input.suffix(div().text_color(rgb(0x18a058)).child(n.to_string()))
-                            },
-                        ))
-                        .child(
-                            self.btn(
-                                "publish",
-                                self.tr("pubsub.publish"),
-                                "publish",
-                                cx,
-                                move |a, w, cx| a.publish(id, w, cx),
-                            )
-                            .disabled(text_input(&t.pub_channel, cx).is_empty()),
-                        ),
-                );
+            let header=div().id("keypages-table-header").test_support().flex().items_center().h(px(34.)).flex_shrink_0()
+                .border_b_1().border_color(self.diagnostic_border(cx)).bg(self.diagnostic_header_background(false,cx)).font_weight(FontWeight::MEDIUM)
+                .text_color(if dark{rgba(0xffffffe6)}else{rgb(0x1f2225)})
+                .child(div().id("pubsub-header-0").test_support().relative().w(px(200.)).h(px(34.)).flex_shrink_0().flex().items_center().justify_center().child(self.tr("pubsub.time")).child(self.diagnostic_separator(cx)))
+                .child(div().id("pubsub-header-1").test_support().relative().w(px(200.)).h(px(34.)).flex_shrink_0().flex().items_center().justify_center().child(self.tr("pubsub.channel")).child(self.diagnostic_separator(cx)))
+                .child(div().id("pubsub-header-2").test_support().relative().flex_1().min_w_0().h(px(34.)).flex().items_center().justify_center().child(self.tr("pubsub.message")).child(self.diagnostic_separator(cx)))
+                .child(div().id("pubsub-header-3").test_support().w(px(60.)).h(px(34.)).flex_shrink_0().flex().items_center().justify_center().child(self.tr("interface.action")));
+            let mut table=div().id("keypages-table").test_support().flex_1().min_h_0().flex().flex_col().border_1()
+                .font_features(FontFeatures(std::sync::Arc::new(vec![("tnum".into(),1)])))
+                .border_color(self.diagnostic_border(cx)).rounded(px(3.)).overflow_hidden().bg(rgb(if dark{0x1e1e1e}else{0xffffff})).child(header);
+            if count==0{table=table.child(div().flex_1().min_h_0().child(self.diagnostic_empty(cx)));}
+            else if let Some(s)=stream {
+                table=table.child(list(s.list.clone(),cx.processor(move|a,index,_,cx|{
+                    let Some(i)=a.tab_index(id)else{return div().into_any_element()};
+                    let Some(line)=a.tabs[i].pubsub.as_ref().and_then(|s|rows.get(index).and_then(|n|s.lines.get(*n)))else{return div().into_any_element()};
+                    let message=line.text.clone();
+                    div().id(format!("pubsub-row-{index}")).test_support().role(Role::Label)
+                        .aria_label(format!("{}\t{}\t{}",line.time,line.channel.clone().unwrap_or_default(),line.text))
+                        .relative().w_full().flex().items_stretch().min_h(px(33.)).bg(rgb(if dark{0x18181c}else{0xffffff}))
+                        .child(div().id(format!("pubsub-cell-{index}-0")).test_support().w(px(200.)).flex_shrink_0().py(px(6.)).text_center().child(line.time.clone()))
+                        .child(div().id(format!("pubsub-cell-{index}-1")).test_support().w(px(200.)).flex_shrink_0().px(px(8.)).py(px(6.)).text_center().truncate().child(line.channel.clone().unwrap_or_default()))
+                        .child(div().id(format!("pubsub-cell-{index}-2")).test_support().flex_1().min_w_0().px(px(8.)).py(px(6.)).child(line.text.clone()))
+                        .child(div().id(format!("pubsub-cell-{index}-3")).test_support().w(px(60.)).flex_shrink_0().flex().items_center().justify_center().child(
+                            a.icon_btn(format!("message-copy-{index}"),"copy",a.tr("interface.copy_value"),cx,move|a,_,cx|{
+                                cx.write_to_clipboard(ClipboardItem::new_string(message.clone()));a.toast(a.tr("interface.copy_succ"),false);
+                            }).content_style(StyleRefinement::default(),gpui_component::Size::Size(px(18.))).w(px(18.)).h(px(18.)).px_0()))
+                        .into_any_element()
+                })).flex_1().min_h_0());
+            }
+            content=content.child(table)
+                .child(div().id("keypages-total").test_support().h(px(21.)).mt(px(10.)).child(self.tr("pubsub.receive_message").replace("{total}",&stream.as_ref().map(|s|s.lines.len()).unwrap_or(0).to_string())));
+            let weak=cx.weak_entity();let history=t.pub_history.clone();
+            let channel=div().id("pubsub-channel-input").test_support().w(relative(0.35)).max_w(px(200.)).min_w_0().flex_shrink_1()
+                .child(self.diagnostic_input(&t.pub_channel,32., cx).rounded_r(px(0.)))
+                .context_menu(move|mut menu,_,_|{for channel in &history{let channel=channel.clone();menu=menu.item(menu_action(channel.clone(),weak.clone(),move|a,w,cx|{if let Some(i)=a.tab_index(id){set_input(&a.tabs[i].pub_channel,channel.clone(),w,cx);}}));}menu});
+            let disabled=text_input(&t.pub_channel,cx).is_empty();
+            let info_color=if dark{0x70c0e8}else{0x2080f0};
+            let info_foreground=if dark{0x000000}else{0xffffff};
+            let parent=if dark{0x1e1e1e}else{0xffffff};
+            let opacity=if dark{0.38}else{0.5};
+            let label=self.tr("pubsub.publish");
+            let width=text::script_width(&label,gpui::font(".SystemUIFont"),14.,window)+48.;
+            content=content.child(div().id("keypages-publish-row").test_support().flex().items_center().h(px(32.)).mt(px(10.)).gap(px(10.))
+                .child(div().flex_1().min_w_0().flex().items_center().child(channel)
+                    .child(div().id("pubsub-message-input").test_support().w_full().flex_shrink_1().min_w_0().ml(px(-1.)).child(
+                        self.diagnostic_input(&t.pub_message,32., cx).rounded_l(px(0.)).when_some(t.pub_received.as_ref(),|input,(n,_)|input.suffix(
+                            div().h(px(22.)).px(px(6.)).flex().items_center().gap(px(4.)).rounded(px(3.)).border_1()
+                                .border_color(if dark{rgba(0x63e2b74d)}else{rgba(0x18a0584d)})
+                                .bg(if dark{rgba(0x63e2b71a)}else{rgba(0x18a0581a)})
+                                .text_color(rgb(if dark{0x63e2b7}else{0x18a058})).text_size(px(12.))
+                                .child(icon("checked").size(px(16.))).child(n.to_string()))))))
+                .child(self.diagnostic_button(self.btn("publish",label,"publish",cx,move|a,w,cx|a.publish(id,w,cx))).w(px(width)).px(px(12.)).h(px(32.)).gap(px(6.))
+                    .bg(if disabled{Self::diagnostic_fade(info_color,parent,opacity)}else{rgb(info_color).into()}).border_0()
+                    .text_color(if disabled{Self::diagnostic_fade(info_foreground,parent,opacity)}else{rgb(info_foreground).into()}).disabled(disabled)));
+        } else {
+            let mut box_=div().id("keypages-table").test_support().flex_1().min_h_0().flex().flex_col()
+                .px(px(10.)).py(px(5.)).rounded(px(3.)).border_1().border_color(cx.theme().border).bg(rgb(if dark{0x393939}else{0xf4f4f8}));
+            if let Some(s)=stream {
+                box_=box_.child(list(s.list.clone(),cx.processor(move|a,index,_,_|{
+                    let Some(i)=a.tab_index(id)else{return div().into_any_element()};
+                    let Some(line)=a.tabs[i].monitor.as_ref().and_then(|s|rows.get(index).and_then(|n|s.lines.get(*n)))else{return div().into_any_element()};
+                    div().w_full().min_h(px(26.)).pb(px(5.)).child(div().id(format!("monitor-row-{index}")).test_support().role(Role::Label).aria_label(line.text.clone())
+                        .w_full().min_h(px(21.)).text_size(px(14.)).line_height(px(21.)).flex().items_start()
+                        .child(div().flex_shrink_0().font_weight(FontWeight::BOLD).child(">"))
+                        .child(div().flex_1().min_w_0().child(format!(" {}",line.text)))).into_any_element()
+                })).flex_1().min_h_0());
+            }
+            content=content.child(box_);
         }
         content.into_any_element()
     }
     fn render_log(&self, cx: &Context<Self>) -> AnyElement {
-        let filter = text_input(&self.log_filter, cx).to_lowercase();
-        let logs = self
-            .service
-            .history
-            .try_lock()
-            .map(|history| {
-                history
-                    .iter()
-                    .rev()
-                    .filter(|l| {
-                        filter.is_empty()
-                            || l.command.to_lowercase().contains(&filter)
-                            || l.server.to_lowercase().contains(&filter)
-                    })
-                    .skip(self.log_page * 100)
-                    .take(100)
-                    .cloned()
-                    .collect::<Vec<_>>()
-            })
-            .unwrap_or_default();
-        let mut list = div()
-            .id("operation-log-list")
-            .flex_1()
-            .min_h_0()
-            .overflow_y_scroll();
-        for log in logs {
-            list = list.child(
-                div()
-                    .flex()
-                    .gap_2()
-                    .p_2()
-                    .border_b_1()
-                    .border_color(cx.theme().border)
-                    .child(div().w(px(180.)).child(log.time))
-                    .child(
-                        div()
-                            .w(px(120.))
-                            .child(format!("{} / db{}", log.server, log.db)),
-                    )
-                    .child(div().w(px(90.)).child(format!("{:.2} ms", log.elapsed_ms)))
-                    .child(div().flex_1().child(log.command))
-                    .when(!log.error.is_empty(), |d| {
-                        d.text_color(cx.theme().danger).child(log.error)
-                    }),
-            );
+        let filter = text_input(&self.log_filter, cx);
+        let (servers, mut logs) = self.service.history.try_lock().map(|history| {
+            let mut servers = Vec::new();
+            for entry in history.iter() { if !entry.server.is_empty() && !servers.contains(&entry.server) { servers.push(entry.server.clone()); } }
+            let logs = history.iter().filter(|entry| (self.log_server.is_empty() || entry.server == self.log_server)
+                && (filter.is_empty() || entry.command.contains(&filter))).cloned().collect::<Vec<_>>();
+            (servers, logs)
+        }).unwrap_or_default();
+        if let Some(ascending) = self.log_ascending {
+            logs.sort_by(|a,b| a.time.cmp(&b.time));
+            if !ascending { logs.reverse(); }
         }
-        div()
-            .flex()
-            .flex_col()
-            .size_full()
-            .child(
-                div()
-                    .flex()
-                    .gap_2()
-                    .p_2()
-                    .child(Input::new(&self.log_filter).cleanable(true))
-                    .child(self.btn("clear-logs", "清空", "clear", cx, |a, w, cx| {
-                        a.job(
-                            w,
-                            cx,
-                            |s| {
-                                s.history.lock().clear();
-                                Ok(())
-                            },
-                            |_, _, _, _| {},
-                        )
-                    })),
-            )
-            .child(list)
-            .child(
-                div()
-                    .flex()
-                    .justify_end()
-                    .p_2()
-                    .gap_2()
-                    .child(self.btn("log-prev", "‹", "", cx, |a, _, cx| {
-                        a.log_page = a.log_page.saturating_sub(1);
-                        cx.notify();
-                    }))
-                    .child((self.log_page + 1).to_string())
-                    .child(self.btn("log-next", "›", "", cx, |a, _, cx| {
-                        a.log_page += 1;
-                        cx.notify();
-                    })),
-            )
+        let mut list = div().id("operation-log-list").test_support().flex_1().min_h_0().overflow_y_scroll().track_scroll(&self.log_scroll);
+        if logs.is_empty() { list = list.child(self.diagnostic_empty(cx)); }
+        let count = logs.len();
+        for (index, log) in logs.into_iter().enumerate() {
+            let cost = if log.elapsed_ms < 1000. { format!("{} ms", log.elapsed_ms.trunc()) } else { format!("{} s", (log.elapsed_ms/1000.).floor()) };
+            list = list.child(self.diagnostic_row("log", index, count, [log.time, log.server, log.command, cost],
+                [Some(180.), Some(150.), self.log_command_width, Some(100.)], self.log_ascending.is_some(), false, cx));
+        }
+        let weak = cx.weak_entity();
+        let all = self.tr("common.all");
+        let all_option = all.clone();
+        let server_select = self.diagnostic_outline(self.btn("log-server-filter", "", "", cx, |_, _, _| {}),cx)
+            .w(px(100.)).h(px(32.)).px(px(11.))
+            .bg(if self.dark(cx){Self::diagnostic_fade(0xffffff,0x1e1e1e,0.1)}else{rgb(0xffffff).into()})
+            .when(self.dark(cx),|button|button.border_color(Hsla::transparent_black()))
+            .child(div().flex_1().text_left().truncate().child(if self.log_server.is_empty() { all } else { self.log_server.clone() }))
+            .child(icon("select-chevron").size(px(16.)).text_color(if self.dark(cx){rgba(0xffffff61)}else{rgb(0xc2c2c2)}))
+            .dropdown_menu(move |mut menu, _, _| {
+                menu = menu.item(menu_action(all_option.clone(), weak.clone(), |app, _, cx| { app.log_server.clear();cx.notify(); }));
+                for server in &servers { let server=server.clone();menu=menu.item(menu_action(server.clone(),weak.clone(),move|app,_,cx|{app.log_server=server.clone();cx.notify();})); }
+                menu
+            });
+        let form = div().id("keypages-form").test_support().flex().gap(px(18.))
+            .child(self.diagnostic_field(self.tr("log.filter_server"), server_select.into_any_element()))
+            .child(self.diagnostic_field(self.tr("log.filter_keyword"), div().id("keypages-filter").test_support()
+                .w(px(self.diagnostic_filter_width(cx))).child(self.diagnostic_input(&self.log_filter,32., cx).cleanable(true)).into_any_element()))
+            .child(self.diagnostic_field(String::new(), self.diagnostic_outline(self.icon_btn("log-refresh","refresh",self.tr("log.refresh"),cx,|app,_,cx|{
+                let count=app.service.history.try_lock().map(|history|history.len()).unwrap_or(0);
+                if count>0 {app.log_scroll.scroll_to_item(count-1);}cx.notify();
+            }),cx).w(px(42.)).h(px(32.)).px(px(11.)).into_any_element()))
+            .child(self.diagnostic_field(String::new(), self.diagnostic_outline(self.icon_btn("clear-logs","delete",self.tr("log.clean_log"),cx,|app,w,cx|app.open_dialog(DialogKind::CleanLog,w,cx)),cx)
+                .w(px(42.)).h(px(32.)).px(px(11.)).into_any_element()));
+        let header = div().id("keypages-table-header").test_support().flex().items_center().h(px(46.)).flex_shrink_0()
+            .border_b_1().border_color(self.diagnostic_border(cx)).bg(self.diagnostic_header_background(false,cx))
+            .font_weight(FontWeight::MEDIUM).text_color(if self.dark(cx){rgba(0xffffffe6)}else{rgb(0x1f2225)})
+            .child(self.diagnostic_sort_header("log-sort-time",self.tr("log.exec_time"),self.log_ascending,46.,cx,|app,_,cx|{
+                app.log_ascending=match app.log_ascending{None=>Some(false),Some(false)=>Some(true),Some(true)=>None};cx.notify();
+            }))
+            .child(div().id("log-header-1").test_support().relative().w(px(150.)).h(px(46.)).flex_shrink_0().flex().items_center().justify_center().child(self.tr("log.server")).child(self.diagnostic_separator(cx)))
+            .child(div().id("log-header-2").test_support().relative().min_w_0().h(px(46.)).flex().items_center().justify_center()
+                .when_some(self.log_command_width,|cell,width|cell.w(px(width)).flex_shrink_0()).when(self.log_command_width.is_none(),|cell|cell.flex_1())
+                .child(self.tr("log.cmd"))
+                .child(self.diagnostic_separator(cx))
+                .child(self.resize_handle(0,"log-command",self.log_command_width.unwrap_or((self.viewport_width-524.).max(1.)),cx)))
+            .child(div().id("log-header-3").test_support().w(px(100.)).h(px(46.)).flex_shrink_0().flex().items_center().justify_center().child(self.tr("log.cost_time")));
+        div().id("keypages-root").test_support().flex().flex_col().size_full().p(px(20.)).text_size(px(14.)).line_height(px(21.))
+            .child(div().id("keypages-title").test_support().h(px(27.)).mb(px(20.)).text_size(px(18.)).line_height(px(27.)).font_weight(FontWeight::MEDIUM)
+                .text_color(if self.dark(cx){rgba(0xffffffe6)}else{rgb(0x1f2225)}).child(self.tr("log.title")))
+            .child(form)
+            .child(div().id("keypages-table").test_support().flex_1().min_h_0().flex().flex_col()
+                .border_1().border_color(self.diagnostic_border(cx)).rounded(px(3.)).overflow_hidden()
+                .bg(rgb(if self.dark(cx){0x1e1e1e}else{0xffffff})).child(header).child(list))
             .into_any_element()
     }
     pub(super) fn change_format(

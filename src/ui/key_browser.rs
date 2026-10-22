@@ -210,7 +210,6 @@ impl RdmApp {
         self.open_dialog(DialogKind::DeleteKeys, window, cx);
         if checked || matches!(selection, Some(Selection::Key(_))) {
             self.set_dialog_keys(keys);
-            self.set_dialog_field("direct", "true", window, cx);
         } else {
             let pattern = match selection {
                 Some(Selection::Folder(prefix)) => format!("{prefix}*"),
@@ -919,13 +918,7 @@ impl RdmApp {
         };
         div().px(px(3.)).h(px(30.)).child(node).into_any_element()
     }
-    pub(super) fn render_key_delete_warning(&self, key: &[u8], cx: &Context<Self>) -> AnyElement {
-        let message = self
-            .tr("dialogue.remove_tip")
-            .replace("{type}", "")
-            .replace("{name}", &display_bytes(key))
-            .trim()
-            .to_string();
+    pub(super) fn render_warning_dialog(&self, message: String, cx: &Context<Self>) -> AnyElement {
         div()
             .absolute()
             .inset_0()
@@ -947,7 +940,7 @@ impl RdmApp {
                     .pt(px(16.))
                     .pb(px(20.))
                     .rounded(px(4.))
-                    .bg(cx.theme().background)
+                    .bg(if self.dark(cx) { rgb(0x2c2c32).into() } else { cx.theme().background })
                     .shadow_lg()
                     .font({
                         let mut font = gpui::font(".SystemUIFont");
@@ -955,7 +948,7 @@ impl RdmApp {
                         font
                     })
                     .text_size(px(14.))
-                    .text_color(self.connection_node_color(cx))
+                    .text_color(if self.dark(cx){rgba(0xffffffd1)}else{rgb(0x333639)})
                     .on_mouse_down(MouseButton::Left, |_, _, cx| cx.stop_propagation())
                     .child(
                         div()
@@ -968,14 +961,14 @@ impl RdmApp {
                             .text_size(px(18.))
                             .font_weight(FontWeight::MEDIUM)
                             .text_color(if self.dark(cx) {
-                                rgb(0xe6e6e6)
+                                rgba(0xffffffe6)
                             } else {
                                 rgb(0x1f2225)
                             })
                             .child(
                                 icon("notice-warning")
                                     .size(px(28.))
-                                    .text_color(rgb(0xf0a020)),
+                                    .text_color(rgb(if self.dark(cx){0xf2c97d}else{0xf0a020})),
                             )
                             .child(self.tr("common.warning")),
                     )
@@ -985,7 +978,7 @@ impl RdmApp {
                             .test_support()
                             .mt(px(8.))
                             .mb(px(16.))
-                            .h(px(21.))
+                            .min_h(px(21.))
                             .line_height(px(21.))
                             .child(message),
                     )
@@ -1005,8 +998,12 @@ impl RdmApp {
                                     cx,
                                     |app, w, cx| app.close_dialog(w, cx),
                                 )
+                                .content_style(div().text_size(px(14.)).style().clone(),gpui_component::Size::Size(px(18.)))
+                                .text_color(rgb(0x333639))
+                                .border_color(if self.dark(cx){rgba(0xffffff3d)}else{rgb(0xe0e0e6)})
                                 .h(px(28.))
                                 .px(px(7.))
+                                .when(self.dark(cx), |button| button.bg(Hsla::transparent_black()).text_color(rgba(0xffffffd1)))
                                 .rounded(px(4.)),
                             )
                             .child(
@@ -1017,13 +1014,14 @@ impl RdmApp {
                                     cx,
                                     |app, w, cx| app.submit_dialog(w, cx),
                                 )
+                                .content_style(div().text_size(px(14.)).style().clone(),gpui_component::Size::Size(px(18.)))
                                 .warning()
+                                .bg(rgb(if self.dark(cx){0xf2c97d}else{0xf0a020}))
+                                .text_color(rgb(if self.dark(cx){0}else{0xffffff}))
                                 .h(px(28.))
                                 .px(px(8.))
                                 .rounded(px(4.))
-                                .bg(rgb(0xf0a020))
-                                .border_color(rgb(0xf0a020))
-                                .text_color(rgb(0xffffff)),
+                                .border_color(rgb(if self.dark(cx){0xf2c97d}else{0xf0a020})),
                             ),
                     ),
             )

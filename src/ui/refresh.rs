@@ -116,7 +116,7 @@ impl RdmApp {
                     }
                 })
                 .hover_style(hover.style().clone())
-        } else if matches!(target, RefreshTarget::Status) {
+        } else if matches!(target, RefreshTarget::Status | RefreshTarget::Slow) {
             let mut content=div().text_size(px(14.)).line_height(px(14.));
             Button::new(name)
                 .ghost()

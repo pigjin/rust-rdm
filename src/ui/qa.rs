@@ -652,6 +652,49 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     "status-clients-overflow",
                     "status-clients-loading-light",
                     "status-clients-loading-dark",
+                    "keypages-slow-empty-light",
+                    "keypages-slow-rows-light",
+                    "keypages-monitor-empty-light",
+                    "keypages-monitor-rows-light",
+                    "keypages-pubsub-empty-light",
+                    "keypages-pubsub-rows-light",
+                    "keypages-log-empty-light",
+                    "keypages-log-rows-light",
+                    "keypages-ttl-light",
+                    "keypages-ttl-days-light",
+                    "keypages-ttl-batch-light",
+                    "keypages-rename-light",
+                    "keypages-group-light",
+                    "keypages-group-edit-light",
+                    "keypages-flush-light",
+                    "keypages-delete-selected-light",
+                    "keypages-delete-pattern-light",
+                    "keypages-delete-direct-light",
+                    "keypages-delete-affected-light",
+                    "keypages-warning-light",
+                    "keypages-slow-empty-dark",
+                    "keypages-slow-rows-dark",
+                    "keypages-monitor-empty-dark",
+                    "keypages-monitor-rows-dark",
+                    "keypages-pubsub-empty-dark",
+                    "keypages-pubsub-rows-dark",
+                    "keypages-log-empty-dark",
+                    "keypages-log-rows-dark",
+                    "keypages-ttl-dark",
+                    "keypages-ttl-days-dark",
+                    "keypages-ttl-batch-dark",
+                    "keypages-rename-dark",
+                    "keypages-group-dark",
+                    "keypages-group-edit-dark",
+                    "keypages-flush-dark",
+                    "keypages-delete-selected-dark",
+                    "keypages-delete-pattern-dark",
+                    "keypages-delete-direct-dark",
+                    "keypages-delete-affected-dark",
+                    "keypages-warning-dark",
+                    "diagnostic-functional",
+                    "monitor-wrap-light",
+                    "monitor-wrap-dark",
                 ];
                 let only_scene = std::env::var("RUST_RDM_QA_SCENE").ok();
                 let scene_prefix = std::env::var("RUST_RDM_QA_PREFIX").ok();
@@ -1113,6 +1156,12 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     } else { None };
                     if snapshot.starts_with("key-filter-") || snapshot.starts_with("tag-style-") || snapshot.starts_with("tag-overflow-") || snapshot.starts_with("sidebar-resize-") || snapshot.starts_with("sidebar-contract-") || snapshot.starts_with("selector-font-") || snapshot.starts_with("general-fallback-") || snapshot.starts_with("css-label-") {key_filter_qa::verify(&view,window,snapshot,cx).await;}
                     if snapshot.starts_with("match-tooltip-") || snapshot.starts_with("entry-match-width-") || snapshot.starts_with("entry-control-") { match_tooltip_qa::verify(&view,window,snapshot,cx).await; }
+                    if snapshot == "diagnostic-functional" { diagnostic_interactions::verify(&view, window, cx).await; }
+                    let keypages_restore = if snapshot.starts_with("keypages-") {
+                        Some(keypages_qa::prepare(&view, window, snapshot, cx).await)
+                    } else if snapshot.starts_with("monitor-wrap-") {
+                        Some(keypages_qa::verify_monitor_wrap(&view, window, snapshot, cx).await)
+                    } else { None };
                     let status_values_restore = if snapshot == "status-values" { Some(status_values_qa::verify(&view,window,cx).await) } else { None };
                     let status_layout_restore = if snapshot.starts_with("status-layout-") { Some(status_layout_qa::verify(&view,window,snapshot,cx).await) } else { None };
                     let status_info_restore = if snapshot.starts_with("status-info-") { Some(status_info_qa::verify(&view,window,snapshot,cx).await) } else { None };
@@ -2124,6 +2173,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                             }
                         }).unwrap();
                     }
+                    if snapshot.starts_with("keypages-") { window.update(cx, |_, w, _| keypages_qa::capture(w, snapshot)).unwrap(); }
                     let path = output_dir.join(format!("{snapshot}.png"));
                     let result = cx.update_window(window.into(), |_, window, cx| {
                         window.refresh();
@@ -2137,6 +2187,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                         Ok(Ok(())) => println!("{}", path.display()),
                         other => panic!("QA render failed {snapshot}: {other:?}"),
                     }
+                    if let Some(state) = keypages_restore { window.update(cx, |_, w, cx| view.update(cx, |app, cx| keypages_qa::restore(state, app, w, cx))).unwrap(); }
                     if let Some((stored,effective,families))=restore_entry_style {
                         window.update(cx,|_,window,cx|view.update(cx,|app,cx|{
                             app.pref.general.font_size=stored;app.general_css_size=effective;app.pref.general.font_family=families;app.apply_theme(window,cx);

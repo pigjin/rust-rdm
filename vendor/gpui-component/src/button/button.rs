@@ -881,6 +881,10 @@ impl RenderOnce for Button {
                     return;
                 }
 
+                // Keyboard/accessibility clicks have no mouse-down to dismiss the tooltip.
+                if let Some(overlay) = crate::root::WindowState::tooltip_overlay(window, cx) {
+                    overlay.update(cx, |overlay, cx| overlay.hide(cx));
+                }
                 on_click(event, window, cx);
             })
         })

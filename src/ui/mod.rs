@@ -41,6 +41,7 @@ mod status_chart_text;
 mod status_number;
 mod status_info;
 mod status_clients;
+mod diagnostic_pages;
 mod match_tooltip;
 #[cfg(feature = "ui-qa")]
 mod match_tooltip_qa;
@@ -50,6 +51,10 @@ mod status_values_qa;
 mod status_layout_qa;
 #[cfg(feature = "ui-qa")]
 mod status_info_qa;
+#[cfg(feature = "ui-qa")]
+mod keypages_qa;
+#[cfg(feature = "ui-qa")]
+mod diagnostic_interactions;
 #[cfg(feature = "ui-qa")]
 mod status_clients_qa;
 #[cfg(feature = "ui-qa")]
@@ -372,6 +377,19 @@ struct StreamState {
     auto_last: bool,
     list: ListState,
 }
+impl StreamState {
+    fn idle() -> Self {
+        let (_, receiver) = mpsc::sync_channel(1);
+        Self {
+            cancel: Cancellation::default(),
+            receiver,
+            lines: VecDeque::new(),
+            running: false,
+            auto_last: true,
+            list: ListState::new(0, ListAlignment::Top, px(500.)),
+        }
+    }
+}
 impl Drop for StreamState {
     fn drop(&mut self) {
         self.cancel.cancel();
@@ -472,7 +490,7 @@ struct Tab {
     slow_limit: Entity<InputState>,
     slow_keyword: Entity<InputState>,
     slow_client: Entity<InputState>,
-    slow_ascending: bool,
+    slow_ascending: Option<bool>,
     slow_auto: bool,
     slow_seconds: f64,
     slow_interval: Entity<InputState>,
@@ -545,7 +563,10 @@ struct RdmApp {
     next_notice_id: u64,
     last_poll: Instant,
     last_auto: Instant,
-    log_page: usize,
+    log_server: String,
+    log_ascending: Option<bool>,
+    log_command_width: Option<f32>,
+    log_scroll: ScrollHandle,
     sidebar_resizing: bool,
     sidebar_hover: bool,
     sidebar_save_epoch: u64,
@@ -720,7 +741,7 @@ impl RdmApp {
             tab_close_warnings: vec![],
             next_dialog_id: 0,
             conn_filter: input("", "筛选", false, window, cx),
-            log_filter: input("", "筛选", false, window, cx),
+            log_filter: input("", "", false, window, cx),
             focus: cx.focus_handle(),
             subs: vec![],
             busy: 0,
@@ -730,7 +751,10 @@ impl RdmApp {
             next_notice_id: 0,
             last_poll: Instant::now(),
             last_auto: Instant::now(),
-            log_page: 0,
+            log_server: String::new(),
+            log_ascending: Some(true),
+            log_command_width: None,
+            log_scroll: ScrollHandle::new(),
             sidebar_resizing: false,
             sidebar_hover: false,
             sidebar_save_epoch: 0,
@@ -1188,7 +1212,7 @@ impl RdmApp {
             slow_limit: input("20", "", false, window, cx),
             slow_keyword: input("", "", false, window, cx),
             slow_client: input("", "", false, window, cx),
-            slow_ascending: false,
+            slow_ascending: Some(false),
             slow_auto: false,
             slow_seconds: 5.,
             slow_interval: input("5", "", false, window, cx),
@@ -1206,9 +1230,9 @@ impl RdmApp {
             status_auto: status_profile >= 0.,
             info_details: false,
             status_interval: input(dialogs::numbers::display(Some(status_seconds)), "", false, window, cx),
-            monitor: None,
-            pubsub: None,
-            stream_filter: input("", "筛选", false, window, cx),
+            monitor: Some(StreamState::idle()),
+            pubsub: Some(StreamState::idle()),
+            stream_filter: input("", "", false, window, cx),
             pub_channel: input("", self.tr("pubsub.channel"), false, window, cx),
             pub_message: input("", self.tr("pubsub.message"), false, window, cx),
             pub_pattern: input("*", "Pattern", false, window, cx),
@@ -1951,17 +1975,17 @@ impl RdmApp {
         let cancel = Cancellation::default();
         let token = cancel.clone();
         let (sender, receiver) = mpsc::sync_channel(1024);
-        let lines = current
-            .take()
-            .map(|mut s| std::mem::take(&mut s.lines))
-            .unwrap_or_default();
+        let (lines, auto_last, list) = current.take().map_or_else(
+            || (VecDeque::new(), true, ListState::new(0, ListAlignment::Top, px(500.))),
+            |mut state| (std::mem::take(&mut state.lines), state.auto_last, state.list.clone()),
+        );
         *current = Some(StreamState {
             cancel,
             receiver,
             lines,
             running: true,
-            auto_last: true,
-            list: ListState::new(0, ListAlignment::Top, px(500.)),
+            auto_last,
+            list,
         });
         std::thread::spawn(move || {
             let result = (|| -> Result<()> {
