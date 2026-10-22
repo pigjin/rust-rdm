@@ -129,6 +129,11 @@ jobs:
           if (-not $fxc) { $fxc = Get-ChildItem "$sdk\*\x64\fxc.exe" -ErrorAction SilentlyContinue | Sort-Object FullName -Descending | Select-Object -First 1 }
           if (-not $fxc) { throw 'Windows SDK shader compiler not found' }
           "GPUI_FXC_PATH=$($fxc.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          # Git Bash's minimal Perl shadows Strawberry Perl and cannot configure OpenSSL.
+          $perl = "$env:SystemDrive\Strawberry\perl\bin\perl.exe"
+          & $perl -MLocale::Maketext::Simple -MIPC::Cmd -e 1
+          if ($LASTEXITCODE -ne 0) { throw 'Strawberry Perl modules are unavailable' }
+          "OPENSSL_SRC_PERL=$perl" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       - name: Test core library
         run: cargo test --locked -p redisdock --no-default-features --lib
       - name: Build desktop release
