@@ -270,73 +270,6 @@ impl RdmApp {
                     .child(format!("{}…", localized("加载中"))),
             );
         }
-        if let Some((release, description, url)) = &self.update_notice {
-            let download = url.clone();
-            root = root.child(
-                div()
-                    .absolute()
-                    .top(px(50.))
-                    .right(px(20.))
-                    .w(px(400.))
-                    .p_4()
-                    .rounded(px(4.))
-                    .shadow_lg()
-                    .border_1()
-                    .border_color(cx.theme().border)
-                    .bg(cx.theme().background)
-                    .child(div().font_weight(FontWeight::SEMIBOLD).child(format!(
-                        "{} - {}",
-                        self.tr("dialogue.upgrade.title"),
-                        release.version
-                    )))
-                    .child(div().py_3().child(description.clone()))
-                    .child(
-                        div()
-                            .flex()
-                            .gap_2()
-                            .child(
-                                self.btn(
-                                    "update-skip",
-                                    self.tr("dialogue.upgrade.skip"),
-                                    "",
-                                    cx,
-                                    |a, _, cx| {
-                                        if let Some((release, _, _)) = a.update_notice.take() {
-                                            a.pref.general.skip_version = release.version;
-                                            a.save_preferences();
-                                        }
-                                        cx.notify();
-                                    },
-                                )
-                                .small(),
-                            )
-                            .child(
-                                self.btn(
-                                    "update-later",
-                                    self.tr("dialogue.upgrade.later"),
-                                    "",
-                                    cx,
-                                    |a, _, cx| {
-                                        a.update_notice = None;
-                                        cx.notify();
-                                    },
-                                )
-                                .small(),
-                            )
-                            .child(
-                                self.btn(
-                                    "update-download",
-                                    self.tr("dialogue.upgrade.download_now"),
-                                    "",
-                                    cx,
-                                    move |_, _, cx| cx.open_url(&download),
-                                )
-                                .small()
-                                .primary(),
-                            ),
-                    ),
-            );
-        }
         if self.dialog.is_some() && !self.editing_entry() {
             root = root.child(self.render_dialog(window, cx));
         }
@@ -457,7 +390,7 @@ impl RdmApp {
                             .min_w(px(68.))
                             .flex_shrink_0()
                             .font_weight(FontWeight::EXTRA_BOLD)
-                            .child("Tiny RDM"),
+                            .child("RedisDock"),
                     )
                     .child(
                         div()
@@ -555,15 +488,7 @@ impl RdmApp {
         let weak = cx.weak_entity();
         let preferences = self.tr("menu.preferences");
         let about = self.tr("menu.about");
-        let chinese = matches!(self.current_language().as_str(), "zh" | "zh-cn");
-        let guide = if chinese {
-            "https://tinyrdm.com/zh/guide/"
-        } else {
-            "https://tinyrdm.com/guide/"
-        };
         let report = self.tr("menu.report_bug");
-        let guide_label = self.tr("menu.user_guide");
-        let update_label = self.tr("menu.check_update");
         let menu = self
             .connection_icon_button(
                 "settings",
@@ -587,13 +512,7 @@ impl RdmApp {
                     )
                     .item(PopupMenuItem::link(
                         report.clone(),
-                        "https://github.com/tiny-craft/tiny-rdm/issues",
-                    ))
-                    .item(PopupMenuItem::link(guide_label.clone(), guide))
-                    .item(menu_action(
-                        update_label.clone(),
-                        weak.clone(),
-                        |app, w, cx| app.check_updates(w, cx),
+                        "https://github.com/pigjin/rust-rdm/issues",
                     ))
                     .separator()
                     .item(menu_action(about.clone(), weak.clone(), |app, w, cx| {
@@ -601,29 +520,6 @@ impl RdmApp {
                     }))
             })
             .offset(px(6.));
-        let social = if chinese {
-            self.connection_icon_button(
-                "wechat",
-                "qrcode",
-                self.tr("ribbon.wechat_official"),
-                18.,
-                cx,
-                |app, w, cx| app.open_dialog(DialogKind::Community, w, cx),
-            )
-            .icon(icon("qrcode").size(px(22.)))
-            .with_size(gpui_component::Size::Size(px(29.3333)))
-        } else {
-            self.connection_icon_button(
-                "twitter",
-                "twitter",
-                self.tr("ribbon.follow_x"),
-                18.,
-                cx,
-                |_, _, cx| cx.open_url("https://twitter.com/LykinHuang"),
-            )
-            .icon(icon("twitter").size(px(22.)))
-            .with_size(gpui_component::Size::Size(px(29.3333)))
-        };
         let footer = div()
             .flex()
             .flex_col()
@@ -632,20 +528,13 @@ impl RdmApp {
             .pb(px(15.))
             .child(div().my(px(10.)).ml(px(1.)).child(menu))
             .child(
-                social
-                    .allow_icon_overflow()
-                    .size(px(18.))
-                    .my(px(10.))
-                    .ml(px(1.)),
-            )
-            .child(
                 self.connection_icon_button(
                     "github",
                     "github",
                     self.tr("ribbon.github"),
                     18.,
                     cx,
-                    |_, _, cx| cx.open_url("https://github.com/tiny-craft/tiny-rdm"),
+                    |_, _, cx| cx.open_url("https://github.com/pigjin/rust-rdm"),
                 )
                 .icon(icon("github").size(px(22.)))
                 .with_size(gpui_component::Size::Size(px(29.3333)))
@@ -660,8 +549,6 @@ impl RdmApp {
             .into_any_element()
     }
     fn render_empty(&self, cx: &Context<Self>) -> AnyElement {
-        let language = self.current_language();
-        let sponsor = crate::update::Sponsor::select(&self.sponsors, &language);
         div()
             .flex()
             .flex_col()
@@ -693,23 +580,6 @@ impl RdmApp {
                 cx,
                 |app, w, cx| app.open_dialog(DialogKind::Connection(None), w, cx),
             ))
-            .when_some(sponsor, |container, sponsor| {
-                let url = sponsor.link.clone();
-                container.child(
-                    self.btn(
-                        "sponsor-link",
-                        sponsor.name.clone(),
-                        "",
-                        cx,
-                        move |_, _, cx| cx.open_url(&url),
-                    )
-                    .text()
-                    .text_color(cx.theme().muted_foreground)
-                    .mt(px(20.))
-                    .h_auto()
-                    .p_0(),
-                )
-            })
             .into_any_element()
     }
     pub(super) fn connection_icon_button(

@@ -1,0 +1,196 @@
+name: Release RedisDock
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  RUST_TOOLCHAIN: '1.99.0'
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: '0'
+  CARGO_BUILD_JOBS: '2'
+
+jobs:
+  version:
+    name: Validate release version
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      prerelease: ${{ steps.version.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Select Rust
+        run: |
+          rustup toolchain install "$RUST_TOOLCHAIN" --profile minimal
+          rustup default "$RUST_TOOLCHAIN"
+      - name: Test release gates
+        run: python3 scripts/test-release.py
+      - name: Match tag to Cargo version
+        id: version
+        env:
+          TAG: ${{ github.ref_name }}
+        run: python3 scripts/release.py version --tag "$TAG" --github-output "$GITHUB_OUTPUT"
+
+  build:
+    name: Build ${{ matrix.os }} ${{ matrix.arch }}
+    needs: version
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: linux
+            arch: x86_64
+            runner: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+          - os: linux
+            arch: arm64
+            runner: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+          - os: windows
+            arch: x86_64
+            runner: windows-2025
+            target: x86_64-pc-windows-msvc
+            rustflags: '-C target-feature=+crt-static'
+          - os: windows
+            arch: arm64
+            runner: windows-11-arm
+            target: aarch64-pc-windows-msvc
+            rustflags: '-C target-feature=+crt-static'
+          - os: macos
+            arch: x86_64
+            runner: macos-15-intel
+            target: x86_64-apple-darwin
+          - os: macos
+            arch: arm64
+            runner: macos-15
+            target: aarch64-apple-darwin
+    defaults:
+      run:
+        shell: bash
+    env:
+      CARGO_BUILD_TARGET: ${{ matrix.target }}
+      RUSTFLAGS: ${{ matrix.rustflags || '' }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Select native Rust toolchain
+        run: |
+          rustup toolchain install "$RUST_TOOLCHAIN-$CARGO_BUILD_TARGET" --profile minimal
+          rustup default "$RUST_TOOLCHAIN-$CARGO_BUILD_TARGET"
+      - uses: actions/cache@v6.1.0
+        with:
+          key: rust-${{ matrix.target }}-${{ env.RUST_TOOLCHAIN }}-${{ hashFiles('Cargo.lock', 'Cargo.toml') }}
+          restore-keys: rust-${{ matrix.target }}-${{ env.RUST_TOOLCHAIN }}-
+          path: |
+            ~/.cargo/registry
+            target/${{ matrix.target }}
+            target/debug
+            target/release
+      - name: Install Linux dependencies
+        if: matrix.os == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential pkg-config clang libclang-dev \
+            libssl-dev libzstd-dev libfontconfig-dev libwayland-dev libxkbcommon-x11-dev \
+            libx11-xcb-dev libasound2-dev libvulkan1 dpkg-dev patchelf desktop-file-utils imagemagick
+      - name: Set up Windows SDK and MSVC
+        if: matrix.os == 'windows'
+        shell: pwsh
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $cpu = if ($env:ARCH -eq 'arm64') { 'arm64' } else { 'x64' }
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          $vs = & $vswhere -latest -products '*' -property installationPath
+          if (-not $vs) { throw 'Visual Studio not found' }
+          $command = "call `"$vs\Common7\Tools\VsDevCmd.bat`" -no_logo -arch=$cpu -host_arch=$cpu >nul && set"
+          $variables = & cmd.exe /d /s /c $command
+          if ($LASTEXITCODE -ne 0) { throw 'MSVC environment setup failed' }
+          $variables | ForEach-Object {
+            if ($_ -match '^(PATH|INCLUDE|LIB|LIBPATH|WindowsSdkDir|WindowsSDKVersion|VCToolsInstallDir)=(.*)$') {
+              "$($Matches[1])=$($Matches[2])" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+            }
+          }
+          $sdk = "${env:ProgramFiles(x86)}\Windows Kits\10\bin"
+          $fxc = Get-ChildItem "$sdk\*\$cpu\fxc.exe" -ErrorAction SilentlyContinue | Sort-Object FullName -Descending | Select-Object -First 1
+          if (-not $fxc) { $fxc = Get-ChildItem "$sdk\*\x64\fxc.exe" -ErrorAction SilentlyContinue | Sort-Object FullName -Descending | Select-Object -First 1 }
+          if (-not $fxc) { throw 'Windows SDK shader compiler not found' }
+          "GPUI_FXC_PATH=$($fxc.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - name: Test core library
+        run: cargo test --locked -p redisdock --no-default-features --lib
+      - name: Build desktop release
+        run: cargo build --locked --release --package redisdock --bin redisdock
+      - name: Package and check Linux
+        if: matrix.os == 'linux'
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: scripts/package-linux.sh "$ARCH"
+      - name: Package and check macOS
+        if: matrix.os == 'macos'
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: scripts/package-macos.sh "$ARCH"
+      - name: Package and check Windows
+        if: matrix.os == 'windows'
+        shell: pwsh
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: ./scripts/package-windows.ps1 -Arch $env:ARCH
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: RedisDock-${{ matrix.os }}-${{ matrix.arch }}
+          path: target/dist/*
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
+
+  release:
+    name: Publish GitHub Release
+    needs: [version, build]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      TAG: ${{ github.ref_name }}
+      VERSION: ${{ needs.version.outputs.version }}
+      PRERELEASE: ${{ needs.version.outputs.prerelease }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          pattern: RedisDock-*
+          merge-multiple: true
+          path: target/dist
+      - name: Require eight packages and generate checksums
+        run: python3 scripts/release.py manifest target/dist --version "$VERSION"
+      - name: Upload to draft and publish complete release
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" --json isDraft > "$RUNNER_TEMP/existing-release.json"; then
+            python3 -c 'import json, sys; draft = json.load(open(sys.argv[1]))["isDraft"]; sys.exit(0 if draft else "Refusing to overwrite a published release")' "$RUNNER_TEMP/existing-release.json"
+          else
+            gh release create "$TAG" --verify-tag --draft --title "RedisDock $VERSION" --generate-notes --prerelease="$PRERELEASE"
+          fi
+          gh release edit "$TAG" --title "RedisDock $VERSION" --prerelease="$PRERELEASE"
+          gh release upload "$TAG" target/dist/* --clobber
+          gh release view "$TAG" --json isDraft,tagName,name,assets > "$RUNNER_TEMP/release.json"
+          python3 scripts/release.py check-upload target/dist "$RUNNER_TEMP/release.json" --version "$VERSION"
+          gh release edit "$TAG" --draft=false

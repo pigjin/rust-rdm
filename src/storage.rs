@@ -16,14 +16,25 @@ impl Store {
         Self { root: root.into() }
     }
     pub fn system() -> Self {
-        if let Some(path) = std::env::var_os("RUST_RDM_DATA_DIR") {
+        if let Some(path) =
+            std::env::var_os("REDISDOCK_DATA_DIR").or_else(|| std::env::var_os("RUST_RDM_DATA_DIR"))
+        {
             return Self::new(path);
         }
-        Self::new(
-            directories::BaseDirs::new()
-                .map(|d| d.config_dir().join("rust-rdm"))
-                .unwrap_or_else(|| PathBuf::from(".rdm-data")),
-        )
+        let dirs = directories::BaseDirs::new();
+        Self::new(Self::default_root(dirs.as_ref().map(|d| d.config_dir())))
+    }
+    fn default_root(config_dir: Option<&Path>) -> PathBuf {
+        let (root, legacy) = match config_dir {
+            Some(base) => (base.join("RedisDock"), base.join("rust-rdm")),
+            None => (PathBuf::from(".redisdock-data"), PathBuf::from(".rdm-data")),
+        };
+        // Reuse existing connections and preferences without moving or copying user data.
+        if !root.exists() && legacy.is_dir() {
+            legacy
+        } else {
+            root
+        }
     }
     pub fn load<T: DeserializeOwned + Default>(&self, filename: &str) -> Result<T> {
         let path = self.root.join(filename);
@@ -111,7 +122,7 @@ pub fn staging_file(path: &Path) -> Result<tempfile::NamedTempFile> {
         .filter(|parent| !parent.as_os_str().is_empty())
         .unwrap_or_else(|| Path::new("."));
     Ok(tempfile::Builder::new()
-        .prefix(".rdm-")
+        .prefix(".redisdock-")
         .tempfile_in(directory)?)
 }
 pub fn flatten(conns: &[Connection]) -> Vec<Connection> {
@@ -195,4 +206,32 @@ pub fn save_connection(
         });
     }
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn redisdock_config_reuses_legacy_data_until_a_new_directory_exists() {
+        let directory = tempfile::tempdir().unwrap();
+        let current = directory.path().join("RedisDock");
+        let legacy = directory.path().join("rust-rdm");
+        assert_eq!(Store::default_root(Some(directory.path())), current);
+
+        fs::create_dir(&legacy).unwrap();
+        let connections = b"- name: existing-connection\n";
+        fs::write(legacy.join("connections.yaml"), connections).unwrap();
+        let store = Store::new(Store::default_root(Some(directory.path())));
+        assert_eq!(store.root, legacy);
+        assert_eq!(store.connections().unwrap()[0].name, "existing-connection");
+        assert!(!current.exists());
+
+        fs::create_dir(&current).unwrap();
+        assert_eq!(Store::default_root(Some(directory.path())), current);
+        assert_eq!(
+            fs::read(legacy.join("connections.yaml")).unwrap(),
+            connections
+        );
+    }
 }

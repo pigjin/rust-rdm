@@ -1,4 +1,4 @@
-module rust-rdm-ssh-fixture
+module redisdock-ssh-fixture
 
 go 1.25.0
 

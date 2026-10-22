@@ -99,7 +99,9 @@ fn localized(text: &str) -> String {
     })
 }
 fn system_language() -> String {
-    if let Ok(value) = std::env::var("RUST_RDM_LANGUAGE") {
+    if let Ok(value) = std::env::var("REDISDOCK_LANGUAGE")
+        .or_else(|_| std::env::var("RUST_RDM_LANGUAGE"))
+    {
         return value;
     }
     #[cfg(target_os = "macos")]
@@ -185,12 +187,12 @@ fn initialize_actions(cx: &mut App) {
     cx.bind_keys([KeyBinding::new("cmd-q", Quit, None)]);
     cx.set_menus(vec![
         Menu {
-            name: "Tiny RDM".into(),
+            name: "RedisDock".into(),
             disabled: false,
             items: vec![
                 MenuItem::action("Preferences…", PreferencesAction),
                 MenuItem::Separator,
-                MenuItem::action("Quit Tiny RDM", Quit),
+                MenuItem::action("Quit RedisDock", Quit),
             ],
         },
         Menu {
@@ -301,7 +303,7 @@ pub fn run() {
                     }),
                     window_min_size: Some(size(px(960.), px(640.))),
                     titlebar: Some(TitlebarOptions {
-                        title: Some("Tiny RDM".into()),
+                        title: Some("RedisDock".into()),
                         appears_transparent: true,
                         traffic_light_position: Some(point(px(12.), px(12.))),
                         ..Default::default()
@@ -585,9 +587,6 @@ struct RdmApp {
     fonts: Vec<String>,
     viewport_width: f32,
     column_drag: Option<(u64, String, f32, f32)>,
-    update_loading: bool,
-    update_notice: Option<(crate::update::Release, String, String)>,
-    sponsors: Vec<crate::update::Sponsor>,
 }
 fn input(
     text: impl Into<SharedString>,
@@ -721,7 +720,6 @@ impl RdmApp {
         let connections = store.connections();
         let preferences = store.preferences();
         let pref = preferences.as_ref().cloned().unwrap_or_default();
-        let sponsors = store.load("sponsors.yaml").unwrap_or_default();
         let mut app = Self {
             service: Arc::new(Service::new(store.clone())),
             store,
@@ -773,9 +771,6 @@ impl RdmApp {
             fonts: cx.text_system().all_font_names(),
             viewport_width: window.bounds().size.width.as_f32(),
             column_drag: None,
-            update_loading: false,
-            update_notice: None,
-            sponsors,
         };
         if let Err(e) = connections {
             app.toast(e.to_string(), true);
@@ -848,16 +843,6 @@ impl RdmApp {
             }
         })
         .detach();
-        #[cfg(not(feature = "ui-qa"))]
-        if app.pref.general.check_update {
-            cx.spawn_in(window, async move |this, cx| {
-                cx.background_executor()
-                    .timer(Duration::from_millis(500))
-                    .await;
-                let _ = this.update_in(cx, |a, w, cx| a.fetch_updates(false, w, cx));
-            })
-            .detach();
-        }
         app
     }
     fn load_language(&mut self) {
@@ -1001,14 +986,6 @@ impl RdmApp {
             system_language()
         } else {
             self.pref.general.language.clone()
-        }
-    }
-    fn cache_sponsors(&mut self, sponsors: &[crate::update::Sponsor]) {
-        if !sponsors.is_empty() {
-            self.sponsors = sponsors.to_vec();
-            if let Err(error) = self.store.save("sponsors.yaml", &self.sponsors) {
-                self.toast(error.to_string(), true);
-            }
         }
     }
     fn save_connections(&mut self) {

@@ -47,7 +47,6 @@
       "key_icon_style2": "점 타입",
       "key_icon_style3": "일반 아이콘",
       "update": "업데이트",
-      "auto_check_update": "자동 업데이트 확인",
       "privacy": "개인 정보 보호 정책",
       "allow_track": "익명 데이터 수집 허용"
     },
@@ -71,8 +70,7 @@
       "decoder_name": "이름",
       "cmd_preview": "미리보기",
       "status": "상태",
-      "auto_enabled": "자동 디코딩 활성화",
-      "help": "도움말"
+      "auto_enabled": "자동 디코딩 활성화"
     }
   },
   "interface": {
@@ -153,8 +151,7 @@
     "empty_server_list": "추가된 Redis 서버 없음",
     "action": "작업",
     "type": "유형",
-    "cli_welcome": "Tiny RDM Redis 콘솔 환영합니다",
-    "retrieving_version": "업데이트 확인 중",
+    "cli_welcome": "RedisDock Redis 콘솔 환영합니다",
     "sub_tab": {
       "status": "상태",
       "key_detail": "키 상세정보",
@@ -168,8 +165,6 @@
     "server": "서버",
     "browser": "데이터 브라우저",
     "log": "로그",
-    "wechat_official": "공식 계정",
-    "follow_x": "팔로우 \uD835\uDD4F",
     "github": "Github",
     "logout": "로그아웃"
   },
@@ -384,23 +379,14 @@
       "args": "인수",
       "args_help": "[VALUE]를 인코딩/디코딩 내용 자리 표시자로 사용하세요. 자리 표시자가 없으면 끝에 추가됩니다."
     },
-    "upgrade": {
-      "title": "새 버전 사용 가능",
-      "new_version_tip": "새 버전 {ver}이 있습니다. 지금 다운로드하시겠습니까?",
-      "no_update": "최신 버전입니다",
-      "download_now": "지금 다운로드",
-      "later": "나중에",
-      "skip": "이 버전 건너뛰기"
-    },
     "welcome": {
-      "title": "Tiny RDM에 오신 것을 환영합니다!",
-      "content": "더 나은 사용자 경험을 제공하기 위해 Tiny RDM은 일부 익명 데이터를 수집하여 소프트웨어를 최적화하고 사용자 경험을 개선하는 데 사용합니다. 이는 개인 정보와는 무관함을 알려드립니다.\n\n만약 우려되는 점이 있다면 설정에서 이 데이터 수집 기능을 언제든 끌 수 있습니다. 문의 사항이 있으면 개발자에게 연락하시기 바랍니다. Tiny RDM이 좋은 도우미가 되길 바랍니다!",
+      "title": "RedisDock에 오신 것을 환영합니다!",
+      "content": "더 나은 사용자 경험을 제공하기 위해 RedisDock은 일부 익명 데이터를 수집하여 소프트웨어를 최적화하고 사용자 경험을 개선하는 데 사용합니다. 이는 개인 정보와는 무관함을 알려드립니다.\n\n만약 우려되는 점이 있다면 설정에서 이 데이터 수집 기능을 언제든 끌 수 있습니다. 문의 사항이 있으면 개발자에게 연락하시기 바랍니다. RedisDock이 좋은 도우미가 되길 바랍니다!",
       "accept": "개선에 동의",
       "reject": "거부"
     },
     "about": {
-      "source": "소스 코드",
-      "website": "공식 웹사이트"
+      "source": "소스 코드"
     }
   },
   "login": {
@@ -418,8 +404,6 @@
     "close": "닫기",
     "preferences": "설정",
     "help": "도움말",
-    "user_guide": "사용자 가이드",
-    "check_update": "업데이트 확인...",
     "report_bug": "버그 신고",
     "about": "정보"
   },

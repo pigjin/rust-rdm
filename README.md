@@ -1,15 +1,20 @@
-# Rust RDM
+# RedisDock
 
-使用 Rust + GPUI 迁移 Tiny RDM 桌面版。原项目参考目录为
+RedisDock 是使用 Rust + GPUI 构建的原生 Redis 桌面管理客户端，基于 Tiny RDM 迁移。原项目参考目录为
 `/Users/zlsj/Projects/tiny-rdm`；Web 和 Docker 版本不在本次范围内。
 
-macOS 桌面版已覆盖 8 大核心服务（连接、浏览器、命令行、慢日志、监控、发布/订阅、运行日志、偏好与更新）及连接、分组、偏好与解码器、新建键、添加/编辑行、重命名、TTL、批量删除、清空数据库、CSV 导入导出和确认警告框。本轮验证范围及待验项如下。
+更名验证（2026-10-22）：30 项库测试、61 项核心集成测试和 9 项网络测试通过，覆盖旧配置目录与环境变量兼容。
+当前注册的 554 个 UI 场景中，本轮执行 6 个相关场景；另用隔离配置核对实际窗口、欢迎文案、关于页和应用/退出菜单的 RedisDock 名称。
+`RedisDock.app` 的名称、应用标识、严格签名及 12 个代码/常量段检查通过，测试进程已退出，默认用户配置哈希不变。
+本轮未重新执行全量 UI 或 Windows/Linux 验收；以下完整 macOS 验收记录对应更名前的版本。
 
-本轮验收复核（2026-10-22）：原始 512 个 UI 场景先完整跑通；修复后保留原场景及顺序，新增 40 个关键页面对照状态、1 个实际操作回归和 2 个监控长行回归，最终 **555/555** 场景通过。重新执行的 **120/120** 项相关测试、macOS 应用包严格签名和 12 个代码/常量段一致性检查通过。
+macOS 桌面版已覆盖 8 大核心服务（连接、浏览器、命令行、慢日志、监控、发布/订阅、运行日志、偏好设置）及连接、分组、偏好与解码器、新建键、添加/编辑行、重命名、TTL、批量删除、清空数据库、CSV 导入导出和确认警告框。
+
+更名前验收复核（2026-10-22）：原始 512 个 UI 场景先完整跑通；修复后保留原场景及顺序，新增 40 个关键页面对照状态、1 个实际操作回归和 2 个监控长行回归，最终 **555/555** 场景通过。重新执行的 **120/120** 项相关测试、macOS 应用包严格签名和 12 个代码/常量段一致性检查通过。
 
 原版 macOS WKWebView 的 40 个明暗主题关键状态通过 **1558 项布局 + 838 项绘制** 检查。实际监控启停与重启、发布订阅、空白频道、日志筛选与三态排序、TTL 快捷设置、改名、批量删除和带确认门槛的清库均有当前回归。最终签名包另完成 16 项实际窗口验收，覆盖中文保存、TTL、命令行、监控、原生保存面板、发布订阅、明暗主题、Hash、RedisJSON、日志确认及 Cmd+Q 退出。离屏与原生 Redis 夹具均恢复并退出，默认用户配置哈希不变。
 
-**本轮 macOS 功能与关键页面视觉验收通过。** 实际窗口发现的监控长行重叠、键盘与辅助功能激活后的提示框残留均已修复并回归，禁用按钮的操作限制保持有效。旧 Chrome 的 Unicode/Emoji、五项底栏宽度及 43 项图表实色描边掩膜差异继续保留；未宣告 Windows/Linux 或整图逐像素一致性。
+**更名前的 macOS 功能与关键页面视觉验收通过。** 实际窗口发现的监控长行重叠、键盘与辅助功能激活后的提示框残留均已修复并回归，禁用按钮的操作限制保持有效。旧 Chrome 的 Unicode/Emoji、五项底栏宽度及 43 项图表实色描边掩膜差异继续保留；未宣告 Windows/Linux 或整图逐像素一致性。
 
 完整证据与可离线打开的对照报告见 [macOS 验收报告](outputs/macos-acceptance-20261021/index.html)。以下为此前各阶段记录；本轮状态以上述结果为准。
 实现范围、已有证据和说明见 `docs/parity.md`。
@@ -121,14 +126,55 @@ python3 scripts/check-macos-bundle.py debug
 # release 构建的核验命令也使用 release
 ```
 
-输出为 `target/bundle/Tiny RDM.app`。构建脚本使用本地签名，包含静态 OpenSSL 和第三方许可。
+输出为 `target/bundle/RedisDock.app`。构建脚本使用本地签名，包含静态 OpenSSL 和第三方许可。
 图标、图片和语言资源在 debug 与 release 构建中均嵌入程序，不依赖源码目录。
 当前应用包链接最低版本为 macOS 11，已验证的运行环境为 macOS 26。
 
+## GitHub Releases 发布
+
+仅推送 `v` 开头的 tag 会触发 GitHub Actions；普通提交与 PR 不触发构建。
+发布前更新 `Cargo.toml` 的版本，并运行 `cargo check --locked`；若修改版本后锁文件需要同步，
+先运行 `cargo check` 更新 `Cargo.lock`，将两者与工作流、打包脚本一起提交后再创建 tag：
+
+```sh
+# 当前源码版本为 0.1.0；后续将下面的版本替换为 Cargo.toml 中的版本。
+git tag -a v0.1.0 -m 'RedisDock 0.1.0'
+git push origin v0.1.0
+```
+
+tag 去掉 `v` 后必须与源码版本完全一致，例如 `v0.1.0` 发布为 **RedisDock 0.1.0**。
+`v0.2.0-rc.1` 等预发布版本同样要求源码版本一致，并标记为 Prerelease。
+工作流固定 Rust 1.99.0，六种目标均执行无桌面库测试、release 构建与安装包检查。
+所有目标成功后才创建 Release 草稿，上传八个安装包和 `SHA256SUMS`，核对上传完整后自动发布。
+失败的草稿可通过重跑工作流补齐；已经发布的同名 tag 会拒绝覆盖。
+使用内置 `GITHUB_TOKEN`，仅发布作业拥有 `contents: write`，无需额外配置 PAT 或签名 Secrets。
+
+| 系统 | 架构与下载文件 | 安装方式 |
+| --- | --- | --- |
+| macOS | `RedisDock-<版本>-macos-arm64.dmg` / `x86_64.dmg` | Apple Silicon 选择 arm64，Intel Mac 选择 x86_64；打开 DMG，将 RedisDock 拖入 Applications |
+| Windows | `RedisDock-<版本>-windows-arm64-setup.exe` / `x86_64-setup.exe` | 选择对应架构并运行；安装到当前用户的 Programs 目录，提供开始菜单和卸载入口，卸载保留用户配置 |
+| Linux | `RedisDock-<版本>-linux-arm64.AppImage` / `x86_64.AppImage` | `chmod +x` 后运行；AppImage 内嵌用户态依赖，仍需要系统图形驱动和 Vulkan 支持 |
+| Linux | `RedisDock-<版本>-linux-arm64.deb` / `x86_64.deb` | 使用 `sudo apt install ./RedisDock-<版本>-linux-<架构>.deb` 安装；DEB 内部架构分别为 arm64 / amd64 |
+
+Linux 以 Ubuntu 24.04 为构建基线，启用 X11 和 Wayland；不承诺兼容更旧的 glibc。
+Windows ARM64 安装器通过 Windows 兼容层启动，安装的是原生 ARM64 应用。
+macOS 使用本地签名，未接入 Apple 公证；Windows 安装包未签名，首次安装可能出现系统安全提示。
+这些 CI 检查覆盖构建与打包，不代表 Linux、Windows 或各架构已经完成完整 UI 和真实硬件验收。
+
+Linux/macOS 下载后可用 `sha256sum -c SHA256SUMS`（macOS 用 `shasum -a 256 -c SHA256SUMS`）核对完整下载集。
+仅下载单个安装包时，核对清单中对应文件的一行即可；Windows 可使用 `Get-FileHash -Algorithm SHA256 <文件>` 对照。
+本机发布逻辑检查命令为 `python3 scripts/test-release.py`；macOS DMG 可用 `scripts/package-macos.sh arm64` 构建。
+
 ## 配置和兼容
 
-macOS 默认配置目录为 `~/Library/Application Support/rust-rdm`。
-也可用 `RUST_RDM_DATA_DIR` 指定配置目录，用 `RUST_RDM_LANGUAGE` 指定自动语言。
+macOS 新安装默认配置目录为 `~/Library/Application Support/RedisDock`。
+也可用 `REDISDOCK_DATA_DIR` 指定配置目录，用 `REDISDOCK_LANGUAGE` 指定自动语言。
+若新目录不存在且旧版 `~/Library/Application Support/rust-rdm` 目录存在，会继续使用旧目录，
+保留已有连接与偏好，不移动或复制用户配置。旧环境变量 `RUST_RDM_DATA_DIR`、
+`RUST_RDM_LANGUAGE` 仍可使用，新变量优先。
+
+已移除更新检查、赞助、Twitter 以及 Tiny RDM 网站跳转。项目源码与问题反馈使用 GitHub 链接，
+编辑器内容链接和 Redis、SSH、代理功能保留。旧配置中的更新选项加载时被忽略，不再写入保存后的配置。
 
 连接和偏好设置使用原项目兼容的 YAML 字段结构。连接列表的更多菜单使用
 原版 ZIP 备份格式，包含 `connections.yaml`；导入按原版覆盖连接配置，保留原始
@@ -179,16 +225,16 @@ Redis 集成测试要求 `redis-server`、`redis-cli` 和 `openssl` 可执行。
 SSH 检查另需 OpenSSH 的 `sshd`、`ssh-keygen`、`ssh-agent`、`ssh-add`。
 密码、agent 和 Unix socket 的组合检查使用测试专用 Go SSH 服务，需 Go 1.25；
 应用运行不使用该服务。RedisJSON 检查另需本机兼容的 RedisJSON 模块，并通过
-`RUST_RDM_JSON_MODULE` 指定模块文件。完整检查命令：
+`REDISDOCK_JSON_MODULE` 指定模块文件。完整检查命令：
 
 ```sh
-go -C tests/fixtures/ssh-server build -o /tmp/rust-rdm-ssh-server .
-RUST_RDM_SSH_FIXTURE=/tmp/rust-rdm-ssh-server \
-  RUST_RDM_JSON_MODULE=/path/to/rejson.so \
-  cargo test --locked -p rust-rdm --no-default-features -- --include-ignored
-cargo test --locked -p rust-rdm --lib file_dialog_
-cargo test --locked -p rust-rdm --lib csv_messages_match_original_store_samples
-cargo test --locked -p rust-rdm --lib json_brackets_match_original_samples
+go -C tests/fixtures/ssh-server build -o /tmp/redisdock-ssh-server .
+REDISDOCK_SSH_FIXTURE=/tmp/redisdock-ssh-server \
+  REDISDOCK_JSON_MODULE=/path/to/rejson.so \
+  cargo test --locked -p redisdock --no-default-features --lib --tests -- --include-ignored
+cargo test --locked -p redisdock --lib file_dialog_
+cargo test --locked -p redisdock --lib csv_messages_match_original_store_samples
+cargo test --locked -p redisdock --lib json_brackets_match_original_samples
 cargo test --locked -p gpui-base --features test-support rdm_
 cargo test --locked -p gpui-base --features test-support --lib hover_card::tests
 # macOS Apple 文字后端
@@ -198,20 +244,20 @@ cargo test --locked -p gpui-pre-apple --features font-kit,runtime_shaders,test-s
 离屏界面验收使用程序自己的渲染场景，输出图片，不截取用户桌面：
 
 ```sh
-mkdir -p /tmp/rdm-demo
+mkdir -p /tmp/redisdock-demo
 redis-server --port 0 --save '' --appendonly no \
-  --unixsocket /tmp/rdm-demo/redis.sock
-# 在另一终端运行（先准备 /tmp/rdm-demo 目录）
-cargo run --locked --no-default-features --example seed_demo -- /tmp/rdm-demo --render-qa
+  --unixsocket /tmp/redisdock-demo/redis.sock
+# 在另一终端运行（先准备 /tmp/redisdock-demo 目录）
+cargo run --locked --no-default-features --example seed_demo -- /tmp/redisdock-demo --render-qa
 # 另一个终端：启动带 RedisJSON 的第二个隔离服务。
-mkdir -p /tmp/rdm-json-demo
+mkdir -p /tmp/redisdock-json-demo
 redis-server --port 0 --save '' --appendonly no \
-  --unixsocket /tmp/rdm-json-demo/redis.sock --loadmodule /path/to/rejson.so
+  --unixsocket /tmp/redisdock-json-demo/redis.sock --loadmodule /path/to/rejson.so
 # 再在验收终端准备数据；两个 Redis 服务都保持运行。
-cargo run --locked --no-default-features --example seed_demo -- /tmp/rdm-json-demo --render-qa
-RUST_RDM_JSON_QA_DIR=/tmp/rdm-json-demo \
+cargo run --locked --no-default-features --example seed_demo -- /tmp/redisdock-json-demo --render-qa
+REDISDOCK_JSON_QA_DIR=/tmp/redisdock-json-demo \
   cargo run --locked --features ui-qa --example render_qa -- \
-  /tmp/rdm-demo outputs/ui-qa
+  /tmp/redisdock-demo outputs/ui-qa
 ```
 
 离屏场景要求 `seed_demo` 写入的 `RDM-QA-FIXTURE` 标记。布局对照位于

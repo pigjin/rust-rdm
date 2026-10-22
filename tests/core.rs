@@ -1,4 +1,4 @@
-use rust_rdm::{
+use redisdock::{
     codec,
     model::*,
     redis::{self, Client, Value, command},
@@ -133,7 +133,7 @@ impl RedisFixture {
     }
     fn with_module(module: Option<&std::path::Path>) -> Self {
         let dir = tempfile::Builder::new()
-            .prefix("rust-rdm-test-")
+            .prefix("redisdock-test-")
             .tempdir_in("/private/tmp")
             .unwrap();
         let socket = dir.path().join("redis.sock");
@@ -452,7 +452,7 @@ fn updating_connections_preserves_group_and_sibling_order() {
 }
 #[test]
 fn dragging_connections_preserves_order_and_group_membership() {
-    use rust_rdm::order::{Destination, move_item};
+    use redisdock::order::{Destination, move_item};
     let mut connections = vec![];
     for name in ["first", "middle", "last"] {
         save_connection(
@@ -725,7 +725,7 @@ fn concurrent_atomic_writes_never_share_a_staging_file() {
             let path = path.clone();
             let content = content.clone();
             std::thread::spawn(move || {
-                rust_rdm::storage::atomic_write(&path, content.as_bytes()).unwrap()
+                redisdock::storage::atomic_write(&path, content.as_bytes()).unwrap()
             })
         })
         .collect::<Vec<_>>();
@@ -936,58 +936,33 @@ fn connection_url_decodes_auth() {
     assert!(c.ssl.enable);
 }
 #[test]
-fn updates_honor_skip_versions_and_language_fallbacks() {
-    use rust_rdm::update::{Release, compare_versions};
-    use std::cmp::Ordering;
-    let release: Release = serde_json::from_str(r#"{"version":"v1.10.1","description":{"zh":"更新内容","en":"Release notes"},"download_page":{"en":"https://tinyrdm.com/download"}}"#).unwrap();
-    assert_eq!(compare_versions("v1.10.1", "1.9.9"), Ordering::Greater);
-    assert_eq!(compare_versions("1.2", "v1.2.0"), Ordering::Equal);
-    assert!(!release.available("1.9", "1.10.1", false));
-    assert!(release.available("1.9", "1.10.1", true));
-    assert!(!release.available("1.11", "", true));
-    assert_eq!(release.text(&release.description, "zh-cn"), "更新内容");
-    assert_eq!(release.text(&release.description, "ja-jp"), "Release notes");
-    assert_eq!(
-        release.text(&release.download_page, "zh-cn"),
-        "https://tinyrdm.com/download"
-    );
-}
-#[test]
-fn sponsor_metadata_keeps_source_order_and_persists_regions() {
-    use rust_rdm::update::{Release, Sponsor};
-    let release: Release = serde_json::from_str(r#"{"version":"1.0","sponsor":[{"name":"English","link":"https://example.com/en","region":["en"]},{"name":"Chinese","link":"https://example.com/zh","region":["zh"]},{"name":"Global","link":"https://example.com/all","region":null}]}"#).unwrap();
-    assert_eq!(
-        Sponsor::select(&release.sponsor, "zh-cn").unwrap().name,
-        "Chinese"
-    );
-    assert_eq!(
-        Sponsor::select(&release.sponsor, "en-us").unwrap().name,
-        "English"
-    );
-    assert_eq!(
-        Sponsor::select(&release.sponsor, "zh-tw").unwrap().name,
-        "Global"
-    );
-    assert_eq!(
-        Sponsor::select(&release.sponsor, "ja-jp").unwrap().name,
-        "Global"
-    );
+fn preferences_ignore_retired_update_fields_and_preserve_editor_links() {
     let tmp = tempfile::tempdir().unwrap();
     let store = Store::new(tmp.path());
-    store.save("sponsors.yaml", &release.sponsor).unwrap();
-    assert_eq!(
-        store.load::<Vec<Sponsor>>("sponsors.yaml").unwrap(),
-        release.sponsor
-    );
-    let null: Release = serde_json::from_str(r#"{"sponsor":null}"#).unwrap();
-    assert!(null.sponsor.is_empty());
+    assert!(Preferences::default().editor.links);
+    for (check, skip) in [("check_update", "skip_version"), ("checkUpdate", "skipVersion")] {
+        std::fs::write(
+            tmp.path().join("preferences.yaml"),
+            format!("general:\n  {check}: true\n  {skip}: '1.2.3'\n  theme: dark\neditor:\n  links: false\n"),
+        ).unwrap();
+        let preferences = store.preferences().unwrap();
+        assert_eq!(preferences.general.theme, "dark");
+        assert!(!preferences.editor.links);
+        store.save("preferences.yaml", &preferences).unwrap();
+        let saved = serde_json::to_value(store.preferences().unwrap()).unwrap();
+        for key in ["check_update", "skip_version", "checkUpdate", "skipVersion"] {
+            assert!(saved["general"].get(key).is_none());
+        }
+        assert_eq!(saved["general"]["theme"], "dark");
+        assert_eq!(saved["editor"]["links"], false);
+    }
 }
 #[test]
 fn welcome_choice_remembers_both_acceptance_and_rejection() {
     let tmp = tempfile::tempdir().unwrap();
     let store = Store::new(tmp.path());
     for choice in [false, true] {
-        let mut preferences = rust_rdm::model::Preferences::default();
+        let mut preferences = redisdock::model::Preferences::default();
         assert!(!preferences.behavior.welcomed);
         preferences.welcome_choice(choice);
         store.save("preferences.yaml", &preferences).unwrap();
@@ -1072,11 +1047,11 @@ fn connection_zip_import_replaces_profiles_without_form_validation() {
     );
 
     let mut sorted = imported.clone();
-    rust_rdm::order::move_item(
+    redisdock::order::move_item(
         &mut sorted,
         "bad/name",
         false,
-        rust_rdm::order::Destination::Group("imported".into()),
+        redisdock::order::Destination::Group("imported".into()),
     )
     .expect("sorting imported profiles does not run connection form validation");
     assert_eq!(sorted[0].connections.len(), 3);
@@ -1190,7 +1165,7 @@ fn preference_numbers_match_go_rpc() {
     let cases: serde_json::Value =
         serde_json::from_str(include_str!("fixtures/preference-number-go-source.json")).unwrap();
     for case in cases.as_array().unwrap() {
-        let result = rust_rdm::model::Preferences::from_form_json(case["input"].clone());
+        let result = redisdock::model::Preferences::from_form_json(case["input"].clone());
         assert_eq!(
             result.is_ok(),
             case["success"].as_bool().unwrap(),
@@ -1226,7 +1201,7 @@ fn preference_numbers_match_go_rpc() {
 #[test]
 fn preference_getter_matches_original_repairs() {
     let dir = tempfile::tempdir().unwrap();
-    let store = rust_rdm::storage::Store::new(dir.path());
+    let store = redisdock::storage::Store::new(dir.path());
     let source = "general:\n  font_size: 0\n  scan_size: 0\nbehavior:\n  aside_width: 12\n  window_width: 100\n  window_height: 200\n";
     std::fs::write(dir.path().join("preferences.yaml"), source).unwrap();
     let pref = store.preferences().unwrap();
@@ -1245,20 +1220,20 @@ fn preference_getter_matches_original_repairs() {
 
 #[test]
 fn alias_indices_preserve_original_go_int_range() {
-    let profile: rust_rdm::model::Connection = serde_json::from_value(serde_json::json!({
+    let profile: redisdock::model::Connection = serde_json::from_value(serde_json::json!({
         "alias": {"-1": "imported", "4294967296": "large", "0": "main"}
     }))
     .unwrap();
     assert_eq!(profile.alias.get(&-1).unwrap(), "imported");
     assert_eq!(profile.alias.get(&4294967296).unwrap(), "large");
-    let round_trip: rust_rdm::model::Connection =
+    let round_trip: redisdock::model::Connection =
         serde_yaml::from_str(&serde_yaml::to_string(&profile).unwrap()).unwrap();
     assert_eq!(round_trip.alias, profile.alias);
     for key in ["null", "1.5"] {
         let mut aliases = serde_json::Map::new();
         aliases.insert(key.into(), "fixture".into());
         assert!(
-            serde_json::from_value::<rust_rdm::model::Connection>(
+            serde_json::from_value::<redisdock::model::Connection>(
                 serde_json::json!({"alias": aliases})
             )
             .is_err()
@@ -1448,7 +1423,7 @@ fn add_entries_matches_original_responses_data_errors_and_remaining_ttl() {
 
 #[test]
 fn edit_entries_match_original_responses_bytes_command_order_and_ttl() {
-    use rust_rdm::service::EntryUpdate;
+    use redisdock::service::EntryUpdate;
     use serde_json::{Value as Json,json};
     fn bytes(value:&Json)->Vec<u8>{
         value.as_str().map(|text|text.as_bytes().to_vec()).unwrap_or_else(||value.as_array().unwrap().iter().map(|v|v.as_u64().unwrap() as u8).collect())
@@ -1502,16 +1477,16 @@ fn edit_entries_match_original_responses_bytes_command_order_and_ttl() {
 }
 
 #[test]
-#[ignore = "requires RUST_RDM_JSON_MODULE pointing to the installed RedisJSON module"]
+#[ignore = "requires REDISDOCK_JSON_MODULE pointing to the installed RedisJSON module"]
 fn new_key_json_creation_matches_original_default_invalid_and_existing_values() {
-    let module=std::env::var_os("RUST_RDM_JSON_MODULE").expect("set RUST_RDM_JSON_MODULE");
+    let module=std::env::var_os("REDISDOCK_JSON_MODULE").expect("set REDISDOCK_JSON_MODULE");
     check_new_key_source_backend(&RedisFixture::with_module(Some(std::path::Path::new(&module))),true);
 }
 
 #[test]
-#[ignore = "requires RUST_RDM_JSON_MODULE pointing to the installed RedisJSON module"]
+#[ignore = "requires REDISDOCK_JSON_MODULE pointing to the installed RedisJSON module"]
 fn redisjson_real_module_preserves_source_contracts_and_dump_restore() {
-    let module = std::env::var_os("RUST_RDM_JSON_MODULE").expect("set RUST_RDM_JSON_MODULE to the RedisJSON library");
+    let module = std::env::var_os("REDISDOCK_JSON_MODULE").expect("set REDISDOCK_JSON_MODULE to the RedisJSON library");
     let fixture = RedisFixture::with_module(Some(std::path::Path::new(&module)));
     let service = fixture.service();
     let config = &fixture.config;
@@ -1694,7 +1669,7 @@ fn redis_all_collection_types_and_entry_editing() {
                 }
                 Err(error) => {
                     assert_ne!(kind, KeyType::Stream);
-                    assert!(error.is::<rust_rdm::service::KeyNotFound>(), "{error}");
+                    assert!(error.is::<redisdock::service::KeyNotFound>(), "{error}");
                     break;
                 }
             }

@@ -3,5 +3,6 @@
 /.cargo-home/
 /outputs/
 /.rdm-data/
+/.redisdock-data/
 *.log
 .DS_Store

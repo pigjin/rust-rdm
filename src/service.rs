@@ -874,7 +874,7 @@ impl Service {
                 if remove {
                     let script=b"local v=redis.call('LINDEX',KEYS[1],ARGV[1]); if not v then return 0 end; local mark=ARGV[2]; redis.call('LSET',KEYS[1],ARGV[1],mark); return redis.call('LREM',KEYS[1],1,mark)";
                     let marker = format!(
-                        "\0rust-rdm-delete-{}-{}",
+                        "\0redisdock-delete-{}-{}",
                         std::process::id(),
                         SystemTime::now().duration_since(UNIX_EPOCH)?.as_nanos()
                     )

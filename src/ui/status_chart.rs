@@ -409,7 +409,7 @@ impl RenderOnce for StatusChart {
         canvas(move|bounds,window,_|prepare.layout(bounds.size.width.as_f32() as f64,bounds.size.height.as_f32() as f64,|s|text_width(s,window)),
             move|bounds,layout,window,cx| {
                 #[cfg(feature="ui-qa")]
-                if std::env::var_os("RUST_RDM_QA_STATUS_CHART_TRACE").is_some() {
+                if std::env::var_os("REDISDOCK_QA_STATUS_CHART_TRACE").is_some() {
                     for (value,label) in layout.ticks.iter().zip(&layout.tick_labels).rev() {println!("STATUS AXIS TICK: {}",serde_json::json!({"chart":data.id,"value":value,"label":label}));}
                     println!("STATUS CHART FRAME: {}",serde_json::json!({"chart":data.id,"canvas":{"x":bounds.origin.x.as_f32(),"y":bounds.origin.y.as_f32(),"w":bounds.size.width.as_f32(),"h":bounds.size.height.as_f32()},"layout":layout}));
                 }

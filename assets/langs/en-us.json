@@ -47,7 +47,6 @@
       "key_icon_style2": "Dot",
       "key_icon_style3": "Common",
       "update": "Update",
-      "auto_check_update": "Auto check for updates",
       "privacy": "Privacy",
       "allow_track": "Allows anonymous data to be collected"
     },
@@ -71,8 +70,7 @@
       "decoder_name": "Name",
       "cmd_preview": "Preview",
       "status": "Status",
-      "auto_enabled": "Auto Decoding Enabled",
-      "help": "Help"
+      "auto_enabled": "Auto Decoding Enabled"
     }
   },
   "interface": {
@@ -153,8 +151,7 @@
     "empty_server_list": "No Redis server added",
     "action": "Action",
     "type": "Type",
-    "cli_welcome": "Welcome to Tiny RDM Redis Console",
-    "retrieving_version": "Checking for updates",
+    "cli_welcome": "Welcome to RedisDock Redis Console",
     "sub_tab": {
       "status": "Status",
       "key_detail": "Key Detail",
@@ -168,8 +165,6 @@
     "server": "Server",
     "browser": "Data Browser",
     "log": "Log",
-    "wechat_official": "WeChat Official Account",
-    "follow_x": "Follow \uD835\uDD4F",
     "github": "Github",
     "logout": "Sign Out"
   },
@@ -384,23 +379,14 @@
       "args": "Arguments",
       "args_help": "Use [VALUE] as placeholder for encoding/decoding content. The content will be appended to the end if no placeholder is provided."
     },
-    "upgrade": {
-      "title": "New Version Available",
-      "new_version_tip": "New version {ver} available, download now?",
-      "no_update": "You're up-to-date",
-      "download_now": "Download Now",
-      "later": "Later",
-      "skip": "Skip This Version"
-    },
     "welcome": {
-      "title": "Welcome to Tiny RDM！",
-      "content": "In order to provide a better user experience, Tiny RDM collects some anonymous data to help optimize the software and improve the user experience, please rest assured that this does not involve your personal privacy information.\n\nIf you have any concerns, you can turn off this data collection feature at any time by going to Preferences. If you have any questions, feel free to contact the developer. I hope Tiny RDM can become your helpful assistant!",
+      "title": "Welcome to RedisDock！",
+      "content": "In order to provide a better user experience, RedisDock collects some anonymous data to help optimize the software and improve the user experience, please rest assured that this does not involve your personal privacy information.\n\nIf you have any concerns, you can turn off this data collection feature at any time by going to Preferences. If you have any questions, feel free to contact the developer. I hope RedisDock can become your helpful assistant!",
       "accept": "Help Improve",
       "reject": "Reject"
     },
     "about": {
-      "source": "Source Code",
-      "website": "Official Website"
+      "source": "Source Code"
     }
   },
   "login": {
@@ -418,8 +404,6 @@
     "close": "Close",
     "preferences": "Preferences",
     "help": "Help",
-    "user_guide": "User Guide",
-    "check_update": "Check for Updates...",
     "report_bug": "Report Bug",
     "about": "About"
   },

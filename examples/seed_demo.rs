@@ -1,5 +1,5 @@
 //! Creates disposable data only in the explicitly supplied local Unix socket.
-use rust_rdm::{model::*, redis::command, service::Service, storage::Store};
+use redisdock::{model::*, redis::command, service::Service, storage::Store};
 fn main() -> anyhow::Result<()> {
     let render_qa = std::env::args().nth(2).as_deref() == Some("--render-qa");
     let root = std::path::PathBuf::from(
@@ -67,7 +67,7 @@ fn main() -> anyhow::Result<()> {
             s.create(&config, 0, key.as_bytes(), kind, b"*", &rows, -1)?;
         }
     }
-    let gzip = rust_rdm::codec::encode("{\"compressed\":true}", "GZip", "JSON", &[])?;
+    let gzip = redisdock::codec::encode("{\"compressed\":true}", "GZip", "JSON", &[])?;
     s.create(&config, 0, b"gzip_test", KeyType::String, &gzip, &[], -1)?;
     s.create(
         &config,

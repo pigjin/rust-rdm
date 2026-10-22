@@ -483,7 +483,7 @@ pub(super) async fn verify(
         println!("{prefix} FRAME: {}", serde_json::json!({"scene":scene,"frames":frames,"filter":value,"match":tab.key_match,"exact":tab.exact,"inputFocused":tab.filter.focus_handle(cx).is_focused(window),"asideWidth":app.pref.behavior.aside_width,"resizing":app.sidebar_resizing,"hovering":app.sidebar_hover,"unobservedOffscreen":unobserved_offscreen,"baseline":baseline}));
         if !differences.is_empty() {
             println!("{prefix} QA FAIL: {}",serde_json::json!({"scene":scene,"differences":differences}));
-            let retain=(tag_overflow && std::env::var("RUST_RDM_QA_RETAIN_TAG_OVERFLOW").as_deref()==Ok("1")) ||(sidebar&&std::env::var("RUST_RDM_QA_RETAIN_SIDEBAR_RESIZE").as_deref()==Ok("1")) ||(selector_font&&std::env::var("RUST_RDM_QA_RETAIN_SELECTOR_FONT").as_deref()==Ok("1"));
+            let retain=(tag_overflow && std::env::var("REDISDOCK_QA_RETAIN_TAG_OVERFLOW").as_deref()==Ok("1")) ||(sidebar&&std::env::var("REDISDOCK_QA_RETAIN_SIDEBAR_RESIZE").as_deref()==Ok("1")) ||(selector_font&&std::env::var("REDISDOCK_QA_RETAIN_SELECTOR_FONT").as_deref()==Ok("1"));
             assert!(retain,"{scene} source rectangles failed: {differences:?}");
             println!("{prefix} QA RETAINED NEGATIVE: {scene}; diagnostic image only, not acceptance");
         } else {

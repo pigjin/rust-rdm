@@ -270,7 +270,7 @@ pub(in crate::ui) async fn verify(
         let matches = cx
             .update_window(window.into(), |_, window, cx| {
                 let previous = cx.read_from_clipboard();
-                cx.write_to_clipboard(ClipboardItem::new_string("rust-rdm-copy-check".into()));
+                cx.write_to_clipboard(ClipboardItem::new_string("redisdock-copy-check".into()));
                 window.dispatch_event(
                     PlatformInput::KeyDown(KeyDownEvent {
                         keystroke: Keystroke::parse("cmd-c").unwrap(),

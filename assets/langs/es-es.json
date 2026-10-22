@@ -47,7 +47,6 @@
       "key_icon_style2": "Punto",
       "key_icon_style3": "Común",
       "update": "Actualizar",
-      "auto_check_update": "Buscar actualizaciones automáticamente",
       "privacy": "Política de Privacidad",
       "allow_track": "Permitir recopilar datos anónimos"
     },
@@ -71,8 +70,7 @@
       "decoder_name": "Nombre",
       "cmd_preview": "Vista previa",
       "status": "Estado",
-      "auto_enabled": "Decodificación automática habilitada",
-      "help": "Ayuda"
+      "auto_enabled": "Decodificación automática habilitada"
     }
   },
   "interface": {
@@ -153,8 +151,7 @@
     "empty_server_list": "No se ha agregado ningún servidor Redis",
     "action": "Acción",
     "type": "Tipo",
-    "cli_welcome": "Bienvenido a la consola Redis de Tiny RDM",
-    "retrieving_version": "Buscando actualizaciones",
+    "cli_welcome": "Bienvenido a la consola Redis de RedisDock",
     "sub_tab": {
       "status": "Estado",
       "key_detail": "Detalles de clave",
@@ -168,8 +165,6 @@
     "server": "Servidor",
     "browser": "Explorador de datos",
     "log": "Registro",
-    "wechat_official": "Cuenta oficial de WeChat",
-    "follow_x": "Seguir \uD835\uDD4F",
     "github": "Github",
     "logout": "Cerrar sesión"
   },
@@ -384,23 +379,14 @@
       "args": "Argumentos",
       "args_help": "Use [VALUE] como marcador de posición para codificar/decodificar contenido. El contenido se agregará al final si no se proporciona marcador de posición."
     },
-    "upgrade": {
-      "title": "Nueva versión disponible",
-      "new_version_tip": "Nueva versión {ver} disponible, ¿descargar ahora?",
-      "no_update": "Está actualizado",
-      "download_now": "Descargar ahora",
-      "later": "Más tarde",
-      "skip": "Omitir esta versión"
-    },
     "welcome": {
-      "title": "¡Bienvenido a Tiny RDM!",
-      "content": "Con el fin de brindar una mejor experiencia de usuario, Tiny RDM recopila algunos datos anónimos para ayudar a optimizar el software y mejorar la experiencia del usuario. Tenga la seguridad de que esto no involucrará su información de privacidad personal.\n\nSi tiene alguna inquietud, puede desactivar esta función de recopilación de datos en cualquier momento yendo a Preferencias. Si tiene alguna pregunta, no dude en ponerse en contacto con el desarrollador. ¡Espero que Tiny RDM pueda ser un buen asistente para usted!",
+      "title": "¡Bienvenido a RedisDock!",
+      "content": "Con el fin de brindar una mejor experiencia de usuario, RedisDock recopila algunos datos anónimos para ayudar a optimizar el software y mejorar la experiencia del usuario. Tenga la seguridad de que esto no involucrará su información de privacidad personal.\n\nSi tiene alguna inquietud, puede desactivar esta función de recopilación de datos en cualquier momento yendo a Preferencias. Si tiene alguna pregunta, no dude en ponerse en contacto con el desarrollador. ¡Espero que RedisDock pueda ser un buen asistente para usted!",
       "accept": "Ayudar a Mejorar",
       "reject": "Rechazar"
     },
     "about": {
-      "source": "Código fuente",
-      "website": "Sitio web oficial"
+      "source": "Código fuente"
     }
   },
   "login": {
@@ -418,8 +404,6 @@
     "close": "Cerrar",
     "preferences": "Preferencias",
     "help": "Ayuda",
-    "user_guide": "Guía de usuario",
-    "check_update": "Buscar actualizaciones...",
     "report_bug": "Reportar error",
     "about": "Acerca de"
   },

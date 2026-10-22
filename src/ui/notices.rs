@@ -81,7 +81,6 @@ impl RdmApp {
         .into();
         self.apply_theme(window, cx);
         if record["modal"].as_bool().unwrap() {
-            self.pref.general.check_update = true;
             self.pref.general.allow_track = true;
             self.open_dialog(dialogs::DialogKind::Preferences, window, cx);
         }

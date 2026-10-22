@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=RedisDock
+Comment=Native Redis desktop client
+Exec=redisdock
+Icon=redisdock
+Terminal=false
+Categories=Development;Database;

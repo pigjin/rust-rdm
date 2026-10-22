@@ -7,24 +7,27 @@ case "$profile" in
   debug) cargo build --locked ;;
   *) echo 'Usage: scripts/bundle-macos.sh [debug|release]' >&2; exit 2 ;;
 esac
-bundle="target/bundle/Tiny RDM.app"
+version=$(python3 scripts/release.py version --core)
+target_dir="${CARGO_TARGET_DIR:-target}"
+binary_dir="$target_dir/${CARGO_BUILD_TARGET:+$CARGO_BUILD_TARGET/}$profile"
+bundle="$target_dir/bundle/RedisDock.app"
 mkdir -p "$bundle/Contents/MacOS" "$bundle/Contents/Resources"
-cp "target/$profile/rust-rdm" "$bundle/Contents/MacOS/rust-rdm"
+cp "$binary_dir/redisdock" "$bundle/Contents/MacOS/redisdock"
 cp assets/images/icon.png "$bundle/Contents/Resources/icon.png"
 cp assets/images/AppIcon.icns "$bundle/Contents/Resources/AppIcon.icns"
 frameworks="$bundle/Contents/Frameworks"
 rm -rf "$frameworks"
 mkdir -p "$frameworks"
-local_libraries=$(otool -L "$bundle/Contents/MacOS/rust-rdm" | awk '$1 ~ /^\/opt\/homebrew\// || $1 ~ /^\/usr\/local\// {print $1}')
+local_libraries=$(otool -L "$bundle/Contents/MacOS/redisdock" | awk '$1 ~ /^\/opt\/homebrew\// || $1 ~ /^\/usr\/local\// {print $1}')
 for library in $local_libraries; do
   library_name=$(basename "$library")
   cp "$library" "$frameworks/$library_name"
   chmod u+w "$frameworks/$library_name"
   install_name_tool -id "@rpath/$library_name" "$frameworks/$library_name"
-  install_name_tool -change "$library" "@rpath/$library_name" "$bundle/Contents/MacOS/rust-rdm"
+  install_name_tool -change "$library" "@rpath/$library_name" "$bundle/Contents/MacOS/redisdock"
 done
 if [ -n "$local_libraries" ]; then
-  install_name_tool -add_rpath '@executable_path/../Frameworks' "$bundle/Contents/MacOS/rust-rdm"
+  install_name_tool -add_rpath '@executable_path/../Frameworks' "$bundle/Contents/MacOS/redisdock"
   for bundled_library in "$frameworks"/*.dylib; do
     for library in $local_libraries; do
       install_name_tool -change "$library" "@rpath/$(basename "$library")" "$bundled_library"
@@ -37,7 +40,7 @@ for third_party_license in assets/licenses/*.txt; do
 done
 cp LICENSE "$bundle/Contents/Resources/LICENSE"
 minimum_system=$({
-  vtool -show-build "$bundle/Contents/MacOS/rust-rdm"
+  vtool -show-build "$bundle/Contents/MacOS/redisdock"
   for bundled_library in "$frameworks"/*.dylib; do
     [ ! -f "$bundled_library" ] || vtool -show-build "$bundled_library"
   done
@@ -48,17 +51,18 @@ cat > "$bundle/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
-<key>CFBundleExecutable</key><string>rust-rdm</string>
-<key>CFBundleIdentifier</key><string>com.tinycraft.rust-rdm</string>
-<key>CFBundleName</key><string>Tiny RDM</string>
-<key>CFBundleDisplayName</key><string>Tiny RDM</string>
+<key>CFBundleExecutable</key><string>redisdock</string>
+<key>CFBundleIdentifier</key><string>io.github.pigjin.redisdock</string>
+<key>CFBundleName</key><string>RedisDock</string>
+<key>CFBundleDisplayName</key><string>RedisDock</string>
 <key>CFBundlePackageType</key><string>APPL</string>
-<key>CFBundleShortVersionString</key><string>0.1.0</string>
-<key>CFBundleVersion</key><string>1</string>
+<key>CFBundleShortVersionString</key><string>$version</string>
+<key>CFBundleVersion</key><string>$version</string>
 <key>CFBundleIconFile</key><string>AppIcon.icns</string>
 <key>NSHighResolutionCapable</key><true/>
 <key>LSMinimumSystemVersion</key><string>$minimum_system</string>
 </dict></plist>
 PLIST
 codesign --force --deep --sign - "$bundle"
-echo "$PWD/$bundle"
+cd "$bundle"
+pwd

@@ -96,7 +96,7 @@ def main():
     executable = ROOT / 'target/debug/examples/render_qa'
     report = {'startedAt': datetime.now().astimezone().isoformat(), 'expectedScenes': expected,
               'registeredSceneCount': len(registered), 'qaExecutableSHA256': sha(executable), 'passed': False}
-    fixture_root = Path(tempfile.mkdtemp(prefix='rdm-ui-', dir='/private/tmp'))
+    fixture_root = Path(tempfile.mkdtemp(prefix='redisdock-ui-', dir='/private/tmp'))
     processes, fixtures = [], []
     try:
         for kind in ['ordinary', 'json']:
@@ -120,7 +120,7 @@ def main():
                     time.sleep(.05)
             else:
                 raise RuntimeError('Disposable Redis did not become ready')
-            env = dict(os.environ, RUST_RDM_DATA_DIR=str(folder))
+            env = dict(os.environ, REDISDOCK_DATA_DIR=str(folder))
             subprocess.run([str(ROOT / 'target/debug/examples/seed_demo'), str(folder), '--render-qa'],
                            cwd=ROOT, env=env, check=True)
             if kind == 'json':
@@ -130,12 +130,12 @@ def main():
             assert len(baseline['keys']) == 19 and all(row['pttl'] == -1 for row in baseline['keys'])
             write(output / f'{kind}-baseline.json', baseline)
             fixtures.append({'kind': kind, 'root': str(folder), 'pid': child.pid, 'baseline': baseline})
-        env = dict(os.environ, RUST_RDM_DATA_DIR=fixtures[0]['root'],
-                   RUST_RDM_JSON_QA_DIR=fixtures[1]['root'], RUST_RDM_QA_STATUS_CHART_TRACE='1', RUST_BACKTRACE='1')
-        for key in ['RUST_RDM_QA_SCENES', 'RUST_RDM_QA_SCENE', 'RUST_RDM_QA_PREFIX']:
+        env = dict(os.environ, REDISDOCK_DATA_DIR=fixtures[0]['root'],
+                   REDISDOCK_JSON_QA_DIR=fixtures[1]['root'], REDISDOCK_QA_STATUS_CHART_TRACE='1', RUST_BACKTRACE='1')
+        for key in ['REDISDOCK_QA_SCENES', 'REDISDOCK_QA_SCENE', 'REDISDOCK_QA_PREFIX']:
             env.pop(key, None)
         if args.scenes or args.prefix:
-            env['RUST_RDM_QA_SCENES'] = ','.join(expected)
+            env['REDISDOCK_QA_SCENES'] = ','.join(expected)
         log = output / 'ui.log'
         report['fixtures'] = [{k: value for k, value in record.items() if k != 'baseline'} for record in fixtures]
         report['log'] = str(log)

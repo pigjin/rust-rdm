@@ -113,7 +113,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                         show: false,
                         focus: false,
                         titlebar: Some(TitlebarOptions {
-                            title: Some("Tiny RDM".into()),
+                            title: Some("RedisDock".into()),
                             appears_transparent: true,
                             ..Default::default()
                         }),
@@ -173,7 +173,6 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     "connections-menu-dark",
                     "connections-more",
                     "settings-menu",
-                    "community",
                     "message-success",
                     "message-error",
                     "message-error-modal",
@@ -182,7 +181,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     "notification-error",
                     "notification-error-dark",
                     "welcome",
-                    "sponsor",
+                    "about",
                     "csv-import-default",
                     "new-key-string",
                     "new-key-hash",
@@ -696,9 +695,9 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     "monitor-wrap-light",
                     "monitor-wrap-dark",
                 ];
-                let only_scene = std::env::var("RUST_RDM_QA_SCENE").ok();
-                let scene_prefix = std::env::var("RUST_RDM_QA_PREFIX").ok();
-                let selected_scenes = std::env::var("RUST_RDM_QA_SCENES").ok().map(|scenes| scenes.split(',').map(str::trim).filter(|name| !name.is_empty()).map(str::to_owned).collect::<Vec<_>>());
+                let only_scene = std::env::var("REDISDOCK_QA_SCENE").ok();
+                let scene_prefix = std::env::var("REDISDOCK_QA_PREFIX").ok();
+                let selected_scenes = std::env::var("REDISDOCK_QA_SCENES").ok().map(|scenes| scenes.split(',').map(str::trim).filter(|name| !name.is_empty()).map(str::to_owned).collect::<Vec<_>>());
                 if let Some(scenes) = &selected_scenes { assert!(!scenes.is_empty() && scenes.iter().all(|scene| snapshots.contains(&scene.as_str())), "unknown QA scene list"); }
                 if let Some(scene) = &only_scene {
                     assert!(snapshots.contains(&scene.as_str()), "unknown QA scene");
@@ -735,14 +734,13 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                             app.messages.clear();app.notifications.clear();
                             if snapshot != "dark" {app.pref.general.theme="light".into();app.apply_theme(window,cx);}
                             app.pref.behavior.welcomed = true;
-                            app.sponsors.clear();
                             app.connections=qa_connections.clone();
                             app.groups_open.clear();
                             app.connection_selected=None;
                             app.connection_pending=None;
                             app.connection_scroll.set_offset(point(px(0.),px(0.)));
                             set_input(&app.conn_filter,"",window,cx);
-                            if snapshot.starts_with("connections") || matches!(snapshot,"settings-menu"|"community") {
+                            if snapshot.starts_with("connections") || snapshot=="settings-menu" {
                                 let ids=app.tabs.iter().map(|tab|tab.id).collect::<Vec<_>>();
                                 for id in ids {app.close_tab(id,window,cx);}
                                 app.nav=Nav::Server;
@@ -877,7 +875,6 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                                     else {app.qa_prepare_csv(name,window,cx);}
                                 },
                                 "connections-selected"=>{},
-                                "community"=>app.open_dialog(dialogs::DialogKind::Community,window,cx),
                                 "connections-copy"=>{
                                     let source=qa_connections[0].clone();let mut taken=source.clone();taken.name="localhost2".into();app.connections.push(taken);
                                     app.duplicate_connection(source,window,cx);app.qa_assert_connection_tree_dialog("copy","localhost3",cx);
@@ -921,11 +918,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                                     }
                                 }
                                 "welcome" => app.pref.behavior.welcomed = false,
-                                "sponsor" => {
-                                    app.sponsors = vec![crate::update::Sponsor {
-                                        name: "QA Sponsor".into(), link: "https://example.com".into(), region: vec!["zh".into()],
-                                    }];
-                                }
+                                "about" => app.open_dialog(dialogs::DialogKind::About, window, cx),
                                 "preferences-font-filter" | "preferences-font-tags" | "preferences-font-keyboard" => {
                                     app.open_dialog(dialogs::DialogKind::Preferences, window, cx);
                                     if snapshot == "preferences-font-tags" {
@@ -1890,7 +1883,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                         println!("QA PASS: actual input shows and clears connection feedback");
                     }
                     if snapshot=="connection-validation-save" {
-                        let dir=tempfile::Builder::new().prefix("rust-rdm-form-qa-").tempdir_in("/private/tmp").unwrap();
+                        let dir=tempfile::Builder::new().prefix("redisdock-form-qa-").tempdir_in("/private/tmp").unwrap();
                         window.update(cx,|_,window,cx|view.update(cx,|app,cx| {
                             let original=std::mem::replace(&mut app.store,Store::new(dir.path()));
                             let connections=app.connections.clone();
@@ -1987,7 +1980,12 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                         }
                         cx.update_window(window.into(),|_,window,cx|{
                             window.refresh();let _=window.draw(cx);
-                            let (position,button)=match snapshot {"connections-menu-group"=>(point(px(170.),px(85.)),MouseButton::Right),"connections-more"=>(point(px(330.),px(748.)),MouseButton::Left),"settings-menu"=>(point(px(25.),px(657.)),MouseButton::Left),_=>(point(px(170.),px(55.)),MouseButton::Right)};
+                            if snapshot=="settings-menu" {
+                                assert!(gpui_base::test_support::find(window,&[],&"wechat".into()).is_none(),"official account entry is removed");
+                                assert!(gpui_base::test_support::find(window,&[],&"twitter".into()).is_none(),"Twitter entry is removed");
+                                assert!(gpui_base::test_support::find(window,&[],&"github".into()).is_some(),"project link remains available");
+                            }
+                            let (position,button)=match snapshot {"connections-menu-group"=>(point(px(170.),px(85.)),MouseButton::Right),"connections-more"=>(point(px(330.),px(748.)),MouseButton::Left),"settings-menu"=>(gpui_base::test_support::find(window,&[],&"settings".into()).unwrap().bounds().center(),MouseButton::Left),_=>(point(px(170.),px(55.)),MouseButton::Right)};
                             window.dispatch_event(PlatformInput::MouseDown(MouseDownEvent{button,position,click_count:1,..Default::default()}),cx);
                             window.dispatch_event(PlatformInput::MouseUp(MouseUpEvent{button,position,click_count:1,..Default::default()}),cx);
                             window.refresh();let _=window.draw(cx);
@@ -2004,11 +2002,14 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                             let bounds=menu.bounds();
                             println!("QA MENU {snapshot}: {bounds:?}");
                             assert!((bounds.origin.x.as_f32()-expected["x"].as_f64().unwrap() as f32).abs()<0.6,"source menu x");
-                            assert!((bounds.origin.y.as_f32()-expected["y"].as_f64().unwrap() as f32).abs()<0.6,"source menu y");
+                            let expected_y=if snapshot=="settings-menu" {gpui_base::test_support::find(window,&[],&"settings".into()).unwrap().bounds().origin.y-bounds.size.height-px(6.)}else{px(expected["y"].as_f64().unwrap()as f32)};
+                            assert!((bounds.origin.y-expected_y).abs()<px(0.6),"source menu anchor gap");
                             assert!((bounds.size.width.as_f32()-expected["w"].as_f64().unwrap() as f32).abs()<0.1,"source menu width");
-                            assert!((bounds.size.height.as_f32()-expected["h"].as_f64().unwrap() as f32).abs()<0.1,"source menu height");
+                            let expected_height=expected["h"].as_f64().unwrap() as f32-if snapshot=="settings-menu" {2.*28.} else {0.};
+                            assert!((bounds.size.height.as_f32()-expected_height).abs()<0.1,"menu height after removing guide and update rows");
                             let mut items=gpui_base::test_support::snapshots(window).into_iter().filter(|item|item.role()==Some(gpui::Role::MenuItem)&&item.label().is_some()).collect::<Vec<_>>();items.sort_by(|a,b|a.bounds().origin.y.partial_cmp(&b.bounds().origin.y).unwrap());
-                            let source_items=source["metrics"].as_array().unwrap().iter().filter(|item|item["class"].as_str().unwrap().split_whitespace().next()==Some("n-dropdown-option-body")).collect::<Vec<_>>();
+                            let source_items=source["metrics"].as_array().unwrap().iter().filter(|item|item["class"].as_str().unwrap().split_whitespace().next()==Some("n-dropdown-option-body"))
+                                .filter(|item|snapshot!="settings-menu"||!matches!(item["text"].as_str(),Some("使用指南"|"检查更新..."))).collect::<Vec<_>>();
                             assert_eq!(items.len(),source_items.len(),"source menu item count");
                             for (item,expected) in items.iter().zip(source_items) {
                                 assert_eq!(item.label(),expected["text"].as_str(),"source menu label");
@@ -2016,19 +2017,6 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                             }
                         }).unwrap();
                         println!("QA PASS: {snapshot} actual menu trigger");
-                    }
-                    if snapshot=="community" {
-                        cx.update_window(window.into(),|_,window,cx|{
-                            window.refresh();let _=window.draw(cx);
-                            let oracle:serde_json::Value=serde_json::from_str(include_str!("../../tests/fixtures/community-source.json")).unwrap();
-                            let expected=oracle["metrics"].as_array().unwrap().iter().find(|element|element["class"]=="n-flex n-modal").unwrap();
-                            let actual=gpui_base::test_support::find(window,&[],&"community-images".into()).expect("two community images are visible").bounds();
-                            for (value,key) in [(actual.origin.x.as_f32(),"x"),(actual.origin.y.as_f32(),"y"),(actual.size.width.as_f32(),"w"),(actual.size.height.as_f32(),"h")] {assert!((value-expected[key].as_f64().unwrap() as f32).abs()<0.6,"source community {key}: {actual:?}");}
-                            let position=point(px(400.),px(200.));
-                            window.dispatch_event(PlatformInput::MouseDown(MouseDownEvent{button:MouseButton::Left,position,click_count:1,..Default::default()}),cx);
-                            window.dispatch_event(PlatformInput::MouseUp(MouseUpEvent{button:MouseButton::Left,position,click_count:1,..Default::default()}),cx);
-                            assert!(view.read(cx).dialog.is_some(),"clicking an image keeps the original modal open");
-                        }).unwrap();
                     }
                     if matches!(snapshot,"font-size-preview"|"font-size-cleared") {
                         let oracle:Json=serde_json::from_str(include_str!("../../tests/fixtures/font-size-preview-source.json")).unwrap();
@@ -2506,22 +2494,6 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                         }
                         println!("QA PASS: 9 original alias numbers and integer map acceptance");
                     }
-                    if snapshot=="community" {
-                        for keyboard in [true,false] {
-                            cx.update_window(window.into(),|_,window,cx|{
-                                if !keyboard {view.update(cx,|app,cx|app.open_dialog(dialogs::DialogKind::Community,window,cx));}
-                                window.refresh();let _=window.draw(cx);
-                                if keyboard {window.dispatch_event(PlatformInput::KeyDown(KeyDownEvent{keystroke:Keystroke::parse("escape").unwrap(),is_held:false,prefer_character_input:false}),cx);}else{
-                                    let position=point(px(900.),px(400.));
-                                    window.dispatch_event(PlatformInput::MouseDown(MouseDownEvent{button:MouseButton::Left,position,click_count:1,..Default::default()}),cx);
-                                    window.dispatch_event(PlatformInput::MouseUp(MouseUpEvent{button:MouseButton::Left,position,click_count:1,..Default::default()}),cx);
-                                }
-                            }).unwrap();
-                            cx.background_executor().timer(Duration::from_millis(50)).await;
-                            window.update(cx,|_,_,cx|assert!(view.read(cx).dialog.is_none(),"community Escape and mask close")).unwrap();
-                        }
-                        println!("QA PASS: community source image geometry, image click, Escape and mask close");
-                    }
                     if matches!(snapshot,"connections-selected"|"connections-connected"|"connections-group-open") {
                         let click=|x:f32,y:f32,cx:&mut AsyncApp|{
                             cx.update_window(window.into(),|_,window,cx|{
@@ -2586,17 +2558,19 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                         })).unwrap();
                         println!("QA PASS: welcome buttons persist acceptance and rejection without redisplaying");
                     }
-                    if snapshot == "sponsor" {
-                        window.update(cx, |_, _, cx| view.update(cx, |app, _| {
-                            let old = app.store.load::<Vec<crate::update::Sponsor>>("sponsors.yaml").unwrap();
-                            let items = app.sponsors.clone();
-                            app.cache_sponsors(&items);
-                            app.cache_sponsors(&[]);
-                            assert_eq!(app.sponsors, items);
-                            assert_eq!(app.store.load::<Vec<crate::update::Sponsor>>("sponsors.yaml").unwrap(), items);
-                            app.store.save("sponsors.yaml", &old).unwrap();
-                        })).unwrap();
-                        println!("QA PASS: sponsor cache survives empty update metadata");
+                    if matches!(snapshot, "about" | "preferences" | "preferences-decoder" | "connections-empty") {
+                        window.update(cx, |_, window, _| {
+                            for id in ["update-download", "sponsor-link", "twitter", "decoder-help", "privacy-policy", "about-website"] {
+                                assert!(gpui_base::test_support::find(window, &[], &id.into()).is_none(), "removed external action {id}");
+                            }
+                            if snapshot == "about" {
+                                assert!(gpui_base::test_support::find(window, &[], &"about-source".into()).is_some(), "project GitHub remains available");
+                            }
+                            if snapshot == "preferences-decoder" {
+                                assert!(gpui_base::test_support::find(window, &[], &"add-decoder".into()).is_some(), "decoder configuration remains available");
+                            }
+                        }).unwrap();
+                        println!("QA PASS: {snapshot} removes external actions and preserves project controls");
                     }
                     if snapshot=="key-browser-delete" {
                         let click=|name:&'static str,cx:&mut AsyncApp| {cx.update_window(window.into(),|_,window,cx|{

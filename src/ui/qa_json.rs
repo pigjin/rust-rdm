@@ -61,7 +61,7 @@ pub(super) fn click(id: &str, window: WindowHandle<Root>, cx: &mut AsyncApp) {
 
 fn configurations() -> Vec<Connection> {
     let root = PathBuf::from(
-        std::env::var_os("RUST_RDM_JSON_QA_DIR").expect("JSON UI QA requires RUST_RDM_JSON_QA_DIR"),
+        std::env::var_os("REDISDOCK_JSON_QA_DIR").expect("JSON UI QA requires REDISDOCK_JSON_QA_DIR"),
     );
     assert_eq!(
         std::fs::read_to_string(root.join("RDM-QA-FIXTURE")).unwrap(),

@@ -517,10 +517,6 @@ pub struct General {
     pub use_sys_proxy: bool,
     #[serde(alias = "useSysProxyHttp")]
     pub use_sys_proxy_http: bool,
-    #[serde(alias = "checkUpdate")]
-    pub check_update: bool,
-    #[serde(alias = "skipVersion")]
-    pub skip_version: String,
     #[serde(alias = "allowTrack")]
     pub allow_track: bool,
 }
@@ -536,8 +532,6 @@ impl Default for General {
             key_icon_style: 0,
             use_sys_proxy: false,
             use_sys_proxy_http: false,
-            check_update: true,
-            skip_version: String::new(),
             allow_track: true,
         }
     }

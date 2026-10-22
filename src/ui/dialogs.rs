@@ -88,7 +88,6 @@ pub(super) enum DialogKind {
     Import,
     Export,
     About,
-    Community,
     CleanLog,
 }
 #[derive(Clone)]
@@ -1435,7 +1434,6 @@ impl RdmApp {
                 "general",
             ),
             DialogKind::About => (self.tr("menu.about"), Json::Null, "general"),
-            DialogKind::Community => ("Tiny RDM".into(), Json::Null, "general"),
         };
         if matches!(
             kind,
@@ -2441,11 +2439,6 @@ impl RdmApp {
             .into_any_element()
     }
     fn preferences_decoders(&self, cx: &Context<Self>) -> AnyElement {
-        let help_url = if self.lang["name"] == "简体中文" {
-            "https://tinyrdm.com/zh/guide/custom-decoder.html"
-        } else {
-            "https://tinyrdm.com/guide/custom-decoder.html"
-        };
         let toolbar = div()
             .flex()
             .items_center()
@@ -2456,14 +2449,6 @@ impl RdmApp {
                 "add",
                 cx,
                 |app, w, cx| app.open_nested_dialog(DialogKind::Decoder(None), w, cx),
-            ))
-            .child(div().flex_1())
-            .child(self.btn(
-                "decoder-help",
-                self.tr("preferences.decoder.help"),
-                "help",
-                cx,
-                move |_, _, cx| cx.open_url(help_url),
             ));
         let heading = div()
             .flex()
@@ -3495,53 +3480,6 @@ impl RdmApp {
         if matches!(d.kind, DialogKind::CleanLog) {
             return self.render_warning_dialog(self.tr("log.confirm_clean_log"), cx);
         }
-        if matches!(d.kind, DialogKind::Community) {
-            let images = div()
-                .id("community-images")
-                .test_support()
-                .w(px(400.))
-                .flex()
-                .flex_col()
-                .gap(px(8.))
-                .on_mouse_down(MouseButton::Left, |_, _, cx| cx.stop_propagation())
-                .children(
-                    [
-                        ("wechat_official.png", 137.5),
-                        ("bilibili_official.png", 400. * 730. / 960.),
-                    ]
-                    .into_iter()
-                    .enumerate()
-                    .map(|(index, (name, height))| {
-                        div()
-                            .id(("community-image", index))
-                            .test_support()
-                            .w(px(400.))
-                            .h(px(height))
-                            .flex_shrink_0()
-                            .child(
-                                img(ImageSource::Resource(Resource::Embedded(
-                                    format!("images/{name}").into(),
-                                )))
-                                .w(px(400.))
-                                .h(px(height)),
-                            )
-                    }),
-                );
-            return div()
-                .absolute()
-                .inset_0()
-                .flex()
-                .items_center()
-                .justify_center()
-                .bg(rgba(0x00000066))
-                .occlude()
-                .on_mouse_down(
-                    MouseButton::Left,
-                    cx.listener(|app, _, window, cx| app.close_dialog(window, cx)),
-                )
-                .child(images)
-                .into_any_element();
-        }
         let special = matches!(d.kind, DialogKind::About);
         let mut body = div().flex().flex_col();
         let mut sections = vec![];
@@ -3633,10 +3571,8 @@ impl RdmApp {
                             .child(div().flex().gap(px(10.))
                                 .child(div().flex_1().min_w_0().child(self.dialog_input("general.scan_size", &self.tr("preferences.general.scan_size"), false, cx)))
                                 .child(div().flex_1().min_w_0().child(self.dialog_choice("general.key_icon_style", &self.tr("preferences.general.key_icon_style"), (0..4).map(|style| (style.to_string(), self.tr(&format!("preferences.general.key_icon_style{style}")))).collect(), cx))))
-                            .child(self.form_field(&self.tr("preferences.general.update"), div().h(px(32.)).flex().items_center().child(self.dialog_checkbox("general.check_update", &self.tr("preferences.general.auto_check_update"), cx)).into_any_element(), cx))
                             .child(self.form_field(&self.tr("preferences.general.privacy"), div().h(px(32.)).flex().items_center()
-                                .child(self.dialog_checkbox("general.allow_track", &self.tr("preferences.general.allow_track"), cx))
-                                .child(self.btn("privacy-policy", self.tr("preferences.general.privacy"), "", cx, |app, _, cx| cx.open_url(if app.lang["name"] == "简体中文" { "https://tinyrdm.com/zh/guide/privacy.html" } else { "https://tinyrdm.com/guide/privacy.html" })).text().underline().text_color(cx.theme().primary).px_0()).into_any_element(), cx));
+                                .child(self.dialog_checkbox("general.allow_track", &self.tr("preferences.general.allow_track"), cx)).into_any_element(), cx));
                     }
                 }
             }
@@ -4080,9 +4016,9 @@ impl RdmApp {
                         div()
                             .text_size(px(18.))
                             .font_weight(FontWeight::BOLD)
-                            .child("Tiny RDM"),
+                            .child("RedisDock"),
                     )
-                    .child(format!("v{}", crate::update::CURRENT_VERSION))
+                    .child(format!("v{}", env!("CARGO_PKG_VERSION")))
                     .child(
                         div()
                             .flex()
@@ -4095,19 +4031,8 @@ impl RdmApp {
                                     "",
                                     cx,
                                     |_, _, cx| {
-                                        cx.open_url("https://github.com/tiny-craft/tiny-rdm")
+                                        cx.open_url("https://github.com/pigjin/rust-rdm")
                                     },
-                                )
-                                .ghost(),
-                            )
-                            .child("|")
-                            .child(
-                                self.btn(
-                                    "about-website",
-                                    self.tr("dialogue.about.website"),
-                                    "",
-                                    cx,
-                                    |_, _, cx| cx.open_url("https://tinyrdm.com/"),
                                 )
                                 .ghost(),
                             ),
@@ -4122,7 +4047,6 @@ impl RdmApp {
                             )),
                     )
             }
-            DialogKind::Community => unreachable!("community uses the original image-only modal"),
         }
         let has_sections = !sections.is_empty();
         let mut nav = div()
@@ -5182,69 +5106,5 @@ impl RdmApp {
                 let _ = crate::storage::atomic_write(&path, text.as_bytes());
             }
         }).detach();
-    }
-    pub(super) fn check_updates(&mut self, window: &mut Window, cx: &mut Context<Self>) {
-        self.fetch_updates(true, window, cx);
-    }
-    pub(super) fn fetch_updates(
-        &mut self,
-        manual: bool,
-        window: &mut Window,
-        cx: &mut Context<Self>,
-    ) {
-        if self.update_loading {
-            return;
-        }
-        self.update_loading = true;
-        let loading = manual.then(|| self.loading_message(self.tr("interface.retrieving_version")));
-        let task = cx
-            .background_executor()
-            .spawn(async { crate::update::fetch() });
-        cx.spawn_in(window, async move |this, cx| {
-            let result = task.await;
-            let _ = this.update_in(cx, |a, _, cx| {
-                a.update_loading = false;
-                if let Some(id) = loading {
-                    a.destroy_message(id);
-                }
-                match result {
-                    Ok(release) => {
-                        a.cache_sponsors(&release.sponsor);
-                        let language = if a.pref.general.language == "auto" {
-                            system_language()
-                        } else {
-                            a.pref.general.language.clone()
-                        };
-                        let url = release.text(&release.download_page, &language).to_string();
-                        if release.available(
-                            crate::update::CURRENT_VERSION,
-                            &a.pref.general.skip_version,
-                            manual,
-                        ) && !url.is_empty()
-                        {
-                            let description =
-                                release.text(&release.description, &language).to_string();
-                            let description = if description.is_empty() {
-                                a.tr("dialogue.upgrade.new_version_tip")
-                                    .replace("{ver}", &release.version)
-                            } else {
-                                description
-                            };
-                            a.update_notice = Some((release, description, url));
-                        } else if manual {
-                            a.toast(a.tr("dialogue.upgrade.no_update"), false);
-                        }
-                    }
-                    Err(error) => {
-                        if manual {
-                            a.toast(error.to_string(), true);
-                        }
-                    }
-                }
-                cx.notify();
-            });
-        })
-        .detach();
-        cx.notify();
     }
 }

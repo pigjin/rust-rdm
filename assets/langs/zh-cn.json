@@ -47,7 +47,6 @@
       "key_icon_style2": "圆点类型",
       "key_icon_style3": "通用图标",
       "update": "更新",
-      "auto_check_update": "自动检查更新",
       "privacy": "隐私策略",
       "allow_track": "允许收集匿名数据"
     },
@@ -71,8 +70,7 @@
       "decoder_name": "解码器名称",
       "cmd_preview": "命令预览",
       "status": "状态",
-      "auto_enabled": "已加入自动解码",
-      "help": "帮助"
+      "auto_enabled": "已加入自动解码"
     }
   },
   "interface": {
@@ -153,8 +151,7 @@
     "empty_server_list": "还没添加Redis服务器",
     "action": "操作",
     "type": "类型",
-    "cli_welcome": "欢迎使用Tiny RDM的Redis命令行控制台",
-    "retrieving_version": "正在检索新版本",
+    "cli_welcome": "欢迎使用RedisDock的Redis命令行控制台",
     "sub_tab": {
       "status": "状态",
       "key_detail": "键详情",
@@ -168,8 +165,6 @@
     "server": "服务器",
     "browser": "数据浏览",
     "log": "日志",
-    "wechat_official": "微信公众号",
-    "follow_x": "关注我的\uD835\uDD4F",
     "github": "Github",
     "logout": "退出登录"
   },
@@ -384,23 +379,14 @@
       "args": "运行参数",
       "args_help": "使用[VALUE]代替编码/解码内容占位符，如果不填内容占位则默认放最后"
     },
-    "upgrade": {
-      "title": "有可用新版本",
-      "new_version_tip": "新版本（{ver}），是否立即下载",
-      "no_update": "当前已是最新版",
-      "download_now": "立即下载",
-      "later": "稍后提醒我",
-      "skip": "忽略本次更新"
-    },
     "welcome": {
-      "title": "欢迎使用Tiny RDM！",
-      "content": "为了提供更好的用户体验，Tiny RDM会收集一些匿名的数据，以帮助优化软件和改进用户体验，请放心这不会涉及到您的个人隐私信息。\n\n如果您对此有任何顾虑，可以随时前往\"偏好设置\"中关闭此项数据收集功能。有任何问题可联系开发者，希望Tiny RDM可以成为您的好帮手！",
+      "title": "欢迎使用RedisDock！",
+      "content": "为了提供更好的用户体验，RedisDock会收集一些匿名的数据，以帮助优化软件和改进用户体验，请放心这不会涉及到您的个人隐私信息。\n\n如果您对此有任何顾虑，可以随时前往\"偏好设置\"中关闭此项数据收集功能。有任何问题可联系开发者，希望RedisDock可以成为您的好帮手！",
       "accept": "帮助改进",
       "reject": "不接受"
     },
     "about": {
-      "source": "源码地址",
-      "website": "官方网站"
+      "source": "源码地址"
     }
   },
   "login": {
@@ -418,8 +404,6 @@
     "close": "关闭",
     "preferences": "偏好设置",
     "help": "帮助",
-    "user_guide": "使用指南",
-    "check_update": "检查更新...",
     "report_bug": "报告错误",
     "about": "关于"
   },

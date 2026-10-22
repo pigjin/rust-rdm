@@ -3,10 +3,14 @@
 import argparse
 import hashlib
 import json
+import os
 from pathlib import Path
+import plistlib
 import struct
 import subprocess
 import uuid
+
+from release import core_version, package_version
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -43,12 +47,30 @@ def inspect(path):
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("profile", choices=("debug", "release"), nargs="?", default="release")
 args = parser.parse_args()
-bundle = ROOT / "target/bundle/Tiny RDM.app"
-build_uuid, build_sections = inspect(ROOT / "target" / args.profile / "rust-rdm")
-bundle_uuid, bundle_sections = inspect(bundle / "Contents/MacOS/rust-rdm")
+target = ROOT / os.environ.get("CARGO_TARGET_DIR", "target")
+binary_dir = target / os.environ.get("CARGO_BUILD_TARGET", "") / args.profile
+bundle = target / "bundle/RedisDock.app"
+version = package_version()
+with (bundle / "Contents/Info.plist").open("rb") as source:
+    metadata = plistlib.load(source)
+for key, expected in {
+    "CFBundleExecutable": "redisdock",
+    "CFBundleIdentifier": "io.github.pigjin.redisdock",
+    "CFBundleName": "RedisDock",
+    "CFBundleDisplayName": "RedisDock",
+    "CFBundleShortVersionString": core_version(version),
+    "CFBundleVersion": core_version(version),
+}.items():
+    assert metadata[key] == expected, f"Incorrect {key}: {metadata[key]!r}"
+build_uuid, build_sections = inspect(binary_dir / "redisdock")
+bundle_uuid, bundle_sections = inspect(bundle / "Contents/MacOS/redisdock")
 assert (build_uuid, build_sections) == (bundle_uuid, bundle_sections), "Bundle differs from the selected Cargo build"
 subprocess.run(["codesign", "--verify", "--deep", "--strict", str(bundle)], check=True)
 report = {
+    "appName": metadata["CFBundleName"],
+    "bundleIdentifier": metadata["CFBundleIdentifier"],
+    "executable": metadata["CFBundleExecutable"],
+    "version": version,
     "strictSignatureVerified": True,
     "buildUUID": build_uuid,
     "bundleUUID": bundle_uuid,

@@ -1,9 +1,9 @@
 [package]
-name = "rust-rdm"
+name = "redisdock"
 version = "0.1.0"
 edition = "2024"
 license = "GPL-3.0-only"
-description = "Tiny RDM rebuilt with Rust and GPUI"
+description = "RedisDock, a native Redis desktop client built with Rust and GPUI"
 
 [workspace]
 members = ["vendor/gpui-base", "vendor/gpui-apple"]
@@ -42,9 +42,8 @@ parking_lot = { version = "0.12", features = ["arc_lock"] }
 indexmap = "2"
 tempfile = "3"
 futures = "0.3"
-ureq = { version = "3", features = ["json"] }
 gpui = { package = "gpui-pre", version = "=0.3.9", optional = true }
-gpui-platform = { package = "gpui-pre-platform", version = "=0.3.9", features = ["runtime_shaders", "font-kit"], optional = true }
+gpui-platform = { package = "gpui-pre-platform", version = "=0.3.9", features = ["runtime_shaders", "font-kit", "x11", "wayland"], optional = true }
 gpui-base = { version = "=0.7.3", optional = true }
 gpui-component = { version = "=0.7.3", features = ["tree-sitter", "tree-sitter-yaml", "tree-sitter-html"], optional = true }
 gpui-component-assets = { package = "gpui-kit-assets", version = "=0.7.3", optional = true }
@@ -73,7 +72,7 @@ gpui-pre-apple = { path = "vendor/gpui-apple" }
 vt100 = { path = "vendor/vt100" }
 
 [[bin]]
-name = "rust-rdm"
+name = "redisdock"
 path = "src/main.rs"
 required-features = ["desktop"]
 

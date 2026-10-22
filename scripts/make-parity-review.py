@@ -202,7 +202,6 @@ NAMES = {
     "connections-menu-dark": "深色右键菜单",
     "connections-more": "连接备份菜单",
     "settings-menu": "设置菜单",
-    "community": "公众号弹层",
     "message-success": "成功消息",
     "message-error": "错误消息",
     "message-error-modal": "弹窗上的错误消息",
@@ -278,7 +277,7 @@ NAMES = {
     "key-browser-menu-key": "键右键菜单",
     "key-browser-more": "数据库操作菜单",
     "key-browser-delete": "删除单键确认",
-    "welcome": "首次欢迎提示", "sponsor": "赞助展示", "new-connection": "新建连接",
+    "welcome": "首次欢迎提示", "about": "关于", "new-connection": "新建连接",
     "connection-advanced": "高级配置", "connection-alias": "数据库别名",
     "connection-ssl": "SSL / TLS", "connection-ssh": "SSH 隧道",
     "connection-sentinel": "哨兵模式", "connection-cluster": "集群模式",
@@ -371,7 +370,7 @@ if not scenes:
 
 HTML = """<!doctype html><html lang="zh-CN"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Rust RDM 桌面界面对照</title><style>
+<title>RedisDock 桌面界面对照</title><style>
 *{box-sizing:border-box}body{margin:0;background:#f5f5f6;color:#333639;font:14px system-ui,-apple-system,sans-serif}
 header{padding:24px max(24px,calc((100vw - 1100px)/2));background:white;border-bottom:1px solid #ddd}
 h1{margin:0 0 10px;font-size:22px}p{margin:8px 0;line-height:1.7;color:#62666c}
@@ -384,7 +383,7 @@ label{display:flex;align-items:center;gap:8px}main{max-width:1120px;margin:24px 
 #native{clip-path:inset(0 50% 0 0)}#line{position:absolute;left:50%;top:0;bottom:0;border-left:2px solid #d33a31;pointer-events:none}
 #line:after{content:'↔';position:absolute;top:50%;left:-15px;border-radius:50%;background:#d33a31;color:white;width:30px;height:30px;display:grid;place-items:center}
 footer{margin-top:18px;color:#666;font-size:13px;line-height:1.8}input[type=range]{accent-color:#d33a31;width:230px}
-</style><header><h1>Rust RDM 桌面界面对照</h1>
+</style><header><h1>RedisDock 桌面界面对照</h1>
 <p>原版参考图来自 Vue 源码的临时副本和固定布局样本；GPUI 图使用临时 Redis。状态数值和行顺序可因样本不同而变化。</p>
 <p>20px 底栏三项使用原版 macOS WKWebView 和九种内置解码器能力的固定样本；通用字号变化时，原版按钮与菜单仍使用 14px。其余截图保留各自的历史参考引擎。</p>
 <p>左侧筛选栏包含 22 对输入／操作样本、6 对匹配标签／禁用搜索和 6 对长标签裁切样本的原始像素裁片，仅用于查看该控件；两套样本右侧模型不同，完整原图保留在验收文件中。</p>

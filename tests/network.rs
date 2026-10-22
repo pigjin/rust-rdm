@@ -1,4 +1,4 @@
-use rust_rdm::{
+use redisdock::{
     model::*,
     redis::{Client, command},
     service::Service,
@@ -183,7 +183,7 @@ fn tcp_auth_and_both_authenticated_proxy_protocols() {
             password: "redis-pass".into(),
             conn_timeout: 2,
             exec_timeout: 2,
-            proxy: rust_rdm::model::Proxy {
+            proxy: redisdock::model::Proxy {
                 kind: 2,
                 schema: if socks { "socks5h" } else { "http" }.into(),
                 addr: "127.0.0.1".into(),
@@ -438,7 +438,7 @@ fn tls_ca_sni_and_mutual_authentication() {
     for scheme in ["http", "https"] {
         let proxy = Proxy::new(port, false);
         let mut tunneled = config.clone();
-        tunneled.proxy = rust_rdm::model::Proxy {
+        tunneled.proxy = redisdock::model::Proxy {
             kind: 2,
             schema: scheme.into(),
             addr: "127.0.0.1".into(),
@@ -668,8 +668,8 @@ fn streaming_frame_survives_a_timeout_mid_response() {
         exec_timeout: 1,
         ..Default::default()
     };
-    let mut wire = rust_rdm::redis::Wire::open(&config, "127.0.0.1", port, 0, false).unwrap();
-    assert!(rust_rdm::redis::is_timeout(&wire.read().unwrap_err()));
+    let mut wire = redisdock::redis::Wire::open(&config, "127.0.0.1", port, 0, false).unwrap();
+    assert!(redisdock::redis::is_timeout(&wire.read().unwrap_err()));
     assert_eq!(wire.read().unwrap().bytes(), b"abcdefghij");
     worker.join().unwrap();
 }
@@ -684,7 +684,7 @@ fn https_proxy_uses_original_plain_connect_and_authenticated_redis() {
         password: "redis-pass".into(),
         conn_timeout: 2,
         exec_timeout: 2,
-        proxy: rust_rdm::model::Proxy {
+        proxy: redisdock::model::Proxy {
             kind: 2,
             schema: "https".into(),
             addr: "127.0.0.1".into(),
@@ -823,7 +823,7 @@ fn system_proxy_routes_real_connections() {
             name: format!("system-{name}"),
             port: redis.port,
             password: "redis-pass".into(),
-            proxy: rust_rdm::model::Proxy {
+            proxy: redisdock::model::Proxy {
                 kind: 1,
                 ..Default::default()
             },
@@ -875,7 +875,7 @@ fn system_proxy_routes_real_connections() {
 
 #[cfg(unix)]
 #[test]
-#[ignore = "requires RUST_RDM_SSH_FIXTURE built from tests/fixtures/ssh-server"]
+#[ignore = "requires REDISDOCK_SSH_FIXTURE built from tests/fixtures/ssh-server"]
 fn ssh_authentication_and_unix_forwarding_combinations() {
     if let Ok(raw) = std::env::var("RDM_SSH_AGENT_CHILD_CONFIG") {
         let configs: Vec<Connection> = serde_json::from_str(&raw).unwrap();
@@ -919,8 +919,8 @@ fn ssh_authentication_and_unix_forwarding_combinations() {
     let ready = dir.path().join("ready.log");
     let mut server = Process(
         Command::new(
-            std::env::var("RUST_RDM_SSH_FIXTURE")
-                .expect("build tests/fixtures/ssh-server and set RUST_RDM_SSH_FIXTURE"),
+            std::env::var("REDISDOCK_SSH_FIXTURE")
+                .expect("build tests/fixtures/ssh-server and set REDISDOCK_SSH_FIXTURE"),
         )
         .args([
             "-addr",
@@ -1001,7 +1001,7 @@ fn ssh_authentication_and_unix_forwarding_combinations() {
             config.name = format!("ssh-{scheme}-{network}");
             config.network = network.into();
             if let Some(proxy) = &proxy {
-                config.proxy = rust_rdm::model::Proxy {
+                config.proxy = redisdock::model::Proxy {
                     kind: 2,
                     schema: scheme.into(),
                     addr: "127.0.0.1".into(),
@@ -1021,7 +1021,7 @@ fn ssh_authentication_and_unix_forwarding_combinations() {
                         client
                             .query(&command(&["BLPOP", "empty-ssh-fixture", "2"]))
                             .unwrap(),
-                        rust_rdm::redis::Value::Null
+                        redisdock::redis::Value::Null
                     ));
                     assert!(
                         started.elapsed() >= Duration::from_secs(2),

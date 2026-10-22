@@ -47,7 +47,6 @@
       "key_icon_style2": "Nokta",
       "key_icon_style3": "Ortak",
       "update": "Güncelle",
-      "auto_check_update": "Güncellemeleri otomatik kontrol et",
       "privacy": "Gizlilik",
       "allow_track": "Anonim veri toplanmasına izin ver"
     },
@@ -71,8 +70,7 @@
       "decoder_name": "Ad",
       "cmd_preview": "Önizleme",
       "status": "Durum",
-      "auto_enabled": "Otomatik Kod Çözme Etkin",
-      "help": "Yardım"
+      "auto_enabled": "Otomatik Kod Çözme Etkin"
     }
   },
   "interface": {
@@ -153,8 +151,7 @@
     "empty_server_list": "Redis sunucusu eklenmedi",
     "action": "İşlem",
     "type": "Tür",
-    "cli_welcome": "Tiny RDM Redis Konsoluna Hoş Geldiniz",
-    "retrieving_version": "Güncellemeler kontrol ediliyor",
+    "cli_welcome": "RedisDock Redis Konsoluna Hoş Geldiniz",
     "sub_tab": {
       "status": "Durum",
       "key_detail": "Anahtar Detayı",
@@ -168,8 +165,6 @@
     "server": "Sunucu",
     "browser": "Veri Tarayıcı",
     "log": "Log",
-    "wechat_official": "WeChat Resmi Hesap",
-    "follow_x": "𝕏'i Takip Et",
     "github": "Github",
     "logout": "Çıkış Yap"
   },
@@ -384,23 +379,14 @@
       "args": "Argümanlar",
       "args_help": "Kodlama/kod çözme içeriği için [VALUE] yer tutucusu kullanın. Yer tutucu sağlanmazsa içerik sonuna eklenecektir."
     },
-    "upgrade": {
-      "title": "Yeni Sürüm Mevcut",
-      "new_version_tip": "Yeni {ver} sürümü mevcut, şimdi indirilsin mi?",
-      "no_update": "Güncelsiniz",
-      "download_now": "Şimdi İndir",
-      "later": "Sonra",
-      "skip": "Bu Sürümü Atla"
-    },
     "welcome": {
-      "title": "Tiny RDM'e Hoş Geldiniz!",
-      "content": "Daha iyi bir kullanıcı deneyimi sağlamak için Tiny RDM, yazılımı optimize etmeye ve kullanıcı deneyimini iyileştirmeye yardımcı olmak için bazı anonim veriler toplamaktadır. Bunun kişisel gizlilik bilgilerinizi içermediğinden emin olabilirsiniz.\n\nHerhangi bir endişeniz varsa, Tercihler'e giderek bu veri toplama özelliğini istediğiniz zaman kapatabilirsiniz. Herhangi bir sorunuz varsa, geliştiriciye ulaşmaktan çekinmeyin. Umarım Tiny RDM yararlı asistanınız olur!",
+      "title": "RedisDock'e Hoş Geldiniz!",
+      "content": "Daha iyi bir kullanıcı deneyimi sağlamak için RedisDock, yazılımı optimize etmeye ve kullanıcı deneyimini iyileştirmeye yardımcı olmak için bazı anonim veriler toplamaktadır. Bunun kişisel gizlilik bilgilerinizi içermediğinden emin olabilirsiniz.\n\nHerhangi bir endişeniz varsa, Tercihler'e giderek bu veri toplama özelliğini istediğiniz zaman kapatabilirsiniz. Herhangi bir sorunuz varsa, geliştiriciye ulaşmaktan çekinmeyin. Umarım RedisDock yararlı asistanınız olur!",
       "accept": "İyileştirmeye Yardım Et",
       "reject": "Reddet"
     },
     "about": {
-      "source": "Kaynak Kod",
-      "website": "Resmi Web Sitesi"
+      "source": "Kaynak Kod"
     }
   },
   "login": {
@@ -418,8 +404,6 @@
     "close": "Kapat",
     "preferences": "Tercihler",
     "help": "Yardım",
-    "user_guide": "Kullanıcı Kılavuzu",
-    "check_update": "Güncellemeleri Kontrol Et...",
     "report_bug": "Hata Bildir",
     "about": "Hakkında"
   },
