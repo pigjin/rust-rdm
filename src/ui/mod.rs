@@ -954,6 +954,50 @@ impl RdmApp {
             .into();
             t.font_family = ".SystemUIFont".into();
         });
+        #[cfg(all(target_os = "macos", not(feature = "ui-qa")))]
+        {
+            use std::sync::atomic::{AtomicU8, Ordering};
+            static DOCK_THEME: AtomicU8 = AtomicU8::new(0);
+            let target = if mode == ThemeMode::Dark { 2 } else { 1 };
+            if DOCK_THEME.swap(target, Ordering::Relaxed) != target {
+                let asset = if mode == ThemeMode::Dark {
+                    "images/icon-dark.png"
+                } else {
+                    "images/icon-light.png"
+                };
+                if let Some(file) = Assets::get(asset) {
+                    unsafe {
+                        use objc2::runtime::{AnyClass, AnyObject};
+                        if let (Some(data_cls), Some(img_cls), Some(app_cls)) = (
+                            AnyClass::get(c"NSData"),
+                            AnyClass::get(c"NSImage"),
+                            AnyClass::get(c"NSApplication"),
+                        ) {
+                            let bytes = file.data.as_ref();
+                            let data: *mut AnyObject = objc2::msg_send![
+                                data_cls,
+                                dataWithBytes: bytes.as_ptr(),
+                                length: bytes.len()
+                            ];
+                            if !data.is_null() {
+                                let alloc: *mut AnyObject = objc2::msg_send![img_cls, alloc];
+                                let image: *mut AnyObject =
+                                    objc2::msg_send![alloc, initWithData: data];
+                                let app: *mut AnyObject =
+                                    objc2::msg_send![app_cls, sharedApplication];
+                                if !app.is_null() && !image.is_null() {
+                                    let _: () =
+                                        objc2::msg_send![app, setApplicationIconImage: image];
+                                }
+                                if !image.is_null() {
+                                    let _: () = objc2::msg_send![image, release];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         for tab in &self.tabs { self.update_json_brackets(tab.id, cx); }
         for dialog in self.dialog.iter().chain(self.dialog_stack.iter())
             .chain(self.cached_entry_panels.values().map(|(dialog, _)| dialog))

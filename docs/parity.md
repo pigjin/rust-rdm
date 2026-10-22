@@ -1,7 +1,7 @@
 # RedisDock 桌面迁移验收记录
 
 项目与应用于 2026-10-22 更名为 RedisDock，Cargo 包及可执行文件名为 `redisdock`，
-macOS 应用包为 `RedisDock.app`，标识为 `io.github.pigjin.redisdock`。
+macOS 应用包为 `RedisDock.app`，标识为 `com.pigjin.redisdock`。
 新配置目录为 `RedisDock`；不存在新目录时兼容旧 `rust-rdm` 目录，数据目录与语言的旧环境变量仍可使用。
 下文历史应用名、路径、上游样本及验收记录保留原始名称，不代表更名后重新执行的验收。
 

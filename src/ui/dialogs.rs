@@ -4003,14 +4003,17 @@ impl RdmApp {
                 body = body.child(self.simple_dialog_input("name", "", window, cx))
             }
             DialogKind::About => {
+                let icon = if self.dark(cx) {
+                    "images/icon-dark.png"
+                } else {
+                    "images/icon-light.png"
+                };
                 body = body
                     .items_center()
                     .gap_3()
                     .child(
-                        img(ImageSource::Resource(Resource::Embedded(
-                            "images/icon.png".into(),
-                        )))
-                        .size(px(120.)),
+                        img(ImageSource::Resource(Resource::Embedded(icon.into())))
+                            .size(px(120.)),
                     )
                     .child(
                         div()

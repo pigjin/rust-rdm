@@ -8,7 +8,7 @@
 #endif
 
 [Setup]
-AppId=io.github.pigjin.redisdock
+AppId=com.pigjin.redisdock
 AppName=RedisDock
 AppVersion={#Version}
 AppVerName=RedisDock {#Version}

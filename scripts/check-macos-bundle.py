@@ -55,7 +55,7 @@ with (bundle / "Contents/Info.plist").open("rb") as source:
     metadata = plistlib.load(source)
 for key, expected in {
     "CFBundleExecutable": "redisdock",
-    "CFBundleIdentifier": "io.github.pigjin.redisdock",
+    "CFBundleIdentifier": "com.pigjin.redisdock",
     "CFBundleName": "RedisDock",
     "CFBundleDisplayName": "RedisDock",
     "CFBundleShortVersionString": core_version(version),
