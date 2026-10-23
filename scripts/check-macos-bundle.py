@@ -60,8 +60,16 @@ for key, expected in {
     "CFBundleDisplayName": "RedisDock",
     "CFBundleShortVersionString": core_version(version),
     "CFBundleVersion": core_version(version),
+    "CFBundleIconName": "AppIcon",
 }.items():
     assert metadata[key] == expected, f"Incorrect {key}: {metadata[key]!r}"
+assert metadata["CFBundleIconFile"] in ("AppIcon", "AppIcon.icns")
+resources = bundle / "Contents/Resources"
+assert (resources / "AppIcon.icns").read_bytes().startswith(b"icns"), "Missing fallback icon"
+catalog = json.loads(subprocess.check_output(["xcrun", "assetutil", "--info", str(resources / "Assets.car")]))
+appearances = {entry.get("Appearance") for entry in catalog if entry.get("Name", "").startswith("AppIcon")}
+assert {"NSAppearanceNameAqua", "NSAppearanceNameDarkAqua", "ISAppearanceTintable"} <= appearances, \
+    f"Missing native icon appearances: {appearances}"
 build_uuid, build_sections = inspect(binary_dir / "redisdock")
 bundle_uuid, bundle_sections = inspect(bundle / "Contents/MacOS/redisdock")
 assert (build_uuid, build_sections) == (bundle_uuid, bundle_sections), "Bundle differs from the selected Cargo build"
@@ -72,6 +80,9 @@ report = {
     "executable": metadata["CFBundleExecutable"],
     "version": version,
     "strictSignatureVerified": True,
+    "nativeIconAppearances": sorted(appearances - {None}),
+    "iconResourceSHA256": {name: hashlib.sha256((resources / name).read_bytes()).hexdigest()
+                          for name in ("Assets.car", "AppIcon.icns")},
     "buildUUID": build_uuid,
     "bundleUUID": bundle_uuid,
     "comparedSectionCount": len(build_sections),

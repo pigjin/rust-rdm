@@ -1,5 +1,9 @@
+#[cfg(all(target_os = "macos", not(feature = "ui-qa")))]
+mod app_icon;
 mod connection_tree;
 mod key_browser;
+#[cfg(feature = "ui-qa")]
+mod key_loading_qa;
 mod key_selectors;
 mod entries;
 mod entry_delete;
@@ -424,6 +428,7 @@ struct Tab {
     keys: Vec<KeyEntry>,
     scan: ScanState,
     scan_epoch: u64,
+    keys_loading: bool,
     total: u64,
     selected: IndexSet<Vec<u8>>,
     check_mode: bool,
@@ -783,6 +788,8 @@ impl RdmApp {
         app.fonts.sort();
         app.fonts.dedup();
         app.apply_theme(window, cx);
+        #[cfg(all(target_os = "macos", not(feature = "ui-qa")))]
+        app_icon::sync(window.appearance());
         app.load_language();
         app.subs
             .push(cx.on_blur(&app.connection_focus, window, |app, _, cx| {
@@ -819,6 +826,8 @@ impl RdmApp {
             }));
         app.subs
             .push(cx.observe_window_appearance(window, |app, window, cx| {
+                #[cfg(all(target_os = "macos", not(feature = "ui-qa")))]
+                app_icon::sync(window.appearance());
                 if app.pref.general.theme == "auto" {
                     app.apply_theme(window, cx);
                     cx.notify();
@@ -954,50 +963,6 @@ impl RdmApp {
             .into();
             t.font_family = ".SystemUIFont".into();
         });
-        #[cfg(all(target_os = "macos", not(feature = "ui-qa")))]
-        {
-            use std::sync::atomic::{AtomicU8, Ordering};
-            static DOCK_THEME: AtomicU8 = AtomicU8::new(0);
-            let target = if mode == ThemeMode::Dark { 2 } else { 1 };
-            if DOCK_THEME.swap(target, Ordering::Relaxed) != target {
-                let asset = if mode == ThemeMode::Dark {
-                    "images/icon-dark.png"
-                } else {
-                    "images/icon-light.png"
-                };
-                if let Some(file) = Assets::get(asset) {
-                    unsafe {
-                        use objc2::runtime::{AnyClass, AnyObject};
-                        if let (Some(data_cls), Some(img_cls), Some(app_cls)) = (
-                            AnyClass::get(c"NSData"),
-                            AnyClass::get(c"NSImage"),
-                            AnyClass::get(c"NSApplication"),
-                        ) {
-                            let bytes = file.data.as_ref();
-                            let data: *mut AnyObject = objc2::msg_send![
-                                data_cls,
-                                dataWithBytes: bytes.as_ptr(),
-                                length: bytes.len()
-                            ];
-                            if !data.is_null() {
-                                let alloc: *mut AnyObject = objc2::msg_send![img_cls, alloc];
-                                let image: *mut AnyObject =
-                                    objc2::msg_send![alloc, initWithData: data];
-                                let app: *mut AnyObject =
-                                    objc2::msg_send![app_cls, sharedApplication];
-                                if !app.is_null() && !image.is_null() {
-                                    let _: () =
-                                        objc2::msg_send![app, setApplicationIconImage: image];
-                                }
-                                if !image.is_null() {
-                                    let _: () = objc2::msg_send![image, release];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
         for tab in &self.tabs { self.update_json_brackets(tab.id, cx); }
         for dialog in self.dialog.iter().chain(self.dialog_stack.iter())
             .chain(self.cached_entry_panels.values().map(|(dialog, _)| dialog))
@@ -1160,6 +1125,7 @@ impl RdmApp {
             keys: vec![],
             scan: ScanState::default(),
             scan_epoch: 0,
+            keys_loading: false,
             total: 0,
             selected: IndexSet::new(),
             check_mode: false,
@@ -1348,12 +1314,16 @@ impl RdmApp {
             return;
         };
         let t = &mut self.tabs[i];
+        if t.keys_loading && !reset {
+            return;
+        }
         if reset {
             t.scan = ScanState::default();
             t.scan_epoch += 1;
             t.keys.clear();
             t.selected.clear();
         }
+        t.keys_loading = true;
         let epoch = t.scan_epoch;
         let c = t.conn.clone();
         let db = t.db;
@@ -1375,19 +1345,29 @@ impl RdmApp {
             window,
             cx,
             move |s| {
-                let mut page = s.scan(&c, db, &pattern, &kind, exact, state, count)?;
-                while !page.state.end && (all || page.keys.len() < load_size) {
-                    let next = s.scan(&c, db, &pattern, &kind, exact, page.state.clone(), count)?;
-                    page.keys.extend(next.keys);
-                    page.state = next.state;
-                }
-                Ok(page)
+                Ok((|| -> Result<_> {
+                    let mut page = s.scan(&c, db, &pattern, &kind, exact, state, count)?;
+                    while !page.state.end && (all || page.keys.len() < load_size) {
+                        let next = s.scan(&c, db, &pattern, &kind, exact, page.state.clone(), count)?;
+                        page.keys.extend(next.keys);
+                        page.state = next.state;
+                    }
+                    Ok(page)
+                })())
             },
             move |app, page, _, _| {
                 if let Some(i) = app.tab_index(id)
                     && app.tabs[i].db == db
                     && app.tabs[i].scan_epoch == epoch
                 {
+                    app.tabs[i].keys_loading = false;
+                    let page = match page {
+                        Ok(page) => page,
+                        Err(error) => {
+                            app.toast(error.to_string(), true);
+                            return;
+                        }
+                    };
                     let t = &mut app.tabs[i];
                     let mut seen = t.keys.iter().map(|k| k.key.clone()).collect::<HashSet<_>>();
                     t.keys

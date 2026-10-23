@@ -117,7 +117,8 @@ cargo run --locked
 已在 Apple Silicon macOS、Rust 1.99 环境构建。GPUI 通过 Metal 渲染，
 已启用运行时着色器编译，可使用 macOS Command Line Tools。
 
-生成 macOS 应用包：
+生成 macOS 应用包需要完整 Xcode 26 或更新版本，使用其 `actool` 编译原生应用图标
+（仅 Command Line Tools 仍可运行 `cargo run`）。通过 `DEVELOPER_DIR` 或 `xcode-select` 选择 Xcode 后运行：
 
 ```sh
 scripts/bundle-macos.sh debug
@@ -128,6 +129,10 @@ python3 scripts/check-macos-bundle.py debug
 
 输出为 `target/bundle/RedisDock.app`。构建脚本使用本地签名，包含静态 OpenSSL 和第三方许可。
 图标、图片和语言资源在 debug 与 release 构建中均嵌入程序，不依赖源码目录。
+macOS 原生图标源文件为 `assets/images/AppIcon.icon`，可用 Icon Composer 编辑。
+应用包默认采用亮色图标；macOS 26+ 的 Finder 和 Dock 遵循系统的“图标与小组件样式”，
+选择“深色 → 自动”时随系统深浅色切换，不受应用内主题设置影响。旧系统与直接运行二进制时，
+运行中的 Dock 图标跟随系统深浅色，未运行时使用亮色兼容图标。
 当前应用包链接最低版本为 macOS 11，已验证的运行环境为 macOS 26。
 
 ## GitHub Releases 发布

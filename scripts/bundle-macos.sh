@@ -2,6 +2,11 @@
 set -eu
 cd "$(dirname "$0")/.."
 profile="${1:-release}"
+xcrun --find actool >/dev/null
+if ! xcodebuild -version | awk '/^Xcode / { found = 1; if ($2 + 0 >= 26) ok = 1 } END { exit !(found && ok) }'; then
+  echo 'macOS app icons require full Xcode 26 or later (select it with DEVELOPER_DIR or xcode-select).' >&2
+  exit 1
+fi
 case "$profile" in
   release) cargo build --locked --release ;;
   debug) cargo build --locked ;;
@@ -14,7 +19,6 @@ bundle="$target_dir/bundle/RedisDock.app"
 mkdir -p "$bundle/Contents/MacOS" "$bundle/Contents/Resources"
 cp "$binary_dir/redisdock" "$bundle/Contents/MacOS/redisdock"
 cp assets/images/icon.png "$bundle/Contents/Resources/icon.png"
-cp assets/images/AppIcon.icns "$bundle/Contents/Resources/AppIcon.icns"
 frameworks="$bundle/Contents/Frameworks"
 rm -rf "$frameworks"
 mkdir -p "$frameworks"
@@ -47,6 +51,11 @@ minimum_system=$({
 } | awk '
   /minos/ { split($2, part, "."); number = part[1] * 10000 + part[2] * 100 + part[3]; if (number > maximum) { maximum = number; version = $2 } }
   END { print version }')
+icon_info="$target_dir/macos-icon-info.plist"
+xcrun actool assets/images/AppIcon.icon \
+  --compile "$bundle/Contents/Resources" --app-icon AppIcon \
+  --platform macosx --minimum-deployment-target "$minimum_system" \
+  --output-partial-info-plist "$icon_info" --output-format human-readable-text --warnings --notices
 cat > "$bundle/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -58,11 +67,24 @@ cat > "$bundle/Contents/Info.plist" <<PLIST
 <key>CFBundlePackageType</key><string>APPL</string>
 <key>CFBundleShortVersionString</key><string>$version</string>
 <key>CFBundleVersion</key><string>$version</string>
-<key>CFBundleIconFile</key><string>AppIcon.icns</string>
 <key>NSHighResolutionCapable</key><true/>
 <key>LSMinimumSystemVersion</key><string>$minimum_system</string>
 </dict></plist>
 PLIST
+python3 - "$bundle/Contents/Info.plist" "$icon_info" <<'PY'
+import plistlib
+import sys
+from pathlib import Path
+
+metadata, icons = map(Path, sys.argv[1:])
+info = plistlib.loads(metadata.read_bytes())
+generated = plistlib.loads(icons.read_bytes())
+assert generated.get('CFBundleIconName') == 'AppIcon', 'Missing native app icon metadata'
+assert generated.get('CFBundleIconFile') in ('AppIcon', 'AppIcon.icns'), 'Missing fallback icon metadata'
+info.update(generated)
+metadata.write_bytes(plistlib.dumps(info))
+PY
 codesign --force --deep --sign - "$bundle"
+touch "$bundle"
 cd "$bundle"
 pwd

@@ -29,6 +29,9 @@ mounted=true
 test "$(readlink "$work/mount/Applications")" = /Applications
 cmp "$bundle/Contents/Info.plist" "$work/mount/RedisDock.app/Contents/Info.plist"
 cmp "$bundle/Contents/MacOS/redisdock" "$work/mount/RedisDock.app/Contents/MacOS/redisdock"
+for icon in Assets.car AppIcon.icns; do
+  cmp "$bundle/Contents/Resources/$icon" "$work/mount/RedisDock.app/Contents/Resources/$icon"
+done
 codesign --verify --deep --strict "$work/mount/RedisDock.app"
 test -s "$work/mount/RedisDock.app/Contents/Resources/LICENSE"
 for license in assets/licenses/*.txt; do

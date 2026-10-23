@@ -241,6 +241,9 @@ impl RdmApp {
             return;
         };
         let tab = &self.tabs[i];
+        if tab.keys_loading {
+            return;
+        }
         let nodes = tree_rows(tab, &tab.key_filter, false);
         let Some(selected) = &tab.key_selection else {
             return;
@@ -590,6 +593,7 @@ impl RdmApp {
                     .id("key-browser-tree")
                     .test_support()
                     .track_focus(&tab.key_focus)
+                    .relative()
                     .flex()
                     .flex_col()
                     .flex_1()
@@ -607,7 +611,29 @@ impl RdmApp {
                     .on_key_down(
                         cx.listener(move |app, event, w, cx| app.browser_key(id, event, w, cx)),
                     )
-                    .child(list),
+                    .child(list)
+                    .when(tab.keys_loading, |tree| {
+                        tree.child(
+                            div()
+                                .id("key-browser-loading")
+                                .test_support()
+                                .role(Role::Label)
+                                .aria_label(localized("加载中"))
+                                .absolute()
+                                .inset_0()
+                                .occlude()
+                                .on_mouse_down(MouseButton::Left, |_, _, cx| cx.stop_propagation())
+                                .on_mouse_down(MouseButton::Right, |_, _, cx| cx.stop_propagation())
+                                .on_scroll_wheel(|_, _, cx| cx.stop_propagation())
+                                .bg(self.sidebar_color(cx).opacity(0.85))
+                                .flex()
+                                .items_center()
+                                .justify_center()
+                                .child(gpui_component::spinner::Spinner::new()
+                                    .with_size(gpui_component::Size::Size(px(24.)))
+                                    .color(rgb(0xd33a31).into())),
+                        )
+                    }),
             )
             .child(
                 div()
@@ -1125,7 +1151,7 @@ impl RdmApp {
                     cx,
                     move |app, w, cx| app.scan_keys(id, false, false, w, cx),
                 )
-                .disabled(tab.scan.end),
+                .disabled(tab.scan.end || tab.keys_loading),
             )
             .child(
                 self.browser_tool_button(
@@ -1138,7 +1164,7 @@ impl RdmApp {
                     cx,
                     move |app, w, cx| app.scan_keys(id, false, true, w, cx),
                 )
-                .disabled(tab.scan.end),
+                .disabled(tab.scan.end || tab.keys_loading),
             )
             .child(div().flex_1().min_w(px(10.)))
             .child(self.browser_tool_button(

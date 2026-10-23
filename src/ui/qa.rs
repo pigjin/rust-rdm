@@ -694,6 +694,8 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     "diagnostic-functional",
                     "monitor-wrap-light",
                     "monitor-wrap-dark",
+                    "key-loading-light",
+                    "key-loading-dark",
                 ];
                 let only_scene = std::env::var("REDISDOCK_QA_SCENE").ok();
                 let scene_prefix = std::env::var("REDISDOCK_QA_PREFIX").ok();
@@ -808,7 +810,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                                     if app.active.is_none() {app.open_connection(qa_connections[0].clone(),window,cx);}
                                     app.qa_prepare_key_filter(name,window,cx);
                                 },
-                                name if name.starts_with("key-browser") || name.starts_with("key-type-") || name.starts_with("key-database-") => {
+                                name if name.starts_with("key-browser") || name.starts_with("key-type-") || name.starts_with("key-database-") || name.starts_with("key-loading-") => {
                                     if app.active.is_none() { app.open_connection(app.connections[0].clone(),window,cx); }
                                     if let Some(i)=app.index() {
                                         let tab=&mut app.tabs[i];
@@ -1159,6 +1161,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     let status_layout_restore = if snapshot.starts_with("status-layout-") { Some(status_layout_qa::verify(&view,window,snapshot,cx).await) } else { None };
                     let status_info_restore = if snapshot.starts_with("status-info-") { Some(status_info_qa::verify(&view,window,snapshot,cx).await) } else { None };
                     let status_clients_restore = if snapshot.starts_with("status-clients-") { Some(status_clients_qa::verify(&view,window,snapshot,cx).await) } else { None };
+                    let key_loading_restore = if snapshot.starts_with("key-loading-") { Some(key_loading_qa::verify(&view,window,snapshot,cx).await) } else { None };
                     if snapshot.starts_with("key-input-") {
                         if let Some(text) = qa_key_input::verify(&view, window, snapshot, cx).await {
                             _copied_text = Some(text);
@@ -2611,6 +2614,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     if let Some(saved) = status_layout_restore { status_layout_qa::restore(&view,window,saved,cx); }
                     if let Some(saved) = status_info_restore { status_info_qa::restore(&view,window,saved,cx); }
                     if let Some(saved) = status_clients_restore { status_clients_qa::restore(&view,window,saved,cx).await; }
+                    if let Some(saved) = key_loading_restore { key_loading_qa::restore(&view,window,saved,cx).await; }
                     if snapshot.starts_with("match-tooltip-") || snapshot.starts_with("entry-match-width-") || snapshot.starts_with("entry-control-") { match_tooltip_qa::restore(&view,window,cx).await; }
                     if snapshot.starts_with("key-filter-") || snapshot.starts_with("tag-style-") || snapshot.starts_with("tag-overflow-") || snapshot.starts_with("sidebar-resize-") || snapshot.starts_with("sidebar-contract-") || snapshot.starts_with("selector-font-") || snapshot.starts_with("general-fallback-") || snapshot.starts_with("css-label-") {key_filter_qa::restore(&view,window,snapshot,cx).await;}
                     if snapshot.starts_with("key-browser") {

@@ -257,7 +257,9 @@ impl RdmApp {
                     .child(div().flex_1().min_w_0().child(content)),
             )
             .child(self.sidebar_events(cx));
-        if self.busy > self.entry_conversions {
+        let key_loading_visible = self.nav == Nav::Browser
+            && self.index().is_some_and(|i| self.tabs[i].keys_loading);
+        if self.busy > self.entry_conversions && !key_loading_visible {
             root = root.child(
                 div()
                     .id("app-loading-indicator")

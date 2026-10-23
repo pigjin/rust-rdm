@@ -89,6 +89,9 @@ jobs:
         run: |
           rustup toolchain install "$RUST_TOOLCHAIN-$CARGO_BUILD_TARGET" --profile minimal
           rustup default "$RUST_TOOLCHAIN-$CARGO_BUILD_TARGET"
+      - name: Select macOS Xcode for native icons
+        if: matrix.os == 'macos'
+        run: echo 'DEVELOPER_DIR=/Applications/Xcode_26.3.app/Contents/Developer' >> "$GITHUB_ENV"
       - uses: actions/cache@v6.1.0
         with:
           key: rust-${{ matrix.target }}-${{ env.RUST_TOOLCHAIN }}-${{ hashFiles('Cargo.lock', 'Cargo.toml') }}
