@@ -474,8 +474,9 @@ impl RdmApp {
             .w(px(42.))
             .h(px(32.))
             .rounded(px(3.))
-            .disabled(detail.end || tab.values_loading)
+            .disabled(detail.end || tab.values_loading || tab.entries_loading)
         };
+        let cancel_load = tab.entries_loading.then(|| self.btn("cancel-entry-load", self.tr("common.cancel"), "close", cx, move |app, _, cx| app.cancel_entry_load(id, cx)));
         let add_label = self.tr("interface.add_row");
         let add_width = text_width(add_label.clone()) + 48.;
         let mut toolbar = div()
@@ -550,6 +551,7 @@ impl RdmApp {
                     ),
             )
             .child(div().flex_1().min_w_0());
+        if let Some(cancel) = cancel_load { toolbar = toolbar.child(cancel); }
         if !stream {
             toolbar = toolbar
                 .child(div().flex().children((0..2).map(|align| {

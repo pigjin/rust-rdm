@@ -15,6 +15,29 @@ use std::{
     time::{Duration, Instant},
 };
 
+fn trust_ssh_fixture(config: &mut Connection) {
+    let error = Client::connect(config, 0).err().expect("unknown fixture must not authenticate");
+    let error = error.downcast_ref::<redisdock::redis::SshHostKeyError>().expect("typed unknown host error");
+    assert!(error.expected.is_none());
+    assert!(error.observed.fingerprint.starts_with("SHA256:"));
+    for sentinel in [false, true] {
+        let mut discovery = config.clone();
+        discovery.sentinel.enable = sentinel;
+        discovery.cluster.enable = !sentinel;
+        let blocked = Client::connect(&discovery, 0).err().expect("discovery must verify SSH before authentication");
+        assert!(blocked.downcast_ref::<redisdock::redis::SshHostKeyError>().unwrap().expected.is_none());
+    }
+    config.ssh.trusted_host = Some(error.observed.clone());
+    let mut changed = config.clone();
+    changed.ssh.trusted_host.as_mut().unwrap().fingerprint = "SHA256:changed-fixture-key".into();
+    let error = Client::connect(&changed, 0).err().expect("changed fixture must not authenticate");
+    assert!(error.downcast_ref::<redisdock::redis::SshHostKeyError>().unwrap().expected.is_some());
+    let text = error.to_string();
+    assert_eq!(text.lines().count(), 3);
+    assert!(text.contains("Expected: SHA256:"));
+    assert!(text.contains("Received: SHA256:"));
+}
+
 struct Server {
     child: Child,
     dir: tempfile::TempDir,
@@ -762,7 +785,7 @@ fn ssh_tunnel_uses_a_disposable_key_and_server() {
         );
         std::thread::sleep(Duration::from_millis(30));
     }
-    let config = Connection {
+    let mut config = Connection {
         name: "ssh-fixture".into(),
         port: redis.port,
         ssh: Ssh {
@@ -778,6 +801,7 @@ fn ssh_tunnel_uses_a_disposable_key_and_server() {
         exec_timeout: 3,
         ..Default::default()
     };
+    trust_ssh_fixture(&mut config);
     let mut client = Client::connect(&config, 3).unwrap_or_else(|error| {
         panic!(
             "{error}\n{}",
@@ -948,7 +972,7 @@ fn ssh_authentication_and_unix_forwarding_combinations() {
         );
         std::thread::sleep(Duration::from_millis(20));
     }
-    let base = Connection {
+    let mut base = Connection {
         name: "ssh-auth".into(),
         port: redis.port,
         sock: socket.to_string_lossy().into_owned(),
@@ -965,6 +989,8 @@ fn ssh_authentication_and_unix_forwarding_combinations() {
         exec_timeout: 1,
         ..Default::default()
     };
+    trust_ssh_fixture(&mut base);
+    assert!(!std::fs::read_to_string(&log).unwrap().contains("AUTH "), "unknown and changed keys must stop before authentication");
     let agent_socket = dir.path().join("agent.sock");
     let mut agent = Process(
         Command::new("ssh-agent")
@@ -1017,16 +1043,9 @@ fn ssh_authentication_and_unix_forwarding_combinations() {
                 assert_eq!(client.query(&command(&["PING"])).unwrap().bytes(), b"PONG");
                 if scheme.is_empty() && network == "unix" && login == "password" {
                     let started = Instant::now();
-                    assert!(matches!(
-                        client
-                            .query(&command(&["BLPOP", "empty-ssh-fixture", "2"]))
-                            .unwrap(),
-                        redisdock::redis::Value::Null
-                    ));
-                    assert!(
-                        started.elapsed() >= Duration::from_secs(2),
-                        "SSH retains original disabled Redis deadlines"
-                    );
+                    let error = client.query(&command(&["BLPOP", "empty-ssh-fixture", "2"])).unwrap_err();
+                    assert!(redisdock::redis::is_timeout(&error), "{error}");
+                    assert!(started.elapsed() < Duration::from_secs(2), "SSH observes the configured execution deadline");
                 }
             }
             config.ssh.login_type = "agent".into();
@@ -1068,4 +1087,24 @@ fn ssh_authentication_and_unix_forwarding_combinations() {
     ] {
         assert!(events.contains(event), "fixture proof for {event}");
     }
+}
+
+#[test]
+fn a_lost_write_reply_is_never_replayed() {
+    let listener=TcpListener::bind(("127.0.0.1",0)).unwrap();
+    let port=listener.local_addr().unwrap().port();
+    let server=std::thread::spawn(move || {
+        let (stream,_)=listener.accept().unwrap();
+        let mut reader=std::io::BufReader::new(stream);
+        assert_eq!(redisdock::redis::read_value(&mut reader).unwrap().array().unwrap()[0].bytes(),b"PING");
+        reader.get_mut().write_all(b"+PONG\r\n").unwrap();
+        assert_eq!(redisdock::redis::read_value(&mut reader).unwrap().array().unwrap()[0].bytes(),b"INCR");
+        drop(reader);
+        listener
+    });
+    let config=Connection {port,conn_timeout:1,exec_timeout:1,..Default::default()};
+    let mut client=Client::connect(&config,0).unwrap();
+    assert!(client.query(&command(&["INCR","counter"])).is_err());
+    let listener=server.join().unwrap();listener.set_nonblocking(true).unwrap();
+    assert!(matches!(listener.accept(),Err(e) if e.kind()==std::io::ErrorKind::WouldBlock),"no second connection may replay the uncertain write");
 }

@@ -15,6 +15,8 @@ use std::{
     time::Duration,
 };
 
+mod frame;
+
 pub trait ReadWrite: Read + Write + Send {}
 impl<T: Read + Write + Send> ReadWrite for T {}
 impl std::fmt::Debug for dyn ReadWrite {
@@ -141,7 +143,7 @@ fn read_nested(reader: &mut impl BufRead, depth: usize, buffered: bool) -> Resul
                 return Ok(Value::Null);
             }
             if prefix[0] == b'%' || prefix[0] == b'|' {
-                n *= 2;
+                n = n.checked_mul(2).ok_or_else(|| anyhow!("RESP 数组长度异常"))?;
             }
             if !(0..=10_000_000).contains(&n) {
                 bail!("RESP 数组长度异常");
@@ -163,6 +165,7 @@ fn read_nested(reader: &mut impl BufRead, depth: usize, buffered: bool) -> Resul
 pub struct Wire {
     reader: BufReader<Box<dyn ReadWrite>>,
     pending: Vec<u8>,
+    frame: frame::Frame,
 }
 impl Wire {
     pub fn open(
@@ -175,6 +178,7 @@ impl Wire {
         let mut wire = Self {
             reader: BufReader::new(transport(config, host, port)?),
             pending: vec![],
+            frame: frame::Frame::default(),
         };
         let (user, password) = if config.sentinel.enable && !sentinel {
             (&config.sentinel.username, &config.sentinel.password)
@@ -207,17 +211,11 @@ impl Wire {
     }
     pub fn read(&mut self) -> Result<Value> {
         loop {
-            let mut cursor = io::Cursor::new(self.pending.as_slice());
-            match read_nested(&mut cursor, 0, true) {
-                Ok(value) => {
-                    let used = cursor.position() as usize;
-                    self.pending.drain(..used);
-                    return Ok(value);
-                }
-                Err(e)
-                    if e.downcast_ref::<io::Error>()
-                        .is_some_and(|e| e.kind() == io::ErrorKind::UnexpectedEof) => {}
-                Err(e) => return Err(e),
+            if let Some(used) = self.frame.advance(&self.pending)? {
+                let value = read_value(&mut io::Cursor::new(&self.pending[..used]))?;
+                self.pending.drain(..used);
+                self.frame = frame::Frame::default();
+                return Ok(value);
             }
             let mut chunk = [0; 16384];
             let n = self.reader.read(&mut chunk)?;
@@ -886,6 +884,23 @@ fn http_connect(
     }
     Ok(())
 }
+#[derive(Clone, Debug)]
+pub struct SshHostKeyError {
+    pub observed: crate::model::SshHostKey,
+    pub expected: Option<crate::model::SshHostKey>,
+}
+impl std::fmt::Display for SshHostKeyError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let key = &self.observed;
+        if let Some(old) = &self.expected {
+            write!(f, "SSH host key changed for {}:{} ({}). Connection blocked.\nExpected: {}\nReceived: {}", key.host, key.port, key.algorithm, old.fingerprint, key.fingerprint)
+        } else {
+            write!(f, "Unknown SSH host {}:{} ({}) {}", key.host, key.port, key.algorithm, key.fingerprint)
+        }
+    }
+}
+impl std::error::Error for SshHostKeyError {}
+
 fn transport(config: &Connection, host: &str, port: u16) -> Result<Box<dyn ReadWrite>> {
     let proxy = effective_proxy(
         config,
@@ -902,8 +917,18 @@ fn transport(config: &Connection, host: &str, port: u16) -> Result<Box<dyn ReadW
         tcp.set_write_timeout(None)?;
         let mut session = ssh2::Session::new()?;
         session.set_tcp_stream(tcp);
-        session.set_timeout((config.conn_timeout * 1000).min(u32::MAX as u64) as u32);
+        session.set_timeout(config.conn_timeout.max(1).saturating_mul(1000).min(u32::MAX as u64) as u32);
         session.handshake()?;
+        let (_, kind) = session.host_key().ok_or_else(|| anyhow!("SSH server did not provide a host key"))?;
+        let hash = session.host_key_hash(ssh2::HashType::Sha256).ok_or_else(|| anyhow!("SSH host key fingerprint unavailable"))?;
+        let observed = crate::model::SshHostKey {
+            host: ssh.addr.clone(), port: ssh.port, algorithm: format!("{kind:?}"),
+            fingerprint: format!("SHA256:{}", base64::engine::general_purpose::STANDARD_NO_PAD.encode(hash)),
+        };
+        let expected = ssh.trusted_host.as_ref().filter(|key| key.host == ssh.addr && key.port == ssh.port);
+        if expected != Some(&observed) {
+            return Err(SshHostKeyError { observed, expected: expected.cloned() }.into());
+        }
         match ssh.login_type.as_str() {
             "agent" => session.userauth_agent(&ssh.username)?,
             "pkfile" => session.userauth_pubkey_file(
@@ -921,8 +946,7 @@ fn transport(config: &Connection, host: &str, port: u16) -> Result<Box<dyn ReadW
         if !session.authenticated() {
             bail!("SSH 验证失败");
         }
-        // The original disables Redis read/write deadlines for SSH channels.
-        session.set_timeout(0);
+        session.set_timeout(config.exec_timeout.max(1).saturating_mul(1000).min(u32::MAX as u64) as u32);
         if config.network == "unix" {
             let socket = if config.sock.is_empty() {
                 "/tmp/redis.sock"
@@ -1085,7 +1109,8 @@ pub fn is_timeout(error: &anyhow::Error) -> bool {
         matches!(
             e.kind(),
             io::ErrorKind::TimedOut | io::ErrorKind::WouldBlock
-        )
+        ) || (e.kind() == io::ErrorKind::Other && e.to_string() == "Timed out waiting on socket")
+        // ssh2 maps LIBSSH2_ERROR_SOCKET_TIMEOUT to Other and retains only its message.
     })
 }
 

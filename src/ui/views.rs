@@ -282,6 +282,7 @@ impl RdmApp {
             root = root.child(self.render_tab_close_warning(warning, cx));
         }
         root = root.child(self.render_notices(window, cx));
+        if self.ssh_trust.is_some() { root = root.child(self.render_ssh_trust(cx)); }
         root.into_any_element()
     }
     fn render_welcome(&self, cx: &Context<Self>) -> AnyElement {
@@ -2068,7 +2069,7 @@ impl RdmApp {
         }),cx).w(px(34.)).h(px(28.)).px_0().when(auto_last,|b|b.border_0().bg(cx.theme().primary.opacity(0.16)).text_color(cx.theme().primary)))
             .child(div().flex_1())
             .child(self.diagnostic_outline(self.icon_btn("stream-clear","delete",self.tr(if pubsub{"pubsub.clear"}else{"monitor.clean_log"}),cx,move|a,_,cx|{
-                if let Some(i)=a.tab_index(id){let current=if pubsub{&mut a.tabs[i].pubsub}else{&mut a.tabs[i].monitor};if let Some(s)=current{s.lines.clear();s.list.reset(0);cx.notify();}}
+                if let Some(i)=a.tab_index(id){let current=if pubsub{&mut a.tabs[i].pubsub}else{&mut a.tabs[i].monitor};if let Some(s)=current{s.clear_lines();cx.notify();}}
             }),cx).w(px(34.)).h(px(28.)).px_0());
         let form=if pubsub {
             div().id("keypages-form").test_support().h(px(46.)).pb(px(18.)).child(controls).into_any_element()
@@ -2087,6 +2088,10 @@ impl RdmApp {
         };
         let mut content=div().id("keypages-root").test_support().flex().flex_col().size_full().p(px(20.)).text_size(px(14.)).line_height(px(21.))
             .text_color(if dark{rgba(0xffffffd1)}else{rgb(0x333639)}).child(form);
+        if let Some(state) = stream && state.dropped > 0 {
+            content = content.child(div().id("stream-retention").test_support().text_sm()
+                .child(self.tr("stream_retention").replace("{kept}", &state.lines.len().to_string()).replace("{dropped}", &state.dropped.to_string())));
+        }
         let filter=if pubsub{String::new()}else{text_input(&t.stream_filter,cx)};
         let rows=stream.as_ref().map(|s|s.lines.iter().enumerate().filter(|(_,line)|filter.is_empty()||line.text.contains(&filter)).map(|(n,_)|n).collect::<Vec<_>>()).unwrap_or_default();
         let count=rows.len();
@@ -2415,7 +2420,7 @@ pub(super) fn type_mark(kind: &KeyType, short: bool, small: bool, inverse: bool)
         })
         .into_any_element()
 }
-#[derive(Clone)]
+#[derive(Clone, Debug, PartialEq)]
 pub(super) struct TreeRow {
     pub key: Option<Vec<u8>>,
     pub label: String,
@@ -2424,7 +2429,7 @@ pub(super) struct TreeRow {
     pub kind: KeyType,
 }
 #[derive(Default)]
-struct Node {
+pub(super) struct Node {
     children: BTreeMap<String, Node>,
     keys: Vec<KeyEntry>,
     count: usize,
@@ -2436,7 +2441,26 @@ pub(super) fn key_separator(tab: &Tab) -> &str {
         &tab.conn.key_separator
     }
 }
+pub(super) fn build_key_tree(tab: &Tab) -> Node {
+    let mut root = Node::default();
+    let sep = key_separator(tab);
+    for k in &tab.keys {
+        let label = display_bytes(&k.key);
+        let parts = label.split(sep).collect::<Vec<_>>();
+        let mut n = &mut root;
+        n.count += 1;
+        for p in &parts[..parts.len().saturating_sub(1)] {
+            n = n.children.entry(p.to_string()).or_default();
+            n.count += 1;
+        }
+        n.keys.push(k.clone());
+    }
+    root
+}
 pub(super) fn tree_rows(tab: &Tab, filter: &str, all: bool) -> Vec<TreeRow> {
+    tree_rows_from(tab, filter, all, &build_key_tree(tab))
+}
+pub(super) fn tree_rows_from(tab: &Tab, filter: &str, all: bool, root: &Node) -> Vec<TreeRow> {
     let base_depth = usize::from(tab.check_mode);
     let mut rows = Vec::new();
     if tab.check_mode {
@@ -2451,7 +2475,6 @@ pub(super) fn tree_rows(tab: &Tab, filter: &str, all: bool) -> Vec<TreeRow> {
             return rows;
         }
     }
-    let sep = key_separator(tab);
     if tab.flat {
         rows.extend(
             tab.keys
@@ -2466,18 +2489,6 @@ pub(super) fn tree_rows(tab: &Tab, filter: &str, all: bool) -> Vec<TreeRow> {
                 }),
         );
         return rows;
-    }
-    let mut root = Node::default();
-    for k in &tab.keys {
-        let label = display_bytes(&k.key);
-        let parts = label.split(sep).collect::<Vec<_>>();
-        let mut n = &mut root;
-        n.count += 1;
-        for p in &parts[..parts.len().saturating_sub(1)] {
-            n = n.children.entry(p.to_string()).or_default();
-            n.count += 1;
-        }
-        n.keys.push(k.clone());
     }
     fn matches(n: &Node, filter: &str) -> bool {
         filter.is_empty()
@@ -2531,7 +2542,7 @@ pub(super) fn tree_rows(tab: &Tab, filter: &str, all: bool) -> Vec<TreeRow> {
         }
     }
     visit(
-        &root,
+        root,
         String::new(),
         base_depth,
         tab,

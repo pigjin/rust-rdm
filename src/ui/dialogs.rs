@@ -147,11 +147,11 @@ struct Target {
     keys: Vec<Vec<u8>>,
 }
 pub(super) struct Dialog {
-    id: u64,
+    pub(super) id: u64,
     format_epoch: u64,
     format_loading: bool,
     kind: DialogKind,
-    data: Json,
+    pub(super) data: Json,
     fields: BTreeMap<String, Entity<InputState>>,
     numbers: BTreeMap<String, Option<f64>>,
     general_preview_size: f32,
@@ -1066,6 +1066,7 @@ impl RdmApp {
         self.dialog.as_ref().and_then(|dialog| dialog.editors.get("value"))
             .map(|editor| editor.entity_id())
     }
+    #[cfg(feature = "ui-qa")]
     fn entry_changed(&self, cx: &App) -> bool {
         self.dialog.as_ref().is_some_and(|dialog| dialog.entry_changed(cx))
     }
@@ -4419,6 +4420,7 @@ impl RdmApp {
         true
     }
     pub(super) fn save_active(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        if self.ssh_trust.is_some() { return; }
         if let Some(dialog) = &self.dialog {
             if matches!(
                 dialog.kind,
@@ -4564,6 +4566,7 @@ impl RdmApp {
                     if let Some(i)=app.tab_index(id) {
                         let tab=&mut app.tabs[i];
                         tab.keys.retain(|entry|entry.key!=deleted_key);
+                        tab.key_revision += 1;
                         tab.total=tab.total.saturating_sub(count);
                         tab.selected.clear();tab.key_selection=None;tab.current_key=None;tab.detail=None;tab.detail_epoch+=1;tab.pane=Pane::Status;
                     }
@@ -4676,117 +4679,6 @@ impl RdmApp {
                 let field = |name: &str| d.value(name, cx);
                 let boolval = |name: &str| d.boolean(name);
                 match kind {
-                    DialogKind::NewKey | DialogKind::AddEntries => {
-                        let new = matches!(kind, DialogKind::NewKey);
-                        let kind = if new {
-                            KeyType::parse(&field("type"))
-                        } else {
-                            target.kind
-                        };
-                        let key = if new { field("key").into_bytes() } else { key };
-                        let decode = field("decode");
-                        let format = field("format");
-                        let value =
-                            codec::encode(&field("value"), &decode, &format, &self.pref.decoder)?;
-                        let rows = d
-                            .rows
-                            .iter()
-                            .map(|r| {
-                                Ok(Entry {
-                                    id: text_input(&r.id, cx).into_bytes(),
-                                    value: codec::encode(
-                                        &text_input(&r.value, cx),
-                                        &decode,
-                                        &format,
-                                        &self.pref.decoder,
-                                    )?,
-                                    score: text_input(&r.score, cx),
-                                    ..Default::default()
-                                })
-                            })
-                            .collect::<Result<Vec<_>>>()?;
-                        let ttl = if new {
-                            field("ttl")
-                                .parse::<i64>()?
-                                .checked_mul(field("unit").parse::<i64>().unwrap_or(1))
-                                .ok_or_else(|| anyhow::anyhow!("TTL 超出范围"))?
-                        } else {
-                            -1
-                        };
-                        let head = boolval("head");
-                        let only_new = boolval("only_new");
-                        let stream_id = field("stream_id");
-                        self.dialog = None;
-                        self.job(
-                            window,
-                            cx,
-                            move |s| {
-                                if new {
-                                    let bytes = if kind == KeyType::Stream {
-                                        stream_id.as_bytes()
-                                    } else {
-                                        &value
-                                    };
-                                    s.create(&c, db, &key, kind, bytes, &rows, ttl)
-                                } else {
-                                    s.add_entries(
-                                        &c, db, &key, kind, &rows, head, only_new, &stream_id,
-                                    )
-                                }
-                            },
-                            move |a, _, w, cx| {
-                                a.scan_keys(id, true, false, w, cx);
-                                a.reload_detail(id, true, w, cx);
-                            },
-                        );
-                    }
-                    DialogKind::EditEntry(old) => {
-                        let new_field = field("field");
-                        let dialog_id = d.id;
-                        let saved_field = new_field.clone();
-                        let saved_value = field("value");
-                        let saved_score = field("score");
-                        let pin = boolval("pin");
-                        let new = Entry {
-                            id: if new_field == display_bytes(&old.id) {
-                                old.id.clone()
-                            } else {
-                                new_field.into_bytes()
-                            },
-                            value: codec::encode(
-                                &field("value"),
-                                &field("decode"),
-                                &field("format"),
-                                &self.pref.decoder,
-                            )?,
-                            score: field("score"),
-                            ..Default::default()
-                        };
-                        let kind = target.kind;
-                        let updated = new.clone();
-                        if !pin {
-                            self.dialog = None;
-                            self.full_editor = false;
-                        }
-                        self.job(
-                            window,
-                            cx,
-                            move |s| s.edit_entry(&c, db, &key, &kind, &old, &new, false),
-                            move |a, _, w, cx| {
-                                if pin
-                                    && let Some(d) = &mut a.dialog
-                                    && d.id == dialog_id
-                                    && matches!(d.kind, DialogKind::EditEntry(_))
-                                {
-                                    d.kind = DialogKind::EditEntry(updated);
-                                    d.data["field"] = Json::String(saved_field);
-                                    d.data["value"] = Json::String(saved_value);
-                                    d.data["score"] = Json::String(saved_score);
-                                }
-                                a.reload_detail(id, true, w, cx);
-                            },
-                        );
-                    }
                     DialogKind::Rename => {
                         let new = field("new_key").into_bytes();
                         if new.is_empty() {
@@ -4946,6 +4838,10 @@ impl RdmApp {
             }
         };
         let dialog_id = dialog.id;
+        if super::ssh_trust::needs_confirmation(&config) {
+            self.request_ssh_trust(config, super::ssh_trust::Resume::Test { dialog: dialog_id, sentinel }, window, cx);
+            return;
+        }
         dialog.connection_testing = true;
         dialog.connection_test = None;
         self.job(

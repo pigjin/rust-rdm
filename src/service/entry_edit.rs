@@ -27,11 +27,11 @@ impl Service {
         param: &EntryUpdate,
         decoders: &[Decoder],
     ) -> Result<Json> {
-        drop(self.client(c, db)?);
-        let run = |command: &str, args: Vec<Vec<u8>>| {
+        let mut client = self.client(c, db)?;
+        let mut run = |command: &str, args: Vec<Vec<u8>>| {
             let mut all = vec![command.as_bytes().to_vec(), key.to_vec()];
             all.extend(args);
-            self.run(c, db, all)
+            self.logged(c, db, std::slice::from_ref(&all), || client.query(&all))
         };
         let save = |value: &[u8]| {
             codec::save_as(value, &param.decode, &param.format, decoders)
@@ -79,8 +79,8 @@ impl Service {
                         Some(dv),
                     );
                 } else {
-                    run("HDEL", vec![old])?;
                     let n = run("HSET", vec![new, value.clone()])?.integer()?;
+                    run("HDEL", vec![old]).map_err(|error| anyhow::anyhow!("新值已写入，但旧字段删除失败；请刷新确认：{error}"))?;
                     if n > 0 {
                         push(
                             "replaced",
@@ -115,24 +115,15 @@ impl Service {
                 }
             }
             KeyType::Set => {
-                if run("SREM", vec![param.value.clone()])
-                    .and_then(|v| v.integer())
-                    .unwrap_or(0)
-                    > 0
+                let value = save(&param.new_value)?;
+                let added = run("SADD", vec![value.clone()])?.integer()?;
+                if value != param.value && run("SREM", vec![param.value.clone()])
+                    .map_err(|error| anyhow::anyhow!("新值已写入，但旧成员删除失败；请刷新确认：{error}"))?.integer()? > 0
                 {
                     push("removed", json!({"v":string(&param.value)}), None);
                 }
-                let value = save(&param.new_value)?;
-                if run("SADD", vec![value.clone()])
-                    .and_then(|v| v.integer())
-                    .unwrap_or(0)
-                    > 0
-                {
-                    push(
-                        "added",
-                        json!({"v":string(&value)}),
-                        Some(display(&value, false)),
-                    );
+                if added > 0 {
+                    push("added", json!({"v":string(&value)}), Some(display(&value, false)));
                 }
             }
             KeyType::ZSet => {
@@ -141,6 +132,7 @@ impl Service {
                         push("removed", json!({"s":0,"v":string(&param.value)}), None);
                     }
                 } else {
+                    if param.score.is_nan() { bail!("invalid score: NaN"); }
                     let value = save(&param.new_value)?;
                     let score = param.score.to_string().into_bytes();
                     if value == param.value {
@@ -151,8 +143,8 @@ impl Service {
                             Some(display(&value, true)),
                         );
                     } else {
-                        run("ZREM", vec![param.value.clone()])?;
                         let n = run("ZADD", vec![score, value.clone()])?.integer()?;
+                        run("ZREM", vec![param.value.clone()]).map_err(|error| anyhow::anyhow!("新值已写入，但旧成员删除失败；请刷新确认：{error}"))?;
                         let dv = display(&value, true);
                         if n > 0 {
                             push(

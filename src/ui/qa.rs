@@ -696,6 +696,10 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     "monitor-wrap-dark",
                     "key-loading-light",
                     "key-loading-dark",
+                    "safety-entry-pagination",
+                    "safety-stream-retention",
+                    "safety-ssh-trust-light",
+                    "safety-ssh-trust-dark",
                 ];
                 let only_scene = std::env::var("REDISDOCK_QA_SCENE").ok();
                 let scene_prefix = std::env::var("REDISDOCK_QA_PREFIX").ok();
@@ -1161,6 +1165,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     let status_layout_restore = if snapshot.starts_with("status-layout-") { Some(status_layout_qa::verify(&view,window,snapshot,cx).await) } else { None };
                     let status_info_restore = if snapshot.starts_with("status-info-") { Some(status_info_qa::verify(&view,window,snapshot,cx).await) } else { None };
                     let status_clients_restore = if snapshot.starts_with("status-clients-") { Some(status_clients_qa::verify(&view,window,snapshot,cx).await) } else { None };
+                    let safety_restore = if snapshot.starts_with("safety-") { Some(safety_qa::verify(&view,window,snapshot,cx).await) } else { None };
                     let key_loading_restore = if snapshot.starts_with("key-loading-") { Some(key_loading_qa::verify(&view,window,snapshot,cx).await) } else { None };
                     if snapshot.starts_with("key-input-") {
                         if let Some(text) = qa_key_input::verify(&view, window, snapshot, cx).await {
@@ -1255,6 +1260,8 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     }
                     if matches!(snapshot, "preferences-font-tags" | "preferences-font-keyboard") {
                         let _ = cx.update_window(window.into(), |_, window, cx| {
+                            // Present the new tag/menu hitboxes before replaying the outside click.
+                            window.refresh(); let _ = window.draw(cx);
                             let position = point(px(270.), px(143.));
                             window.dispatch_event(PlatformInput::MouseDown(MouseDownEvent {
                                 button: MouseButton::Left, position, click_count: 1, ..Default::default()
@@ -2614,6 +2621,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     if let Some(saved) = status_layout_restore { status_layout_qa::restore(&view,window,saved,cx); }
                     if let Some(saved) = status_info_restore { status_info_qa::restore(&view,window,saved,cx); }
                     if let Some(saved) = status_clients_restore { status_clients_qa::restore(&view,window,saved,cx).await; }
+                    if let Some(saved) = safety_restore { safety_qa::restore(&view,window,saved,cx).await; }
                     if let Some(saved) = key_loading_restore { key_loading_qa::restore(&view,window,saved,cx).await; }
                     if snapshot.starts_with("match-tooltip-") || snapshot.starts_with("entry-match-width-") || snapshot.starts_with("entry-control-") { match_tooltip_qa::restore(&view,window,cx).await; }
                     if snapshot.starts_with("key-filter-") || snapshot.starts_with("tag-style-") || snapshot.starts_with("tag-overflow-") || snapshot.starts_with("sidebar-resize-") || snapshot.starts_with("sidebar-contract-") || snapshot.starts_with("selector-font-") || snapshot.starts_with("general-fallback-") || snapshot.starts_with("css-label-") {key_filter_qa::restore(&view,window,snapshot,cx).await;}

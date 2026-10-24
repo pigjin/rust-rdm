@@ -470,5 +470,7 @@
     "message": "메시지",
     "receive_message": "{total}개의 메시지를 받았습니다",
     "always_show_last": "최신 내용으로 자동 스크롤"
-  }
+  },
+  "ssh_trust": {"title": "Trust SSH server?", "verify": "Verify this fingerprint with the server administrator before continuing. Authentication starts only after confirmation.", "accept": "Trust and connect"},
+  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only."
 }

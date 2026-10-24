@@ -544,8 +544,12 @@ fn collection_order_and_substring_search_follow_original_behavior() {
             .collect::<Vec<_>>(),
         entries.iter().map(|r| r.value.clone()).collect::<Vec<_>>()
     );
-    let filtered = s.detail(c, 0, b"ordered", 0, "idd", 1, "", false).unwrap();
-    assert!(filtered.end);
+    let mut filtered = s.detail(c, 0, b"ordered", 0, "idd", 1, "", false).unwrap();
+    assert!(!filtered.end, "a search batch does not pretend the full list was scanned");
+    while !filtered.end {
+        let next = s.detail(c, 0, b"ordered", filtered.cursor, "idd", 1, "", false).unwrap();
+        filtered.rows.extend(next.rows); filtered.cursor=next.cursor; filtered.end=next.end;
+    }
     assert_eq!(filtered.rows.len(), 2);
     assert_eq!(filtered.rows[0].id, b"1");
     s.create(
@@ -1131,7 +1135,13 @@ fn connection_zip_import_entry_selection_matches_original_go_results() {
             }
         }
         std::fs::write(store.root.join("connections.yaml"), "- name: existing\n").unwrap();
+        if matches!(name, "last-entry-fallback" | "invalid-yaml" | "empty") {
+            assert!(store.import_connections(&path).is_err(), "reject unsafe import: {name}");
+            assert_eq!(std::fs::read_to_string(store.root.join("connections.yaml")).unwrap(), "- name: existing\n");
+            continue;
+        }
         let imported = store.import_connections(&path).unwrap();
+        assert!(!imported.is_empty());
         assert_eq!(
             std::fs::read_to_string(store.root.join("connections.yaml")).unwrap(),
             record["bytes"].as_str().unwrap(),
@@ -1436,8 +1446,33 @@ fn edit_entries_match_original_responses_bytes_command_order_and_ttl() {
     }}
     let corpus:Json=serde_json::from_str(include_str!("fixtures/edit-entries-backend-source.json")).unwrap();
     let fixture=RedisFixture::new();let service=fixture.service();let config=&fixture.config;
-    for sample in corpus["records"].as_array().unwrap(){
-        let name=sample["name"].as_str().unwrap();let param=&sample["param"];
+    for original in corpus["records"].as_array().unwrap(){
+        let mut sample = original.clone();
+        // Approved safety differences; keep the captured original oracle unchanged.
+        let name = original["name"].as_str().unwrap();
+        let mut wire = sample["wire"].as_array().cloned().unwrap_or_default();
+        if wire.len() == 2 && matches!(wire[0][0].as_str(), Some("hdel" | "srem" | "zrem")) {
+            wire.swap(0, 1);
+        }
+        if name.starts_with("set-same-member") {
+            wire.retain(|row| row[0] == "sadd");
+            sample["result"]["data"] = json!({});
+        }
+        if name == "set-wrong-type" {
+            wire.retain(|row| row[0] == "sadd");
+            sample["result"] = json!({"success":false,"msg":"WRONGTYPE Operation against a key holding the wrong kind of value"});
+        }
+        if name.contains("invalid-hex") && sample["kind"] == "SET" {
+            wire.clear();
+            sample["snapshotHex"] = json!(sample["setup"].as_array().unwrap().iter().filter(|row| row[0].as_str().is_some_and(|op|op.eq_ignore_ascii_case("sadd"))).flat_map(|row| row.as_array().unwrap()[1..].iter()).map(|v|hex::encode(v.as_str().unwrap())).collect::<Vec<_>>());
+            sample["type"] = json!("set");
+            if name == "set-invalid-hex-removes-old-first" { sample["pttl"] = json!(-1); }
+        }
+        if name.ends_with("loses-ttl") { sample["pttl"] = json!(600000); }
+        if name == "hash-rename-wrong-type" { wire.truncate(1); wire[0][0]=json!("hset"); }
+        if name == "zset-wrong-type" { wire.truncate(1); wire[0][0]=json!("zadd"); }
+        sample["wire"] = json!(wire);
+        let param=&sample["param"];
         let kind=KeyType::parse(sample["kind"].as_str().unwrap());let key=bytes(&param["key"]);
         let run=|head:&str,args:&[&str]|{
             let mut all=vec![head.as_bytes().to_vec(),key.clone()];all.extend(args.iter().map(|s|s.as_bytes().to_vec()));service.run(config,1,all).unwrap()
@@ -1918,6 +1953,7 @@ fn csv_matches_original_go_backend_samples() {
             if actual.done as u64!=expected["exported"].as_u64().unwrap() || actual.failed as u64!=expected["failed"].as_u64().unwrap() || actual.canceled!=expected["canceled"].as_bool().unwrap() {
                 mismatches.push(format!("{name}: {actual:?} vs {expected}"));
             }
+            if actual.canceled { assert!(!path.exists(), "cancel must not publish a partial file"); continue; }
             let rows=csv::ReaderBuilder::new().has_headers(false).flexible(true).from_path(&path).unwrap().records().map(|row|row.unwrap().iter().map(str::to_string).collect::<Vec<_>>()).collect::<Vec<_>>();
             let expected_rows=record["rows"].as_array().map(|rows|rows.iter().map(|row|row.as_array().unwrap().iter().map(|value|value.as_str().unwrap().replace("$DUMP",&dump)).collect::<Vec<_>>()).collect::<Vec<_>>()).unwrap_or_default();
             if rows!=expected_rows {mismatches.push(format!("{name}: CSV {rows:?} vs {expected_rows:?}"));}
@@ -2046,4 +2082,123 @@ fn csv_import_ttl_matches_original_go_boundaries() {
         }
     }
     assert!(mismatches.is_empty(), "Go CSV TTL differences:\n{}", mismatches.join("\n"));
+}
+
+#[test]
+fn safe_entry_replacements_preserve_values_ttl_and_report_partial_failures() {
+    use redisdock::service::EntryUpdate;
+    let fixture = RedisFixture::new();
+    let service = fixture.service();
+    let c = &fixture.config;
+    let run = |args: &[&str]| service.run(c, 0, command(args)).unwrap();
+    for (kind, seed, read) in [(KeyType::Hash, "HSET", "HGET"), (KeyType::Set, "SADD", "SISMEMBER"), (KeyType::ZSet, "ZADD", "ZSCORE")] {
+        let key = kind.name();
+        match kind { KeyType::Hash => { run(&[seed, key, "old", "value"]); }, KeyType::ZSet => { run(&[seed, key, "1", "old"]); }, _ => { run(&[seed, key, "old"]); } }
+        run(&["PEXPIRE", key, "120000"]);
+        let param = EntryUpdate { field: "old".into(), new_field: "new".into(), value: b"old".to_vec(), new_value: b"new".to_vec(), score: 2., format: "Raw".into(), decode: "None".into(), ..Default::default() };
+        service.update_key_entry(c, 0, key.as_bytes(), &kind, &param, &[]).unwrap();
+        assert!(run(&["PTTL", key]).integer().unwrap() > 119000, "{key}: remaining TTL retained");
+        assert!(!matches!(run(&[read, key, "new"]), Value::Null));
+        if kind == KeyType::Set {
+            let same = EntryUpdate { value: b"new".to_vec(), ..param };
+            service.update_key_entry(c,0,key.as_bytes(),&kind,&same,&[]).unwrap();
+            assert_eq!(run(&["SISMEMBER",key,"new"]).integer().unwrap(),1);
+            assert!(run(&["PTTL",key]).integer().unwrap()>0);
+        }
+    }
+    run(&["SADD","invalid","old"]);
+    let invalid = EntryUpdate { value:b"old".to_vec(),new_value:b"zz".to_vec(),format:"Hex".into(),decode:"None".into(),..Default::default() };
+    assert!(service.update_key_entry(c,0,b"invalid",&KeyType::Set,&invalid,&[]).is_err());
+    assert_eq!(run(&["SISMEMBER","invalid","old"]).integer().unwrap(),1);
+    run(&["ACL","SETUSER","safe-test","on",">fixture-password","~*","+ping","+sadd"]);
+    let restricted = Connection { name:"restricted".into(),username:"safe-test".into(),password:"fixture-password".into(),..c.clone() };
+    let param = EntryUpdate { value:b"old".to_vec(),new_value:vec![0,255,1],format:"Raw".into(),decode:"None".into(),..Default::default() };
+    let error = service.update_key_entry(&restricted,0,b"invalid",&KeyType::Set,&param,&[]).unwrap_err();
+    assert!(error.to_string().contains("新值已写入"));
+    assert_eq!(run(&["SISMEMBER","invalid","old"]).integer().unwrap(),1);
+    assert_eq!(service.run(c,0,vec![b"SISMEMBER".to_vec(),b"invalid".to_vec(),param.new_value]).unwrap().integer().unwrap(),1);
+    run(&["ACL","SETUSER","safe-test","-sadd","+srem"]);
+    assert!(service.update_key_entry(&restricted,0,b"invalid",&KeyType::Set,&EntryUpdate {value:b"old".to_vec(),new_value:b"denied".to_vec(),..Default::default()},&[]).is_err());
+    assert_eq!(run(&["SISMEMBER","invalid","old"]).integer().unwrap(),1);
+    run(&["ACL","DELUSER","safe-test"]);
+}
+
+#[test]
+fn canceled_export_keeps_the_existing_backup_at_both_cancel_points() {
+    let fixture = RedisFixture::new(); let service = fixture.service();
+    for late in [false,true] {
+        let path = fixture.dir.path().join("previous.csv");
+        std::fs::write(&path,b"previous complete backup").unwrap();
+        let cancel = redis::Cancellation::default();
+        if !late { cancel.cancel(); }
+        let report = service.export_csv(&fixture.config,0,&[b"missing".to_vec()],&path,false,&cancel,|_| { if late { cancel.cancel(); } }).unwrap();
+        assert!(report.canceled);
+        assert_eq!(std::fs::read(&path).unwrap(),b"previous complete backup");
+        assert_eq!(std::fs::read_dir(fixture.dir.path()).unwrap().filter_map(Result::ok).filter(|f| f.file_name().to_string_lossy().starts_with(".redisdock-")).count(),0);
+    }
+}
+
+#[test]
+fn collection_search_resumes_from_scanned_rows_even_when_nothing_matches() {
+    let fixture = RedisFixture::new(); let service = fixture.service(); let c=&fixture.config;
+    for i in 0..73 {
+        let id=i.to_string(); let text=if i%11==0 {"match"} else {"other"};
+        for args in [command(&["RPUSH","paged-list",text]),command(&["XADD","paged-stream",&format!("{}-0",i+1),"v",text]),command(&["HSET","paged-hash",&format!("{text}-{id}"),text]),command(&["SADD","paged-set",&format!("{text}-{id}")]),command(&["ZADD","paged-zset",&id,&format!("{text}-{id}")])] { service.run(c,0,args).unwrap(); }
+    }
+    for key in ["paged-list","paged-stream","paged-hash","paged-set","paged-zset"] {
+        let mut cursor=0;let mut after=String::new();let mut rows=std::collections::HashMap::new(); let mut batches=0;
+        loop {
+            let d=service.detail(c,0,key.as_bytes(),cursor,"match",5,&after,false).unwrap();
+            batches+=1; assert!(batches<100);
+            for row in d.rows { rows.insert(row.id.clone(),row); }
+            cursor=d.cursor;after=d.stream_cursor;
+            if d.end {break;}
+        }
+        assert_eq!(rows.len(),7,"all matching rows reached: {key}");
+        if key=="paged-list" { for id in [0,11,22,33,44,55,66] {assert!(rows.contains_key(id.to_string().as_bytes()));} }
+    }
+}
+
+#[test]
+fn backup_failures_leave_existing_files_unchanged() {
+    use std::io::Write;
+    let dir=tempfile::tempdir().unwrap();let store=Store::new(dir.path());
+    let original=b"- name: previous\n";std::fs::write(dir.path().join("connections.yaml"),original).unwrap();
+    let archive=dir.path().join("corrupt.zip");
+    let mut writer=zip::ZipWriter::new(std::fs::File::create(&archive).unwrap());
+    writer.start_file("connections.yaml",zip::write::FileOptions::default().compression_method(zip::CompressionMethod::Stored)).unwrap();
+    writer.write_all(b"- name: replacement\n").unwrap();writer.finish().unwrap();
+    let mut bytes=std::fs::read(&archive).unwrap();
+    let i=bytes.windows(b"replacement".len()).position(|b|b==b"replacement").unwrap();bytes[i]^=1;std::fs::write(&archive,bytes).unwrap();
+    assert!(store.import_connections(&archive).is_err());
+    assert_eq!(std::fs::read(dir.path().join("connections.yaml")).unwrap(),original);
+    #[cfg(unix)] {
+        use std::os::unix::fs::PermissionsExt;
+        let output=dir.path().join("previous.csv");std::fs::write(&output,b"complete backup").unwrap();
+        std::fs::set_permissions(dir.path(),std::fs::Permissions::from_mode(0o500)).unwrap();
+        let service=Service::new(store);
+        let result=service.export_csv(&Connection::default(),0,&[],&output,false,&redis::Cancellation::default(),|_|{});
+        std::fs::set_permissions(dir.path(),std::fs::Permissions::from_mode(0o700)).unwrap();
+        assert!(result.is_err());assert_eq!(std::fs::read(&output).unwrap(),b"complete backup");
+    }
+}
+
+#[test]
+fn zset_equal_scores_keep_redis_member_order_across_pages() {
+    let fixture = RedisFixture::new();
+    let service = fixture.service();
+    service.run(&fixture.config, 0, command(&["ZADD", "ties", "1", "match-a", "1", "match-b", "1", "match-c"])).unwrap();
+    for reverse in [false, true] {
+        let mut actual = Vec::new();
+        let mut cursor = 0;
+        loop {
+            let page = service.detail(&fixture.config, 0, b"ties", cursor, "*", 2, "", reverse).unwrap();
+            actual.extend(page.rows.into_iter().map(|row| row.id));
+            cursor = page.cursor;
+            if page.end { break; }
+        }
+        let mut expected = vec![b"match-a".to_vec(), b"match-b".to_vec(), b"match-c".to_vec()];
+        if reverse { expected.reverse(); }
+        assert_eq!(actual, expected);
+    }
 }

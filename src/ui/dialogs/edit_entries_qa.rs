@@ -299,7 +299,7 @@ pub(in crate::ui) async fn verify(
             }
         }
     }
-    // An unpinned invalid Set conversion closes immediately, after SREM is sent.
+    // Approved safety change: invalid conversion closes the editor without mutating the Set.
     run(&["DEL", key]);
     run(&["SADD", key, "before"]);
     let detail = service
@@ -318,9 +318,12 @@ pub(in crate::ui) async fn verify(
     window.update(cx,|_,w,cx|view.update(cx,|app,cx|app.set_dialog_field("format","Hex",w,cx))).unwrap();
     text(view, "zz", window, cx);
     draw(window, cx).await;
+    let invalid_start = service.history.lock().len();
     click("save-entry".into(), window, cx);
     idle(view, window, cx).await;
-    assert_eq!(run(&["TYPE", key]).text(), "none");
+    assert!(service.history.lock().iter().skip(invalid_start).all(|entry| !entry.command.starts_with("SREM") && !entry.command.starts_with("SADD")));
+    assert_eq!(run(&["TYPE", key]).text(), "set");
+    assert_eq!(run(&["SISMEMBER", key, "before"]).integer().unwrap(), 1);
     window
         .update(cx, |_, _, cx| {
             let app = view.read(cx);
@@ -333,6 +336,7 @@ pub(in crate::ui) async fn verify(
         })
         .unwrap();
     // Changing format reads saved props again, dropping both unsaved controls.
+    run(&["DEL", key]);
     run(&["HSET", key, "old", "before"]);
     let detail = service
         .detail(&connection, 15, key.as_bytes(), 0, "", 100, "", false)
@@ -389,7 +393,7 @@ pub(in crate::ui) async fn verify(
         .unwrap();
     draw(window, cx).await;
     println!(
-        "EDIT ENTRIES INPUT QA PASS: four actual editor saves, partial page/summary only, Source pin states and empty fallbacks, destructive Set conversion failure, format draft reset and DB15 cleanup"
+        "EDIT ENTRIES INPUT QA PASS: four actual editor saves, partial page/summary only, Source pin states and empty fallbacks, non-destructive Set conversion failure, format draft reset and DB15 cleanup"
     );
     println!(
         "ENTRY EDITOR SHORTCUT QA PASS: four unchanged unpinned saves and unchanged pinned Hash save via actual Cmd+S"

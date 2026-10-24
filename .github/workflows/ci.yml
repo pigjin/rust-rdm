@@ -1,0 +1,47 @@
+name: Regression tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: macos-15
+    timeout-minutes: 30
+    env:
+      CARGO_TERM_COLOR: always
+      CARGO_BUILD_JOBS: '2'
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Select Rust
+        run: |
+          rustup toolchain install 1.99.0 --profile minimal
+          rustup default 1.99.0
+      - uses: actions/cache@v6.1.0
+        with:
+          key: regression-macos-${{ hashFiles('Cargo.lock', 'Cargo.toml') }}
+          restore-keys: regression-macos-
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+      - name: Install test fixtures
+        run: |
+          brew install redis openssl@3
+          echo "$(brew --prefix openssl@3)/bin" >> "$GITHUB_PATH"
+          module="$(brew --prefix redis)/lib/redis/modules/rejson.so"
+          test -f "$module"
+          echo "REDISDOCK_JSON_MODULE=$module" >> "$GITHUB_ENV"
+          go -C tests/fixtures/ssh-server build -o "$RUNNER_TEMP/redisdock-ssh-server" .
+          echo "REDISDOCK_SSH_FIXTURE=$RUNNER_TEMP/redisdock-ssh-server" >> "$GITHUB_ENV"
+      - name: Test release gates
+        run: python3 scripts/test-release.py
+      - name: Test core, RedisJSON, TLS, proxies, cluster, Sentinel and SSH
+        run: cargo test --locked -p redisdock --no-default-features --lib --tests -- --include-ignored

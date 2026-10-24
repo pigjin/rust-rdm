@@ -116,6 +116,14 @@ pub struct Ssl {
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
+pub struct SshHostKey {
+    pub host: String,
+    pub port: u16,
+    pub algorithm: String,
+    pub fingerprint: String,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(default = "Ssh::stored_empty")]
 pub struct Ssh {
     pub enable: bool,
@@ -128,6 +136,8 @@ pub struct Ssh {
     #[serde(alias = "pkFile")]
     pub pk_file: String,
     pub passphrase: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub trusted_host: Option<SshHostKey>,
 }
 impl Default for Ssh {
     fn default() -> Self {
@@ -140,6 +150,7 @@ impl Default for Ssh {
             password: String::new(),
             pk_file: String::new(),
             passphrase: String::new(),
+            trusted_host: None,
         }
     }
 }
@@ -684,6 +695,7 @@ pub struct KeyDetail {
     pub value: Vec<u8>,
     pub rows: Vec<Entry>,
     pub cursor: u64,
+    pub stream_cursor: String,
     pub end: bool,
 }
 #[derive(Clone, Debug, Default)]

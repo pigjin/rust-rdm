@@ -470,5 +470,7 @@
     "message": "訊息",
     "receive_message": "已接收訊息 {total} 條",
     "always_show_last": "自動捲動到最新"
-  }
+  },
+  "ssh_trust": {"title": "确认 SSH 服务器身份", "verify": "请先通过可信渠道核对服务器指纹。确认后才会发送认证信息；密钥变化时会阻止连接。", "accept": "信任并连接"},
+  "stream_retention": "保留 {kept} 条，已淘汰 {dropped} 条；复制和导出仅包含保留记录"
 }

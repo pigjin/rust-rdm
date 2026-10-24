@@ -182,8 +182,8 @@ macOS 新安装默认配置目录为 `~/Library/Application Support/RedisDock`�
 编辑器内容链接和 Redis、SSH、代理功能保留。旧配置中的更新选项加载时被忽略，不再写入保存后的配置。
 
 连接和偏好设置使用原项目兼容的 YAML 字段结构。连接列表的更多菜单使用
-原版 ZIP 备份格式，包含 `connections.yaml`；导入按原版覆盖连接配置，保留原始
-YAML 字节。配置加载及打开编辑表单时的默认值处理分别遵循原版后端和前端。
+原版 ZIP 备份格式，包含 `connections.yaml`；导入须找到 `connections.yaml` 并成功解析为连接列表后才原子覆盖，保留合法备份的原始
+YAML 字节；缺失、损坏或无效 YAML 不改动已有配置。配置加载及打开编辑表单时的默认值处理分别遵循原版后端和前端。
 Redis 数据导入、导出兼容原版 CSV：十六进制键名、DUMP 数据及
 可选的绝对过期毫秒时间。提交后表单立即关闭，可继续浏览；关闭底部进度消息
 会取消对应任务。导入可选择完成后重新载入键列表。
@@ -219,6 +219,9 @@ SOCKS5 / SOCKS5H 代理；支持 String、Hash、List、Set、ZSet、Stream 和 
 HTTPS 代理选项按原版发送普通 CONNECT；Redis TLS 仍由 SSL 配置独立控制。
 系统 Redis 代理按原版读取 `ALL_PROXY` / `all_proxy` 和 `NO_PROXY` / `no_proxy`。
 SSH 支持密码、私钥、agent 及远端 TCP / Unix socket 转发。
+首次连接在认证前显示端点和 SHA-256 主机指纹，确认后保存绑定主机与端口的信任记录；
+同一端点密钥变化会阻止连接并显示新旧指纹。旧配置首次连接也须确认。
+安全与性能调整、原版样本保留规则及回归命令见 [安全与性能回归说明](docs/safety-performance.md)。
 RedisJSON 需要服务器提供对应模块。PHP 转码需要可执行的 PHP；Pickle 的
 datetime 兼容转换使用 Python。自定义转码器保留原版 Base64 输入输出与
 `{VALUE}` 参数占位约定。

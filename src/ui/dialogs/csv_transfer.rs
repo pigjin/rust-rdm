@@ -72,9 +72,7 @@ fn completion(
         Outcome::Completed(report) => report,
         Outcome::Failed(error) => {
             messages.push((MessageKind::Error, error));
-            // Preserve the original store's zero-count summary after a normal
-            // {success:false} response, including its import reload policy.
-            TransferProgress::default()
+            return Completion { messages, reload: false };
         }
         Outcome::Rejected => {
             return Completion {
@@ -320,6 +318,8 @@ mod tests {
             };
             let actual = completion(kind, record["reload"] == true, result, &tr);
             let expected = record["completed"].as_array().unwrap();
+            // Safety change: a failed transfer emits only its error, never a success summary.
+            let expected = if response["success"] == false { &expected[..1] } else { expected.as_slice() };
             assert_eq!(actual.messages.len(), expected.len(), "{}", record["name"]);
             for ((level, text), expected) in actual.messages.iter().zip(expected) {
                 assert_eq!(
@@ -346,7 +346,7 @@ mod tests {
             }
             assert_eq!(
                 actual.reload,
-                !record["reloads"].as_array().unwrap().is_empty(),
+                response["success"] != false && !record["reloads"].as_array().unwrap().is_empty(),
                 "{}",
                 record["name"]
             );

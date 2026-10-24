@@ -34,7 +34,6 @@ serde-pickle = "1"
 quick-xml = "0.38"
 native-tls = "0.2"
 ssh2 = { version = "0.9", features = ["vendored-openssl"] }
-socks = "0.3"
 url = "2"
 directories = "6"
 chrono = { version = "0.4", features = ["serde"] }

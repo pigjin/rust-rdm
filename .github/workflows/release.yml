@@ -40,9 +40,13 @@ jobs:
           TAG: ${{ github.ref_name }}
         run: python3 scripts/release.py version --tag "$TAG" --github-output "$GITHUB_OUTPUT"
 
+  regression:
+    needs: version
+    uses: ./.github/workflows/ci.yml
+
   build:
     name: Build ${{ matrix.os }} ${{ matrix.arch }}
-    needs: version
+    needs: [version, regression]
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 120
     strategy:

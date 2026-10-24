@@ -5,7 +5,7 @@ pub(super) struct Restore {
     history: VecDeque<crate::service::CommandLog>,
     monitor: Option<StreamState>,
     pubsub: Option<StreamState>,
-    _sender: mpsc::SyncSender<StreamEvent>,
+    _sender: Arc<Mutex<stream_history::Inbox>>,
 }
 
 pub(super) async fn prepare(view: &Entity<RdmApp>, window: WindowHandle<Root>, scene: &str, cx: &mut AsyncApp) -> Restore {
@@ -23,7 +23,8 @@ pub(super) async fn prepare(view: &Entity<RdmApp>, window: WindowHandle<Root>, s
     let restore = window.update(cx, |_, w, cx| view.update(cx, |app, cx| {
         let i = app.index().unwrap();
         let id = app.tabs[i].id;
-        let (sender, receiver) = mpsc::sync_channel(16);
+        let receiver = Arc::new(Mutex::new(stream_history::Inbox::default()));
+        let sender = receiver.clone();
         let restore = Restore { history: app.service.history.lock().clone(),
             monitor: app.tabs[i].monitor.take(), pubsub: app.tabs[i].pubsub.take(), _sender: sender };
         app.pref.general.font_size = 14.;
@@ -58,7 +59,7 @@ pub(super) async fn prepare(view: &Entity<RdmApp>, window: WindowHandle<Root>, s
                     lines.push_back(StreamLine { time: if n == 0 { "2023-11-15 06:13:20.123" } else { "2023-11-15 06:13:21.456" }.into(), channel: pubsub.then(|| "news:updates".into()), text: text.into() });
                 }
             }
-            let state = Some(StreamState { cancel: Cancellation::default(), receiver, lines,
+            let state = Some(StreamState { retained_bytes: lines.iter().map(StreamLine::retained_bytes).sum(), dropped: 0, cancel: Cancellation::default(), receiver, lines,
                 running: kind.ends_with("rows"), auto_last: true,
                 list: ListState::new(0, ListAlignment::Top, px(500.)) });
             if pubsub { app.tabs[i].pubsub = state; } else { app.tabs[i].monitor = state; }

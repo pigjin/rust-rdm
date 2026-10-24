@@ -470,5 +470,7 @@
     "message": "Mesaj",
     "receive_message": "{total} mesaj alındı",
     "always_show_last": "Son Mesaja Otomatik Kaydır"
-  }
+  },
+  "ssh_trust": {"title": "Trust SSH server?", "verify": "Verify this fingerprint with the server administrator before continuing. Authentication starts only after confirmation.", "accept": "Trust and connect"},
+  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only."
 }

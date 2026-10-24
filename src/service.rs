@@ -497,8 +497,8 @@ impl Service {
                     } else {
                         "*".into()
                     };
-                    let mut current = if full { 0 } else { cursor };
-                    loop {
+                    let mut current = cursor;
+                    {
                         let mut args = vec![scan.as_bytes().to_vec(), key.to_vec()];
                         args.extend(command(&[
                             &current.to_string(),
@@ -535,9 +535,6 @@ impl Service {
                                 });
                             }
                         }
-                        if !full || current == 0 {
-                            break;
-                        }
                     }
                     d.cursor = current;
                     d.end = current == 0;
@@ -548,6 +545,7 @@ impl Service {
                             .parse::<f64>()
                             .unwrap_or_default()
                             .total_cmp(&b.score.parse::<f64>().unwrap_or_default())
+                            .then_with(|| a.id.cmp(&b.id))
                     });
                     if reverse {
                         d.rows.reverse();
@@ -559,12 +557,8 @@ impl Service {
                     .run(c, db, vec![b"LLEN".to_vec(), key.to_vec()])?
                     .integer()? as u64;
                 let filter = pattern != "*";
-                let start = if filter { 0 } else { cursor };
-                let last = if filter {
-                    "-1".into()
-                } else {
-                    (cursor + page as u64 - 1).to_string()
-                };
+                let start = cursor;
+                let last = cursor.saturating_add(page as u64).saturating_sub(1).to_string();
                 let mut args = vec![b"LRANGE".to_vec(), key.to_vec()];
                 args.extend(command(&[&start.to_string(), &last]));
                 let v = self.run(c, db, args)?;
@@ -577,31 +571,26 @@ impl Service {
                         });
                     }
                 }
-                d.cursor = if filter {
-                    d.length
-                } else {
-                    (cursor + page as u64).min(d.length)
-                };
-                d.end = d.cursor >= d.length;
+                d.cursor = cursor + v.array()?.len() as u64;
+                d.end = v.array()?.len() < page || d.cursor >= d.length;
             }
             KeyType::Stream => {
                 d.length = self
                     .run(c, db, vec![b"XLEN".to_vec(), key.to_vec()])?
                     .integer()? as u64;
                 let filter = pattern != "*";
-                let start = if stream_after.is_empty() || filter {
+                let start = if stream_after.is_empty() {
                     "+".into()
                 } else {
                     format!("({stream_after}")
                 };
                 let mut args = vec![b"XREVRANGE".to_vec(), key.to_vec()];
                 args.extend(command(&[&start, "-"]));
-                if !filter {
-                    args.extend(command(&["COUNT", &page.to_string()]));
-                }
+                args.extend(command(&["COUNT", &page.to_string()]));
                 let v = self.run(c, db, args)?;
                 for r in v.array()? {
                     let a = r.array()?;
+                    d.stream_cursor = a[0].text();
                     let fields = a[1]
                         .array()?
                         .chunks_exact(2)
@@ -632,8 +621,8 @@ impl Service {
                         });
                     }
                 }
-                d.cursor = cursor + d.rows.len() as u64;
-                d.end = filter || d.rows.len() < page || d.cursor >= d.length;
+                d.cursor = cursor + v.array()?.len() as u64;
+                d.end = v.array()?.len() < page || d.cursor >= d.length;
             }
             _ => bail!("不支持的数据类型：{}", kind.name()),
         }
@@ -1161,14 +1150,20 @@ impl Service {
                     .and_then(|value| value.integer()).unwrap_or(-1);
                 record.push(if ttl > 0 {(now_ms() + ttl).to_string()} else {"-1".into()});
             }
-            match w.write_record(record) {
-                Ok(()) => report.done += 1,
-                Err(_) => report.failed += 1,
-            }
+            w.write_record(record)?;
+            report.done += 1;
+        }
+        if cancel.canceled() {
+            report.canceled = true;
+            return Ok(report);
         }
         w.flush()?;
         w.get_ref().sync_all()?;
         drop(w);
+        if cancel.canceled() {
+            report.canceled = true;
+            return Ok(report);
+        }
         temporary.persist(path).map_err(|error| error.error)?;
         Ok(report)
     }

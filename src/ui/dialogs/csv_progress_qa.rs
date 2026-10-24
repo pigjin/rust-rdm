@@ -104,7 +104,13 @@ impl RdmApp {
         } else {
             "completed"
         }];
-        let expected = expected.as_array().unwrap();
+        let mut expected = expected.as_array().unwrap().clone();
+        if record["response"]["success"] == false {
+            // Approved safety change: failure shows one error, anchored like the last source notice.
+            let y = expected.last().unwrap()["bounds"]["y"].clone();
+            expected.truncate(1);
+            expected[0]["bounds"]["y"] = y;
+        }
         assert_eq!(self.messages.len(), expected.len(), "{scene}");
         for (notice, expected) in self.messages.iter().zip(expected) {
             assert_eq!(notice.text, expected["text"].as_str().unwrap());
@@ -417,10 +423,10 @@ pub(in crate::ui) async fn verify(
     window
         .update(cx, |_, _, cx| {
             let app = view.read(cx);
-            assert_eq!(app.messages.len(), 2);
+            // Failed I/O must not also display a successful completion summary.
+            assert_eq!(app.messages.len(), 1);
             assert_eq!(app.messages[0].kind, MessageKind::Error);
-            assert_eq!(app.messages[1].kind, MessageKind::Success);
-            assert_eq!(app.messages[1].text, "已完成导入操作，成功0个，忽略0个");
+            assert!(!app.messages[0].text.is_empty());
         })
         .unwrap();
     // Actual close-button events exercise the same event scope as Source Wails.

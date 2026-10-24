@@ -223,9 +223,11 @@ impl RdmApp {
                         div().size_0().into_any_element()
                     } else {
                         div()
-                            .child(text::ScriptLabel {
-                                text: notice.text.clone(),
-                            })
+                            .flex()
+                            .flex_col()
+                            .children(notice.text.lines().map(|line| text::ScriptLabel {
+                                text: line.to_owned(),
+                            }))
                             .into_any_element()
                     })
                     .when(notice.closable, |message| {

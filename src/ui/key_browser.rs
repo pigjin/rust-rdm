@@ -244,7 +244,7 @@ impl RdmApp {
         if tab.keys_loading {
             return;
         }
-        let nodes = tree_rows(tab, &tab.key_filter, false);
+        let nodes = super::key_tree_cache::visible_rows(tab);
         let Some(selected) = &tab.key_selection else {
             return;
         };
@@ -549,7 +549,7 @@ impl RdmApp {
                         .rounded_l(px(0.)),
                     ),
             );
-        let nodes = Arc::new(tree_rows(tab, &tab.key_filter, false));
+        let nodes = super::key_tree_cache::visible_rows(tab);
         let render_nodes = nodes.clone();
         let list = uniform_list(
             "key-tree",

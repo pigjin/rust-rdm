@@ -1,11 +1,17 @@
 #[cfg(all(target_os = "macos", not(feature = "ui-qa")))]
 mod app_icon;
 mod connection_tree;
+mod ssh_trust;
 mod key_browser;
+mod key_tree_cache;
 #[cfg(feature = "ui-qa")]
 mod key_loading_qa;
+#[cfg(feature = "ui-qa")]
+mod safety_qa;
 mod key_selectors;
 mod entries;
+mod entry_loading;
+mod stream_history;
 mod entry_delete;
 mod value_footer;
 mod text_control_width;
@@ -377,19 +383,23 @@ enum StreamEvent {
 }
 struct StreamState {
     cancel: Cancellation,
-    receiver: mpsc::Receiver<StreamEvent>,
+    receiver: Arc<Mutex<stream_history::Inbox>>,
     lines: VecDeque<StreamLine>,
+    retained_bytes: usize,
+    dropped: usize,
     running: bool,
     auto_last: bool,
     list: ListState,
 }
 impl StreamState {
     fn idle() -> Self {
-        let (_, receiver) = mpsc::sync_channel(1);
+        let receiver = Arc::new(Mutex::new(stream_history::Inbox::default()));
         Self {
             cancel: Cancellation::default(),
             receiver,
             lines: VecDeque::new(),
+            retained_bytes: 0,
+            dropped: 0,
             running: false,
             auto_last: true,
             list: ListState::new(0, ListAlignment::Top, px(500.)),
@@ -426,6 +436,8 @@ struct Tab {
     info: Info,
     samples: VecDeque<Sample>,
     keys: Vec<KeyEntry>,
+    key_revision: u64,
+    key_tree_cache: key_tree_cache::Cache,
     scan: ScanState,
     scan_epoch: u64,
     keys_loading: bool,
@@ -451,6 +463,8 @@ struct Tab {
     key_name: Entity<InputState>,
     current_key: Option<Vec<u8>>,
     detail_epoch: u64,
+    detail_cancel: Cancellation,
+    entries_loading: bool,
     editor: Entity<EditorState>,
     editor_original: String,
     json_brackets: gpui_component::input::TextDecorationCollection,
@@ -555,6 +569,8 @@ struct RdmApp {
     connection_tabs_scroll: ScrollHandle,
     next_id: u64,
     dialog: Option<dialogs::Dialog>,
+    ssh_trust: Option<ssh_trust::Pending>,
+    ssh_probe_epoch: u64,
     dialog_stack: Vec<dialogs::Dialog>,
     cached_entry_panels: BTreeMap<u64, (dialogs::Dialog, bool)>,
     tab_close_warnings: Vec<tab_close::CloseWarning>,
@@ -739,6 +755,8 @@ impl RdmApp {
             connection_tabs_scroll: ScrollHandle::new(),
             next_id: 0,
             dialog: None,
+            ssh_trust: None,
+            ssh_probe_epoch: 0,
             dialog_stack: vec![],
             cached_entry_panels: BTreeMap::new(),
             tab_close_warnings: vec![],
@@ -1036,6 +1054,11 @@ impl RdmApp {
         cx.notify();
     }
     fn open_connection(&mut self, c: Connection, window: &mut Window, cx: &mut Context<Self>) {
+        if self.ssh_trust.is_some() { return; }
+        if ssh_trust::needs_confirmation(&c) {
+            self.request_ssh_trust(c, ssh_trust::Resume::Open, window, cx);
+            return;
+        }
         if let Some(id) = self.tabs.iter().find(|t| t.conn.name == c.name).map(|t| t.id) {
             self.activate_connection_tab(Some(id), cx);
             if self.dialog.is_none() || self.editing_entry() { self.focus.focus(window, cx); }
@@ -1123,6 +1146,8 @@ impl RdmApp {
             info: Info::default(),
             samples: VecDeque::new(),
             keys: vec![],
+            key_revision: 0,
+            key_tree_cache: key_tree_cache::Cache::default(),
             scan: ScanState::default(),
             scan_epoch: 0,
             keys_loading: false,
@@ -1148,6 +1173,8 @@ impl RdmApp {
             key_name,
             current_key: None,
             detail_epoch: 0,
+            detail_cancel: Cancellation::default(),
+            entries_loading: false,
             editor,
             editor_original: String::new(),
             json_brackets,
@@ -1320,6 +1347,7 @@ impl RdmApp {
         if reset {
             t.scan = ScanState::default();
             t.scan_epoch += 1;
+            t.key_revision += 1;
             t.keys.clear();
             t.selected.clear();
         }
@@ -1372,6 +1400,7 @@ impl RdmApp {
                     let mut seen = t.keys.iter().map(|k| k.key.clone()).collect::<HashSet<_>>();
                     t.keys
                         .extend(page.keys.into_iter().filter(|k| seen.insert(k.key.clone())));
+                    t.key_revision += 1;
                     t.keys.sort_by(|a, b| {
                         natural_compare(&display_bytes(&a.key), &display_bytes(&b.key))
                     });
@@ -1400,6 +1429,10 @@ impl RdmApp {
             t.exact = false;
             t.expanded.clear();
             set_input(&t.filter, "", window, cx);
+            t.detail_cancel.cancel();
+            t.entries_loading = false;
+            t.values_loading = false;
+            t.format_epoch += 1;
             t.detail_epoch += 1;
             t.conn.last_db = db;
             t.value_saving = false;
@@ -1460,96 +1493,6 @@ impl RdmApp {
             self.reload_detail(id, true, window, cx);
         }
     }
-    fn reload_detail(&mut self, id: u64, reset: bool, window: &mut Window, cx: &mut Context<Self>) {
-        let Some(i) = self.tab_index(id) else {
-            return;
-        };
-        let t = &mut self.tabs[i];
-        let Some(key) = t.current_key.clone() else {
-            return;
-        };
-        if reset {
-            t.removed_fields.clear();
-        }
-        t.detail_epoch += 1;
-        let epoch = t.detail_epoch;
-        let c = t.conn.clone();
-        let db = t.db;
-        let cursor = if reset {
-            0
-        } else {
-            t.detail.as_ref().map(|d| d.cursor).unwrap_or(0)
-        };
-        let after = if reset {
-            String::new()
-        } else {
-            t.detail
-                .as_ref()
-                .and_then(|d| d.rows.last())
-                .map(|r| display_bytes(&r.id))
-                .unwrap_or_default()
-        };
-        let pattern = t.row_match.clone();
-        let reverse = t.reverse;
-        let page = self.pref.general.scan_size;
-        self.job(
-            window,
-            cx,
-            move |s| match s.detail(&c, db, &key, cursor, &pattern, page, &after, reverse) {
-                Ok(detail) => Ok(Some(detail)),
-                Err(error) if error.is::<KeyNotFound>() => Ok(None),
-                Err(error) => Err(error),
-            },
-            move |app, detail, window, cx| {
-                if let Some(i) = app.tab_index(id)
-                    && app.tabs[i].detail_epoch == epoch
-                {
-                    let Some(mut detail) = detail else {
-                        let t = &mut app.tabs[i];
-                        t.pane = Pane::Status;
-                        t.current_key = None;
-                        t.detail = None;
-                        t.entry_delete = None;
-                        t.footer_picker = None;
-                        t.footer_hover = None;
-                        t.footer_tooltip = None;
-                        t.footer_hover_epoch += 1;
-                        t.editing = false;
-                        t.auto_refresh = false;
-                        t.row_values.clear();
-                        t.format_epoch += 1;
-                        t.values_loading = false;
-                        app.toast("load key summary fail: key not exists", true);
-                        return;
-                    };
-                    let t = &mut app.tabs[i];
-                    if !reset && let Some(old) = &t.detail {
-                        let mut rows = old.rows.clone();
-                        let mut seen = rows.iter().map(|r| r.id.clone()).collect::<HashSet<_>>();
-                        rows.extend(
-                            detail
-                                .rows
-                                .into_iter()
-                                .filter(|r| seen.insert(r.id.clone())),
-                        );
-                        detail.rows = rows;
-                    }
-                    if !matches!(detail.kind, KeyType::String | KeyType::Json) {
-                        if t.decode == "Auto" {
-                            t.decode = "None".into();
-                        }
-                        if t.format == "Auto" {
-                            t.format = "Raw".into();
-                        }
-                    }
-                    app.tabs[i].detail = Some(detail);
-                    app.tabs[i].detail_loaded = Instant::now();
-                    app.tabs[i].editing = false;
-                    app.prepare_values(id, window, cx);
-                }
-            },
-        );
-    }
     fn cpu_job<T: Send + 'static>(
         &mut self,
         window: &mut Window,
@@ -1574,13 +1517,24 @@ impl RdmApp {
         cx.notify();
     }
     pub(super) fn prepare_values(&mut self, id: u64, window: &mut Window, cx: &mut Context<Self>) {
+        self.prepare_entry_values(id, false, window, cx);
+    }
+    pub(super) fn prepare_incremental_values(&mut self, id: u64, window: &mut Window, cx: &mut Context<Self>) {
+        self.prepare_entry_values(id, true, window, cx);
+    }
+    fn prepare_entry_values(&mut self, id: u64, incremental: bool, window: &mut Window, cx: &mut Context<Self>) {
         let Some(i) = self.tab_index(id) else {
             return;
         };
         let t = &mut self.tabs[i];
-        if let Some(detail)=&mut t.detail {for row in &mut detail.rows {row.display_value=None;}}
-        let Some(detail) = t.detail.clone() else {
-            return;
+        if !incremental && let Some(detail) = &mut t.detail {
+            for row in &mut detail.rows { row.display_value = None; }
+        }
+        let Some(original) = &t.detail else { return; };
+        let detail = KeyDetail {
+            key: original.key.clone(), kind: original.kind.clone(), value: original.value.clone(),
+            rows: original.rows.iter().filter(|row| !incremental || !t.row_values.contains_key(&row.id)).cloned().collect(),
+            ..Default::default()
         };
         let name = display_bytes(&detail.key);
         if text_input(&t.key_name, cx) != name {
@@ -1636,7 +1590,7 @@ impl RdmApp {
                         }
                     };
                     let t = &mut a.tabs[i];
-                    t.row_values = rows;
+                    if incremental { t.row_values.extend(rows); } else { t.row_values = rows; }
                     t.entry_list
                         .splice(0..t.entry_list.item_count(), t.entry_list.item_count());
                     if let Some(value) = value {
@@ -1670,51 +1624,6 @@ impl RdmApp {
             set_input(&t.row_filter, "", window, cx);
             self.reload_detail(id, true, window, cx);
         }
-    }
-    fn load_all_entries(&mut self, id: u64, window: &mut Window, cx: &mut Context<Self>) {
-        let Some(i) = self.tab_index(id) else {
-            return;
-        };
-        let t = &mut self.tabs[i];
-        let Some(key) = t.current_key.clone() else {
-            return;
-        };
-        let c = t.conn.clone();
-        let db = t.db;
-        let pattern = t.row_match.clone();
-        let reverse = t.reverse;
-        let page = self.pref.general.scan_size;
-        t.detail_epoch += 1;
-        let epoch = t.detail_epoch;
-        self.job(
-            window,
-            cx,
-            move |s| {
-                let mut d = s.detail(&c, db, &key, 0, &pattern, page, "", reverse)?;
-                let mut seen = d.rows.iter().map(|r| r.id.clone()).collect::<HashSet<_>>();
-                while !d.end {
-                    let after = d
-                        .rows
-                        .last()
-                        .map(|r| display_bytes(&r.id))
-                        .unwrap_or_default();
-                    let next = s.detail(&c, db, &key, d.cursor, &pattern, page, &after, reverse)?;
-                    d.rows
-                        .extend(next.rows.into_iter().filter(|r| seen.insert(r.id.clone())));
-                    d.cursor = next.cursor;
-                    d.end = next.end;
-                }
-                Ok(d)
-            },
-            move |a, d, w, cx| {
-                if let Some(i) = a.tab_index(id)
-                    && a.tabs[i].detail_epoch == epoch
-                {
-                    a.tabs[i].detail = Some(d);
-                    a.prepare_values(id, w, cx);
-                }
-            },
-        );
     }
     fn cli_key(&mut self, event: &KeyDownEvent, window: &mut Window, cx: &mut Context<Self>) {
         if self.dialog_key(event, window, cx) || self.dialog.is_some() {
@@ -1975,15 +1884,18 @@ impl RdmApp {
         let pattern = text_input(&t.pub_pattern, cx);
         let cancel = Cancellation::default();
         let token = cancel.clone();
-        let (sender, receiver) = mpsc::sync_channel(1024);
-        let (lines, auto_last, list) = current.take().map_or_else(
-            || (VecDeque::new(), true, ListState::new(0, ListAlignment::Top, px(500.))),
-            |mut state| (std::mem::take(&mut state.lines), state.auto_last, state.list.clone()),
+        let receiver = Arc::new(Mutex::new(stream_history::Inbox::default()));
+        let sender = receiver.clone();
+        let (lines, auto_last, list, retained_bytes, dropped) = current.take().map_or_else(
+            || (VecDeque::new(), true, ListState::new(0, ListAlignment::Top, px(500.)), 0, 0),
+            |mut state| (std::mem::take(&mut state.lines), state.auto_last, state.list.clone(), state.retained_bytes, state.dropped),
         );
         *current = Some(StreamState {
             cancel,
             receiver,
             lines,
+            retained_bytes,
+            dropped,
             running: true,
             auto_last,
             list,
@@ -2028,9 +1940,7 @@ impl RdmApp {
                                     text: v.text(),
                                 }
                             };
-                            if sender.send(StreamEvent::Line(line)).is_err() {
-                                break;
-                            }
+                            sender.lock().push(StreamEvent::Line(line));
                         }
                         Err(e) if crate::redis::is_timeout(&e) => {}
                         Err(e) => return Err(e),
@@ -2039,9 +1949,9 @@ impl RdmApp {
                 Ok(())
             })();
             if let Err(e) = result {
-                let _ = sender.send(StreamEvent::Error(e.to_string()));
+                sender.lock().push(StreamEvent::Error(e.to_string()));
             }
-            let _ = sender.send(StreamEvent::Stopped);
+            sender.lock().push(StreamEvent::Stopped);
         });
         cx.notify();
     }
@@ -2080,28 +1990,33 @@ impl RdmApp {
         for tab in &mut self.tabs {
             for stream in [&mut tab.monitor, &mut tab.pubsub].into_iter().flatten() {
                 for _ in 0..500 {
-                    match stream.receiver.try_recv() {
-                        Ok(StreamEvent::Line(line)) => {
-                            stream.lines.push_back(line);
+                    let event = {
+                        let mut inbox = stream.receiver.lock();
+                        let dropped = std::mem::take(&mut inbox.dropped);
+                        stream.dropped += dropped;
+                        changed |= dropped > 0;
+                        inbox.pop()
+                    };
+                    match event {
+                        Some(StreamEvent::Line(line)) => {
+                            stream.push_line(line);
                             changed = true;
                         }
-                        Ok(StreamEvent::Error(error)) => {
+                        Some(StreamEvent::Error(error)) => {
                             errors.push(error);
                             stream.running = false;
                             changed = true;
                         }
-                        Ok(StreamEvent::Stopped) => {
+                        Some(StreamEvent::Stopped) => {
                             stream.running = false;
                             changed = true;
                         }
-                        Err(mpsc::TryRecvError::Disconnected) => {
-                            if stream.running {
-                                stream.running = false;
-                                changed = true;
+                        None => {
+                            if stream.running && Arc::strong_count(&stream.receiver) == 1 {
+                                stream.running = false; changed = true;
                             }
                             break;
                         }
-                        Err(mpsc::TryRecvError::Empty) => break,
                     }
                 }
             }

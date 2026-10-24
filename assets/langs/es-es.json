@@ -470,5 +470,7 @@
     "message": "Mensaje",
     "receive_message": "Recibidos {total} mensajes",
     "always_show_last": "Desplazamiento automático al último"
-  }
+  },
+  "ssh_trust": {"title": "Trust SSH server?", "verify": "Verify this fingerprint with the server administrator before continuing. Authentication starts only after confirmation.", "accept": "Trust and connect"},
+  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only."
 }

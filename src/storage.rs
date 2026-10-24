@@ -73,22 +73,15 @@ impl Store {
     }
     pub fn import_connections(&self, path: &Path) -> Result<Vec<Connection>> {
         let mut archive = zip::ZipArchive::new(fs::File::open(path)?)?;
-        let mut candidate = None;
-        // The desktop importer takes the first matching entry, or the last entry
-        // if the archive has no connections.yaml. It copies bytes without form validation.
-        for index in 0..archive.len() {
-            candidate = Some(index);
-            if archive.by_index(index)?.name_raw() == b"connections.yaml" {
-                break;
-            }
-        }
-        if let Some(index) = candidate {
-            let mut bytes = Vec::new();
-            archive.by_index(index)?.read_to_end(&mut bytes)?;
-            self.save_bytes("connections.yaml", &bytes)?;
-        }
-        // The original connection list is empty when the copied YAML is invalid.
-        Ok(self.connections().unwrap_or_default())
+        let candidate = (0..archive.len()).find(|&index| {
+            archive.by_index(index).is_ok_and(|entry| entry.name_raw() == b"connections.yaml")
+        }).ok_or_else(|| anyhow::anyhow!("备份中缺少 connections.yaml"))?;
+        let mut bytes = Vec::new();
+        archive.by_index(candidate)?.read_to_end(&mut bytes)?;
+        let connections: Vec<Connection> = serde_yaml::from_slice(&bytes)
+            .context("连接备份无效，原配置未修改")?;
+        self.save_bytes("connections.yaml", &bytes)?;
+        Ok(connections)
     }
     pub fn export_connections(&self, path: &Path) -> Result<()> {
         let bytes = fs::read(self.root.join("connections.yaml"))?;
