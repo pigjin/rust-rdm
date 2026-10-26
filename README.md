@@ -137,17 +137,19 @@ macOS 原生图标源文件为 `assets/images/AppIcon.icon`，可用 Icon Compos
 
 ## GitHub Releases 发布
 
-仅推送 `v` 开头的 tag 会触发 GitHub Actions；普通提交与 PR 不触发构建。
+推送 `v` 开头的 tag 会触发安装包构建和自动发布；PR 与 `main` 分支提交执行 macOS 回归。
+0.1.3 补齐 SSH 测试 fixture 的 Go 工具链，并合入 0.1.2 的安全与性能改动。
+0.1.2 的发布因缺少 Go 未完成，原标签保留；后续使用新版本标签发布。
 发布前更新 `Cargo.toml` 的版本，并运行 `cargo check --locked`；若修改版本后锁文件需要同步，
 先运行 `cargo check` 更新 `Cargo.lock`，将两者与工作流、打包脚本一起提交后再创建 tag：
 
 ```sh
-# 当前源码版本为 0.1.2；后续将下面的版本替换为 Cargo.toml 中的版本。
-git tag -a v0.1.2 -m 'RedisDock 0.1.2'
-git push origin v0.1.2
+# 当前源码版本为 0.1.3；后续将下面的版本替换为 Cargo.toml 中的版本。
+git tag -a v0.1.3 -m 'RedisDock 0.1.3'
+git push origin v0.1.3
 ```
 
-tag 去掉 `v` 后必须与源码版本完全一致，例如 `v0.1.2` 发布为 **RedisDock 0.1.2**。
+tag 去掉 `v` 后必须与源码版本完全一致，例如 `v0.1.3` 发布为 **RedisDock 0.1.3**。
 `v0.2.0-rc.1` 等预发布版本同样要求源码版本一致，并标记为 Prerelease。
 工作流固定 Rust 1.99.0，六种目标均执行无桌面库测试、release 构建与安装包检查。
 所有目标成功后才创建 Release 草稿，上传八个安装包和 `SHA256SUMS`，核对上传完整后自动发布。
