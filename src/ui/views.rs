@@ -86,7 +86,7 @@ impl RdmApp {
     pub(super) fn render_app(&mut self, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
         self.prepare_key_selectors(window, cx);
         let title = self.render_title(window, cx);
-        let ribbon = self.render_ribbon(cx);
+        let ribbon = self.render_ribbon(window, cx);
         let content = if self.nav == Nav::Log {
             self.render_log(cx)
         } else {
@@ -102,6 +102,11 @@ impl RdmApp {
             };
             self.render_sidebar(sidebar, main, window, cx)
         };
+        let page_progress = motion::enter(
+            format!("workspace-{}", self.nav as u8),
+            window,
+            cx,
+        );
         let general_font = self.preference_font("general", ".SystemUIFont", cx);
         let mut root = div()
             .id("rdm-root")
@@ -254,7 +259,7 @@ impl RdmApp {
                     .font(general_font)
                     .text_size(px(self.general_font_size()))
                     .child(ribbon)
-                    .child(div().flex_1().min_w_0().child(content)),
+                    .child(div().flex_1().min_w_0().opacity(page_progress).child(content)),
             )
             .child(self.sidebar_events(cx));
         let key_loading_visible = self.nav == Nav::Browser
@@ -273,16 +278,29 @@ impl RdmApp {
             );
         }
         if self.dialog.is_some() && !self.editing_entry() {
-            root = root.child(self.render_dialog(window, cx));
+            let id = self.dialog.as_ref().unwrap().id;
+            let dialog = self.render_dialog(window, cx);
+            root = root.child(motion::overlay(
+                ElementId::from(("dialog-enter", id)), dialog, window, cx,
+            ));
         }
         if !self.pref.behavior.welcomed {
-            root = root.child(self.render_welcome(cx));
+            root = root.child(motion::overlay(
+                "welcome-enter", self.render_welcome(cx), window, cx,
+            ));
         }
         for warning in &self.tab_close_warnings {
-            root = root.child(self.render_tab_close_warning(warning, cx));
+            root = root.child(motion::overlay(
+                ElementId::from(("tab-close-enter", warning.id)),
+                self.render_tab_close_warning(warning, cx), window, cx,
+            ));
         }
         root = root.child(self.render_notices(window, cx));
-        if self.ssh_trust.is_some() { root = root.child(self.render_ssh_trust(cx)); }
+        if self.ssh_trust.is_some() {
+            root = root.child(motion::overlay(
+                "ssh-trust-enter", self.render_ssh_trust(cx), window, cx,
+            ));
+        }
         root.into_any_element()
     }
     fn render_welcome(&self, cx: &Context<Self>) -> AnyElement {
@@ -409,7 +427,7 @@ impl RdmApp {
         row.child(div().w(px(15.)).min_w(px(15.)).flex_grow(1.))
             .into_any_element()
     }
-    fn render_ribbon(&self, cx: &Context<Self>) -> AnyElement {
+    fn render_ribbon(&self, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
         let rail = div()
             .flex()
             .flex_col()
@@ -420,7 +438,19 @@ impl RdmApp {
             .bg(self.ribbon_color(cx))
             .border_r_1()
             .border_color(self.split_color(cx));
-        let mut navigation = div().flex().flex_col().gap(px(2.)).pr(px(3.));
+        let selected_index = match self.nav {
+            Nav::Browser => 0,
+            Nav::Server => usize::from(!self.tabs.is_empty()),
+            Nav::Log => 1 + usize::from(!self.tabs.is_empty()),
+        };
+        let marker_top = gpui_base::motion::transition(
+            "ribbon-marker-top",
+            px(9.6 + selected_index as f32 * 42.),
+            gpui_base::motion::Transition::new(Duration::from_millis(160)),
+            window,
+            cx,
+        );
+        let mut navigation = div().relative().flex().flex_col().gap(px(2.)).pr(px(3.));
         for (nav, ico, label) in [
             (Nav::Browser, "database", "ribbon.browser"),
             (Nav::Server, "server", "ribbon.server"),
@@ -481,6 +511,7 @@ impl RdmApp {
                             .w(px(3.))
                             .rounded(px(999.))
                             .bg(cx.theme().primary)
+                            .when(selected, |bar| bar.invisible())
                             .when(!selected, |bar| {
                                 bar.invisible()
                                     .group_hover("ribbon-item", |bar| bar.visible())
@@ -488,6 +519,16 @@ impl RdmApp {
                     ),
             );
         }
+        navigation = navigation.child(
+            div()
+                .absolute()
+                .left_0()
+                .top(marker_top)
+                .w(px(3.))
+                .h(px(20.8))
+                .rounded(px(999.))
+                .bg(cx.theme().primary),
+        );
         let weak = cx.weak_entity();
         let preferences = self.tr("menu.preferences");
         let about = self.tr("menu.about");
@@ -1425,6 +1466,7 @@ impl RdmApp {
         };
         let t = &self.tabs[i];
         let tabs = self.render_content_nav(i, window, cx);
+        let progress = motion::enter(format!("content-{}-{}", t.id, t.pane as u8), window, cx);
         let page = match t.pane {
             Pane::Status => self.render_status(i, window, cx),
             Pane::Detail => self.render_detail(i, window, cx),
@@ -1438,7 +1480,7 @@ impl RdmApp {
             .flex_col()
             .size_full()
             .child(tabs)
-            .child(div().flex_1().min_h_0().overflow_hidden().child(page))
+            .child(div().flex_1().min_h_0().overflow_hidden().opacity(progress).child(page))
             .into_any_element()
     }
     fn render_status(&self, i: usize, window: &mut Window, cx: &Context<Self>) -> AnyElement {
@@ -2411,7 +2453,7 @@ pub(super) fn type_mark(kind: &KeyType, short: bool, small: bool, inverse: bool)
         .border_color(rgba(0xddddddcc))
         .bg(rgb(if inverse { c } else { b }))
         .text_color(rgb(if inverse { b } else { c }))
-        .text_size(px(12.))
+        .text_size(px(if short && *kind == KeyType::None { 8. } else { 12. }))
         .font_weight(FontWeight::BOLD)
         .child(if short {
             kind.short().to_string()

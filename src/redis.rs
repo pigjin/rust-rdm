@@ -25,6 +25,22 @@ impl std::fmt::Debug for dyn ReadWrite {
     }
 }
 
+struct SshTransport(ssh2::Channel);
+impl Read for SshTransport {
+    fn read(&mut self, bytes: &mut [u8]) -> io::Result<usize> {
+        self.0.read(bytes)
+    }
+}
+impl Write for SshTransport {
+    fn write(&mut self, bytes: &[u8]) -> io::Result<usize> {
+        self.0.write(bytes)
+    }
+    fn flush(&mut self) -> io::Result<()> {
+        // Channel writes are unbuffered; libssh2's flush discards received replies.
+        Ok(())
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 pub enum Value {
     Null,
@@ -228,9 +244,27 @@ impl Wire {
         }
     }
     pub fn pipeline(&mut self, commands: &[Vec<Vec<u8>>]) -> Result<Vec<Value>> {
+        if commands.is_empty() {
+            return Ok(vec![]);
+        }
         let s = self.reader.get_mut();
+        const CAPACITY: usize = 64 * 1024;
+        let mut pending = Vec::with_capacity(CAPACITY);
         for args in commands {
-            s.write_all(&encode_command(args))?;
+            let encoded = encode_command(args);
+            let mut remaining = encoded.as_slice();
+            while !remaining.is_empty() {
+                let n = remaining.len().min(CAPACITY - pending.len());
+                pending.extend_from_slice(&remaining[..n]);
+                remaining = &remaining[n..];
+                if pending.len() == CAPACITY {
+                    s.write_all(&pending)?;
+                    pending.clear();
+                }
+            }
+        }
+        if !pending.is_empty() {
+            s.write_all(&pending)?;
         }
         s.flush()?;
         commands.iter().map(|_| self.read()).collect()
@@ -453,6 +487,30 @@ impl Client {
                 }
             })
             .collect()
+    }
+    pub fn key_types(&mut self, keys: &[Vec<u8>], cancel: &Cancellation) -> Result<Vec<Value>> {
+        if cancel.canceled() {
+            bail!("operation canceled");
+        }
+        if self.config.sentinel.enable && self.sentinel_checked.elapsed() >= Duration::from_secs(1) {
+            let _ = self.rediscover_master();
+        }
+        let mut groups = HashMap::<_, Vec<_>>::new();
+        for (index, key) in keys.iter().enumerate() {
+            let target = self.slots.get(&hash_slot(key)).unwrap_or(&self.primary).clone();
+            groups.entry(target).or_default().push((index, vec![b"TYPE".to_vec(), key.clone()]));
+        }
+        let mut result = vec![Value::Null; keys.len()];
+        for ((host, port), group) in groups {
+            if cancel.canceled() {
+                bail!("operation canceled");
+            }
+            let (indices, commands): (Vec<_>, Vec<_>) = group.into_iter().unzip();
+            for (index, value) in indices.into_iter().zip(self.pipeline_at(&host, port, &commands)?) {
+                result[index] = value;
+            }
+        }
+        Ok(result)
     }
     pub fn masters(&mut self) -> Result<Vec<(String, u16)>> {
         if !self.config.cluster.enable {
@@ -953,9 +1011,9 @@ fn transport(config: &Connection, host: &str, port: u16) -> Result<Box<dyn ReadW
             } else {
                 &config.sock
             };
-            Box::new(session.channel_direct_streamlocal(socket, None)?)
+            Box::new(SshTransport(session.channel_direct_streamlocal(socket, None)?))
         } else {
-            Box::new(session.channel_direct_tcpip(host, port, None)?)
+            Box::new(SshTransport(session.channel_direct_tcpip(host, port, None)?))
         }
     } else if config.network == "unix" {
         #[cfg(unix)]
@@ -1112,6 +1170,67 @@ pub fn is_timeout(error: &anyhow::Error) -> bool {
         ) || (e.kind() == io::ErrorKind::Other && e.to_string() == "Timed out waiting on socket")
         // ssh2 maps LIBSSH2_ERROR_SOCKET_TIMEOUT to Other and retains only its message.
     })
+}
+
+#[cfg(test)]
+mod pipeline_tests {
+    use super::*;
+    use std::sync::Mutex;
+    #[derive(Default)]
+    struct Record { bytes: Vec<u8>, calls: Vec<usize>, reads: usize, flushes: usize }
+    struct Transport {
+        record: Arc<Mutex<Record>>,
+        response: io::Cursor<Vec<u8>>,
+        short: usize,
+        fail_after: usize,
+    }
+    impl Read for Transport {
+        fn read(&mut self, b: &mut [u8]) -> io::Result<usize> {
+            self.record.lock().unwrap().reads += 1;
+            self.response.read(b)
+        }
+    }
+    impl Write for Transport {
+        fn write(&mut self, bytes: &[u8]) -> io::Result<usize> {
+            let mut record = self.record.lock().unwrap();
+            record.calls.push(bytes.len());
+            if record.bytes.len() >= self.fail_after { return Err(io::ErrorKind::BrokenPipe.into()); }
+            let n = bytes.len().min(self.short).min(self.fail_after - record.bytes.len());
+            record.bytes.extend_from_slice(&bytes[..n]);
+            Ok(n)
+        }
+        fn flush(&mut self) -> io::Result<()> { self.record.lock().unwrap().flushes += 1; Ok(()) }
+    }
+    fn wire(short: usize, fail_after: usize, response: Vec<u8>) -> (Wire, Arc<Mutex<Record>>) {
+        let record = Arc::new(Mutex::new(Record::default()));
+        (Wire { reader: BufReader::new(Box::new(Transport { record: record.clone(), response: io::Cursor::new(response), short, fail_after })), pending: vec![], frame: frame::Frame::default() }, record)
+    }
+    #[test]
+    fn pipeline_coalesces_bounded_writes_and_handles_short_writes() {
+        let commands = (0..3000).map(|i| command(&["ECHO", &format!("binary\0:{i}")])).collect::<Vec<_>>();
+        let expected = commands.iter().flat_map(|args| encode_command(args)).collect::<Vec<_>>();
+        let replies = (0..3000).map(|i| format!(":{i}\r\n")).collect::<String>().into_bytes();
+        for short in [usize::MAX, 7] {
+            let (mut wire, record) = wire(short, usize::MAX, replies.clone());
+            assert_eq!(wire.pipeline(&commands).unwrap(), (0..3000).map(Value::Int).collect::<Vec<_>>());
+            let r = record.lock().unwrap();
+            assert_eq!(r.bytes, expected);
+            assert_eq!(r.flushes, 1);
+            assert!(r.calls.iter().all(|&n| n <= 65536));
+            if short == usize::MAX { assert_eq!(r.calls.len(), expected.len().div_ceil(65536)); }
+        }
+    }
+    #[test]
+    fn failed_pipeline_writes_are_not_retried_or_read() {
+        let (mut wire, record) = wire(7, 13, vec![]);
+        assert!(wire.pipeline(&[command(&["INCR", "counter"])]).is_err());
+        drop(wire);
+        let r = record.lock().unwrap();
+        assert_eq!(r.bytes.len(), 13);
+        assert_eq!(r.calls.len(), 3);
+        assert_eq!(r.reads, 0);
+        assert_eq!(r.flushes, 0);
+    }
 }
 
 #[cfg(test)]

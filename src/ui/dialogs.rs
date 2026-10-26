@@ -911,7 +911,7 @@ impl RdmApp {
             .as_ref()
             .is_some_and(|dialog| dialog.boolean("rdm_full_editor"));
         self.apply_theme(window, cx);
-        self.load_language();
+        self.load_language(cx);
         if let Some(focus) = return_focus {
             focus.focus(window, cx);
         } else if let Some(editor) = self
@@ -996,7 +996,7 @@ impl RdmApp {
             if key == "general.language" {
                 let current = self.pref.general.language.clone();
                 self.pref.general.language = value.to_string();
-                self.load_language();
+                self.load_language(cx);
                 self.pref.general.language = current;
                 let title = self.tr("menu.preferences");
                 if let Some(dialog) = &mut self.dialog {
@@ -2725,24 +2725,17 @@ impl RdmApp {
                 for (value, label) in &options {
                     let value = value.clone();
                     let field = key.clone();
-                    menu = menu.item(menu_action(label.clone(), weak.clone(), move |a, w, cx| {
-                        if a.editing_entry() && matches!(field.as_str(), "format" | "decode") {
-                            a.change_entry_format(&field, value.clone(), w, cx);
-                            return;
-                        }
-                        if let Some(d) = &mut a.dialog
-                            && let Some(state) = d.fields.get(&field)
-                        {
-                            set_input(state, value.clone(), w, cx);
-                            if field == "db_filter_type" && value != "none" {
-                                let indices =
-                                    d.arguments.entry("db_filter_list".into()).or_default();
-                                if indices.is_empty() {
-                                    indices.push(input("0", "DB", false, w, cx));
-                                }
+                    // Language names keep their own spelling instead of translating "English".
+                    let label = if field == "general.language" { label.clone() } else { localized(label) };
+                    let weak = weak.clone();
+                    menu = menu.item(PopupMenuItem::new(label).on_click(move |_, w, cx| {
+                        let _ = weak.update(cx, |a, cx| {
+                            if a.editing_entry() && matches!(field.as_str(), "format" | "decode") {
+                                a.change_entry_format(&field, value.clone(), w, cx);
+                                return;
                             }
-                            cx.notify();
-                        }
+                            a.set_dialog_field(&field, value.clone(), w, cx);
+                        });
                     }));
                 }
                 menu
@@ -4141,7 +4134,7 @@ impl RdmApp {
                     a.pref = Preferences::default();
                     a.save_preferences();
                     a.apply_theme(w, cx);
-                    a.load_language();
+                    a.load_language(cx);
                     a.open_dialog(DialogKind::Preferences, w, cx);
                 },
             ));
@@ -4566,6 +4559,7 @@ impl RdmApp {
                     if let Some(i)=app.tab_index(id) {
                         let tab=&mut app.tabs[i];
                         tab.keys.retain(|entry|entry.key!=deleted_key);
+                        tab.key_types.states.remove(&deleted_key);
                         tab.key_revision += 1;
                         tab.total=tab.total.saturating_sub(count);
                         tab.selected.clear();tab.key_selection=None;tab.current_key=None;tab.detail=None;tab.detail_epoch+=1;tab.pane=Pane::Status;
@@ -4620,7 +4614,7 @@ impl RdmApp {
                 self.pref = pref;
                 self.save_preferences();
                 self.apply_theme(window, cx);
-                self.load_language();
+                self.load_language(cx);
                 for tab in &self.tabs {
                     tab.editor.update(cx, |editor, cx| {
                         editor.set_line_number(self.pref.editor.show_line_num, window, cx);

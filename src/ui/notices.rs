@@ -156,7 +156,7 @@ impl RdmApp {
             }
         }
     }
-    pub(super) fn render_notices(&self, window: &Window, cx: &Context<Self>) -> AnyElement {
+    pub(super) fn render_notices(&self, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
         let dark = self.dark(cx);
         let border = if !cfg!(target_os = "windows") && !window.is_fullscreen() {
             1.
@@ -174,6 +174,7 @@ impl RdmApp {
             .gap(px(8.));
         for notice in &self.messages {
             let id = notice.id;
+            let progress = motion::enter(ElementId::from(("message-enter", id)), window, cx);
             let (name, color) = match notice.kind {
                 MessageKind::Success => ("notice-success", if dark { 0x63e2b7 } else { 0x18a058 }),
                 MessageKind::Warning => ("notice-warning", if dark { 0xf2c97d } else { 0xf0a020 }),
@@ -197,6 +198,8 @@ impl RdmApp {
                     .id(("message", id))
                     .test_support()
                     .relative()
+                    .top(px(6. * (1. - progress)))
+                    .opacity(progress)
                     .occlude()
                     .flex()
                     .items_center()
@@ -271,11 +274,14 @@ impl RdmApp {
             .gap(px(12.));
         for notice in &self.notifications {
             let id = notice.id;
+            let progress = motion::enter(ElementId::from(("notification-enter", id)), window, cx);
             notifications = notifications.child(
                 div()
                     .id(("error-notification", id))
                     .test_support()
                     .relative()
+                    .left(px(8. * (1. - progress)))
+                    .opacity(progress)
                     .occlude()
                     .w_full()
                     .px(px(16.))

@@ -1,9 +1,14 @@
 #[cfg(all(target_os = "macos", not(feature = "ui-qa")))]
 mod app_icon;
+#[cfg(target_os = "macos")]
+mod app_menu;
 mod connection_tree;
 mod ssh_trust;
 mod key_browser;
 mod key_tree_cache;
+mod key_types;
+#[cfg(feature = "ui-qa")]
+mod key_types_qa;
 #[cfg(feature = "ui-qa")]
 mod key_loading_qa;
 #[cfg(feature = "ui-qa")]
@@ -24,6 +29,7 @@ mod refresh;
 mod dialogs;
 mod file_dialogs;
 mod notices;
+mod motion;
 mod tab_close;
 mod connection_tabs;
 #[cfg(feature = "ui-qa")]
@@ -228,6 +234,8 @@ fn initialize_actions(cx: &mut App) {
             items: vec![MenuItem::action("Close Tab", CloseTab)],
         },
     ]);
+    #[cfg(target_os = "macos")]
+    app_menu::init(cx);
     cx.bind_keys([
         KeyBinding::new("cmd-n", NewConnection, Some("Rdm")),
         KeyBinding::new("ctrl-n", NewConnection, Some("Rdm")),
@@ -438,6 +446,7 @@ struct Tab {
     keys: Vec<KeyEntry>,
     key_revision: u64,
     key_tree_cache: key_tree_cache::Cache,
+    key_types: key_types::Cache,
     scan: ScanState,
     scan_epoch: u64,
     keys_loading: bool,
@@ -808,7 +817,7 @@ impl RdmApp {
         app.apply_theme(window, cx);
         #[cfg(all(target_os = "macos", not(feature = "ui-qa")))]
         app_icon::sync(window.appearance());
-        app.load_language();
+        app.load_language(cx);
         app.subs
             .push(cx.on_blur(&app.connection_focus, window, |app, _, cx| {
                 app.connection_pending = None;
@@ -872,7 +881,7 @@ impl RdmApp {
         .detach();
         app
     }
-    fn load_language(&mut self) {
+    fn load_language(&mut self, _cx: &mut App) {
         let code = if self.pref.general.language == "auto" {
             system_language()
         } else {
@@ -922,6 +931,8 @@ impl RdmApp {
             map.clear();
             walk(&chinese, &english, &self.lang, &mut map);
         });
+        #[cfg(target_os = "macos")]
+        app_menu::sync(&self.lang, _cx);
     }
     fn tr(&self, key: &str) -> String {
         self.lang
@@ -1148,6 +1159,7 @@ impl RdmApp {
             keys: vec![],
             key_revision: 0,
             key_tree_cache: key_tree_cache::Cache::default(),
+            key_types: key_types::Cache::default(),
             scan: ScanState::default(),
             scan_epoch: 0,
             keys_loading: false,
@@ -1345,6 +1357,7 @@ impl RdmApp {
             return;
         }
         if reset {
+            t.key_types.reset();
             t.scan = ScanState::default();
             t.scan_epoch += 1;
             t.key_revision += 1;

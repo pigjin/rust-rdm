@@ -56,7 +56,7 @@ unicode-linebreak = { version = "=0.1.5", optional = true }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 objc2 = { version = "=0.6.5", optional = true }
-objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["NSApplication", "NSImage", "NSOpenPanel", "NSSavePanel", "NSPanel", "NSResponder", "NSView", "NSWindow", "NSFont", "objc2-core-foundation", "block2"], optional = true }
+objc2-app-kit = { version = "=0.3.2", default-features = false, features = ["NSApplication", "NSImage", "NSMenu", "NSMenuItem", "NSOpenPanel", "NSSavePanel", "NSPanel", "NSResponder", "NSView", "NSWindow", "NSFont", "objc2-core-foundation", "block2"], optional = true }
 objc2-foundation = { version = "=0.3.2", default-features = false, features = ["NSArray", "NSBundle", "NSData", "NSProcessInfo", "NSString", "NSURL", "NSRange", "block2", "std"], optional = true }
 block2 = { version = "=0.6.2", optional = true }
 raw-window-handle = { version = "=0.6.2", optional = true }

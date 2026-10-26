@@ -82,6 +82,10 @@ pub(super) fn verify(tab: &mut Tab) {
     let root = tree(tab);
     assert!(Arc::ptr_eq(&root, &tree(tab)));
     let a = visible_rows(tab);
+    tab.key_types.remember(b"cache:type-only".to_vec(), KeyType::String);
+    assert!(Arc::ptr_eq(&root, &tree(tab)), "type labels do not rebuild the key tree");
+    assert!(Arc::ptr_eq(&a, &visible_rows(tab)), "type labels do not rebuild visible rows");
+    tab.key_types.states.remove(b"cache:type-only".as_slice());
     assert!(
         Arc::ptr_eq(&a, &visible_rows(tab)),
         "unchanged renders reuse visible rows"

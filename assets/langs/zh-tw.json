@@ -398,6 +398,16 @@
     "network_error": "網路錯誤"
   },
   "menu": {
+    "edit": "編輯",
+    "window": "視窗",
+    "undo": "復原",
+    "redo": "重做",
+    "cut": "剪下",
+    "copy": "複製",
+    "paste": "貼上",
+    "select_all": "全選",
+    "close_tab": "關閉分頁",
+    "quit": "結束 RedisDock",
     "minimise": "最小化",
     "maximise": "最大化",
     "restore": "還原",

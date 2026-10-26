@@ -696,6 +696,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     "monitor-wrap-dark",
                     "key-loading-light",
                     "key-loading-dark",
+                    "lazy-key-types",
                     "safety-entry-pagination",
                     "safety-stream-retention",
                     "safety-ssh-trust-light",
@@ -814,7 +815,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                                     if app.active.is_none() {app.open_connection(qa_connections[0].clone(),window,cx);}
                                     app.qa_prepare_key_filter(name,window,cx);
                                 },
-                                name if name.starts_with("key-browser") || name.starts_with("key-type-") || name.starts_with("key-database-") || name.starts_with("key-loading-") => {
+                                name if name.starts_with("key-browser") || name.starts_with("key-type-") || name.starts_with("key-database-") || name.starts_with("key-loading-") || name == "lazy-key-types" => {
                                     if app.active.is_none() { app.open_connection(app.connections[0].clone(),window,cx); }
                                     if let Some(i)=app.index() {
                                         let tab=&mut app.tabs[i];
@@ -1167,6 +1168,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     let status_clients_restore = if snapshot.starts_with("status-clients-") { Some(status_clients_qa::verify(&view,window,snapshot,cx).await) } else { None };
                     let safety_restore = if snapshot.starts_with("safety-") { Some(safety_qa::verify(&view,window,snapshot,cx).await) } else { None };
                     let key_loading_restore = if snapshot.starts_with("key-loading-") { Some(key_loading_qa::verify(&view,window,snapshot,cx).await) } else { None };
+                    if snapshot == "lazy-key-types" { key_types_qa::verify(&view, window, cx).await; }
                     if snapshot.starts_with("key-input-") {
                         if let Some(text) = qa_key_input::verify(&view, window, snapshot, cx).await {
                             _copied_text = Some(text);
@@ -1247,6 +1249,10 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                             view.read(cx).qa_assert_database_tags(cx);
                         }).unwrap();
                         println!("QA PASS: database tag entry with Return");
+                    }
+                    #[cfg(target_os = "macos")]
+                    if snapshot == "preferences-language-preview" {
+                        app_menu::verify_flow(&view, window, cx).await;
                     }
                     if snapshot == "preferences-font-keyboard" {
                         let _ = cx.update_window(window.into(), |_, window, cx| {

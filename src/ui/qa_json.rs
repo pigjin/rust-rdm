@@ -12,7 +12,7 @@ pub(super) async fn idle(view: &Entity<RdmApp>, window: WindowHandle<Root>, cx: 
                 app.busy == 0
                     && app
                         .index()
-                        .is_none_or(|i| !app.tabs[i].values_loading && !app.tabs[i].value_saving && !app.tabs[i].clients_loading)
+                        .is_none_or(|i| !app.tabs[i].values_loading && !app.tabs[i].value_saving && !app.tabs[i].clients_loading && !app.tabs[i].key_types.in_flight)
             })
             .unwrap()
         {

@@ -138,16 +138,14 @@ impl Service {
             self.client(c, db)?.query_at(host, port, &args)
         })
     }
-    fn pipeline_at(
-        &self,
-        c: &Connection,
-        db: u32,
-        host: &str,
-        port: u16,
-        commands: &[Vec<Vec<u8>>],
-    ) -> Result<Vec<Value>> {
-        self.logged(c, db, commands, || {
-            self.client(c, db)?.pipeline_at(host, port, commands)
+    pub fn key_types(&self, c: &Connection, db: u32, keys: &[Vec<u8>], cancel: &Cancellation) -> Result<Vec<KeyType>> {
+        if keys.is_empty() || cancel.canceled() {
+            return Ok(vec![]);
+        }
+        let commands = keys.iter().map(|key| vec![b"TYPE".to_vec(), key.clone()]).collect::<Vec<_>>();
+        self.logged(c, db, &commands, || {
+            self.client(c, db)?.key_types(keys, cancel)
+                .map(|values| values.into_iter().map(|value| KeyType::parse(&value.text())).collect())
         })
     }
     fn logged<T>(
@@ -354,19 +352,8 @@ impl Service {
                 .map(Value::bytes)
                 .filter(|key| seen.insert(key.clone()))
                 .collect::<Vec<_>>();
-            let types = found
-                .iter()
-                .map(|key| vec![b"TYPE".to_vec(), key.clone()])
-                .collect::<Vec<_>>();
-            for (key, typ) in found
-                .into_iter()
-                .zip(self.pipeline_at(c, db, &host, port, &types)?)
-            {
-                let typ = KeyType::parse(&typ.text());
-                if typ != KeyType::None {
-                    keys.push(KeyEntry { key, kind: typ });
-                }
-            }
+            let typ = if kind.is_empty() { KeyType::Unknown } else { KeyType::parse(kind) };
+            keys.extend(found.into_iter().map(|key| KeyEntry { key, kind: typ.clone() }));
             if state.cursor == 0 {
                 state.node += 1;
             }
