@@ -20,6 +20,11 @@ jobs:
       - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
+      - name: Select Go
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version-file: tests/fixtures/ssh-server/go.mod
+          cache-dependency-path: tests/fixtures/ssh-server/go.sum
       - name: Select Rust
         run: |
           rustup toolchain install 1.99.0 --profile minimal
