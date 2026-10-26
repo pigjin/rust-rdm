@@ -52,10 +52,18 @@ minimum_system=$({
   /minos/ { split($2, part, "."); number = part[1] * 10000 + part[2] * 100 + part[3]; if (number > maximum) { maximum = number; version = $2 } }
   END { print version }')
 icon_info="$target_dir/macos-icon-info.plist"
-xcrun actool assets/images/AppIcon.icon \
-  --compile "$bundle/Contents/Resources" --app-icon AppIcon \
-  --platform macosx --minimum-deployment-target "$minimum_system" \
-  --output-partial-info-plist "$icon_info" --output-format human-readable-text --warnings --notices
+if [ -n "${REDISDOCK_MACOS_ICON_DIR:-}" ]; then
+  # Xcode 26.3 on the Intel runner fails to resolve this valid Icon Composer layer.
+  for icon in Assets.car AppIcon.icns; do
+    cp "$REDISDOCK_MACOS_ICON_DIR/$icon" "$bundle/Contents/Resources/$icon"
+  done
+  cp "$REDISDOCK_MACOS_ICON_DIR/icon-info.plist" "$icon_info"
+else
+  xcrun actool assets/images/AppIcon.icon \
+    --compile "$bundle/Contents/Resources" --app-icon AppIcon \
+    --platform macosx --minimum-deployment-target "$minimum_system" \
+    --output-partial-info-plist "$icon_info" --output-format human-readable-text --warnings --notices
+fi
 cat > "$bundle/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">

@@ -127,6 +127,9 @@ python3 scripts/check-macos-bundle.py debug
 # release 构建的核验命令也使用 release
 ```
 
+CI 在 Apple Silicon runner 编译一次图标，两种 macOS 安装包共用该产物，避免 Intel/Xcode 26.3 的图层引用编译失败。
+本地也可用 `REDISDOCK_MACOS_ICON_DIR` 指定包含 `Assets.car`、`AppIcon.icns` 和 `icon-info.plist` 的目录；应用包仍执行完整图标、代码和签名校验。
+
 输出为 `target/bundle/RedisDock.app`。构建脚本使用本地签名，包含静态 OpenSSL 和第三方许可。
 图标、图片和语言资源在 debug 与 release 构建中均嵌入程序，不依赖源码目录。
 macOS 原生图标源文件为 `assets/images/AppIcon.icon`，可用 Icon Composer 编辑。
@@ -138,6 +141,7 @@ macOS 原生图标源文件为 `assets/images/AppIcon.icon`，可用 Icon Compos
 ## GitHub Releases 发布
 
 推送 `v` 开头的 tag 会触发安装包构建和自动发布；PR 与 `main` 分支提交执行 macOS 回归。
+涉及 macOS 打包的 PR 另执行安装包验证，只上传 CI 产物，不创建或更新 Release。
 0.1.3 补齐 SSH 测试 fixture 的 Go 工具链，并合入 0.1.2 的安全与性能改动。
 0.1.2 的发布因缺少 Go 未完成，原标签保留；后续使用新版本标签发布。
 发布前更新 `Cargo.toml` 的版本，并运行 `cargo check --locked`；若修改版本后锁文件需要同步，
