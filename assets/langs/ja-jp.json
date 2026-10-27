@@ -398,6 +398,16 @@
     "network_error": "ネットワークエラー"
   },
   "menu": {
+    "edit": "編集",
+    "window": "ウインドウ",
+    "undo": "取り消す",
+    "redo": "やり直す",
+    "cut": "カット",
+    "copy": "コピー",
+    "paste": "ペースト",
+    "select_all": "すべてを選択",
+    "close_tab": "タブを閉じる",
+    "quit": "RedisDock を終了",
     "minimise": "最小化",
     "maximise": "最大化",
     "restore": "元に戻す",

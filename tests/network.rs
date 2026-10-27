@@ -289,6 +289,8 @@ fn sentinel_uses_general_auth_for_sentinel_and_separate_master_auth() {
         b"value"
     );
     let service = Service::new(Store::new(master.dir.path().join("settings")));
+    let type_keys = vec![b"via-sentinel".to_vec(), b"missing-key".to_vec()];
+    assert_eq!(service.key_types(&config, 1, &type_keys, &Default::default()).unwrap(), vec![KeyType::String, KeyType::None]);
     assert!(
         !service
             .sentinel_masters(&config)
@@ -362,6 +364,8 @@ fn sentinel_uses_general_auth_for_sentinel_and_separate_master_auth() {
     }
     // The existing connection discovers the promoted master even while the
     // old master's demotion lags, and retains its selected database.
+    assert_eq!(service.key_types(&config, 1, &type_keys, &Default::default()).unwrap(), vec![KeyType::String, KeyType::None]);
+    assert_eq!(service.client(&config, 1).unwrap().primary.1, replica.port);
     c.query(&command(&["SET", "after-failover", "new-master"]))
         .unwrap();
     assert_eq!(c.primary.1, replica.port);
@@ -371,8 +375,7 @@ fn sentinel_uses_general_auth_for_sentinel_and_separate_master_auth() {
         b"value"
     );
 }
-#[test]
-fn tls_ca_sni_and_mutual_authentication() {
+fn tls_fixture() -> (Server, Connection) {
     let dir = tempfile::Builder::new()
         .prefix("rdm-tls-")
         .tempdir_in("/private/tmp")
@@ -456,6 +459,14 @@ fn tls_ca_sni_and_mutual_authentication() {
         exec_timeout: 2,
         ..Default::default()
     };
+    (server, config)
+}
+
+#[test]
+fn tls_ca_sni_and_mutual_authentication() {
+    let (server, config) = tls_fixture();
+    let port = server.port;
+    let key = std::path::Path::new(&config.ssl.key_file);
     let mut c = Client::connect(&config, 0).unwrap();
     assert_eq!(c.query(&command(&["PING"])).unwrap().bytes(), b"PONG");
     for scheme in ["http", "https"] {
@@ -630,8 +641,15 @@ fn cluster_redirects_and_scans_every_master() {
         }
     }
     for i in 0..90 {
+        let key = format!("cluster:{i}");
+        let value = i.to_string();
+        let args = match i % 3 {
+            0 => command(&["SET", &key, &value]),
+            1 => command(&["HSET", &key, "field", &value]),
+            _ => command(&["RPUSH", &key, &value]),
+        };
         client
-            .query(&command(&["SET", &format!("cluster:{i}"), &i.to_string()]))
+            .query(&args)
             .unwrap();
     }
     let service = Service::new(Store::new(nodes[0].dir.path().join("settings")));
@@ -639,6 +657,21 @@ fn cluster_redirects_and_scans_every_master() {
         .all_keys(&config, 0, "cluster:*", &Default::default())
         .unwrap();
     assert_eq!(all.len(), 91);
+    let mut expected = all.iter().map(|key| {
+        match std::str::from_utf8(key).unwrap().strip_prefix("cluster:").unwrap().parse::<usize>() {
+            Ok(i) if i % 3 == 1 => KeyType::Hash,
+            Ok(i) if i % 3 == 2 => KeyType::List,
+            _ => KeyType::String,
+        }
+    }).collect::<Vec<_>>();
+    let mut keys = all.clone();
+    keys.push(b"cluster:missing".to_vec());
+    expected.push(KeyType::None);
+    assert_eq!(service.key_types(&config, 0, &keys, &Default::default()).unwrap(), expected, "cross-slot type batches retain their input order");
+    let commands = keys.iter().map(|key| vec![b"TYPE".to_vec(), key.clone()]).collect::<Vec<_>>();
+    assert!(commands.iter().any(|args| client.query_at("127.0.0.1", base, args).is_err_and(|error| error.to_string().starts_with("MOVED"))), "fixture must exercise a redirected TYPE");
+    let redirected = client.pipeline_at("127.0.0.1", base, &commands).unwrap();
+    assert_eq!(redirected.iter().map(|value| KeyType::parse(&value.text())).collect::<Vec<_>>(), expected);
     assert_eq!(
         client
             .query(&command(&["GET", "cluster:42"]))
@@ -898,6 +931,20 @@ fn system_proxy_routes_real_connections() {
 }
 
 #[cfg(unix)]
+fn verify_large_pipeline(client: &mut Client) {
+    let (host, port) = client.primary.clone();
+    for count in [3000, 12000] {
+        let commands = (0..count).map(|i| command(&["ECHO", &format!("reply:{i}\0\r\n")])).collect::<Vec<_>>();
+        let started = Instant::now();
+        let replies = client.pipeline_at(&host, port, &commands).unwrap();
+        assert_eq!(replies.len(), count);
+        for (reply, args) in replies.iter().zip(&commands) { assert_eq!(reply.bytes(), args[1]); }
+        assert_eq!(client.query(&command(&["PING"])).unwrap().bytes(), b"PONG");
+        println!("SSH PIPELINE: network={} tls={} count={count} elapsed_ms={:.2}", client.config.network, client.config.ssl.enable, started.elapsed().as_secs_f64()*1000.);
+    }
+}
+
+#[cfg(unix)]
 #[test]
 #[ignore = "requires REDISDOCK_SSH_FIXTURE built from tests/fixtures/ssh-server"]
 fn ssh_authentication_and_unix_forwarding_combinations() {
@@ -1041,6 +1088,9 @@ fn ssh_authentication_and_unix_forwarding_combinations() {
                 let mut client = Client::connect(&config, 3)
                     .unwrap_or_else(|error| panic!("{} {login}: {error}", config.name));
                 assert_eq!(client.query(&command(&["PING"])).unwrap().bytes(), b"PONG");
+                if scheme.is_empty() && login == "password" {
+                    verify_large_pipeline(&mut client);
+                }
                 if scheme.is_empty() && network == "unix" && login == "password" {
                     let started = Instant::now();
                     let error = client.query(&command(&["BLPOP", "empty-ssh-fixture", "2"])).unwrap_err();
@@ -1075,6 +1125,25 @@ fn ssh_authentication_and_unix_forwarding_combinations() {
         String::from_utf8_lossy(&child.stdout),
         String::from_utf8_lossy(&child.stderr)
     );
+    let (_tls_redis, mut tls_config) = tls_fixture();
+    let tls_ssh_port = port();
+    let _tls_ssh = Process(Command::new(std::env::var("REDISDOCK_SSH_FIXTURE").unwrap())
+        .args(["-addr", &format!("127.0.0.1:{tls_ssh_port}"), "-redis", &format!("127.0.0.1:{}", tls_config.port)])
+        .arg("-host-key").arg(&host_key)
+        .arg("-authorized-key").arg(client_key.with_extension("pem.pub"))
+        .stdout(Stdio::null()).stderr(Stdio::null()).spawn().unwrap());
+    let started = Instant::now();
+    while TcpStream::connect(("127.0.0.1", tls_ssh_port)).is_err() {
+        assert!(started.elapsed() < Duration::from_secs(5));
+        std::thread::sleep(Duration::from_millis(20));
+    }
+    tls_config.ssh = base.ssh.clone();
+    tls_config.ssh.port = tls_ssh_port;
+    tls_config.ssh.trusted_host = None;
+    trust_ssh_fixture(&mut tls_config);
+    verify_large_pipeline(&mut Client::connect(&tls_config, 0).unwrap());
+    tls_config.ssl.sni = "wrong.example.invalid".into();
+    assert!(Client::connect(&tls_config, 0).is_err(), "SSH wrapping must preserve TLS hostname verification");
     let mut rejected = base.clone();
     rejected.ssh.password = "wrong-fixture-password".into();
     assert!(Client::connect(&rejected, 0).is_err());
@@ -1091,6 +1160,7 @@ fn ssh_authentication_and_unix_forwarding_combinations() {
 
 #[test]
 fn a_lost_write_reply_is_never_replayed() {
+    for pipelined in [false, true] {
     let listener=TcpListener::bind(("127.0.0.1",0)).unwrap();
     let port=listener.local_addr().unwrap().port();
     let server=std::thread::spawn(move || {
@@ -1104,7 +1174,14 @@ fn a_lost_write_reply_is_never_replayed() {
     });
     let config=Connection {port,conn_timeout:1,exec_timeout:1,..Default::default()};
     let mut client=Client::connect(&config,0).unwrap();
-    assert!(client.query(&command(&["INCR","counter"])).is_err());
+    let args = command(&["INCR", "counter"]);
+    if pipelined {
+        let (host, port) = client.primary.clone();
+        assert!(client.pipeline_at(&host, port, &[args]).is_err());
+    } else {
+        assert!(client.query(&args).is_err());
+    }
     let listener=server.join().unwrap();listener.set_nonblocking(true).unwrap();
     assert!(matches!(listener.accept(),Err(e) if e.kind()==std::io::ErrorKind::WouldBlock),"no second connection may replay the uncertain write");
+    }
 }

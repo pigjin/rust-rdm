@@ -398,6 +398,16 @@
     "network_error": "네트워크 오류"
   },
   "menu": {
+    "edit": "편집",
+    "window": "윈도우",
+    "undo": "실행 취소",
+    "redo": "다시 실행",
+    "cut": "오려두기",
+    "copy": "복사하기",
+    "paste": "붙여넣기",
+    "select_all": "모두 선택",
+    "close_tab": "탭 닫기",
+    "quit": "RedisDock 종료",
     "minimise": "최소화",
     "maximise": "최대화",
     "restore": "복원",

@@ -1784,6 +1784,40 @@ fn scan_pages_filter_type_and_exact_key() {
             .any(|command| command.starts_with("TYPE "))
     }));
 }
+
+#[test]
+fn large_first_page_defers_types_and_preserves_binary_keys() {
+    let f = RedisFixture::new();
+    let mut client = Client::connect(&f.config, 0).unwrap();
+    let (host, port) = client.primary.clone();
+    for start in (0..100_000).step_by(3000) {
+        let commands = (start..(start + 3000).min(100_000))
+            .map(|i| command(&["SET", &format!("large:{i}"), "x"]))
+            .collect::<Vec<_>>();
+        client.pipeline_at(&host, port, &commands).unwrap();
+    }
+    let binary = b"\xff\0:binary".to_vec();
+    client.query(&vec![b"SET".to_vec(), binary.clone(), b"x".to_vec()]).unwrap();
+    let service = f.service();
+    let started = Instant::now();
+    let page = service.scan(&f.config, 0, "*", "", false, ScanState::default(), 3000).unwrap();
+    println!("FIRST PAGE: keys={} total={} elapsed_ms={:.2}", page.keys.len(), page.total, started.elapsed().as_secs_f64()*1000.);
+    assert!(page.keys.len() >= 500 && page.keys.len() < 10_000);
+    assert!(!page.state.end);
+    assert_eq!(page.total, 100_001);
+    assert!(page.keys.iter().all(|entry| entry.kind == KeyType::Unknown));
+    assert!(!service.history.lock().iter().any(|entry| entry.command.lines().any(|line| line.starts_with("TYPE "))));
+    let keys = vec![binary.clone(), b"large:42".to_vec(), b"missing-key".to_vec()];
+    assert_eq!(service.key_types(&f.config, 0, &keys, &Default::default()).unwrap(), vec![KeyType::String, KeyType::String, KeyType::None]);
+    let exact = service.scan(&f.config, 0, &display_bytes(&binary), "", true, ScanState::default(), 3000).unwrap();
+    assert_eq!(exact.keys[0].key, binary);
+    assert_eq!(exact.keys[0].kind, KeyType::String);
+    let cancel = redis::Cancellation::default();
+    cancel.cancel();
+    let count = service.history.lock().len();
+    assert!(service.key_types(&f.config, 0, &keys, &cancel).unwrap().is_empty());
+    assert_eq!(service.history.lock().len(), count);
+}
 #[test]
 fn batch_ttl_uses_one_deadline_for_all_keys() {
     let fixture = RedisFixture::new();

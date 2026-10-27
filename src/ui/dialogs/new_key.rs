@@ -1370,6 +1370,7 @@ impl RdmApp {
                     // The original inserts this node directly, including when
                     // a filter would exclude it; a full scan would lose it.
                     let bytes = key.into_bytes();
+                    app.tabs[i].key_types.remember(bytes.clone(), saved_kind.clone());
                     if !app.tabs[i].keys.iter().any(|entry| entry.key == bytes) {
                         app.tabs[i].keys.push(KeyEntry {
                             key: bytes.clone(),

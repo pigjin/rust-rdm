@@ -618,6 +618,7 @@ pub struct Decoder {
 pub enum KeyType {
     #[default]
     None,
+    Unknown,
     String,
     Hash,
     List,
@@ -644,6 +645,7 @@ impl KeyType {
     pub fn name(&self) -> &str {
         match self {
             Self::None => "NONE",
+            Self::Unknown => "…",
             Self::String => "STRING",
             Self::Hash => "HASH",
             Self::List => "LIST",
@@ -656,6 +658,8 @@ impl KeyType {
     }
     pub fn short(&self) -> &str {
         match self {
+            Self::None => "NONE",
+            Self::Unknown => "…",
             Self::String => "S",
             Self::Hash => "H",
             Self::List => "L",

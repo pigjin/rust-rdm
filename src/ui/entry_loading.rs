@@ -197,6 +197,7 @@ impl RdmApp {
                         if first {
                             t.row_values.clear();
                         }
+                        t.key_types.remember(detail.key.clone(), detail.kind.clone());
                         t.detail = Some(detail);
                         t.detail_loaded = Instant::now();
                         t.editing = false;

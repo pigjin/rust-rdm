@@ -398,6 +398,16 @@
     "network_error": "Erro de rede"
   },
   "menu": {
+    "edit": "Editar",
+    "window": "Janela",
+    "undo": "Desfazer",
+    "redo": "Refazer",
+    "cut": "Recortar",
+    "copy": "Copiar",
+    "paste": "Colar",
+    "select_all": "Selecionar Tudo",
+    "close_tab": "Fechar Aba",
+    "quit": "Sair do RedisDock",
     "minimise": "Minimizar",
     "maximise": "Maximizar",
     "restore": "Restaurar",

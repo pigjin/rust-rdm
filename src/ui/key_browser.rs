@@ -560,6 +560,7 @@ impl RdmApp {
                     .collect::<Vec<_>>()
             }),
         )
+        .with_decoration(key_types::VisibleTypes { view: cx.weak_entity(), id, rows: nodes.clone() })
         .track_scroll(&tab.key_scroll)
         .flex_1()
         .min_h_0();
@@ -741,7 +742,11 @@ impl RdmApp {
                             .into_any_element()
                         }
                     } else {
-                        type_mark(&row.kind, true, true, selected)
+                        match row.key.as_ref().and_then(|key| tab.key_types.states.get(key)) {
+                            Some(key_types::State::Ready(kind)) => type_mark(kind, true, true, selected),
+                            Some(key_types::State::Failed) => type_mark(&KeyType::Other("?".into()), false, true, selected),
+                            _ => type_mark(&row.kind, true, true, selected),
+                        }
                     }),
             )
             .child(

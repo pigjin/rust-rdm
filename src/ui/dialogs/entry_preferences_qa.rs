@@ -333,7 +333,7 @@ pub(in crate::ui) async fn verify(
                         });
                     }
                     app.apply_theme(w, cx);
-                    app.load_language();
+                    app.load_language(cx);
                 })
             })
             .unwrap();

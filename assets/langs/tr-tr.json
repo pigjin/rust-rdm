@@ -398,6 +398,16 @@
     "network_error": "Ağ hatası"
   },
   "menu": {
+    "edit": "Düzen",
+    "window": "Pencere",
+    "undo": "Geri Al",
+    "redo": "Yinele",
+    "cut": "Kes",
+    "copy": "Kopyala",
+    "paste": "Yapıştır",
+    "select_all": "Tümünü Seç",
+    "close_tab": "Sekmeyi Kapat",
+    "quit": "RedisDock’tan Çık",
     "minimise": "Küçült",
     "maximise": "Büyüt",
     "restore": "Geri Yükle",
