@@ -327,7 +327,7 @@ impl Service {
                 "MATCH",
                 pattern,
                 "COUNT",
-                &size.to_string(),
+                &(size - keys.len()).to_string(),
             ]);
             if !kind.is_empty() {
                 args.extend(command(&[

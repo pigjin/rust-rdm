@@ -13,6 +13,9 @@ fn wrapped_lines(text: &str, width: f32, font: &Font, window: &Window) -> Vec<St
     if text.is_empty() {
         return vec![String::new()];
     }
+    if super::text::script_width(&text, font.clone(), 14., window) <= width {
+        return vec![text];
+    }
     let mut opportunities: Vec<_> = unicode_linebreak::linebreaks(&text)
         .map(|(i, _)| i)
         .filter(|i| {
@@ -166,14 +169,82 @@ impl ClientSort {
     }
 }
 
-fn sorted_rows(tab: &Tab) -> Vec<&BTreeMap<String, String>> {
-    let mut rows: Vec<_> = tab.clients.iter().collect();
-    let Some((field, order)) = tab.client_sort.state() else {
-        return rows;
+pub(super) type ClientRows = Vec<BTreeMap<String, String>>;
+
+pub(super) struct ClientList {
+    pub rows: Arc<ClientRows>,
+    pub order: Vec<usize>,
+    pub sort: ClientSort,
+    pub loading: bool,
+    pub started: Instant,
+    pub list: ListState,
+    layout: RefCell<Option<(f32, String)>>,
+    #[cfg(feature = "ui-qa")]
+    pub gate: Option<Arc<status_clients_qa::LoadGate>>,
+    #[cfg(feature = "ui-qa")]
+    pub lifetime: Arc<()>,
+}
+
+impl ClientList {
+    fn new() -> Self {
+        Self {
+            rows: Arc::new(vec![]),
+            order: vec![],
+            sort: ClientSort::default(),
+            loading: false,
+            started: Instant::now(),
+            list: ListState::new(0, ListAlignment::Top, px(100.)),
+            layout: RefCell::new(None),
+            #[cfg(feature = "ui-qa")]
+            gate: None,
+            #[cfg(feature = "ui-qa")]
+            lifetime: Arc::new(()),
+        }
+    }
+
+    pub(super) fn replace_rows(&mut self, rows: Arc<ClientRows>, order: Vec<usize>) {
+        self.list.reset_with_uniform_height(rows.len(), px(34.));
+        self.rows = rows;
+        self.order = order;
+        *self.layout.borrow_mut() = None;
+    }
+
+    fn fade(&self, color: Hsla, dark: bool) -> Hsla {
+        if !self.loading {
+            return color;
+        }
+        let alpha = if dark { 0.38 } else { 0.5 };
+        let mut value: Rgba = color.into();
+        let parent: Rgba = rgb(if dark { 0x18181c } else { 0xffffff }).into();
+        value.r = value.r * alpha + parent.r * (1. - alpha);
+        value.g = value.g * alpha + parent.g * (1. - alpha);
+        value.b = value.b * alpha + parent.b * (1. - alpha);
+        value.into()
+    }
+}
+
+impl Tab {
+    pub(super) fn close_clients(&mut self) {
+        self.client_epoch = self.client_epoch.wrapping_add(1);
+        self.clients = None;
+    }
+}
+
+#[cfg(feature = "ui-qa")]
+pub(super) static SORT_COUNT: std::sync::atomic::AtomicUsize =
+    std::sync::atomic::AtomicUsize::new(0);
+
+pub(super) fn sorted_indices(clients: &ClientRows, sort: ClientSort) -> Vec<usize> {
+    #[cfg(feature = "ui-qa")]
+    SORT_COUNT.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+    let mut indices: Vec<_> = (0..clients.len()).collect();
+    let Some((field, order)) = sort.state() else {
+        return indices;
     };
     // Vec::sort_by is stable, including equal numeric ages and canonical
     // equivalent address strings, as in the original DataTable.
-    rows.sort_by(|a, b| {
+    indices.sort_by(|a, b| {
+        let (a, b) = (&clients[*a], &clients[*b]);
         let order_value = if field == "addr" {
             match (a.get(field), b.get(field)) {
                 (None, None) => Ordering::Equal,
@@ -202,7 +273,7 @@ fn sorted_rows(tab: &Tab) -> Vec<&BTreeMap<String, String>> {
             order_value
         }
     });
-    rows
+    indices
 }
 
 pub(super) fn compare_addresses(a: &str, b: &str) -> Ordering {
@@ -297,14 +368,16 @@ impl RdmApp {
             .preserve_horizontal_anchor()
             .trigger_with(move |_, _, _| trigger.into_any_element())
             .on_open_change(move |open, window, cx| {
-                if *open {
-                    let _ = load.update(cx, |app, cx| {
-                        if let Some(i) = app.tab_index(id) {
-                            app.tabs[i].client_sort = ClientSort::default();
+                let _ = load.update(cx, |app, cx| {
+                    if let Some(i) = app.tab_index(id) {
+                        app.tabs[i].close_clients();
+                        if *open {
+                            app.tabs[i].clients = Some(ClientList::new());
+                            app.update_clients(id, None, window, cx);
                         }
-                        app.load_clients(id, window, cx);
-                    });
-                }
+                        cx.notify();
+                    }
+                });
             })
             .content(move |_, window, cx| {
                 content
@@ -314,20 +387,44 @@ impl RdmApp {
             .into_any_element()
     }
 
-    fn load_clients(&mut self, id: u64, window: &mut Window, cx: &mut Context<Self>) {
+    pub(super) fn update_clients(
+        &mut self,
+        id: u64,
+        column: Option<Column>,
+        window: &mut Window,
+        cx: &mut Context<Self>,
+    ) {
         let Some(i) = self.tab_index(id) else {
             return;
         };
-        let connection = self.tabs[i].conn.clone();
-        self.tabs[i].clients_loading = true;
-        self.tabs[i].client_load_started = Instant::now();
-        let service = self.service.clone();
+        let tab = &mut self.tabs[i];
+        let Some(clients) = tab.clients.as_mut().filter(|clients| !clients.loading) else {
+            return;
+        };
+        if let Some(column) = column {
+            clients.sort = clients.sort.next(column);
+        }
+        clients.loading = true;
+        clients.started = Instant::now();
+        let sort = clients.sort;
+        let rows = column.map(|_| clients.rows.clone());
         #[cfg(feature = "ui-qa")]
-        let gate = self.tabs[i].client_load_gate.clone();
+        let gate = clients.gate.clone();
+        tab.client_epoch = tab.client_epoch.wrapping_add(1);
+        let epoch = tab.client_epoch;
+        let connection = self.tabs[i].conn.clone();
+        let service = self.service.clone();
         let task = cx.background_executor().spawn(async move {
-            let result = service.client_list(&connection);
+            let result = match rows {
+                Some(rows) => Ok(rows),
+                None => service.client_list(&connection).map(Arc::new),
+            }
+            .map(|rows| {
+                let order = sorted_indices(&rows, sort);
+                (rows, order)
+            });
             #[cfg(feature = "ui-qa")]
-            if let (Some(gate), Ok(rows)) = (gate, &result) {
+            if let (Some(gate), Ok((rows, _))) = (gate, &result) {
                 gate.hold(rows.clone());
             }
             result
@@ -335,10 +432,14 @@ impl RdmApp {
         cx.spawn_in(window, async move |this, cx| {
             let result = task.await;
             let _ = this.update_in(cx, |app, _, cx| {
-                if let Some(i) = app.tab_index(id) {
-                    app.tabs[i].clients_loading = false;
+                if let Some(i) = app
+                    .tab_index(id)
+                    .filter(|i| app.tabs[*i].client_epoch == epoch)
+                    && let Some(clients) = app.tabs[i].clients.as_mut()
+                {
+                    clients.loading = false;
                     match result {
-                        Ok(rows) => app.tabs[i].clients = rows,
+                        Ok((rows, order)) => clients.replace_rows(rows, order),
                         Err(error) => app.toast(error.to_string(), true),
                     }
                 }
@@ -363,34 +464,129 @@ impl RdmApp {
         }
     }
 
+    fn render_client_row(
+        &self,
+        id: u64,
+        index: usize,
+        shared_column_width: f32,
+        window: &Window,
+        cx: &Context<Self>,
+    ) -> AnyElement {
+        let Some(clients) = self
+            .tab_index(id)
+            .and_then(|i| self.tabs[i].clients.as_ref())
+        else {
+            return div().into_any_element();
+        };
+        let Some(client) = clients.order.get(index).and_then(|i| clients.rows.get(*i)) else {
+            return div().into_any_element();
+        };
+        let dark = self.dark(cx);
+        let fade = |color| clients.fade(color, dark);
+        let foreground = fade(if dark {
+            rgba(0xffffffd1).into()
+        } else {
+            rgb(0x333639).into()
+        });
+        let border = fade(rgb(if dark { 0x58585e } else { 0xefeff5 }).into());
+        let mut font = gpui::font(".SystemUIFont");
+        font.features = FontFeatures(Arc::new(vec![("tnum".into(), 1)]));
+        let last = index + 1 == clients.order.len();
+        let values = [
+            (index + 1).to_string(),
+            client.get("addr").cloned().unwrap_or_default(),
+            client.get("db").cloned().unwrap_or_default(),
+            self.seconds_text(client.get("age").and_then(|v| v.parse().ok()).unwrap_or(0)),
+            self.seconds_text(client.get("idle").and_then(|v| v.parse().ok()).unwrap_or(0)),
+        ];
+        let mut row = div()
+            .id(format!("status-clients-row-{index}"))
+            .test_support()
+            .role(Role::Label)
+            .aria_label(values.join("\t"))
+            .w(px(60. + shared_column_width * 4.))
+            .flex()
+            .flex_shrink_0();
+        for (j, text) in values.into_iter().enumerate() {
+            let key = ["no", "addr", "db", "age", "idle"][j];
+            let cell_width = if j == 0 { 60. } else { shared_column_width };
+            let lines = wrapped_lines(
+                &text,
+                cell_width - 16. - if j < 4 { 1. } else { 0. },
+                &font,
+                window,
+            );
+            let mut label = div().flex().flex_col().items_center().flex_shrink_0();
+            for (line, text) in lines.into_iter().enumerate() {
+                label = label.child(
+                    div()
+                        .id(format!("status-clients-line-{index}-{j}-{line}"))
+                        .test_support()
+                        .role(Role::Label)
+                        .aria_label(text.clone())
+                        .h(px(21.))
+                        .child(super::views::status_text(
+                            text,
+                            14.,
+                            21.,
+                            FontWeight::NORMAL,
+                            &format!("status-clients-text-{index}-{j}-{line}"),
+                            font.clone(),
+                            window,
+                            cx,
+                        )),
+                );
+            }
+            let selected = clients.sort.state().is_some_and(|(field, _)| field == key);
+            let color = if index % 2 == 1 {
+                if dark { 0x515157 } else { 0xfafafc }
+            } else if selected {
+                if dark { 0x535359 } else { 0xf7f7fa }
+            } else if dark {
+                0x48484e
+            } else {
+                0xffffff
+            };
+            let mut cell = div()
+                .id(format!("status-clients-cell-{index}-{j}"))
+                .test_support()
+                .px(px(8.))
+                .py(px(6.))
+                .when(j < 4, |d| d.border_r_1())
+                .when(!last, |d| d.border_b_1())
+                .border_color(border)
+                .bg(fade(rgb(color).into()))
+                .flex()
+                .items_center()
+                .justify_center()
+                .text_color(foreground)
+                .child(label);
+            cell = if j == 0 {
+                cell.w(px(60.)).flex_shrink_0()
+            } else {
+                cell.w(px(shared_column_width)).flex_shrink_0().min_w_0()
+            };
+            row = row.child(cell);
+        }
+        row.into_any_element()
+    }
+
     fn render_clients(
         &self,
         id: u64,
         arrow_x: f32,
-        window: &Window,
+        window: &mut Window,
         cx: &Context<Self>,
     ) -> AnyElement {
         let Some(i) = self.tab_index(id) else {
             return div().into_any_element();
         };
-        let tab = &self.tabs[i];
-        let dark = self.dark(cx);
-        let parent_color: Hsla = rgb(if dark { 0x18181c } else { 0xffffff }).into();
-        // DataTable applies opacity to the wrapper as a composited group.
-        // GPUI opacity blends each primitive separately. For this opaque flat
-        // table, preblend RGB toward the parent while preserving glyph alpha.
-        let fade = |color: Hsla| -> Hsla {
-            if !tab.clients_loading {
-                return color;
-            }
-            let alpha = if dark { 0.38 } else { 0.5 };
-            let mut value: Rgba = color.into();
-            let parent: Rgba = parent_color.into();
-            value.r = value.r * alpha + parent.r * (1. - alpha);
-            value.g = value.g * alpha + parent.g * (1. - alpha);
-            value.b = value.b * alpha + parent.b * (1. - alpha);
-            value.into()
+        let Some(clients) = self.tabs[i].clients.as_ref() else {
+            return div().into_any_element();
         };
+        let dark = self.dark(cx);
+        // Preblend the loading group while preserving glyph alpha.
+        let fade = |color| clients.fade(color, dark);
         // The original tooltip is teleported outside the configured body font.
         let mut font = gpui::font(".SystemUIFont");
         font.features = FontFeatures(std::sync::Arc::new(vec![("tnum".into(), 1)]));
@@ -421,10 +617,7 @@ impl RdmApp {
             (3, "age", Some(Column::Age)),
             (4, "idle", Some(Column::Idle)),
         ] {
-            let selected = tab
-                .client_sort
-                .state()
-                .is_some_and(|(field, _)| field == key);
+            let selected = clients.sort.state().is_some_and(|(field, _)| field == key);
             let title = if key == "no" {
                 "#".into()
             } else {
@@ -471,17 +664,11 @@ impl RdmApp {
                 cell.w(px(shared_column_width)).flex_shrink_0().min_w_0()
             };
             if let Some(column) = sort {
-                let ascending = tab.client_sort.state() == Some((key, "ascend"));
+                let ascending = clients.sort.state() == Some((key, "ascend"));
                 cell = cell
                     .cursor_pointer()
-                    .on_click(cx.listener(move |app, _, _, cx| {
-                        if let Some(i) = app.tab_index(id) {
-                            if app.tabs[i].clients_loading {
-                                return;
-                            }
-                            app.tabs[i].client_sort = app.tabs[i].client_sort.next(column);
-                            cx.notify();
-                        }
+                    .on_click(cx.listener(move |app, _, window, cx| {
+                        app.update_clients(id, Some(column), window, cx);
                     }))
                     .child(
                         div()
@@ -510,97 +697,53 @@ impl RdmApp {
             }
             header = header.child(cell);
         }
-        let clients = sorted_rows(tab);
+        let layout = (width, self.pref.general.language.clone());
+        let layout_changed = clients.layout.borrow().as_ref() != Some(&layout);
+        if layout_changed {
+            clients.list.remeasure();
+            *clients.layout.borrow_mut() = Some(layout);
+        }
+        let height = px(window.viewport_size().height.as_f32() * 0.5);
+        let list_state = clients.list.clone();
+        let parent = cx.entity_id();
         let mut body = div()
             .id("clients-scroll")
             .test_support()
+            .relative()
             .flex()
             .flex_col()
-            .max_h(px(window.viewport_size().height.as_f32() * 0.5))
-            .overflow_y_scroll();
-        for (index, client) in clients.iter().enumerate() {
-            let last = index + 1 == clients.len();
-            let values = [
-                (index + 1).to_string(),
-                client.get("addr").cloned().unwrap_or_default(),
-                client.get("db").cloned().unwrap_or_default(),
-                self.seconds_text(client.get("age").and_then(|v| v.parse().ok()).unwrap_or(0)),
-                self.seconds_text(client.get("idle").and_then(|v| v.parse().ok()).unwrap_or(0)),
-            ];
-            let mut row = div()
-                .id(format!("status-clients-row-{index}"))
-                .test_support()
-                .role(Role::Label)
-                .aria_label(values.join("\t"))
-                .flex()
-                .flex_shrink_0();
-            for (j, text) in values.into_iter().enumerate() {
-                let key = ["no", "addr", "db", "age", "idle"][j];
-                let cell_width = if j == 0 { 60. } else { shared_column_width };
-                let lines = wrapped_lines(
-                    &text,
-                    cell_width - 16. - if j < 4 { 1. } else { 0. },
-                    &font,
-                    window,
-                );
-                let mut label = div().flex().flex_col().items_center().flex_shrink_0();
-                for (line, text) in lines.into_iter().enumerate() {
-                    label = label.child(
-                        div()
-                            .id(format!("status-clients-line-{index}-{j}-{line}"))
-                            .test_support()
-                            .role(Role::Label)
-                            .aria_label(text.clone())
-                            .h(px(21.))
-                            .child(super::views::status_text(
-                                text,
-                                14.,
-                                21.,
-                                FontWeight::NORMAL,
-                                &format!("status-clients-text-{index}-{j}-{line}"),
-                                font.clone(),
-                                window,
-                                cx,
-                            )),
-                    );
-                }
-                let selected = tab
-                    .client_sort
-                    .state()
-                    .is_some_and(|(field, _)| field == key);
-                let color = if index % 2 == 1 {
-                    if dark { 0x515157 } else { 0xfafafc }
-                } else if selected {
-                    if dark { 0x535359 } else { 0xf7f7fa }
-                } else if dark {
-                    0x48484e
-                } else {
-                    0xffffff
-                };
-                let mut cell = div()
-                    .id(format!("status-clients-cell-{index}-{j}"))
-                    .test_support()
-                    .px(px(8.))
-                    .py(px(6.))
-                    .when(j < 4, |d| d.border_r_1())
-                    .when(!last, |d| d.border_b_1())
-                    .border_color(border)
-                    .bg(fade(rgb(color).into()))
-                    .flex()
-                    .items_center()
-                    .justify_center()
-                    .text_color(foreground)
-                    .child(label);
-                cell = if j == 0 {
-                    cell.w(px(60.)).flex_shrink_0()
-                } else {
-                    cell.w(px(shared_column_width)).flex_shrink_0().min_w_0()
-                };
-                row = row.child(cell);
-            }
-            body = body.child(row);
+            .flex_shrink_0()
+            .max_h(height)
+            .overflow_hidden();
+        if !clients.order.is_empty() {
+            body = body.child(
+                gpui::list(
+                    clients.list.clone(),
+                    cx.processor(move |app, index, window, cx| {
+                        app.render_client_row(id, index, shared_column_width, window, cx)
+                    }),
+                )
+                .with_sizing_behavior(ListSizingBehavior::Infer)
+                .w_full()
+                .max_h(height)
+                .flex_shrink_0(),
+            );
         }
-        if clients.is_empty() {
+        if layout_changed && !clients.order.is_empty() {
+            // GPUI discards height hints during the first paint and width changes.
+            body = body.child(
+                canvas(
+                    move |_, _, cx| {
+                        list_state.clone().with_uniform_item_height(px(34.));
+                        cx.notify(parent);
+                    },
+                    |_, _, _, _| {},
+                )
+                .absolute()
+                .inset_0(),
+            );
+        }
+        if clients.order.is_empty() {
             let text = if self.pref.general.language == "zh" {
                 "无数据"
             } else {
@@ -689,12 +832,7 @@ impl RdmApp {
                     .text_color(foreground)
                     .icon(icon("refresh").size(px(16.)))
                     .on_click(cx.listener(move |app, _, window, cx| {
-                        if app
-                            .tab_index(id)
-                            .is_some_and(|i| !app.tabs[i].clients_loading)
-                        {
-                            app.load_clients(id, window, cx);
-                        }
+                        app.update_clients(id, None, window, cx);
                     })),
             );
         let table = div()
@@ -718,10 +856,10 @@ impl RdmApp {
         let table = div()
             .relative()
             .child(table)
-            .when(tab.clients_loading, |container| {
-                let started = tab.client_load_started;
+            .when(clients.loading, |container| {
+                let started = clients.started;
                 #[cfg(feature = "ui-qa")]
-                let phase = tab.client_load_gate.as_ref().map(|_| 0.4_f32);
+                let phase = clients.gate.as_ref().map(|_| 0.4_f32);
                 #[cfg(not(feature = "ui-qa"))]
                 let phase: Option<f32> = None;
                 let reduce_motion = cx.reduce_motion();
@@ -882,8 +1020,34 @@ mod macos {
     }
 }
 
-#[cfg(all(test, target_os = "macos"))]
+#[cfg(test)]
 mod tests {
+    #[test]
+    fn client_sort_is_stable_and_has_three_states() {
+        use super::{ClientList, ClientSort, Column, sorted_indices};
+        let rows = [3, 11, 11]
+            .into_iter()
+            .map(|age| [("age".to_string(), age.to_string())].into())
+            .collect();
+        let sort = ClientSort::default();
+        assert_eq!(sorted_indices(&rows, sort), [1, 2, 0]);
+        let sort = sort.next(Column::Age);
+        assert_eq!(sorted_indices(&rows, sort), [0, 1, 2]);
+        let sort = sort.next(Column::Age);
+        assert_eq!(sort.state(), None);
+        assert_eq!(sorted_indices(&rows, sort), [0, 1, 2]);
+        assert_eq!(
+            sort.next(Column::Address).state(),
+            Some(("addr", "descend"))
+        );
+        let mut clients = ClientList::new();
+        clients.replace_rows(std::sync::Arc::new(rows), vec![0, 1, 2]);
+        let weak = std::sync::Arc::downgrade(&clients.rows);
+        drop(clients);
+        assert!(weak.upgrade().is_none());
+    }
+
+    #[cfg(target_os = "macos")]
     #[test]
     fn rdm_address_collation_matches_original() {
         let source: serde_json::Value = serde_json::from_str(include_str!(

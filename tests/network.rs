@@ -657,6 +657,17 @@ fn cluster_redirects_and_scans_every_master() {
         .all_keys(&config, 0, "cluster:*", &Default::default())
         .unwrap();
     assert_eq!(all.len(), 91);
+    let mut state = redisdock::service::ScanState::default();
+    let mut paged = std::collections::HashSet::new();
+    while !state.end {
+        let page = service.scan(&config, 0, "cluster:*", "", false, state, 7).unwrap();
+        assert_eq!(page.total, 91);
+        for entry in page.keys {
+            assert!(paged.insert(entry.key), "cluster pages must not repeat stable keys");
+        }
+        state = page.state;
+    }
+    assert_eq!(paged, all.iter().cloned().collect());
     let mut expected = all.iter().map(|key| {
         match std::str::from_utf8(key).unwrap().strip_prefix("cluster:").unwrap().parse::<usize>() {
             Ok(i) if i % 3 == 1 => KeyType::Hash,

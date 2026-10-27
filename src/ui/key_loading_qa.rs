@@ -14,6 +14,9 @@ pub(super) async fn verify(
     cx: &mut AsyncApp,
 ) -> Pending {
     qa_json::idle(view, window, cx).await;
+    if scene == "key-loading-light" {
+        verify_load_size(view, window, cx).await;
+    }
     let (service, connection, id, theme) = window.update(cx, |_, _, cx| {
         let app = view.read(cx);
         let tab = &app.tabs[app.index().unwrap()];
@@ -62,6 +65,57 @@ pub(super) async fn verify(
     }).unwrap();
     println!("QA PASS: {scene} pending real scan, visible list loading, stale completion ignored, duplicate load blocked");
     Pending { client: second, id, theme }
+}
+
+async fn verify_load_size(view: &Entity<RdmApp>, window: WindowHandle<Root>, cx: &mut AsyncApp) {
+    let (id, scan_size, load_size, total) = window.update(cx, |_, _, cx| {
+        let app = view.read(cx);
+        let tab = &app.tabs[app.index().unwrap()];
+        (tab.id, app.pref.general.scan_size, tab.conn.load_size, tab.total as usize)
+    }).unwrap();
+    assert_eq!(total, 19, "use the disposable key-browser fixture");
+    for (count, limit) in [(3000, 1), (3, 7), (3, 0)] {
+        let size = if limit == 0 { count } else { limit };
+        for (reset, all) in [(true, false), (false, false), (false, true), (true, false)] {
+            let (previous, history_start) = window.update(cx, |_, window, cx| view.update(cx, |app, cx| {
+                let i = app.tab_index(id).unwrap();
+                let previous = if reset { 0 } else { app.tabs[i].keys.len() };
+                let history_start = app.service.history.lock().len();
+                app.tabs[i].conn.load_size = limit;
+                app.pref.general.scan_size = count;
+                app.scan_keys(id, reset, all, window, cx);
+                (previous, history_start)
+            })).unwrap();
+            qa_json::idle(view, window, cx).await;
+            window.update(cx, |_, _, cx| {
+                let app = view.read(cx);
+                let tab = &app.tabs[app.tab_index(id).unwrap()];
+                let expected = if all { total } else { (previous + size).min(total) };
+                assert!(tab.keys.len() >= expected && tab.keys.len() <= total,
+                    "SCAN={count}, load={limit}, reset={reset}, all={all}");
+                assert_eq!(tab.total as usize, total);
+                let maximum = if all || limit == 0 { count } else { count.min(limit) };
+                let history = app.service.history.lock();
+                for entry in history.iter().skip(history_start).filter(|entry| entry.command.starts_with("SCAN ")) {
+                    let requested = entry.command.split_whitespace().skip_while(|word| *word != "COUNT")
+                        .nth(1).unwrap().parse::<usize>().unwrap();
+                    assert!((1..=maximum).contains(&requested), "connection load size must limit SCAN COUNT");
+                }
+                if all {
+                    assert!(tab.scan.end);
+                    assert!(tab.keys.iter().any(|key| key.key == [0xff, 0, 65]));
+                }
+            }).unwrap();
+        }
+    }
+    window.update(cx, |_, window, cx| view.update(cx, |app, cx| {
+        let i = app.tab_index(id).unwrap();
+        app.tabs[i].conn.load_size = load_size;
+        app.pref.general.scan_size = scan_size;
+        app.scan_keys(id, true, false, window, cx);
+    })).unwrap();
+    qa_json::idle(view, window, cx).await;
+    println!("QA PASS: connection load size controls SCAN COUNT; complete batches display immediately; more/all/reset and zero load size stay valid");
 }
 
 pub(super) async fn restore(

@@ -74,6 +74,8 @@ mod diagnostic_interactions;
 #[cfg(feature = "ui-qa")]
 mod status_clients_qa;
 #[cfg(feature = "ui-qa")]
+mod status_clients_lifecycle_qa;
+#[cfg(feature = "ui-qa")]
 pub fn run_qa(data_dir: std::path::PathBuf, output_dir: std::path::PathBuf) {
     qa::run(data_dir, output_dir);
 }
@@ -526,12 +528,8 @@ struct Tab {
     slow_seconds: f64,
     slow_interval: Entity<InputState>,
     slow_polled: Instant,
-    clients: Vec<BTreeMap<String, String>>,
-    clients_loading: bool,
-    client_load_started: Instant,
-    #[cfg(feature = "ui-qa")]
-    client_load_gate: Option<std::sync::Arc<status_clients_qa::LoadGate>>,
-    client_sort: status_clients::ClientSort,
+    clients: Option<status_clients::ClientList>,
+    client_epoch: u64,
     client_trigger_bounds: std::rc::Rc<std::cell::Cell<Bounds<Pixels>>>,
     client_grid_bounds: std::rc::Rc<std::cell::Cell<Bounds<Pixels>>>,
     info_group: String,
@@ -1244,12 +1242,8 @@ impl RdmApp {
             slow_seconds: 5.,
             slow_interval: input("5", "", false, window, cx),
             slow_polled: Instant::now(),
-            clients: vec![],
-            clients_loading: false,
-            client_load_started: Instant::now(),
-            #[cfg(feature = "ui-qa")]
-            client_load_gate: None,
-            client_sort: Default::default(),
+            clients: None,
+            client_epoch: 0,
             client_trigger_bounds: Default::default(),
             client_grid_bounds: Default::default(),
             info_group: "CPU".into(),
@@ -1381,16 +1375,18 @@ impl RdmApp {
         } else { pattern };
         let kind = t.key_type.clone();
         let exact = t.exact;
-        let count = self.pref.general.scan_size;
+        let count = self.pref.general.scan_size.max(1);
         let load_size = c.load_size;
         self.job(
             window,
             cx,
             move |s| {
                 Ok((|| -> Result<_> {
-                    let mut page = s.scan(&c, db, &pattern, &kind, exact, state, count)?;
+                    let size = if all || load_size == 0 { count } else { count.min(load_size) };
+                    let mut page = s.scan(&c, db, &pattern, &kind, exact, state, size)?;
                     while !page.state.end && (all || page.keys.len() < load_size) {
-                        let next = s.scan(&c, db, &pattern, &kind, exact, page.state.clone(), count)?;
+                        let size = if all { count } else { count.min(load_size - page.keys.len()) };
+                        let next = s.scan(&c, db, &pattern, &kind, exact, page.state.clone(), size)?;
                         page.keys.extend(next.keys);
                         page.state = next.state;
                     }
@@ -2089,6 +2085,13 @@ impl RdmApp {
 }
 impl Render for RdmApp {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+        for tab in &mut self.tabs {
+            if tab.clients.is_some()
+                && (self.nav != Nav::Browser || self.active != Some(tab.id) || tab.pane != Pane::Status)
+            {
+                tab.close_clients();
+            }
+        }
         self.render_app(window, cx)
     }
 }

@@ -651,6 +651,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     "status-clients-overflow",
                     "status-clients-loading-light",
                     "status-clients-loading-dark",
+                    "status-clients-lifecycle",
                     "keypages-slow-empty-light",
                     "keypages-slow-rows-light",
                     "keypages-monitor-empty-light",

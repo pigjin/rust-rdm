@@ -2,21 +2,22 @@
 use super::qa_json::{click, idle};
 use super::*;
 use std::sync::{Arc, Condvar, Mutex};
+use super::status_clients::{ClientList, ClientRows, sorted_indices};
 
 // Holds completion after a real disposable Redis response. No production delay,
 // fake network rows, or clipboard access. Drop releases the worker on QA failure.
 pub(super) struct LoadGate {
-    state: Mutex<(Option<Vec<BTreeMap<String, String>>>, bool, usize)>,
+    state: Mutex<(Option<Arc<ClientRows>>, bool, usize)>,
     ready: Condvar,
 }
 impl LoadGate {
-    fn new() -> Arc<Self> {
+    pub(super) fn new() -> Arc<Self> {
         Arc::new(Self {
             state: Mutex::new((None, false, 0)),
             ready: Condvar::new(),
         })
     }
-    pub(super) fn hold(&self, rows: Vec<BTreeMap<String, String>>) {
+    pub(super) fn hold(&self, rows: Arc<ClientRows>) {
         let mut state = self.state.lock().unwrap();
         state.0 = Some(rows);
         state.2 += 1;
@@ -25,12 +26,15 @@ impl LoadGate {
             .wait_timeout_while(state, Duration::from_secs(30), |v| !v.1)
             .unwrap();
     }
-    fn observed(&self) -> Option<Vec<BTreeMap<String, String>>> {
+    pub(super) fn observed(&self) -> Option<Arc<ClientRows>> {
         self.state.lock().unwrap().0.clone()
     }
-    fn release(&self) {
+    pub(super) fn release(&self) {
         self.state.lock().unwrap().1 = true;
         self.ready.notify_all();
+    }
+    pub(super) fn take_observed(&self) -> Option<Arc<ClientRows>> {
+        self.state.lock().unwrap().0.take()
     }
 }
 struct Release(Arc<LoadGate>);
@@ -45,8 +49,7 @@ pub(super) struct Saved {
     id: u64,
     info: Info,
     samples: VecDeque<Sample>,
-    clients: Vec<BTreeMap<String, String>>,
-    sort: super::status_clients::ClientSort,
+    clients: Option<ClientList>,
     pane: Pane,
     details: bool,
     auto: bool,
@@ -76,14 +79,17 @@ fn install_rows(view: &Entity<RdmApp>, window: WindowHandle<Root>, row: &Json, c
         .update(cx, |_, _, cx| {
             view.update(cx, |app, cx| {
                 let i = app.index().unwrap();
-                app.tabs[i].clients = source_rows(row);
+                let clients = app.tabs[i].clients.as_mut().unwrap();
+                let rows = Arc::new(source_rows(row));
+                let order = sorted_indices(&rows, clients.sort);
+                clients.replace_rows(rows, order);
                 cx.notify();
             })
         })
         .unwrap();
 }
 
-async fn settled(view: &Entity<RdmApp>, window: WindowHandle<Root>, cx: &mut AsyncApp) {
+pub(super) async fn settled(view: &Entity<RdmApp>, window: WindowHandle<Root>, cx: &mut AsyncApp) {
     idle(view, window, cx).await;
     cx.background_executor()
         .timer(Duration::from_millis(200))
@@ -91,7 +97,7 @@ async fn settled(view: &Entity<RdmApp>, window: WindowHandle<Root>, cx: &mut Asy
     cx.update_window(window.into(), |_, window, cx| {
         for _ in 0..2 {
             window.refresh();
-            let _ = window.draw(cx);
+            window.draw(cx).clear(cx);
         }
     })
     .unwrap();
@@ -121,7 +127,7 @@ pub(super) async fn verify(
         .unwrap()
         .iter()
         .chain(extended["records"].as_array().unwrap().iter())
-        .find(|v| v["name"] == scene)
+        .find(|v| v["name"] == scene || (scene == "status-clients-lifecycle" && v["name"] == "status-clients-age-0"))
         .unwrap();
     println!("STATUS CLIENTS START: {scene}");
     let mut saved = cx
@@ -136,7 +142,6 @@ pub(super) async fn verify(
                     info: std::mem::take(&mut tab.info),
                     samples: std::mem::take(&mut tab.samples),
                     clients: std::mem::take(&mut tab.clients),
-                    sort: tab.client_sort.clone(),
                     pane: tab.pane,
                     details: tab.info_details,
                     auto: tab.status_auto,
@@ -171,7 +176,6 @@ pub(super) async fn verify(
                 tab.pane = Pane::Status;
                 tab.info_details = false;
                 tab.status_auto = false;
-                tab.client_sort = Default::default();
                 let c = &row["configuration"];
                 app.pref.general.theme = c["theme"].as_str().unwrap().into();
                 let family = c["family"].as_str().unwrap();
@@ -202,7 +206,7 @@ pub(super) async fn verify(
     let actual = window
         .update(cx, |_, _, cx| {
             let app = view.read(cx);
-            app.tabs[app.index().unwrap()].clients.clone()
+            app.tabs[app.index().unwrap()].clients.as_ref().unwrap().rows.as_ref().clone()
         })
         .unwrap();
     assert!(
@@ -212,6 +216,11 @@ pub(super) async fn verify(
     service_loads.push(serde_json::json!({"action":"open","rows":actual}));
     install_rows(view, window, row, cx);
     settled(view, window, cx).await;
+    if scene == "status-clients-lifecycle" {
+        super::status_clients_lifecycle_qa::verify(view, window, cx).await;
+        install_rows(view, window, row, cx);
+        settled(view, window, cx).await;
+    }
     for _ in 0..row["configuration"]["clicks"].as_u64().unwrap() {
         click(
             &format!(
@@ -229,7 +238,7 @@ pub(super) async fn verify(
         let actual = window
             .update(cx, |_, _, cx| {
                 let app = view.read(cx);
-                app.tabs[app.index().unwrap()].clients.clone()
+                app.tabs[app.index().unwrap()].clients.as_ref().unwrap().rows.as_ref().clone()
             })
             .unwrap();
         assert!(
@@ -256,7 +265,7 @@ pub(super) async fn verify(
         let actual = window
             .update(cx, |_, _, cx| {
                 let app = view.read(cx);
-                app.tabs[app.index().unwrap()].clients.clone()
+                app.tabs[app.index().unwrap()].clients.as_ref().unwrap().rows.as_ref().clone()
             })
             .unwrap();
         assert!(!actual.is_empty() && actual != source_rows(row));
@@ -274,18 +283,20 @@ pub(super) async fn verify(
             window.dispatch_event(PlatformInput::ScrollWheel(ScrollWheelEvent{
                 position,delta:ScrollDelta::Pixels(point(px(0.),px(-10000.))),modifiers:Default::default(),touch_phase:TouchPhase::Moved,
             }),cx);
-            for _ in 0..2 {window.refresh();let _=window.draw(cx);}
-            let shifted=gpui_base::test_support::find(window,&[],&"status-clients-row-0".into()).unwrap().bounds();
+            for _ in 0..2 {window.refresh();window.draw(cx).clear(cx);}
+            let shifted=gpui_base::test_support::find(window,&[],&"status-clients-row-0".into()).map(|node| node.bounds());
             let last=gpui_base::test_support::find(window,&[],&"status-clients-row-23".into()).unwrap().bounds();
+            let offset={let app=view.read(cx);app.tabs[app.index().unwrap()].clients.as_ref().unwrap().list.logical_scroll_top()};
+            let maximum_offset=offset.item_ix as f32*34.+offset.offset_in_item.as_f32();
             assert!((body.bottom()-last.bottom()).as_f32().abs()<0.6,"Wheel must reach the final client row");
-            assert!(shifted.top()<first.top());
+            assert!(shifted.is_none_or(|bounds| bounds.top()<first.top()));
             window.dispatch_event(PlatformInput::ScrollWheel(ScrollWheelEvent{
                 position,delta:ScrollDelta::Pixels(point(px(0.),px(10000.))),modifiers:Default::default(),touch_phase:TouchPhase::Moved,
             }),cx);
-            for _ in 0..2 {window.refresh();let _=window.draw(cx);}
+            for _ in 0..2 {window.refresh();window.draw(cx).clear(cx);}
             let restored=gpui_base::test_support::find(window,&[],&"status-clients-row-0".into()).unwrap().bounds();
             assert!((restored.top()-first.top()).as_f32().abs()<0.6);
-            scroll_proof=serde_json::json!({"actualWheelToEndAndBack":true,"maximumOffset":(first.top()-shifted.top()).as_f32(),"lastBottom":last.bottom().as_f32(),"bodyBottom":body.bottom().as_f32(),"initialFirstTop":first.top().as_f32(),"restoredFirstTop":restored.top().as_f32()});
+            scroll_proof=serde_json::json!({"actualWheelToEndAndBack":true,"maximumOffset":maximum_offset,"firstRowUnmountedAtEnd":shifted.is_none(),"lastBottom":last.bottom().as_f32(),"bodyBottom":body.bottom().as_f32(),"initialFirstTop":first.top().as_f32(),"restoredFirstTop":restored.top().as_f32()});
         }).unwrap();
     }
     let mut pending_proof = Json::Null;
@@ -295,7 +306,7 @@ pub(super) async fn verify(
             .update(cx, |_, _, cx| {
                 view.update(cx, |app, _| {
                     let i = app.index().unwrap();
-                    app.tabs[i].client_load_gate = Some(gate.clone());
+                    app.tabs[i].clients.as_mut().unwrap().gate = Some(gate.clone());
                 })
             })
             .unwrap();
@@ -312,7 +323,7 @@ pub(super) async fn verify(
         let actual = gate
             .observed()
             .expect("Own Redis response must reach the completion gate");
-        assert!(!actual.is_empty() && actual != source_rows(row));
+        assert!(!actual.is_empty() && actual.as_ref() != &source_rows(row));
         service_loads.push(serde_json::json!({"action":"pending-refresh","rows":actual}));
         click("status-clients-header-addr", window, cx);
         click("refresh-clients", window, cx);
@@ -320,9 +331,9 @@ pub(super) async fn verify(
         window
             .update(cx, |_, _, cx| {
                 let app = view.read(cx);
-                let tab = &app.tabs[app.index().unwrap()];
-                assert!(tab.clients_loading && tab.clients == old_rows);
-                assert!(tab.client_sort.state() == Some(("age", "descend")));
+                let clients = app.tabs[app.index().unwrap()].clients.as_ref().unwrap();
+                assert!(clients.loading && clients.rows.as_ref() == &old_rows);
+                assert!(clients.sort.state() == Some(("age", "descend")));
                 assert_eq!(gate.state.lock().unwrap().2, 1);
             })
             .unwrap();
@@ -330,7 +341,7 @@ pub(super) async fn verify(
     }
     cx.update_window(window.into(), |_, window, cx| {
         window.dispatch_event(PlatformInput::MouseMove(MouseMoveEvent { position:point(px(20.),px(760.)), ..Default::default() }),cx);
-        for _ in 0..2 { window.refresh(); let _ = window.draw(cx); }
+        for _ in 0..2 { window.refresh(); window.draw(cx).clear(cx); }
         let mut ids:Vec<String> = ["status-summary-grid","status-stat-1","status-stat-row-1","status-value-1","status-clients-popup","status-clients-table","status-clients-title","status-clients-headers","clients-scroll","status-clients-empty","status-clients-empty-icon","status-clients-empty-description","status-clients-loading","refresh-clients","show-clients"].into_iter().map(str::to_string).collect();
         for key in ["no","addr","db","age","idle"] { ids.push(format!("status-clients-header-{key}")); }
         for i in 0..row["currentClients"].as_array().unwrap().len() { ids.push(format!("status-clients-row-{i}")); for j in 0..5 { ids.push(format!("status-clients-cell-{i}-{j}")); for k in 0..30 { ids.push(format!("status-clients-line-{i}-{j}-{k}")); } } }
@@ -342,7 +353,7 @@ pub(super) async fn verify(
         let general=app.preference_font("general",".SystemUIFont",cx);
         let count=tab.info.get("Clients").unwrap().get("connected_clients").unwrap();
         let inline_widths=serde_json::json!({"number":super::text::script_width(count,general.clone(),24.,window),"button":super::text::script_width("↘",general,14.,window)+16.});
-        println!("STATUS CLIENTS FRAME: {}",serde_json::json!({"scene":scene,"frames":frames,"inlineWidths":inline_widths,"sort":tab.client_sort.state().map(|(field,order)|serde_json::json!({"field":field,"order":order})),"serviceLoads":service_loads,"loading":tab.clients_loading,"pendingProof":pending_proof,"scrollProof":scroll_proof,"scope":"Actual GPUI trigger/sort/refresh/reopen andwheel events. Own Redis responses observed then replaced with source-controlled rows for geometry/paint. Pending case holds completion after a real own Redis response,retains controlled old rows and blocks actual sort/refresh clicks;not native input acceptance."}));
+        println!("STATUS CLIENTS FRAME: {}",serde_json::json!({"scene":scene,"frames":frames,"inlineWidths":inline_widths,"sort":tab.clients.as_ref().unwrap().sort.state().map(|(field,order)|serde_json::json!({"field":field,"order":order})),"serviceLoads":service_loads,"loading":tab.clients.as_ref().unwrap().loading,"pendingProof":pending_proof,"scrollProof":scroll_proof,"scope":"Actual GPUI trigger/sort/refresh/reopen andwheel events. Own Redis responses observed then replaced with source-controlled rows for geometry/paint. Pending case holds completion after a real own Redis response,retains controlled old rows and blocks actual sort/refresh clicks;not native input acceptance."}));
     }).unwrap();
     saved
 }
@@ -359,9 +370,10 @@ pub(super) async fn restore(
         idle(view, window, cx).await;
         window.update(cx, |_, _, cx| view.update(cx, |app, _| {
             let i=app.index().unwrap();let tab=&mut app.tabs[i];
-            assert!(!tab.clients_loading && tab.clients==expected);
-            tab.client_load_gate=None;
-            println!("STATUS CLIENTS PENDING COMPLETION: {}",serde_json::json!({"scene":saved.scene,"tab":tab.id,"loadingCleared":true,"actualOwnRowsApplied":true,"rows":tab.clients,"gateRemoved":true}));
+            let clients = tab.clients.as_mut().unwrap();
+            assert!(!clients.loading && clients.rows == expected);
+            clients.gate=None;
+            println!("STATUS CLIENTS PENDING COMPLETION: {}",serde_json::json!({"scene":saved.scene,"tab":tab.id,"loadingCleared":true,"actualOwnRowsApplied":true,"rows":clients.rows,"gateRemoved":true}));
         })).unwrap();
     }
     click("show-clients", window, cx);
@@ -372,7 +384,6 @@ pub(super) async fn restore(
             tab.info = saved.info;
             tab.samples = saved.samples;
             tab.clients = saved.clients;
-            tab.client_sort = saved.sort;
             tab.pane = saved.pane;
             tab.info_details = saved.details;
             tab.status_auto = saved.auto;

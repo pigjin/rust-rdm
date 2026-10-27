@@ -12,7 +12,7 @@ pub(super) async fn idle(view: &Entity<RdmApp>, window: WindowHandle<Root>, cx: 
                 app.busy == 0
                     && app
                         .index()
-                        .is_none_or(|i| !app.tabs[i].values_loading && !app.tabs[i].value_saving && !app.tabs[i].clients_loading && !app.tabs[i].key_types.in_flight)
+                        .is_none_or(|i| !app.tabs[i].values_loading && !app.tabs[i].value_saving && !app.tabs[i].clients.as_ref().is_some_and(|clients| clients.loading) && !app.tabs[i].key_types.in_flight)
             })
             .unwrap()
         {
@@ -28,7 +28,7 @@ pub(super) async fn idle(view: &Entity<RdmApp>, window: WindowHandle<Root>, cx: 
 pub(super) fn click(id: &str, window: WindowHandle<Root>, cx: &mut AsyncApp) {
     cx.update_window(window.into(), |_, window, cx| {
         window.refresh();
-        let _ = window.draw(cx);
+        window.draw(cx).clear(cx);
         let p = gpui_base::test_support::find(
             window,
             &[],
@@ -308,7 +308,7 @@ pub(super) async fn verify(
     }
     cx.update_window(window.into(), |_, window, cx| {
         window.refresh();
-        let _ = window.draw(cx);
+        window.draw(cx).clear(cx);
         let oracle: Json =
             serde_json::from_str(include_str!("../../tests/fixtures/json-source.json")).unwrap();
         let metrics = oracle["records"]

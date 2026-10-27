@@ -1765,7 +1765,7 @@ fn scan_pages_filter_type_and_exact_key() {
         let p = s.scan(c, 0, "user:*", "STRING", false, state, 5).unwrap();
         for k in p.keys {
             assert_eq!(k.kind, KeyType::String);
-            found.insert(k.key);
+            assert!(found.insert(k.key), "pages must not repeat keys in a stable database");
         }
         state = p.state;
     }
@@ -1783,6 +1783,41 @@ fn scan_pages_filter_type_and_exact_key() {
             .lines()
             .any(|command| command.starts_with("TYPE "))
     }));
+}
+
+#[test]
+fn scan_displays_complete_redis_batches_without_deferring_overflow() {
+    let f = RedisFixture::new();
+    let s = f.service();
+    for index in 0..80 {
+        s.create(&f.config, 0, format!("batch:{index}").as_bytes(), KeyType::String, b"x", &[], -1).unwrap();
+    }
+    let binary = b"\xff\0:binary".to_vec();
+    s.create(&f.config, 0, &binary, KeyType::String, b"x", &[], -1).unwrap();
+    let mut client = Client::connect(&f.config, 0).unwrap();
+    let mut state = ScanState::default();
+    let mut found = std::collections::HashSet::new();
+    while !state.end {
+        let mut cursor = state.cursor;
+        let mut expected = vec![];
+        loop {
+            let reply = client.query(&command(&["SCAN", &cursor.to_string(), "MATCH", "*", "COUNT", "1"])).unwrap();
+            let reply = reply.array().unwrap();
+            cursor = reply[0].integer().unwrap() as u64;
+            expected.extend(reply[1].array().unwrap().iter().map(Value::bytes));
+            if !expected.is_empty() || cursor == 0 { break; }
+        }
+        let page = s.scan(&f.config, 0, "*", "", false, state, 1).unwrap();
+        assert_eq!(page.keys.iter().map(|entry| entry.key.clone()).collect::<Vec<_>>(), expected);
+        assert_eq!(page.state.cursor, cursor);
+        assert_eq!(page.state.end, cursor == 0);
+        for entry in page.keys {
+            assert!(found.insert(entry.key));
+        }
+        state = page.state;
+    }
+    assert_eq!(found.len(), 81);
+    assert!(found.contains(&binary));
 }
 
 #[test]

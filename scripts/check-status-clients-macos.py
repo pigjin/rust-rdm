@@ -47,8 +47,11 @@ for source in fixture['records']:
     data_rows = [v for v in rows if len(v['cells']) == 5]
     expected_labels = ['\t'.join(c['text'] for c in v['cells']) for v in data_rows]
     native_rows = sorted((v for v in frame['frames'] if v['id'].startswith('status-clients-row-')), key=lambda v:int(v['id'].rsplit('-',1)[1]))
-    equal(scene, 'displayed-row-order-and-renumbering', [v['label'] for v in native_rows], expected_labels)
+    mounted_indices = [int(v['id'].rsplit('-', 1)[1]) for v in native_rows]
+    equal(scene, 'displayed-row-order-and-renumbering', [v['label'] for v in native_rows], [expected_labels[i] for i in mounted_indices])
     for i, data in enumerate(data_rows):
+        if data['outer']['y'] >= body['y'] + body['h'] or data['outer']['y'] + data['outer']['h'] <= body['y']:
+            if i not in mounted_indices: continue
         bounds(scene, f'status-clients-row-{i}', nodes, data['outer'])
         for j, cell in enumerate(data['cells']): bounds(scene, f'status-clients-cell-{i}-{j}', nodes, cell)
     empty = next((v for v in source['layout'] if v['class'].startswith('n-empty ')), None)
