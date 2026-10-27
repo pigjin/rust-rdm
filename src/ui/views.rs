@@ -394,7 +394,7 @@ impl RdmApp {
                     .flex()
                     .items_center()
                     .gap(px(3.))
-                    .pl(px(if cfg!(target_os = "macos") { 70. } else { 10. }))
+                    .pl(px(if cfg!(target_os = "macos") { 84. } else { 10. }))
                     .pr(px(10.))
                     .w(px(self.pref.behavior.aside_width + 50. - 4.))
                     .h(px(32.))
@@ -404,7 +404,7 @@ impl RdmApp {
                         img(ImageSource::Resource(Resource::Embedded(
                             "images/icon.png".into(),
                         )))
-                        .size(px(32.)),
+                        .size(px(20.)),
                     )
                     .child(
                         div()

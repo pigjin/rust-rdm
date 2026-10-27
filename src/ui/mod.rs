@@ -282,6 +282,7 @@ pub fn run() {
     );
     gpui_platform::application()
         .with_assets(Assets)
+        .with_quit_mode(QuitMode::LastWindowClosed)
         .run(move |cx| {
             gpui_component::init(cx);
             cx.on_action(|_: &Quit, cx| cx.quit());
