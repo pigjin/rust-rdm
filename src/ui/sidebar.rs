@@ -1,40 +1,5 @@
 use super::*;
 use gpui_base::TestSupportExt as _;
-use gpui_base::motion::{Easing, Interpolate, Transition, transition};
-
-#[derive(Clone, Copy, PartialEq)]
-struct DividerColor([f32; 4]);
-
-impl From<Rgba> for DividerColor {
-    fn from(c: Rgba) -> Self {
-        Self([c.r * c.a, c.g * c.a, c.b * c.a, c.a])
-    }
-}
-
-impl DividerColor {
-    fn color(self) -> Rgba {
-        let [r, g, b, a] = self.0;
-        if a == 0. {
-            Rgba::default()
-        } else {
-            Rgba {
-                r: r / a,
-                g: g / a,
-                b: b / a,
-                a,
-            }
-        }
-    }
-}
-
-impl Interpolate for DividerColor {
-    fn interpolate(&self, target: &Self, progress: f32) -> Self {
-        Self(std::array::from_fn(|i| {
-            self.0[i] + (target.0[i] - self.0[i]) * progress
-        }))
-    }
-}
-
 impl RdmApp {
     pub(super) fn render_sidebar(
         &self,
@@ -50,14 +15,7 @@ impl RdmApp {
         } else {
             Rgba::default()
         };
-        let color = transition(
-            "sidebar-divider-color",
-            DividerColor::from(target),
-            Transition::new(Duration::from_millis(300)).easing(Easing::EaseIn),
-            window,
-            cx,
-        )
-        .color();
+        let color = motion::color("sidebar-divider-color", target.into(), self.sidebar_resizing, window, cx);
         let mut divider = div()
             .id("sidebar-divider")
             .test_support()

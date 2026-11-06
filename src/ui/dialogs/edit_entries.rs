@@ -38,6 +38,7 @@ impl RdmApp {
             .target
             .clone()
             .ok_or_else(|| anyhow::anyhow!("请先打开 Redis 连接"))?;
+        crate::redis::ensure_writable(target.conn.read_only)?;
         let dialog_id = dialog.id;
         let pin = dialog.boolean("pin");
         let field = dialog.value("field", cx);
@@ -108,9 +109,10 @@ impl RdmApp {
         let custom = self.pref.decoder.clone();
         let saved = target.clone();
         let new_field = param.new_field.clone();
-        self.job(
+        self.write_job(
             window,
             cx,
+            target.conn.clone(),
             move |service| {
                 let data = service.update_key_entry(
                     &target.conn,

@@ -6,10 +6,14 @@ use crate::{
 use anyhow::{Result, bail};
 mod entry_edit;
 pub use entry_edit::EntryUpdate;
+mod command_history;
+pub use command_history::CommandHistory;
+mod write_tasks;
+pub use write_tasks::WriteTask;
 use parking_lot::{ArcMutexGuard, Mutex, RawMutex};
 use std::sync::Arc;
 use std::{
-    collections::{HashMap, HashSet, VecDeque},
+    collections::{HashMap, HashSet},
     path::Path,
     time::{Instant, SystemTime, UNIX_EPOCH},
 };
@@ -41,6 +45,7 @@ pub struct ScanState {
     pub cursor: u64,
     pub started: bool,
     pub end: bool,
+    pub total: Option<u64>,
 }
 #[derive(Clone, Debug, Default)]
 pub struct ScanPage {
@@ -69,9 +74,10 @@ pub struct SlowLog {
 }
 
 pub struct Service {
-    clients: Mutex<HashMap<(String, u32), Arc<Mutex<Client>>>>,
-    cli_clients: Mutex<HashMap<String, Arc<Mutex<Client>>>>,
-    pub history: Mutex<VecDeque<CommandLog>>,
+    clients: Mutex<HashMap<(String, u32, bool), Arc<Mutex<Client>>>>,
+    cli_clients: Mutex<HashMap<(String, bool), Arc<Mutex<Client>>>>,
+    writes: Arc<Mutex<HashMap<String, usize>>>,
+    pub history: Mutex<CommandHistory>,
     pub store: Store,
 }
 impl Service {
@@ -79,31 +85,42 @@ impl Service {
         Self {
             clients: Mutex::new(HashMap::new()),
             cli_clients: Mutex::new(HashMap::new()),
-            history: Mutex::new(VecDeque::new()),
+            writes: Arc::new(Mutex::new(HashMap::new())),
+            history: Mutex::new(CommandHistory::default()),
             store,
         }
     }
     pub fn connect(&self, c: &Connection, db: u32) -> Result<()> {
+        if c.read_only { self.ensure_no_writes(&c.name)?; }
         let client = Client::connect(c, db)?;
         self.clients
             .lock()
-            .insert((c.name.clone(), db), Arc::new(Mutex::new(client)));
+            .insert((c.name.clone(), db, c.read_only), Arc::new(Mutex::new(client)));
         Ok(())
     }
     pub fn close(&self, name: &str) {
-        self.clients.lock().retain(|(n, _), _| n != name);
-        self.cli_clients.lock().remove(name);
+        self.clients.lock().retain(|(n, _, _), _| n != name);
+        self.cli_clients.lock().retain(|(n, _), _| n != name);
     }
     pub fn client(&self, c: &Connection, db: u32) -> Result<ArcMutexGuard<RawMutex, Client>> {
-        let id = (c.name.clone(), db);
+        self.client_with_cancel(c, db, None)
+    }
+    fn client_with_cancel(&self, c: &Connection, db: u32, cancel: Option<&Cancellation>) -> Result<ArcMutexGuard<RawMutex, Client>> {
+        anyhow::ensure!(cancel.is_none_or(|token| !token.canceled()), "扫描已取消");
+        let id = (c.name.clone(), db, c.read_only);
         let existing = self.clients.lock().get(&id).cloned();
         let client = if let Some(client) = existing {
             client
         } else {
             let client = Arc::new(Mutex::new(Client::connect(c, db)?));
-            self.clients.lock().entry(id).or_insert(client).clone()
+            let mut clients = self.clients.lock();
+            // A canceled connect must not restore a client removed by close().
+            anyhow::ensure!(cancel.is_none_or(|token| !token.canceled()), "扫描已取消");
+            clients.entry(id).or_insert(client).clone()
         };
-        Ok(client.lock_arc())
+        let client = client.lock_arc();
+        anyhow::ensure!(cancel.is_none_or(|token| !token.canceled()), "扫描已取消");
+        Ok(client)
     }
     pub fn run(&self, c: &Connection, db: u32, args: Vec<Vec<u8>>) -> Result<Value> {
         self.logged(c, db, std::slice::from_ref(&args), || {
@@ -112,14 +129,15 @@ impl Service {
     }
     pub fn run_cli(&self, c: &Connection, db: u32, args: Vec<Vec<u8>>) -> Result<Value> {
         self.logged(c, db, std::slice::from_ref(&args), || {
-            let existing = self.cli_clients.lock().get(&c.name).cloned();
+            let id = (c.name.clone(), c.read_only);
+            let existing = self.cli_clients.lock().get(&id).cloned();
             let client = if let Some(client) = existing {
                 client
             } else {
                 let client = Arc::new(Mutex::new(Client::connect(c, 0)?));
                 self.cli_clients
                     .lock()
-                    .entry(c.name.clone())
+                    .entry(id)
                     .or_insert(client)
                     .clone()
             };
@@ -156,12 +174,16 @@ impl Service {
         work: impl FnOnce() -> Result<T>,
     ) -> Result<T> {
         let start = Instant::now();
-        let result = work();
+        let result = (|| {
+            let _write = commands.iter().any(|args| !redis::is_read_only_command(args))
+                .then(|| self.write_task(c)).transpose()?;
+            for args in commands { redis::check_read_only(c.read_only, args)?; }
+            work()
+        })();
         if commands.is_empty() {
             return result;
         }
-        let mut history = self.history.lock();
-        history.push_back(CommandLog {
+        let log = CommandLog {
             time: chrono::Local::now()
                 .format("%Y-%m-%d %H:%M:%S%.3f")
                 .to_string(),
@@ -190,10 +212,8 @@ impl Service {
                 .err()
                 .map(|error| error.to_string())
                 .unwrap_or_default(),
-        });
-        while history.len() > 5000 {
-            history.pop_front();
-        }
+        };
+        self.history.lock().push_back(log);
         result
     }
     pub fn info(&self, c: &Connection) -> Result<Info> {
@@ -279,24 +299,40 @@ impl Service {
         exact: bool,
         mut state: ScanState,
         count: usize,
+        cancel: &Cancellation,
     ) -> Result<ScanPage> {
+        anyhow::ensure!(!cancel.canceled(), "扫描已取消");
         if state.end {
             return Ok(ScanPage {
+                total: state.total.unwrap_or(0),
                 state,
                 ..Default::default()
             });
         }
+        let query = |node: Option<&(String, u16)>, args: Vec<Vec<u8>>| {
+            anyhow::ensure!(!cancel.canceled(), "扫描已取消");
+            self.logged(c, db, std::slice::from_ref(&args), || {
+                let mut client = self.client_with_cancel(c, db, Some(cancel))?;
+                let value = if let Some((host, port)) = node {
+                    client.query_at(host, *port, &args)?
+                } else {
+                    client.query(&args)?
+                };
+                anyhow::ensure!(!cancel.canceled(), "扫描已取消");
+                Ok(value)
+            })
+        };
         let pattern = if pattern.is_empty() { "*" } else { pattern };
         if exact {
             let mut key = pattern.as_bytes().to_vec();
             let mut typ =
-                KeyType::parse(&self.run(c, db, vec![b"TYPE".to_vec(), key.clone()])?.text());
+                KeyType::parse(&query(None, vec![b"TYPE".to_vec(), key.clone()])?.text());
             if typ == KeyType::None
                 && let Ok(binary) = parse_bytes(pattern)
                 && binary != key
             {
                 key = binary;
-                typ = KeyType::parse(&self.run(c, db, vec![b"TYPE".to_vec(), key.clone()])?.text());
+                typ = KeyType::parse(&query(None, vec![b"TYPE".to_vec(), key.clone()])?.text());
             }
             let keys = if typ != KeyType::None
                 && (kind.is_empty() || typ.name().eq_ignore_ascii_case(kind))
@@ -306,6 +342,7 @@ impl Service {
                 vec![]
             };
             state.end = true;
+            state.total = Some(keys.len() as u64);
             return Ok(ScanPage {
                 total: keys.len() as u64,
                 keys,
@@ -313,21 +350,33 @@ impl Service {
             });
         }
         if state.nodes.is_empty() {
-            state.nodes = self.client(c, db)?.masters()?;
+            let mut client = self.client_with_cancel(c, db, Some(cancel))?;
+            state.nodes = client.masters()?;
+        }
+        if state.total.is_none() {
+            let mut total = 0;
+            if c.cluster.enable {
+                for node in &state.nodes {
+                    total += query(Some(node), command(&["DBSIZE"]))?.integer()? as u64;
+                }
+            } else {
+                total = query(None, command(&["DBSIZE"]))?.integer()? as u64;
+            }
+            state.total = Some(total);
         }
         let mut keys = vec![];
         let mut seen = HashSet::new();
         let size = count.max(1);
         let mut rounds = 0;
-        while state.node < state.nodes.len() && keys.len() < size && rounds < 64 {
-            let (host, port) = state.nodes[state.node].clone();
+        let started = Instant::now();
+        while state.node < state.nodes.len() && rounds < 64 {
             let mut args = command(&[
                 "SCAN",
                 &state.cursor.to_string(),
                 "MATCH",
                 pattern,
                 "COUNT",
-                &(size - keys.len()).to_string(),
+                &size.to_string(),
             ]);
             if !kind.is_empty() {
                 args.extend(command(&[
@@ -339,7 +388,7 @@ impl Service {
                     },
                 ]));
             }
-            let value = self.run_at(c, db, &host, port, args)?;
+            let value = query(Some(&state.nodes[state.node]), args)?;
             let a = value.array()?;
             if a.len() != 2 {
                 bail!("SCAN 响应异常");
@@ -358,17 +407,12 @@ impl Service {
                 state.node += 1;
             }
             rounds += 1;
+            if !keys.is_empty() || started.elapsed() >= std::time::Duration::from_millis(100) {
+                break;
+            }
         }
         state.end = state.node >= state.nodes.len();
-        let total = if c.cluster.enable {
-            let mut sum = 0;
-            for (h, p) in &state.nodes {
-                sum += self.run_at(c, db, h, *p, command(&["DBSIZE"]))?.integer()? as u64;
-            }
-            sum
-        } else {
-            self.run(c, db, command(&["DBSIZE"]))?.integer()? as u64
-        };
+        let total = state.total.unwrap_or(0);
         Ok(ScanPage { keys, state, total })
     }
     pub fn detail(
@@ -623,6 +667,7 @@ impl Service {
         value: Vec<u8>,
         json: bool,
     ) -> Result<()> {
+        let _write = self.write_task(c)?;
         let mut args = if json {
             vec![b"JSON.SET".to_vec(), key.to_vec(), b"$".to_vec(), value]
         } else {
@@ -644,6 +689,7 @@ impl Service {
         rows: &[Entry],
         ttl: i64,
     ) -> Result<()> {
+        let _write = self.write_task(c)?;
         if key.is_empty() {
             bail!("键名不能为空");
         }
@@ -728,6 +774,7 @@ impl Service {
         value: &serde_json::Value,
         ttl: i64,
     ) -> Result<()> {
+        let _write = self.write_task(c)?;
         let expiration = if ttl < 0 {
             let pttl = self.run(c, db, vec![b"PTTL".to_vec(), key.to_vec()])
                 .and_then(|value| value.integer()).unwrap_or(-1);
@@ -790,6 +837,7 @@ impl Service {
         Ok(())
     }
     pub fn ttl(&self, c: &Connection, db: u32, key: &[u8], ttl: i64) -> Result<()> {
+        let _write = self.write_task(c)?;
         let mut args = vec![
             if ttl < 0 {
                 b"PERSIST".to_vec()
@@ -805,10 +853,12 @@ impl Service {
         Ok(())
     }
     pub fn rename(&self, c: &Connection, db: u32, key: &[u8], new: &[u8]) -> Result<()> {
+        let _write = self.write_task(c)?;
         self.run(c, db, vec![b"RENAME".to_vec(), key.to_vec(), new.to_vec()])?;
         Ok(())
     }
     pub fn delete(&self, c: &Connection, db: u32, key: &[u8], asynchronous: bool) -> Result<()> {
+        let _write = self.write_task(c)?;
         self.run(
             c,
             db,
@@ -833,6 +883,7 @@ impl Service {
         new: &Entry,
         remove: bool,
     ) -> Result<()> {
+        let _write = self.write_task(c)?;
         let mut args = match kind {
             KeyType::Hash => {
                 if remove {
@@ -932,6 +983,7 @@ impl Service {
         only_new: bool,
         id: &str,
     ) -> Result<()> {
+        let _write = self.write_task(c)?;
         if kind == KeyType::List && head {
             let mut a = vec![b"LPUSH".to_vec(), key.to_vec()];
             a.extend(rows.iter().rev().map(|r| r.value.clone()));
@@ -969,6 +1021,7 @@ impl Service {
     /// AddFieldsDialog uses these raw values and consumes the original
     /// added/updated/left/right response before optionally reloading the key.
     pub fn add_key_entries(&self, c:&Connection, db:u32, key:&[u8], kind:KeyType, action:i32, value:&serde_json::Value) -> Result<serde_json::Value> {
+        let _write = self.write_task(c)?;
         use serde_json::{Value as Json, json};
         if kind == KeyType::ZSet && !value.is_object() {
             bail!("json: cannot unmarshal array into Go value of type map[string]float64");
@@ -1043,6 +1096,7 @@ impl Service {
         Ok(KeyDetail{key:key.to_vec(),kind,ttl,memory,encoding,length,..Default::default()})
     }
     pub fn flush(&self, c: &Connection, db: u32, asynchronous: bool) -> Result<()> {
+        let _write = self.write_task(c)?;
         let args = command(&["FLUSHDB", if asynchronous { "ASYNC" } else { "SYNC" }]);
         let masters = self.client(c, db)?.masters()?;
         for (h, p) in masters {
@@ -1164,6 +1218,7 @@ impl Service {
         cancel: &Cancellation,
         mut progress: impl FnMut(TransferProgress),
     ) -> Result<TransferProgress> {
+        let _write = self.write_task(c)?;
         let mut reader = crate::csv_import::Reader::new(std::io::BufReader::new(
             std::fs::File::open(path)?,
         ));
@@ -1241,7 +1296,9 @@ impl Service {
         let mut state = ScanState::default();
         let mut keys = HashSet::new();
         while !state.end && !cancel.canceled() {
-            let page = self.scan(c, db, pattern, "", false, state, 3000)?;
+            let page = self.scan(c, db, pattern, "", false, state, 3000, cancel);
+            if cancel.canceled() { break; }
+            let page = page?;
             keys.extend(page.keys.into_iter().map(|k| k.key));
             state = page.state;
         }
@@ -1256,6 +1313,7 @@ impl Service {
         cancel: &Cancellation,
         mut progress: impl FnMut(TransferProgress),
     ) -> Result<TransferProgress> {
+        let _write = self.write_task(c)?;
         let mut r = TransferProgress {
             total: keys.len(),
             ..Default::default()

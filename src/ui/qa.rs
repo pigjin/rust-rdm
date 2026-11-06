@@ -110,8 +110,8 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                             origin: point(px(0.), px(0.)),
                             size: size(px(1024.), px(768.)),
                         })),
-                        show: false,
-                        focus: false,
+                        show: std::env::var_os("REDISDOCK_QA_VISIBLE").is_some(),
+                        focus: std::env::var_os("REDISDOCK_QA_VISIBLE").is_some(),
                         titlebar: Some(TitlebarOptions {
                             title: Some("RedisDock".into()),
                             appears_transparent: true,
@@ -140,6 +140,18 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                 let qa_connections = configs.clone();
                 let qa_decoders = window.update(cx, |_, _, cx| view.read(cx).pref.decoder.clone()).unwrap();
                 let snapshots = [
+                    "read-only-settings-light",
+                    "read-only-settings-dark",
+                    "read-only-connections",
+                    "read-only-string-light",
+                    "read-only-string-dark",
+                    "read-only-entry",
+                    "read-only-cli",
+                    "read-only-pubsub",
+                    "read-only-tasks",
+                    "motion-light",
+                    "motion-dark",
+                    "motion-reduced",
                     "connection-tabs-light",
                     "connection-tabs-dark",
                     "connection-tabs-general18",
@@ -693,6 +705,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     "keypages-delete-affected-dark",
                     "keypages-warning-dark",
                     "diagnostic-functional",
+                    "log-performance",
                     "monitor-wrap-light",
                     "monitor-wrap-dark",
                     "key-loading-light",
@@ -755,6 +768,11 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                                 app.pref.general.theme="light".into();app.apply_theme(window,cx);
                             }
                             match snapshot {
+                                name if name.starts_with("motion-") => {
+                                    if app.active.is_none() { app.open_connection(qa_connections[0].clone(), window, cx); }
+                                    app.nav = Nav::Browser;
+                                    if let Some(id) = app.active { app.select_key(id, b"aahash".to_vec(), window, cx); }
+                                },
                                 name if name.starts_with("match-tooltip-") || name.starts_with("entry-match-width-") || name.starts_with("entry-control-") => {
                                     if app.active.is_none() { app.open_connection(qa_connections[0].clone(),window,cx); }
                                     app.qa_prepare_match_tooltip(name,window,cx);
@@ -1144,6 +1162,10 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     cx.background_executor()
                         .timer(Duration::from_millis(750))
                         .await;
+                    // Geometry checks need a fresh settled frame even when the QA window is occluded.
+                    cx.update_window(window.into(), |_, window, cx| {
+                        window.refresh(); let _ = window.draw(cx);
+                    }).unwrap();
                     if snapshot.starts_with("json-") {
                         if let Some(text) = qa_json::verify(&view, window, snapshot, cx).await { _copied_text = Some(text); }
                     }
@@ -1158,6 +1180,11 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     if snapshot.starts_with("key-filter-") || snapshot.starts_with("tag-style-") || snapshot.starts_with("tag-overflow-") || snapshot.starts_with("sidebar-resize-") || snapshot.starts_with("sidebar-contract-") || snapshot.starts_with("selector-font-") || snapshot.starts_with("general-fallback-") || snapshot.starts_with("css-label-") {key_filter_qa::verify(&view,window,snapshot,cx).await;}
                     if snapshot.starts_with("match-tooltip-") || snapshot.starts_with("entry-match-width-") || snapshot.starts_with("entry-control-") { match_tooltip_qa::verify(&view,window,snapshot,cx).await; }
                     if snapshot == "diagnostic-functional" { diagnostic_interactions::verify(&view, window, cx).await; }
+                    let read_only_restore = if snapshot.starts_with("read-only-") {
+                        Some(dialogs::read_only_qa::verify(&view, window, snapshot, cx).await)
+                    } else { None };
+                    if snapshot == "log-performance" { log_view_qa::verify(&view, window, &output_dir, cx).await; }
+                    if snapshot.starts_with("motion-") { motion_qa::verify(&view, window, snapshot, &output_dir, cx).await; }
                     let keypages_restore = if snapshot.starts_with("keypages-") {
                         Some(keypages_qa::prepare(&view, window, snapshot, cx).await)
                     } else if snapshot.starts_with("monitor-wrap-") {
@@ -1314,7 +1341,8 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                             app.switch_pane(app.tabs[i].id,pane,window,cx);
                         })).unwrap();
                         cx.update_window(window.into(),|_,window,cx|{window.refresh();let _=window.draw(cx);}).unwrap();
-                        cx.background_executor().timer(Duration::from_millis(150)).await;
+                        // Compare settled geometry after the 180 ms indicator transition.
+                        cx.background_executor().timer(Duration::from_millis(200)).await;
                         cx.update_window(window.into(),|_,window,cx|{
                             window.dispatch_event(PlatformInput::MouseMove(MouseMoveEvent{position:point(px(1.),px(1.)),..Default::default()}),cx);
                             window.refresh();let _=window.draw(cx);
@@ -1537,6 +1565,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                             click(("key-label",4usize).into(),1,cx);
                             cx.background_executor().timer(Duration::from_millis(250)).await;
                             click("key-delete-4".into(),1,cx);
+                            cx.background_executor().timer(Duration::from_millis(180)).await;
                             window.update(cx,|_,_,cx|{let app=view.read(cx);app.qa_assert_key_delete_warning(b"aahash");}).unwrap();
                         }
                         if matches!(snapshot,"key-browser-menu-folder"|"key-browser-menu-key"|"key-browser-more") {
@@ -2480,7 +2509,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                         println!("QA PASS: actual hover retains message and leaving restarts the original 3-second timer");
                     }
                     if snapshot=="notification-error" {
-                        window.update(cx,|_,_,cx|view.update(cx,|app,cx|{app.notifications.clear();for i in 0..6{app.error_notification(format!("通知 {i}"));}cx.notify();})).unwrap();
+                        window.update(cx,|_,_,cx|view.update(cx,|app,cx|{app.notifications.clear();for i in 0..6{app.error_notification(format!("通知 {i}"), cx);}cx.notify();})).unwrap();
                         let position=cx.update_window(window.into(),|_,window,cx|{
                             window.refresh();let _=window.draw(cx);let app=view.read(cx);
                             let oracle:Json=serde_json::from_str(include_str!("../../tests/fixtures/notice-source.json")).unwrap();
@@ -2625,6 +2654,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                         cx.background_executor().timer(Duration::from_millis(250)).await;
                     }
                     if let Some(saved) = status_values_restore { status_values_qa::restore(&view,window,saved,cx); }
+                    if let Some(saved) = read_only_restore { dialogs::read_only_qa::restore(&view, window, saved, cx).await; }
                     if let Some(saved) = status_layout_restore { status_layout_qa::restore(&view,window,saved,cx); }
                     if let Some(saved) = status_info_restore { status_info_qa::restore(&view,window,saved,cx); }
                     if let Some(saved) = status_clients_restore { status_clients_qa::restore(&view,window,saved,cx).await; }

@@ -16,6 +16,11 @@ pub(super) struct UnitPicker {
     token: Option<gpui_base::DeferredPopover>,
 }
 impl UnitPicker {
+    pub(super) fn retire(&mut self) {
+        self.open = false;
+        self.token = None;
+    }
+
     pub(super) fn new(cx: &mut App) -> Self {
         Self {
             open: false,
@@ -28,9 +33,7 @@ impl UnitPicker {
 }
 impl RdmApp {
     fn csv_unit_index(&self, cx: &App) -> usize {
-        let value = self
-            .dialog
-            .as_ref()
+        let value = self.display_dialog()
             .map(|d| d.value("unit", cx).parse::<u32>().unwrap_or(1))
             .unwrap_or(1);
         UNITS
@@ -105,7 +108,7 @@ impl RdmApp {
         cx.stop_propagation();
     }
     pub(super) fn render_csv_unit(&self, window: &Window, cx: &Context<Self>) -> AnyElement {
-        let picker = &self.dialog.as_ref().unwrap().csv_unit_picker;
+        let picker = &self.display_dialog().unwrap().csv_unit_picker;
         let selected = self.csv_unit_index(cx);
         let focused = picker.focus.is_focused(window);
         let bounds = picker.bounds.clone();

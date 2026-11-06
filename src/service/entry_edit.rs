@@ -27,6 +27,7 @@ impl Service {
         param: &EntryUpdate,
         decoders: &[Decoder],
     ) -> Result<Json> {
+        let _write = self.write_task(c)?;
         let mut client = self.client(c, db)?;
         let mut run = |command: &str, args: Vec<Vec<u8>>| {
             let mut all = vec![command.as_bytes().to_vec(), key.to_vec()];

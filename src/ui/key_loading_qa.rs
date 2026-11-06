@@ -16,6 +16,7 @@ pub(super) async fn verify(
     qa_json::idle(view, window, cx).await;
     if scene == "key-loading-light" {
         verify_load_size(view, window, cx).await;
+        key_scan_qa::verify(view, window, cx).await;
     }
     let (service, connection, id, theme) = window.update(cx, |_, _, cx| {
         let app = view.read(cx);

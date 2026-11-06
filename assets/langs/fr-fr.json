@@ -1,5 +1,12 @@
 {
   "name": "Français",
+  "read_only": {
+    "label": "Connexion en lecture seule",
+    "badge": "Lecture seule",
+    "hint": "Autoriser uniquement les requêtes de lecture, console comprise. Reconnectez-vous après modification.",
+    "error": "Cette connexion est en lecture seule ; seules les requêtes de lecture sont autorisées.",
+    "pending": "Des écritures sont en attente. Attendez leur fin ou annulez les tâches avant de modifier les paramètres de connexion."
+  },
   "common": {
     "confirm": "Confirmer",
     "cancel": "Annuler",

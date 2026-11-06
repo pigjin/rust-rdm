@@ -153,6 +153,16 @@ impl RdmApp {
             }
         };
         // The form closes synchronously, before either RPC result or progress.
+        let write = if kind == CsvKind::Import {
+            match self.service.write_task(&target.conn) {
+                Ok(task) => Some(task),
+                Err(error) => {
+                    self.toast(localized(&error.to_string()), true);
+                    cx.notify();
+                    return;
+                }
+            }
+        } else { None };
         self.close_dialog(window, cx);
         let message = self.csv_loading_message();
         let cancel = Cancellation::default();
@@ -168,6 +178,7 @@ impl RdmApp {
         let service = self.service.clone();
         let server = target.conn.name.clone();
         let task = cx.background_executor().spawn(async move {
+            let _write = write;
             let update = |report| {
                 let _ = progress_sender.send(CsvProgressEvent {
                     kind,
@@ -226,7 +237,7 @@ impl RdmApp {
         cx: &mut Context<Self>,
     ) {
         self.csv_transfers.remove(&message);
-        self.destroy_message(message);
+        self.destroy_message(message, cx);
         let result = completion(kind, reload, result, |key| self.tr(key));
         for (level, text) in result.messages {
             self.add_message(text, level);

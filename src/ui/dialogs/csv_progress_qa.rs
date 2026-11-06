@@ -63,7 +63,7 @@ impl RdmApp {
                 assert!(self.poll_csv_transfers());
             }
         } else {
-            self.destroy_message(message);
+            self.destroy_message(message, cx);
             let response = &record["response"];
             let result = if response["success"] == false {
                 Outcome::Failed(response["msg"].as_str().unwrap().into())

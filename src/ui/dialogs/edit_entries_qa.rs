@@ -57,6 +57,7 @@ pub(in crate::ui) async fn verify(
     window
         .update(cx, |_, w, cx| {
             view.update(cx, |app, cx| {
+                app.nav = Nav::Browser;
                 if app.index().is_none() {
                     let connection = flatten(&app.connections).first().unwrap().clone();
                     app.open_connection(connection, w, cx);

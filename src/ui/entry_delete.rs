@@ -11,6 +11,7 @@ pub(super) struct EntryDelete {
 
 impl RdmApp {
     fn toggle_entry_delete(&mut self, id: u64, row: Entry, cx: &mut Context<Self>) {
+        if !self.writable_tab(id, cx) { return; }
         let Some(i) = self.tab_index(id) else { return };
         if self.tabs[i]
             .entry_delete
@@ -28,6 +29,7 @@ impl RdmApp {
         cx.notify();
     }
     fn confirm_entry_delete(&mut self, id: u64, window: &mut Window, cx: &mut Context<Self>) {
+        if !self.writable_tab(id, cx) { return; }
         let Some(i) = self.tab_index(id) else { return };
         if let Some(pending) = self.tabs[i].entry_delete.take()
             && self.tabs[i].current_key.as_ref() == Some(&pending.key)
@@ -70,7 +72,9 @@ impl RdmApp {
                 },
             )
             .icon(icon("delete").size(px(20.)))
-            .allow_icon_overflow();
+            .allow_icon_overflow()
+            .disabled(self.tabs[self.tab_index(id).unwrap()].conn.read_only)
+            .when(self.tabs[self.tab_index(id).unwrap()].conn.read_only, |button| button.opacity(0.5));
         let trigger = Rc::new(Cell::new(Bounds::default()));
         let measured = trigger.clone();
         let mut popup = gpui_base::Popup::new(format!("entry-delete-popup-{index}"), button)

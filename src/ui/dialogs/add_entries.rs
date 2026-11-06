@@ -26,7 +26,7 @@ impl RdmApp {
     }
 
     fn add_entry_operations(&self, window: &Window, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let list = dialog.value("type", cx) == "LIST";
         let value = dialog.value("op_type", cx);
         let radio_color:Hsla=rgb(0xd13b37).into();
@@ -121,8 +121,8 @@ impl RdmApp {
         group.into_any_element()
     }
 
-    pub(super) fn render_add_entries(&self, window: &mut Window, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+    pub(super) fn render_add_entries(&self, progress: f32, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
+        let dialog = self.display_dialog().unwrap();
         let kind = dialog.value("type", cx);
         let choice = matches!(kind.as_str(), "HASH" | "LIST" | "ZSET");
         let stream = kind == "STREAM";
@@ -218,10 +218,11 @@ impl RdmApp {
             .items_center()
             .justify_center()
             .bg(rgba(0x00000066))
-            .occlude()
+            .when(self.dialog.is_some(), |mask| mask.occlude())
             .child(
                 div()
                     .id("dialog-card")
+                    .relative().top(px(8. * (1. - progress)))
                     .test_support()
                     .w(px(600.))
                     .h(px(height + 119.))
@@ -301,7 +302,8 @@ impl RdmApp {
                                     + 24.))
                                 .when(self.dark(cx), |button| button.text_color(rgb(0x000000))),
                             ),
-                    ),
+                    )
+                    .when(self.dialog.is_none(), |card| motion::inert(card, ("dialog-exit-focus", dialog.id), window, cx)),
             )
             .into_any_element()
     }
@@ -312,14 +314,16 @@ impl RdmApp {
         cx: &mut Context<Self>,
     ) -> Result<()> {
         let dialog = self.dialog.as_ref().unwrap();
+        let dialog_id = dialog.id;
         let target = dialog
             .target
             .clone()
             .ok_or_else(|| anyhow::anyhow!("请先打开 Redis 连接"))?;
+        crate::redis::ensure_writable(target.conn.read_only)?;
         let value = self.new_key_value(cx);
         let kind = target.kind.clone();
         if kind == KeyType::Stream && value.as_array().is_none_or(|values| values.len() <= 2) {
-            self.dialog = None;
+            self.retire_dialog(window, cx);
             return Ok(());
         }
         let op = dialog.value("op_type", cx).parse::<i32>().unwrap_or(0);
@@ -330,9 +334,10 @@ impl RdmApp {
         };
         let reload = dialog.boolean("reload");
         let saved = target.clone();
-        self.job(
+        self.write_job(
             window,
             cx,
+            target.conn.clone(),
             move |service| {
                 Ok(service
                     .add_key_entries(&target.conn, target.db, &target.key, kind, action, &value)
@@ -353,14 +358,13 @@ impl RdmApp {
                     }
                     Err(error) => app.toast(error, true),
                 }
-                // The original store closes its shared AddFields flag, even
-                // if that dialog was canceled and reopened while awaiting IO.
+                // A completed request only owns the form that submitted it.
                 if app
                     .dialog
                     .as_ref()
-                    .is_some_and(|dialog| matches!(dialog.kind, DialogKind::AddEntries))
+                    .is_some_and(|dialog| dialog.id == dialog_id)
                 {
-                    app.dialog = None;
+                    app.retire_dialog(w, cx);
                 }
             },
         );

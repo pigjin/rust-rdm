@@ -327,7 +327,7 @@ impl RdmApp {
         let tab = &self.tabs[i];
         let id = tab.id;
         let json = tab.detail.as_ref().unwrap().kind == KeyType::Json;
-        let enabled = !tab.values_loading && text_input(&tab.editor, cx) != tab.editor_original;
+        let enabled = !tab.conn.read_only && !tab.values_loading && text_input(&tab.editor, cx) != tab.editor_original;
         let copy_label = self.tr("interface.copy_value");
         let save_label = self.tr("common.save");
         let font = window.text_style().font();
@@ -444,7 +444,7 @@ impl RdmApp {
                                         .editor_style(self.scalar_editor_style(&tab.format, cx))
                                         .editor_paddings(gpui::Edges::default())
                                         .text_size(px(self.editor_font_size()))
-                                        .readonly(tab.values_loading),
+                                        .readonly(tab.conn.read_only || tab.values_loading),
                                 ),
                         ),
                     ),
@@ -458,6 +458,7 @@ impl RdmApp {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
+        if !self.writable_tab(self.tabs[i].id, cx) { return; }
         let tab = &mut self.tabs[i];
         let Some(detail) = &tab.detail else { return };
         let (id, db, connection, key, detail_epoch) = (
@@ -484,9 +485,10 @@ impl RdmApp {
         tab.value_saving = true;
         tab.value_save_epoch += 1;
         let save_epoch = tab.value_save_epoch;
-        self.job(
+        self.write_job(
             window,
             cx,
+            connection.clone(),
             move |service| Ok(service.set_string(&connection, db, &key, value, json)),
             move |app, result, window, cx| {
                 let mut convert_saved = false;

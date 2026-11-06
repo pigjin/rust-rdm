@@ -168,6 +168,7 @@ impl RdmApp {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
+        if !self.writable_tab(id, cx) { return; }
         let selection = cx_selection.or_else(|| {
             self.tab_index(id)
                 .and_then(|i| self.tabs[i].key_selection.clone())
@@ -191,6 +192,7 @@ impl RdmApp {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
+        if !self.writable_tab(id, cx) { return; }
         let Some(i) = self.tab_index(id) else {
             return;
         };
@@ -241,7 +243,7 @@ impl RdmApp {
             return;
         };
         let tab = &self.tabs[i];
-        if tab.keys_loading {
+        if tab.keys_loading && tab.keys.is_empty() {
             return;
         }
         let nodes = super::key_tree_cache::visible_rows(tab);
@@ -546,6 +548,8 @@ impl RdmApp {
                             cx,
                             move |app, w, cx| app.new_browser_key(id, None, w, cx),
                         )
+                        .disabled(tab.conn.read_only)
+                        .when(tab.conn.read_only, |button| button.opacity(0.5))
                         .rounded_l(px(0.)),
                     ),
             );
@@ -613,7 +617,7 @@ impl RdmApp {
                         cx.listener(move |app, event, w, cx| app.browser_key(id, event, w, cx)),
                     )
                     .child(list)
-                    .when(tab.keys_loading, |tree| {
+                    .when(tab.keys_loading && tab.keys.is_empty(), |tree| {
                         tree.child(
                             div()
                                 .id("key-browser-loading")
@@ -647,6 +651,7 @@ impl RdmApp {
             .into_any_element()
     }
     fn browser_row(&self, id: u64, index: usize, row: &TreeRow, cx: &Context<Self>) -> AnyElement {
+        let read_only = self.tabs[self.tab_index(id).unwrap()].conn.read_only;
         let tab = &self.tabs[self.tab_index(id).unwrap()];
         let selection = row.selection();
         let selected = tab.key_selection.as_ref() == Some(&selection);
@@ -797,7 +802,7 @@ impl RdmApp {
                                 app.new_browser_key(id, Some(selection.clone()), w, cx)
                             }
                         },
-                    ));
+                    ).disabled(read_only).when(read_only, |button| button.opacity(0.5)));
             }
             suffix = suffix.child(self.connection_icon_button(
                 format!("key-delete-{index}"),
@@ -815,7 +820,7 @@ impl RdmApp {
                         app.delete_browser_selection(id, Some(selection.clone()), false, w, cx)
                     }
                 },
-            ));
+            ).disabled(read_only).when(read_only, |button| button.opacity(0.5)));
             content = content.child(suffix);
         } else if row.key.as_ref().is_some_and(|key| contains_binary(key)) && !selected {
             content = content.child(icon("binary").size(px(20.)).mr(px(5.)).flex_shrink_0());
@@ -917,7 +922,8 @@ impl RdmApp {
                             app.reload_browser_selection(id, w, cx);
                         }
                     })
-                    .icon(icon(if folder { "add" } else { "refresh" })),
+                    .icon(icon(if folder { "add" } else { "refresh" }))
+                    .disabled(folder && read_only),
                 );
                 let copy = menu_selection.clone();
                 let del = menu_selection.clone();
@@ -942,14 +948,14 @@ impl RdmApp {
                     menu_action(menu_labels[2].clone(), weak.clone(), move |app, w, cx| {
                         app.delete_browser_selection(id, Some(del.clone()), false, w, cx)
                     })
-                    .icon(icon("delete")),
+                    .icon(icon("delete")).disabled(read_only),
                 )
             })
             .into_any_element()
         };
         div().px(px(3.)).h(px(30.)).child(node).into_any_element()
     }
-    pub(super) fn render_warning_dialog(&self, message: String, cx: &Context<Self>) -> AnyElement {
+    pub(super) fn render_warning_dialog(&self, progress: f32, message: String, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
         div()
             .absolute()
             .inset_0()
@@ -957,14 +963,14 @@ impl RdmApp {
             .items_center()
             .justify_center()
             .bg(rgba(0x00000066))
-            .occlude()
-            .on_mouse_down(
+            .when(self.dialog.is_some(), |mask| mask.occlude().on_mouse_down(
                 MouseButton::Left,
                 cx.listener(|app, _, window, cx| app.close_dialog(window, cx)),
-            )
+            ))
             .child(
                 div()
                     .id("key-delete-warning")
+                    .relative().top(px(8. * (1. - progress)))
                     .test_support()
                     .w(px(446.))
                     .px(px(28.))
@@ -1054,12 +1060,14 @@ impl RdmApp {
                                 .rounded(px(4.))
                                 .border_color(rgb(if self.dark(cx){0xf2c97d}else{0xf0a020})),
                             ),
-                    ),
+                    )
+                    .when(self.dialog.is_none(), |card| motion::inert(card, ("dialog-exit-focus", self.display_dialog().unwrap().id), window, cx)),
             )
             .into_any_element()
     }
     fn browser_footer(&self, id: u64, window: &mut Window, cx: &Context<Self>) -> AnyElement {
         let tab = &self.tabs[self.tab_index(id).unwrap()];
+        let read_only = tab.conn.read_only;
         let mut footer = div()
             .id("key-browser-footer")
             .test_support()
@@ -1070,6 +1078,15 @@ impl RdmApp {
             .gap(px(3.))
             .px(px(8.))
             .py(px(3.));
+        if tab.keys_loading && !tab.keys.is_empty() {
+            footer = footer.child(
+                div().id("key-browser-scanning").test_support()
+                    .role(Role::Label).aria_label(localized("加载中"))
+                    .child(gpui_component::spinner::Spinner::new()
+                        .with_size(gpui_component::Size::Size(px(16.)))
+                        .color(rgb(0xd33a31).into())),
+            );
+        }
         if tab.check_mode {
             for (button, asset, tip, kind) in [
                 (
@@ -1108,7 +1125,7 @@ impl RdmApp {
                             }
                         },
                     )
-                    .disabled(tab.selected.is_empty()),
+                    .disabled(tab.selected.is_empty() || (read_only && button != "export-checked")),
                 );
             }
             return footer
@@ -1213,7 +1230,7 @@ impl RdmApp {
                             menu_action(more_labels[0].clone(), weak.clone(), |app, w, cx| {
                                 app.open_dialog(DialogKind::Import, w, cx)
                             })
-                            .icon(icon("import")),
+                            .icon(icon("import")).disabled(read_only),
                         )
                         .separator()
                         .item(
@@ -1225,13 +1242,13 @@ impl RdmApp {
                                     .unwrap_or_else(|| Selection::Folder(String::new()));
                                 app.delete_browser_selection(id, Some(selection), false, w, cx)
                             })
-                            .icon(icon("delete")),
+                            .icon(icon("delete")).disabled(read_only),
                         )
                         .item(
                             menu_action(more_labels[2].clone(), weak.clone(), |app, w, cx| {
                                 app.open_dialog(DialogKind::Flush, w, cx)
                             })
-                            .icon(icon("delete")),
+                            .icon(icon("delete")).disabled(read_only),
                         )
                         .separator()
                         .item(

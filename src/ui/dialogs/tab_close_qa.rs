@@ -83,7 +83,10 @@ async fn client_id(service: Arc<Service>, connection: Connection, cx: &mut Async
     }).await.unwrap()
 }
 
-fn assert_layout(view: &Entity<RdmApp>, dark: bool, window: WindowHandle<Root>, cx: &mut AsyncApp) {
+async fn assert_layout(view: &Entity<RdmApp>, dark: bool, window: WindowHandle<Root>, cx: &mut AsyncApp) {
+    // The source rectangles describe the settled card, not an entrance frame.
+    cx.background_executor().timer(Duration::from_millis(180)).await;
+    draw(window, cx).await;
     let oracle = source();
     let layout = oracle["layouts"].as_array().unwrap().iter()
         .find(|row| row["theme"] == if dark { "dark" } else { "light" }).unwrap();
@@ -110,12 +113,18 @@ fn confirm_and_assert_pending(view: &Entity<RdmApp>, id: u64, window: WindowHand
         let _ = window.draw(cx);
         let element = format!("tab-close-confirm-{id}");
         let position = gpui_base::test_support::find(window, &[], &element.into()).unwrap().bounds().center();
+        let scan = {
+            let app = view.read(cx);
+            let name = &app.tab_close_warnings.last().unwrap().name;
+            app.tabs.iter().find(|tab| &tab.conn.name == name).unwrap().scan_cancel.clone()
+        };
         for event in [PlatformInput::MouseMove(MouseMoveEvent { position, ..Default::default() }),
             PlatformInput::MouseDown(MouseDownEvent { position, button: MouseButton::Left, click_count: 1, ..Default::default() }),
             PlatformInput::MouseUp(MouseUpEvent { position, button: MouseButton::Left, click_count: 1, ..Default::default() })] {
             window.dispatch_event(event, cx);
         }
         let app = view.read(cx);
+        assert!(scan.canceled(), "confirming close cancels scanning before closing the client");
         assert!(app.tab_close_warnings.is_empty(), "the warning closes before the asynchronous callback");
         assert_eq!(app.busy, 0, "tab close must not introduce a global loading overlay");
         assert!(!app.tabs.is_empty(), "tab removal waits for the asynchronous close result");
@@ -141,7 +150,7 @@ pub(in crate::ui) async fn verify(
     draw(window, cx).await;
     let id = warning(view, window, cx);
     assert_draft(view, editor, window, cx);
-    assert_layout(view, dark, window, cx);
+    assert_layout(view, dark, window, cx).await;
     if scene != "tab-close-behavior" {
         assert_eq!(client_id(service, connection, cx).await, original_client,
             "opening the warning must not close its Redis connection");
@@ -248,6 +257,6 @@ pub(in crate::ui) async fn verify(
     }).await.unwrap();
     click(format!("close-{tab}").into(), window, cx);
     draw(window, cx).await;
-    assert_layout(view, false, window, cx);
+    assert_layout(view, false, window, cx).await;
     println!("TAB CLOSE BEHAVIOR QA PASS: actual close/cancel/Escape/Cmd+W events preserve the draft; warning dismisses before async removal; last tab returns to server; five original activation cases and named Redis pool isolation; no key writes");
 }

@@ -1,5 +1,12 @@
 {
   "name": "English",
+  "read_only": {
+    "label": "Read-only connection",
+    "badge": "Read-only",
+    "hint": "Allow queries only, including the console. Reconnect after changing this setting.",
+    "error": "This connection is read-only; only queries are allowed.",
+    "pending": "This connection has pending writes. Wait for completion or cancel the tasks before changing its settings."
+  },
   "common": {
     "confirm": "Confirm",
     "cancel": "Cancel",

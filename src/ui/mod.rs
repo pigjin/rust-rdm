@@ -3,14 +3,18 @@ mod app_icon;
 #[cfg(target_os = "macos")]
 mod app_menu;
 mod connection_tree;
+mod read_only;
 mod ssh_trust;
 mod key_browser;
 mod key_tree_cache;
 mod key_types;
+mod key_loading;
 #[cfg(feature = "ui-qa")]
 mod key_types_qa;
 #[cfg(feature = "ui-qa")]
 mod key_loading_qa;
+#[cfg(feature = "ui-qa")]
+mod key_scan_qa;
 #[cfg(feature = "ui-qa")]
 mod safety_qa;
 mod key_selectors;
@@ -30,6 +34,8 @@ mod dialogs;
 mod file_dialogs;
 mod notices;
 mod motion;
+#[cfg(feature = "ui-qa")]
+mod motion_qa;
 mod tab_close;
 mod connection_tabs;
 #[cfg(feature = "ui-qa")]
@@ -58,6 +64,9 @@ mod status_number;
 mod status_info;
 mod status_clients;
 mod diagnostic_pages;
+mod log_view;
+#[cfg(feature = "ui-qa")]
+mod log_view_qa;
 mod match_tooltip;
 #[cfg(feature = "ui-qa")]
 mod match_tooltip_qa;
@@ -452,6 +461,7 @@ struct Tab {
     key_types: key_types::Cache,
     scan: ScanState,
     scan_epoch: u64,
+    scan_cancel: Cancellation,
     keys_loading: bool,
     total: u64,
     selected: IndexSet<Vec<u8>>,
@@ -577,11 +587,15 @@ struct RdmApp {
     connection_tabs_scroll: ScrollHandle,
     next_id: u64,
     dialog: Option<dialogs::Dialog>,
+    exiting_dialog: Option<motion::Exit<dialogs::Dialog>>,
     ssh_trust: Option<ssh_trust::Pending>,
+    exiting_ssh: Option<motion::Exit<SshHostKey>>,
+    exiting_welcome: Option<motion::Exit<()>>,
     ssh_probe_epoch: u64,
     dialog_stack: Vec<dialogs::Dialog>,
     cached_entry_panels: BTreeMap<u64, (dialogs::Dialog, bool)>,
     tab_close_warnings: Vec<tab_close::CloseWarning>,
+    exiting_warnings: Vec<motion::Exit<tab_close::CloseWarning>>,
     next_dialog_id: u64,
     conn_filter: Entity<InputState>,
     log_filter: Entity<InputState>,
@@ -589,15 +603,18 @@ struct RdmApp {
     subs: Vec<Subscription>,
     busy: usize,
     entry_conversions: usize,
+    key_scans: usize,
     messages: Vec<notices::MessageNotice>,
     notifications: Vec<notices::ErrorNotification>,
+    exiting_messages: Vec<motion::Exit<notices::MessageNotice>>,
+    exiting_notifications: Vec<motion::Exit<notices::ErrorNotification>>,
     next_notice_id: u64,
     last_poll: Instant,
     last_auto: Instant,
     log_server: String,
     log_ascending: Option<bool>,
     log_command_width: Option<f32>,
-    log_scroll: ScrollHandle,
+    log_view: RefCell<log_view::State>,
     sidebar_resizing: bool,
     sidebar_hover: bool,
     sidebar_save_epoch: u64,
@@ -763,11 +780,15 @@ impl RdmApp {
             connection_tabs_scroll: ScrollHandle::new(),
             next_id: 0,
             dialog: None,
+            exiting_dialog: None,
             ssh_trust: None,
+            exiting_ssh: None,
+            exiting_welcome: None,
             ssh_probe_epoch: 0,
             dialog_stack: vec![],
             cached_entry_panels: BTreeMap::new(),
             tab_close_warnings: vec![],
+            exiting_warnings: vec![],
             next_dialog_id: 0,
             conn_filter: input("", "筛选", false, window, cx),
             log_filter: input("", "", false, window, cx),
@@ -775,15 +796,18 @@ impl RdmApp {
             subs: vec![],
             busy: 0,
             entry_conversions: 0,
+            key_scans: 0,
             messages: vec![],
             notifications: vec![],
+            exiting_messages: vec![],
+            exiting_notifications: vec![],
             next_notice_id: 0,
             last_poll: Instant::now(),
             last_auto: Instant::now(),
             log_server: String::new(),
             log_ascending: Some(true),
             log_command_width: None,
-            log_scroll: ScrollHandle::new(),
+            log_view: RefCell::new(log_view::State::default()),
             sidebar_resizing: false,
             sidebar_hover: false,
             sidebar_save_epoch: 0,
@@ -1014,6 +1038,7 @@ impl RdmApp {
         }
     }
     fn choose_welcome(&mut self, allow_tracking: bool, cx: &mut Context<Self>) {
+        self.exiting_welcome = Some(motion::Exit::new((), cx));
         self.pref.welcome_choice(allow_tracking);
         self.save_preferences();
         cx.notify();
@@ -1055,7 +1080,7 @@ impl RdmApp {
                 app.busy = app.busy.saturating_sub(1);
                 match result {
                     Ok(value) => apply(app, value, window, cx),
-                    Err(e) => app.toast(e.to_string(), true),
+                    Err(e) => app.toast(localized(&e.to_string()), true),
                 }
                 cx.notify();
             });
@@ -1064,10 +1089,20 @@ impl RdmApp {
         cx.notify();
     }
     fn open_connection(&mut self, c: Connection, window: &mut Window, cx: &mut Context<Self>) {
+        if c.read_only && let Err(error) = self.service.ensure_no_writes(&c.name) {
+            self.toast(localized(&error.to_string()), true);
+            cx.notify();
+            return;
+        }
         if self.ssh_trust.is_some() { return; }
         if ssh_trust::needs_confirmation(&c) {
             self.request_ssh_trust(c, ssh_trust::Resume::Open, window, cx);
             return;
+        }
+        if let Some(id) = self.tabs.iter()
+            .find(|tab| tab.conn.name == c.name && tab.conn.read_only != c.read_only)
+            .map(|tab| tab.id) {
+            self.close_tab(id, window, cx);
         }
         if let Some(id) = self.tabs.iter().find(|t| t.conn.name == c.name).map(|t| t.id) {
             self.activate_connection_tab(Some(id), cx);
@@ -1161,6 +1196,7 @@ impl RdmApp {
             key_types: key_types::Cache::default(),
             scan: ScanState::default(),
             scan_epoch: 0,
+            scan_cancel: Cancellation::default(),
             keys_loading: false,
             total: 0,
             selected: IndexSet::new(),
@@ -1325,6 +1361,7 @@ impl RdmApp {
             return;
         };
         let name = self.tabs[i].conn.name.clone();
+        self.cancel_key_scan(id);
         self.remove_closed_tab(&name, cx);
         self.job(
             window,
@@ -1334,90 +1371,6 @@ impl RdmApp {
                 Ok(())
             },
             |_, _, _, _| {},
-        );
-    }
-    fn scan_keys(
-        &mut self,
-        id: u64,
-        reset: bool,
-        all: bool,
-        window: &mut Window,
-        cx: &mut Context<Self>,
-    ) {
-        let Some(i) = self.tab_index(id) else {
-            return;
-        };
-        let t = &mut self.tabs[i];
-        if t.keys_loading && !reset {
-            return;
-        }
-        if reset {
-            t.key_types.reset();
-            t.scan = ScanState::default();
-            t.scan_epoch += 1;
-            t.key_revision += 1;
-            t.keys.clear();
-            t.selected.clear();
-        }
-        t.keys_loading = true;
-        let epoch = t.scan_epoch;
-        let c = t.conn.clone();
-        let db = t.db;
-        let state = t.scan.clone();
-        let input_pattern = t.key_match.clone();
-        let pattern = if input_pattern.is_empty() && !t.exact {
-            c.default_filter.clone()
-        } else {
-            input_pattern
-        };
-        let pattern = if !t.exact && !pattern.chars().any(|c| matches!(c, '?' | '*' | '[' | ']' | '{' | '}')) {
-            format!("*{pattern}*")
-        } else { pattern };
-        let kind = t.key_type.clone();
-        let exact = t.exact;
-        let count = self.pref.general.scan_size.max(1);
-        let load_size = c.load_size;
-        self.job(
-            window,
-            cx,
-            move |s| {
-                Ok((|| -> Result<_> {
-                    let size = if all || load_size == 0 { count } else { count.min(load_size) };
-                    let mut page = s.scan(&c, db, &pattern, &kind, exact, state, size)?;
-                    while !page.state.end && (all || page.keys.len() < load_size) {
-                        let size = if all { count } else { count.min(load_size - page.keys.len()) };
-                        let next = s.scan(&c, db, &pattern, &kind, exact, page.state.clone(), size)?;
-                        page.keys.extend(next.keys);
-                        page.state = next.state;
-                    }
-                    Ok(page)
-                })())
-            },
-            move |app, page, _, _| {
-                if let Some(i) = app.tab_index(id)
-                    && app.tabs[i].db == db
-                    && app.tabs[i].scan_epoch == epoch
-                {
-                    app.tabs[i].keys_loading = false;
-                    let page = match page {
-                        Ok(page) => page,
-                        Err(error) => {
-                            app.toast(error.to_string(), true);
-                            return;
-                        }
-                    };
-                    let t = &mut app.tabs[i];
-                    let mut seen = t.keys.iter().map(|k| k.key.clone()).collect::<HashSet<_>>();
-                    t.keys
-                        .extend(page.keys.into_iter().filter(|k| seen.insert(k.key.clone())));
-                    t.key_revision += 1;
-                    t.keys.sort_by(|a, b| {
-                        natural_compare(&display_bytes(&a.key), &display_bytes(&b.key))
-                    });
-                    t.scan = page.state;
-                    t.total = page.total;
-                }
-            },
         );
     }
     fn change_database(&mut self, id: u64, db: u32, window: &mut Window, cx: &mut Context<Self>) {
@@ -1667,7 +1620,7 @@ impl RdmApp {
                 t.cli_output.clear();
             } else {
                 t.cli_output.push(cli::Line::prompt(
-                    &format!("{}:db{}> ", t.conn.name, t.cli_db),
+                    &read_only::cli_prompt(&t.conn, t.cli_db),
                     &input,
                 ));
             }
@@ -1705,6 +1658,7 @@ impl RdmApp {
     }
     fn save_value(&mut self, window: &mut Window, cx: &mut Context<Self>) {
         let Some(i) = self.index() else { return };
+        if !self.writable_tab(self.tabs[i].id, cx) { return; }
         let tab = &self.tabs[i];
         if tab.pane == Pane::Detail && !tab.values_loading && !tab.value_saving
             && tab.detail.as_ref().is_some_and(|detail| matches!(detail.kind, KeyType::String | KeyType::Json)) {
@@ -1822,7 +1776,7 @@ impl RdmApp {
             return;
         }
         t.cli_output.push(cli::Line::prompt(
-            &format!("{}:db{}> ", t.conn.name, t.cli_db),
+            &read_only::cli_prompt(&t.conn, t.cli_db),
             &line,
         ));
         t.cli_scroll.scroll_to_bottom();
@@ -1834,6 +1788,9 @@ impl RdmApp {
         }
         let c = t.conn.clone();
         let db = t.cli_db;
+        let pending_write = if !c.read_only && !crate::redis::is_read_only_command(&args) {
+            self.service.write_task(&c).ok()
+        } else { None };
         let selected_db = if args
             .first()
             .is_some_and(|arg| arg.eq_ignore_ascii_case(b"SELECT"))
@@ -1848,12 +1805,14 @@ impl RdmApp {
             window,
             cx,
             move |service| {
+                let _write = pending_write;
                 Ok(match service.run_cli(&c, db, args) {
                     Ok(value) => (value, selected_db),
                     Err(error) => (crate::redis::Value::Error(error.to_string()), None),
                 })
             },
-            move |app, (value, selected_db), _, _| {
+            move |app, (mut value, selected_db), _, _| {
+                if let crate::redis::Value::Error(error) = &mut value { *error = localized(error); }
                 if let Some(i) = app.tab_index(id) {
                     if let Some(db) = selected_db {
                         app.tabs[i].cli_db = db;
@@ -1966,6 +1925,7 @@ impl RdmApp {
         cx.notify();
     }
     fn publish(&mut self, id: u64, window: &mut Window, cx: &mut Context<Self>) {
+        if !self.writable_tab(id, cx) { return; }
         let Some(i) = self.tab_index(id) else {
             return;
         };
@@ -1978,9 +1938,10 @@ impl RdmApp {
         let c = t.conn.clone();
         let db = t.db;
         let sent_channel = channel.clone();
-        self.job(
+        self.write_job(
             window,
             cx,
+            c.clone(),
             move |s| s.run(&c, db, command(&["PUBLISH", &sent_channel, &message])),
             move |app, value, window, cx| {
                 if let Some(i) = app.tab_index(id) {
@@ -1995,7 +1956,10 @@ impl RdmApp {
         );
     }
     fn tick(&mut self, window: &mut Window, cx: &mut Context<Self>) {
-        let mut changed = false;
+        let mut changed = self.clean_exits(cx);
+        if self.nav == Nav::Log && let Some(history) = self.service.history.try_lock() {
+            changed |= self.log_view.borrow().revision != Some(history.revision());
+        }
         let mut errors = vec![];
         for tab in &mut self.tabs {
             for stream in [&mut tab.monitor, &mut tab.pubsub].into_iter().flatten() {
@@ -2042,7 +2006,7 @@ impl RdmApp {
         for error in errors {
             self.toast(error, true);
         }
-        if self.expire_messages() {
+        if self.expire_messages(cx) {
             changed = true;
         }
         changed |= self.poll_csv_transfers();

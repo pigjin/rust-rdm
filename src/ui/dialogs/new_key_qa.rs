@@ -28,7 +28,7 @@ pub(super) async fn draw(window: WindowHandle<Root>, cx: &mut AsyncApp) {
     })
     .unwrap();
 }
-pub(super) fn click(id: ElementId, window: WindowHandle<Root>, cx: &mut AsyncApp) {
+pub(in crate::ui) fn click(id: ElementId, window: WindowHandle<Root>, cx: &mut AsyncApp) {
     cx.update_window(window.into(), |_, window, cx| {
         window.refresh();
         let _ = window.draw(cx);
@@ -368,6 +368,8 @@ pub(in crate::ui) async fn verify(
             })
         })
         .unwrap();
+    // Restore the fixture's final geometry before the layout oracle runs.
+    cx.background_executor().timer(Duration::from_millis(180)).await;
     draw(window, cx).await;
     println!(
         "NEW KEY INPUT QA PASS: type keys, row buttons, DB filter, import DB, textarea drag, retained failure and actual DB15 creation / cleanup"

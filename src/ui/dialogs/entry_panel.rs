@@ -61,6 +61,7 @@ impl RdmApp {
         cx: &Context<Self>,
     ) -> AnyElement {
         let dialog = self.displayed_entry_dialog().unwrap();
+        let read_only = dialog.target.as_ref().is_some_and(|target| target.conn.read_only);
         let dialog_id = dialog.id;
         let kind = dialog
             .target
@@ -100,7 +101,7 @@ impl RdmApp {
             )
             .id("entry-field-input")
             .w_full()
-            .readonly(matches!(kind, KeyType::List | KeyType::Set))
+            .readonly(read_only || matches!(kind, KeyType::List | KeyType::Set))
             .when(
                 dark && dialog.fields[field_key].focus_handle(cx).is_focused(window),
                 |field| field.bg(rgb(0x2b1b1e)),
@@ -144,7 +145,7 @@ impl RdmApp {
             selectors = selectors.child(self.render_entry_picker(kind, window, cx));
         }
         let changed = dialog.entry_changed(cx);
-        let enabled = changed;
+        let enabled = changed && !read_only;
         let primary: Hsla = rgb(0xd33a31).into();
         let save_label = self.tr("common.update");
         let save = Button::new("save-entry")
@@ -245,7 +246,7 @@ impl RdmApp {
                                     )
                                     .editor_paddings(gpui::Edges::default())
                                     .text_size(px(self.editor_font_size()))
-                                    .readonly(false),
+                                    .readonly(read_only),
                             ),
                     ),
             )

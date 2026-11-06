@@ -84,7 +84,21 @@ impl RdmApp {
             .into_any_element()
     }
     pub(super) fn render_app(&mut self, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
+        self.clean_exits(cx);
+        if self.dialog.is_some() { self.exiting_dialog = None; }
+        if (self.dialog.is_some() && !self.editing_entry()) || self.ssh_trust.is_some() || !self.tab_close_warnings.is_empty() {
+            self.exiting_dialog = None;
+            self.exiting_ssh = None;
+            self.exiting_warnings.clear();
+        }
+        if !self.pref.behavior.welcomed { self.exiting_welcome = None; }
         self.prepare_key_selectors(window, cx);
+        let page_key = if self.nav == Nav::Browser {
+            format!("browser-{:?}", self.index().map(|i| (self.tabs[i].id, self.tabs[i].pane as u8)))
+        } else {
+            format!("workspace-{}", self.nav as u8)
+        };
+        let page_opacity = motion::page(page_key, window, cx);
         let title = self.render_title(window, cx);
         let ribbon = self.render_ribbon(window, cx);
         let content = if self.nav == Nav::Log {
@@ -98,15 +112,10 @@ impl RdmApp {
             let main = if self.nav == Nav::Server {
                 self.render_empty(cx)
             } else {
-                self.render_content(window, cx)
+                self.render_content(page_opacity, window, cx)
             };
             self.render_sidebar(sidebar, main, window, cx)
         };
-        let page_progress = motion::enter(
-            format!("workspace-{}", self.nav as u8),
-            window,
-            cx,
-        );
         let general_font = self.preference_font("general", ".SystemUIFont", cx);
         let mut root = div()
             .id("rdm-root")
@@ -259,12 +268,12 @@ impl RdmApp {
                     .font(general_font)
                     .text_size(px(self.general_font_size()))
                     .child(ribbon)
-                    .child(div().flex_1().min_w_0().opacity(page_progress).child(content)),
+                    .child(div().flex_1().min_w_0().opacity(if self.nav == Nav::Browser { 1. } else { page_opacity }).child(content)),
             )
             .child(self.sidebar_events(cx));
         let key_loading_visible = self.nav == Nav::Browser
             && self.index().is_some_and(|i| self.tabs[i].keys_loading);
-        if self.busy > self.entry_conversions && !key_loading_visible {
+        if self.busy > self.entry_conversions + self.key_scans && !key_loading_visible {
             root = root.child(
                 div()
                     .id("app-loading-indicator")
@@ -277,38 +286,65 @@ impl RdmApp {
                     .child(format!("{}…", localized("加载中"))),
             );
         }
-        if self.dialog.is_some() && !self.editing_entry() {
-            let id = self.dialog.as_ref().unwrap().id;
-            let dialog = self.render_dialog(window, cx);
-            root = root.child(motion::overlay(
-                ElementId::from(("dialog-enter", id)), dialog, window, cx,
-            ));
+        if self.display_dialog().is_some() && !self.editing_entry() {
+            let present = self.dialog.is_some();
+            // Visual continuity is independent of the IDs guarding dialog callbacks.
+            let sample = motion::presence("dialog-enter", present, window, cx);
+            if sample.should_render() {
+                root = root.child(motion::overlay(self.render_dialog(sample.progress, window, cx), sample.progress));
+            }
+            if !present {
+                if sample.should_render() {
+                    self.exiting_dialog.as_mut().unwrap().keep_visible(cx);
+                } else { self.exiting_dialog = None; }
+            }
         }
-        if !self.pref.behavior.welcomed {
-            root = root.child(motion::overlay(
-                "welcome-enter", self.render_welcome(cx), window, cx,
-            ));
+        if !self.pref.behavior.welcomed || self.exiting_welcome.is_some() {
+            let present = !self.pref.behavior.welcomed;
+            let sample = motion::presence("welcome-enter", present, window, cx);
+            if sample.should_render() {
+                root = root.child(motion::overlay(self.render_welcome(sample.progress, window, cx), sample.progress));
+            }
+            if !present {
+                if sample.should_render() {
+                    self.exiting_welcome.as_mut().unwrap().keep_visible(cx);
+                } else { self.exiting_welcome = None; }
+            }
         }
-        for warning in &self.tab_close_warnings {
-            root = root.child(motion::overlay(
-                ElementId::from(("tab-close-enter", warning.id)),
-                self.render_tab_close_warning(warning, cx), window, cx,
-            ));
+        let mut finished_warnings = Vec::new();
+        for (slot, (warning, present)) in self.tab_close_warnings.iter().map(|warning| (warning, true))
+            .chain(self.exiting_warnings.iter().map(|exit| (&exit.value, false))).enumerate()
+        {
+            let sample = motion::presence(ElementId::from(("tab-close-enter", slot)), present, window, cx);
+            if sample.should_render() {
+                root = root.child(motion::overlay(self.render_tab_close_warning(warning, sample.progress, present, window, cx), sample.progress));
+            } else { finished_warnings.push(warning.id); }
         }
+        self.exiting_warnings.retain_mut(|exit| {
+            exit.keep_visible(cx);
+            !finished_warnings.contains(&exit.value.id)
+        });
         root = root.child(self.render_notices(window, cx));
-        if self.ssh_trust.is_some() {
-            root = root.child(motion::overlay(
-                "ssh-trust-enter", self.render_ssh_trust(cx), window, cx,
-            ));
+        if self.ssh_trust.is_some() || self.exiting_ssh.is_some() {
+            let present = self.ssh_trust.is_some();
+            let sample = motion::presence("ssh-trust-enter", present, window, cx);
+            if sample.should_render() {
+                root = root.child(motion::overlay(self.render_ssh_trust(sample.progress, window, cx), sample.progress));
+            }
+            if !present {
+                if sample.should_render() {
+                    self.exiting_ssh.as_mut().unwrap().keep_visible(cx);
+                } else { self.exiting_ssh = None; }
+            }
         }
         root.into_any_element()
     }
-    fn render_welcome(&self, cx: &Context<Self>) -> AnyElement {
+    fn render_welcome(&self, progress: f32, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
         div()
             .id("welcome-notice")
             .absolute()
             .bottom(px(50.))
-            .right(px(16.))
+            .right(px(16. - 8. * (1. - progress)))
             .w(px(365.))
             .pl(px(24.))
             .pr(px(16.))
@@ -360,9 +396,10 @@ impl RdmApp {
                         .text_color(cx.theme().primary),
                     ),
             )
+            .when(self.pref.behavior.welcomed, |card| motion::inert(card, "welcome-exit-focus", window, cx))
             .into_any_element()
     }
-    fn render_title(&self, window: &Window, cx: &Context<Self>) -> AnyElement {
+    fn render_title(&self, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
         let caption = if self.nav == Nav::Browser {
             self.index()
                 .map(|i| format!("- {}", self.tabs[i].conn.name))
@@ -443,10 +480,10 @@ impl RdmApp {
             Nav::Server => usize::from(!self.tabs.is_empty()),
             Nav::Log => 1 + usize::from(!self.tabs.is_empty()),
         };
-        let marker_top = gpui_base::motion::transition(
-            "ribbon-marker-top",
+        let marker_top = motion::move_to(
+            format!("ribbon-marker-{}", !self.tabs.is_empty()),
             px(9.6 + selected_index as f32 * 42.),
-            gpui_base::motion::Transition::new(Duration::from_millis(160)),
+            false,
             window,
             cx,
         );
@@ -460,13 +497,23 @@ impl RdmApp {
                 continue;
             }
             let selected = self.nav == nav;
+            let (hovered, on_hover) = motion::hover(format!("ribbon-hover-{}", nav as u8), window, cx);
+            let background = motion::color(format!("ribbon-bg-{}", nav as u8),
+                rgba(if hovered { 0x0000000d } else { 0 }).into(), false, window, cx);
+            let foreground = motion::color(format!("ribbon-fg-{}", nav as u8),
+                if selected { cx.theme().primary } else if self.dark(cx) {
+                    rgba(0xffffff85).into()
+                } else { rgb(0x767c82).into() }, false, window, cx);
             navigation = navigation.child(
                 div()
+                    .id(format!("ribbon-row-{}", nav as u8))
                     .relative()
                     .group("ribbon-item")
                     .h(px(40.))
                     .w_full()
-                    .hover(|row| row.bg(rgba(0x0000000d)))
+                    .bg(background)
+                    .on_hover(on_hover)
+                    .active(|row| row.bg(rgba(0x00000019)))
                     .child(
                         self.icon_btn(
                             format!("nav-{ico}"),
@@ -476,15 +523,7 @@ impl RdmApp {
                             move |app, _, cx| {
                                 app.nav = nav;
                                 if nav == Nav::Log {
-                                    let count = app
-                                        .service
-                                        .history
-                                        .try_lock()
-                                        .map(|h| h.len())
-                                        .unwrap_or(0);
-                                    if count > 0 {
-                                        app.log_scroll.scroll_to_item(count - 1);
-                                    }
+                                    app.log_view.borrow_mut().jump_to_end = true;
                                 }
                                 cx.notify();
                             },
@@ -494,13 +533,7 @@ impl RdmApp {
                         .icon(icon(&format!("{ico}-thick")).size(px(22.)))
                         .w_full()
                         .h(px(40.))
-                        .text_color(if selected {
-                            cx.theme().primary
-                        } else if self.dark(cx) {
-                            Hsla::from(rgba(0xffffff85))
-                        } else {
-                            Hsla::from(rgb(0x767c82))
-                        }),
+                        .text_color(foreground),
                     )
                     .child(
                         div()
@@ -1279,7 +1312,8 @@ impl RdmApp {
                     .flex_shrink_0()
                     .child(prefix),
             )
-            .child(label);
+            .child(label)
+            .when(c.read_only, |row| row.child(div().text_size(px(11.)).px(px(4.)).child(self.tr("read_only.badge"))));
         if selected {
             let open = c.clone();
             let edit = c.clone();
@@ -1460,13 +1494,12 @@ impl RdmApp {
         }
         cx.notify();
     }
-    fn render_content(&self, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
+    fn render_content(&self, opacity: f32, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
         let Some(i) = self.index() else {
             return self.render_empty(cx);
         };
         let t = &self.tabs[i];
         let tabs = self.render_content_nav(i, window, cx);
-        let progress = motion::enter(format!("content-{}-{}", t.id, t.pane as u8), window, cx);
         let page = match t.pane {
             Pane::Status => self.render_status(i, window, cx),
             Pane::Detail => self.render_detail(i, window, cx),
@@ -1480,7 +1513,7 @@ impl RdmApp {
             .flex_col()
             .size_full()
             .child(tabs)
-            .child(div().flex_1().min_h_0().overflow_hidden().opacity(progress).child(page))
+            .child(div().flex_1().min_h_0().overflow_hidden().opacity(opacity).child(page))
             .into_any_element()
     }
     fn render_status(&self, i: usize, window: &mut Window, cx: &Context<Self>) -> AnyElement {
@@ -2028,7 +2061,7 @@ impl RdmApp {
                 (true, _) => log.address.clone(), (_, true) => log.name.clone(), _ => format!("{} - {}", log.name, log.address),
             };
             list = list.child(self.diagnostic_row("slow", index, count, [time, client, log.args.clone(), cost],
-                [Some(180.), Some(client_width), command_width, Some(100.)], t.slow_ascending.is_some(), true, cx));
+                [Some(180.), Some(client_width), command_width, Some(100.)], t.slow_ascending.is_some(), true, None, cx));
         }
         let mut steps = div().absolute().right(px(8.)).top_0().h_full().flex().items_center();
         for (symbol, delta) in [("−", -1i64), ("+", 1)] {
@@ -2172,9 +2205,9 @@ impl RdmApp {
                 .child(div().id("keypages-total").test_support().h(px(21.)).mt(px(10.)).child(self.tr("pubsub.receive_message").replace("{total}",&stream.as_ref().map(|s|s.lines.len()).unwrap_or(0).to_string())));
             let weak=cx.weak_entity();let history=t.pub_history.clone();
             let channel=div().id("pubsub-channel-input").test_support().w(relative(0.35)).max_w(px(200.)).min_w_0().flex_shrink_1()
-                .child(self.diagnostic_input(&t.pub_channel,32., cx).rounded_r(px(0.)))
+                .child(self.diagnostic_input(&t.pub_channel,32., cx).readonly(t.conn.read_only).rounded_r(px(0.)))
                 .context_menu(move|mut menu,_,_|{for channel in &history{let channel=channel.clone();menu=menu.item(menu_action(channel.clone(),weak.clone(),move|a,w,cx|{if let Some(i)=a.tab_index(id){set_input(&a.tabs[i].pub_channel,channel.clone(),w,cx);}}));}menu});
-            let disabled=text_input(&t.pub_channel,cx).is_empty();
+            let disabled=t.conn.read_only || text_input(&t.pub_channel,cx).is_empty();
             let info_color=if dark{0x70c0e8}else{0x2080f0};
             let info_foreground=if dark{0x000000}else{0xffffff};
             let parent=if dark{0x1e1e1e}else{0xffffff};
@@ -2184,7 +2217,7 @@ impl RdmApp {
             content=content.child(div().id("keypages-publish-row").test_support().flex().items_center().h(px(32.)).mt(px(10.)).gap(px(10.))
                 .child(div().flex_1().min_w_0().flex().items_center().child(channel)
                     .child(div().id("pubsub-message-input").test_support().w_full().flex_shrink_1().min_w_0().ml(px(-1.)).child(
-                        self.diagnostic_input(&t.pub_message,32., cx).rounded_l(px(0.)).when_some(t.pub_received.as_ref(),|input,(n,_)|input.suffix(
+                        self.diagnostic_input(&t.pub_message,32., cx).readonly(t.conn.read_only).rounded_l(px(0.)).when_some(t.pub_received.as_ref(),|input,(n,_)|input.suffix(
                             div().h(px(22.)).px(px(6.)).flex().items_center().gap(px(4.)).rounded(px(3.)).border_1()
                                 .border_color(if dark{rgba(0x63e2b74d)}else{rgba(0x18a0584d)})
                                 .bg(if dark{rgba(0x63e2b71a)}else{rgba(0x18a0581a)})
@@ -2212,24 +2245,31 @@ impl RdmApp {
     }
     fn render_log(&self, cx: &Context<Self>) -> AnyElement {
         let filter = text_input(&self.log_filter, cx);
-        let (servers, mut logs) = self.service.history.try_lock().map(|history| {
-            let mut servers = Vec::new();
-            for entry in history.iter() { if !entry.server.is_empty() && !servers.contains(&entry.server) { servers.push(entry.server.clone()); } }
-            let logs = history.iter().filter(|entry| (self.log_server.is_empty() || entry.server == self.log_server)
-                && (filter.is_empty() || entry.command.contains(&filter))).cloned().collect::<Vec<_>>();
-            (servers, logs)
-        }).unwrap_or_default();
-        if let Some(ascending) = self.log_ascending {
-            logs.sort_by(|a,b| a.time.cmp(&b.time));
-            if !ascending { logs.reverse(); }
-        }
-        let mut list = div().id("operation-log-list").test_support().flex_1().min_h_0().overflow_y_scroll().track_scroll(&self.log_scroll);
-        if logs.is_empty() { list = list.child(self.diagnostic_empty(cx)); }
+        let (servers, logs, list_state) = {
+            let mut state = self.log_view.borrow_mut();
+            state.update(&self.service, filter, &self.log_server, self.log_ascending, self.log_command_width);
+            (state.servers.clone(), state.rows.clone(), state.list.clone())
+        };
+        let mut list = div().id("operation-log-list").test_support().flex().flex_col().flex_1().min_h_0();
         let count = logs.len();
-        for (index, log) in logs.into_iter().enumerate() {
-            let cost = if log.elapsed_ms < 1000. { format!("{} ms", log.elapsed_ms.trunc()) } else { format!("{} s", (log.elapsed_ms/1000.).floor()) };
-            list = list.child(self.diagnostic_row("log", index, count, [log.time, log.server, log.command, cost],
-                [Some(180.), Some(150.), self.log_command_width, Some(100.)], self.log_ascending.is_some(), false, cx));
+        if count == 0 {
+            list = list.child(self.diagnostic_empty(cx));
+        } else {
+            list = list.child(gpui::list(list_state, cx.processor(move |app, index: usize, _, cx| {
+                let log = &logs[index];
+                let preview = log_view::command_preview(&log.command);
+                let copy = matches!(preview, Cow::Owned(_)).then(|| {
+                    let log = log.clone();
+                    app.btn(format!("log-copy-{index}"), app.tr("monitor.copy_log"), "copy", cx, move |app, _, cx| {
+                        cx.write_to_clipboard(ClipboardItem::new_string(log.command.clone()));
+                        app.toast(app.tr("interface.copy_succ"), false);
+                        cx.notify();
+                    }).ghost().h(px(24.)).px(px(4.)).max_w_full().overflow_hidden().into_any_element()
+                });
+                let cost = if log.elapsed_ms < 1000. { format!("{} ms", log.elapsed_ms.trunc()) } else { format!("{} s", (log.elapsed_ms/1000.).floor()) };
+                app.diagnostic_row("log", index, count, [log.time.clone(), log.server.clone(), preview.into_owned(), cost],
+                    [Some(180.), Some(150.), app.log_command_width, Some(100.)], app.log_ascending.is_some(), false, copy, cx)
+            })).flex_1().min_h_0());
         }
         let weak = cx.weak_entity();
         let all = self.tr("common.all");
@@ -2242,7 +2282,7 @@ impl RdmApp {
             .child(icon("select-chevron").size(px(16.)).text_color(if self.dark(cx){rgba(0xffffff61)}else{rgb(0xc2c2c2)}))
             .dropdown_menu(move |mut menu, _, _| {
                 menu = menu.item(menu_action(all_option.clone(), weak.clone(), |app, _, cx| { app.log_server.clear();cx.notify(); }));
-                for server in &servers { let server=server.clone();menu=menu.item(menu_action(server.clone(),weak.clone(),move|app,_,cx|{app.log_server=server.clone();cx.notify();})); }
+                for server in servers.iter() { let server=server.clone();menu=menu.item(menu_action(server.clone(),weak.clone(),move|app,_,cx|{app.log_server=server.clone();cx.notify();})); }
                 menu
             });
         let form = div().id("keypages-form").test_support().flex().gap(px(18.))
@@ -2250,8 +2290,7 @@ impl RdmApp {
             .child(self.diagnostic_field(self.tr("log.filter_keyword"), div().id("keypages-filter").test_support()
                 .w(px(self.diagnostic_filter_width(cx))).child(self.diagnostic_input(&self.log_filter,32., cx).cleanable(true)).into_any_element()))
             .child(self.diagnostic_field(String::new(), self.diagnostic_outline(self.icon_btn("log-refresh","refresh",self.tr("log.refresh"),cx,|app,_,cx|{
-                let count=app.service.history.try_lock().map(|history|history.len()).unwrap_or(0);
-                if count>0 {app.log_scroll.scroll_to_item(count-1);}cx.notify();
+                app.log_view.borrow_mut().jump_to_end = true;cx.notify();
             }),cx).w(px(42.)).h(px(32.)).px(px(11.)).into_any_element()))
             .child(self.diagnostic_field(String::new(), self.diagnostic_outline(self.icon_btn("clear-logs","delete",self.tr("log.clean_log"),cx,|app,w,cx|app.open_dialog(DialogKind::CleanLog,w,cx)),cx)
                 .w(px(42.)).h(px(32.)).px(px(11.)).into_any_element()));
@@ -2332,9 +2371,10 @@ impl RdmApp {
         let message = self
             .tr("dialogue.delete.success")
             .replace("{key}", &removed_label);
-        self.job(
+        self.write_job(
             window,
             cx,
+            c.clone(),
             move |s| s.edit_entry(&c, db, &key, &kind, &row, &row, true),
             move |a, _, w, cx| {
                 a.toast(message, false);

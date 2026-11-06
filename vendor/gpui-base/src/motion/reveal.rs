@@ -52,6 +52,9 @@ impl Element for MotionReveal {
         window: &mut Window,
         cx: &mut App,
     ) -> (LayoutId, Self::RequestLayoutState) {
+        if self.progress >= 1.0 {
+            return (self.child.request_layout(window, cx), ());
+        }
         let height = window.with_element_state(
             global_id.expect("MotionReveal must have an id"),
             |state: Option<RevealState>, _| {
@@ -78,6 +81,22 @@ impl Element for MotionReveal {
         window: &mut Window,
         cx: &mut App,
     ) -> Self::PrepaintState {
+        if self.progress >= 1.0 {
+            // A fully visible child supplies its natural height and keeps its shadows/hitboxes.
+            window.with_element_state(
+                global_id.expect("MotionReveal must have an id"),
+                |_: Option<RevealState>, _| {
+                    (
+                        (),
+                        RevealState {
+                            height: Some(bounds.size.height),
+                        },
+                    )
+                },
+            );
+            self.child.prepaint(window, cx);
+            return;
+        }
         let measured = self.child.layout_as_root(
             size(
                 AvailableSpace::Definite(bounds.size.width),
@@ -113,8 +132,12 @@ impl Element for MotionReveal {
         window: &mut Window,
         cx: &mut App,
     ) {
-        window.with_content_mask(Some(ContentMask { bounds }), |window| {
+        if self.progress >= 1.0 {
             self.child.paint(window, cx);
-        });
+        } else {
+            window.with_content_mask(Some(ContentMask { bounds }), |window| {
+                self.child.paint(window, cx);
+            });
+        }
     }
 }

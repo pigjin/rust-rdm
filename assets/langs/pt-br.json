@@ -1,5 +1,12 @@
 {
   "name": "Português",
+  "read_only": {
+    "label": "Conexão somente leitura",
+    "badge": "Somente leitura",
+    "hint": "Permitir apenas consultas, incluindo o console. Reconecte após alterar esta opção.",
+    "error": "Esta conexão é somente leitura; apenas consultas são permitidas.",
+    "pending": "Há gravações pendentes. Aguarde a conclusão ou cancele as tarefas antes de alterar as configurações da conexão."
+  },
   "common": {
     "confirm": "Confirmar",
     "cancel": "Cancelar",

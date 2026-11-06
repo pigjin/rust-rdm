@@ -19,6 +19,7 @@ impl RdmApp {
             return;
         };
         let name = tab.conn.name.clone();
+        self.exiting_warnings.clear();
         self.next_dialog_id += 1;
         self.tab_close_warnings.push(CloseWarning {
             id: self.next_dialog_id,
@@ -35,7 +36,13 @@ impl RdmApp {
     }
 
     pub(super) fn cancel_tab_close(&mut self, cx: &mut Context<Self>) -> bool {
-        let removed = self.tab_close_warnings.pop().is_some();
+        let removed = self.tab_close_warnings.pop();
+        let removed = if let Some(warning) = removed {
+            if self.tab_close_warnings.is_empty() {
+                self.exiting_warnings.push(motion::Exit::new(warning, cx));
+            }
+            true
+        } else { false };
         if removed {
             cx.notify();
         }
@@ -43,7 +50,12 @@ impl RdmApp {
     }
 
     fn dismiss_tab_close(&mut self, id: u64, cx: &mut Context<Self>) {
-        self.tab_close_warnings.retain(|warning| warning.id != id);
+        if let Some(index) = self.tab_close_warnings.iter().position(|warning| warning.id == id) {
+            let warning = self.tab_close_warnings.remove(index);
+            if self.tab_close_warnings.is_empty() {
+                self.exiting_warnings.push(motion::Exit::new(warning, cx));
+            }
+        }
         cx.notify();
     }
 
@@ -51,11 +63,18 @@ impl RdmApp {
         let Some(index) = self.tab_close_warnings.iter().position(|warning| warning.id == id) else {
             return;
         };
-        let name = self.tab_close_warnings.remove(index).name;
+        let warning = self.tab_close_warnings.remove(index);
+        let name = warning.name.clone();
+        if self.tab_close_warnings.is_empty() {
+            self.exiting_warnings.push(motion::Exit::new(warning, cx));
+        }
         let service = self.service.clone();
         let closing_name = name.clone();
-        // The original warning closes immediately; its callback does not return
-        // the RPC promise. The tab and draft remain until CloseConnection ends.
+        if let Some(tab) = self.tabs.iter().find(|tab| tab.conn.name == name) {
+            self.cancel_key_scan(tab.id);
+        }
+        // Retiring the display does not delay CloseConnection or keep its controls live.
+        // The tab and draft remain until CloseConnection ends.
         // The pinned Go endpoint always reports success, as does Service::close.
         let task = cx.background_executor().spawn(async move {
             service.close(&closing_name);
@@ -88,7 +107,10 @@ impl RdmApp {
     pub(super) fn render_tab_close_warning(
         &self,
         warning: &CloseWarning,
-        cx: &Context<Self>,
+        progress: f32,
+        present: bool,
+        window: &mut Window,
+        cx: &mut Context<Self>,
     ) -> AnyElement {
         let id = warning.id;
         let dark = self.dark(cx);
@@ -104,14 +126,14 @@ impl RdmApp {
             .items_center()
             .justify_center()
             .bg(rgba(0x00000066))
-            .occlude()
-            .on_mouse_down(
+            .when(present, |mask| mask.occlude().on_mouse_down(
                 MouseButton::Left,
                 cx.listener(move |app, _, _, cx| app.dismiss_tab_close(id, cx)),
-            )
+            ))
             .child(
                 div()
                     .id(element("card"))
+                    .relative().top(px(8. * (1. - progress)))
                     .test_support()
                     .w(px(446.))
                     .px(px(28.))
@@ -175,7 +197,8 @@ impl RdmApp {
                                     .bg(warning_color).border_color(warning_color)
                                     .text_color(if dark { rgb(0x000000) } else { rgb(0xffffff) }),
                             ),
-                    ),
+                    )
+                    .when(!present, |card| motion::inert(card, ("tab-close-exit-focus", id), window, cx)),
             )
             .into_any_element()
     }

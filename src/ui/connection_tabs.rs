@@ -3,7 +3,7 @@ use gpui::prelude::*;
 use gpui_base::TestSupportExt as _;
 
 impl RdmApp {
-    pub(super) fn render_connection_tabs(&self, window: &Window, cx: &Context<Self>) -> AnyElement {
+    pub(super) fn render_connection_tabs(&self, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
         let active = self.index();
         let mark: Option<Hsla> = active.and_then(|index| {
             gpui::Rgba::try_from(self.tabs[index].conn.mark_color.as_str()).ok().map(Into::into)
@@ -35,12 +35,19 @@ impl RdmApp {
                 &[TextRun { len: tab.conn.name.len(), font, ..Default::default() }], None,
             ).width().min(px(150.));
             let marked = if selected { mark } else { None };
-            let background = if selected { cx.theme().background } else { rgba(0x00000000).into() };
+            let (hovered, on_hover) = motion::hover(ElementId::from(("connection-tab-hover", id)), window, cx);
+            let background = motion::color(ElementId::from(("connection-tab-bg", id)),
+                if selected { cx.theme().background } else if hovered { self.split_color(cx) }
+                else { rgba(0).into() }, false, window, cx);
+            let foreground = motion::color(ElementId::from(("connection-tab-fg", id)),
+                if selected { cx.theme().primary } else { close_color.into() }, false, window, cx);
+            let border = motion::color(ElementId::from(("connection-tab-border", id)),
+                if selected { self.split_color(cx) } else { rgba(0).into() }, false, window, cx);
             let divider = !selected && active.and_then(|i| i.checked_sub(1)) != Some(index);
             let content = div().flex().flex_1().min_h_0().items_center().gap(px(6.))
                 .pl(px(16.)).pr(px(8.)).pt(px(8.)).pb(px(9.))
                 .border_l_1().border_r_1()
-                .border_color(if selected { self.split_color(cx) } else { rgba(0x00000000).into() })
+                .border_color(border)
                 .child(
                     div().id(("connection-tab-label", id)).test_support()
                         .flex().flex_shrink_0().items_center().gap(px(5.)).h(px(18.))
@@ -49,6 +56,7 @@ impl RdmApp {
                         .child(div().id(("connection-tab-text", id)).test_support()
                             .w(label_width).max_w(px(150.)).truncate().line_height(px(18.)).child(tab.conn.name.clone())),
                 )
+                .when(tab.conn.read_only, |row| row.child(div().text_size(px(11.)).child(self.tr("read_only.badge"))))
                 .child(
                     self.btn(format!("close-{id}"), "", "", cx, move |app, window, cx| {
                         cx.stop_propagation();
@@ -76,9 +84,10 @@ impl RdmApp {
                 .h_full()
                 .rounded_t(px(4.))
                 .bg(background)
-                .when(!selected, |item| item.hover(|style| style.bg(self.split_color(cx))))
+                .on_hover(on_hover)
+                .active(|item| item.bg(self.split_color(cx)))
                 .font_weight(if selected { FontWeight::EXTRA_BOLD } else { FontWeight::NORMAL })
-                .text_color(if selected { cx.theme().primary } else { close_color.into() })
+                .text_color(foreground)
                 .cursor_pointer()
                 .on_mouse_down(MouseButton::Left, |_, _, cx| cx.stop_propagation())
                 .on_click(cx.listener(move |app, _, window, cx| {

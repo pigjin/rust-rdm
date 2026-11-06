@@ -127,7 +127,7 @@ impl RdmApp {
         let view = tab.cli_view.clone();
         let input = text_input(&tab.cli_input, cx);
         let cursor = tab.cli_input.read(cx).cursor();
-        let prefix = format!("{}:db{}> ", tab.conn.name, tab.cli_db);
+        let prefix = read_only::cli_prompt(&tab.conn, tab.cli_db);
         {
             let mut state = view.borrow_mut();
             if state.lines != tab.cli_output

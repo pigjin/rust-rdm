@@ -81,6 +81,7 @@ impl RdmApp {
         let Some(mut pending) = self.ssh_trust.take() else {
             return;
         };
+        self.exiting_ssh = Some(motion::Exit::new(pending.key.clone(), cx));
         self.ssh_probe_epoch += 1;
         if let Some(focus) = pending.previous.take() {
             focus.focus(w, cx);
@@ -121,29 +122,30 @@ impl RdmApp {
         }
         cx.notify();
     }
-    pub(super) fn render_ssh_trust(&self, cx: &Context<Self>) -> AnyElement {
-        let pending = self.ssh_trust.as_ref().unwrap();
-        let key = &pending.key;
+    pub(super) fn render_ssh_trust(&self, progress: f32, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
+        let key = self.ssh_trust.as_ref().map(|pending| &pending.key)
+            .unwrap_or_else(|| &self.exiting_ssh.as_ref().unwrap().value);
         div()
             .id("ssh-trust-overlay")
             .test_support()
             .absolute()
             .inset_0()
-            .occlude()
+            .when(self.ssh_trust.is_some(), |mask| mask.occlude())
             .bg(rgba(0x00000066))
             .flex()
             .items_center()
             .justify_center()
-            .track_focus(&pending.focus)
-            .on_key_down(cx.listener(|app, event: &KeyDownEvent, w, cx| {
+            .when_some(self.ssh_trust.as_ref(), |root, pending| root.track_focus(&pending.focus))
+            .when(self.ssh_trust.is_some(), |mask| mask.on_key_down(cx.listener(|app, event: &KeyDownEvent, w, cx| {
                 if event.keystroke.key == "escape" {
                     app.finish_ssh_trust(false, w, cx);
                 }
                 cx.stop_propagation();
-            }))
+            })))
             .child(
                 div()
                     .id("ssh-trust-dialog")
+                    .relative().top(px(8. * (1. - progress)))
                     .test_support()
                     .role(Role::Dialog)
                     .aria_label(self.tr("ssh_trust.title"))
@@ -184,7 +186,8 @@ impl RdmApp {
                                 )
                                 .tab_stop(true),
                             ),
-                    ),
+                    )
+                    .when(self.ssh_trust.is_none(), |card| motion::inert(card, ("ssh-trust-exit-focus", self.ssh_probe_epoch), window, cx)),
             )
             .into_any_element()
     }

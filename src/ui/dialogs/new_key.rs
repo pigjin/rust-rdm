@@ -27,6 +27,14 @@ pub(super) struct NewKeyState {
     resize: Option<(f32, f32)>,
 }
 
+impl NewKeyState {
+    pub(super) fn retire(&mut self) {
+        self.selector = None;
+        self.token = None;
+        self.resize = None;
+    }
+}
+
 pub(super) fn score_key(row: &Row) -> String {
     format!("new_score.{}", row.score.entity_id().as_u64())
 }
@@ -345,7 +353,7 @@ impl RdmApp {
         if selector == Selector::Type {
             return TYPES.iter().map(|v| v.to_string()).collect();
         }
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let query = dialog.value("new_db_query", cx).to_lowercase();
         dialog
             .target
@@ -522,7 +530,7 @@ impl RdmApp {
         window: &mut Window,
         cx: &Context<Self>,
     ) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let state = dialog.new_key.as_ref().unwrap();
         let open = state.selector == Some(selector);
         let focused = if selector == Selector::Type {
@@ -801,9 +809,7 @@ impl RdmApp {
         control: AnyElement,
         cx: &Context<Self>,
     ) -> AnyElement {
-        let error = self
-            .dialog
-            .as_ref()
+        let error = self.display_dialog()
             .unwrap()
             .new_key
             .as_ref()
@@ -813,7 +819,7 @@ impl RdmApp {
         // Distribute the quarter-pixel CSS labels across the half-pixel GPUI
         // grid, keeping cumulative input positions within one device pixel.
         let label_height = if matches!(key, "db" | "ttl")
-            || (key == "rows" && self.dialog.as_ref().unwrap().value("type", cx) == "STREAM")
+            || (key == "rows" && self.display_dialog().unwrap().value("type", cx) == "STREAM")
         {
             21.
         } else {
@@ -852,7 +858,7 @@ impl RdmApp {
     }
 
     pub(super) fn new_key_input(&self, key: &str, window: &Window, cx: &Context<Self>) -> Input {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let error = dialog.new_key.as_ref().unwrap().errors.contains(key);
         self.csv_input_style(self.number_input(key, cx), key, window, cx)
             .w_full()
@@ -962,7 +968,7 @@ impl RdmApp {
     }
 
     pub(super) fn render_value_rows(&self, window: &Window, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let kind = dialog.value("type", cx);
         let add = matches!(dialog.kind, DialogKind::AddEntries);
         let mut rows = div().flex().flex_col().gap(px(10.));
@@ -1046,8 +1052,8 @@ impl RdmApp {
         rows.into_any_element()
     }
 
-    pub(super) fn render_new_key(&self, window: &mut Window, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+    pub(super) fn render_new_key(&self, progress: f32, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
+        let dialog = self.display_dialog().unwrap();
         let state = dialog.new_key.as_ref().unwrap();
         let kind = dialog.value("type", cx);
         let mut footer_content = div().gap(px(6.));
@@ -1176,10 +1182,11 @@ impl RdmApp {
             .items_center()
             .justify_center()
             .bg(rgba(0x00000066))
-            .occlude()
+            .when(self.dialog.is_some(), |mask| mask.occlude())
             .child(
                 div()
                     .id("dialog-card")
+                    .relative().top(px(8. * (1. - progress)))
                     .test_support()
                     .w(px(600.))
                     .h(px(form_height + 119.))
@@ -1281,7 +1288,8 @@ impl RdmApp {
                                     + 24.))
                                 .when(self.dark(cx), |button| button.text_color(rgb(0x000000))),
                             ),
-                    ),
+                    )
+                    .when(self.dialog.is_none(), |card| motion::inert(card, ("dialog-exit-focus", dialog.id), window, cx)),
             )
             .into_any_element()
     }
@@ -1340,6 +1348,7 @@ impl RdmApp {
             .target
             .clone()
             .ok_or_else(|| anyhow::anyhow!("请先打开 Redis 连接"))?;
+        crate::redis::ensure_writable(target.conn.read_only)?;
         let kind = KeyType::parse(&dialog.value("type", cx));
         let db = dialog.value("db", cx).parse::<u32>()?;
         let ttl_value = dialog.numbers.get("ttl").copied().flatten();
@@ -1355,9 +1364,10 @@ impl RdmApp {
         let value = self.new_key_value(cx);
         let dialog_id = dialog.id;
         let saved_kind = kind.clone();
-        self.job(
+        self.write_job(
             window,
             cx,
+            target.conn.clone(),
             move |service| {
                 service
                     .create_key(&target.conn, db, key.as_bytes(), kind, &value, ttl)
@@ -1367,6 +1377,7 @@ impl RdmApp {
                 if let Some(i) = app.tab_index(id)
                     && app.tabs[i].db == db
                 {
+                    app.cancel_key_scan(id);
                     // The original inserts this node directly, including when
                     // a filter would exclude it; a full scan would lose it.
                     let bytes = key.into_bytes();
@@ -1379,6 +1390,7 @@ impl RdmApp {
                         app.tabs[i].keys.sort_by(|a, b| {
                             natural_compare(&display_bytes(&a.key), &display_bytes(&b.key))
                         });
+                        app.tabs[i].key_revision += 1;
                         app.tabs[i].total += 1;
                         if let Some(database) = app.tabs[i]
                             .databases
@@ -1395,7 +1407,7 @@ impl RdmApp {
                     }
                 }
                 if app.dialog.as_ref().is_some_and(|d| d.id == dialog_id) {
-                    app.dialog = None;
+                    app.retire_dialog(window, cx);
                 }
             },
         );

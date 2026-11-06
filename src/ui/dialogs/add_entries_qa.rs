@@ -173,12 +173,12 @@ pub(in crate::ui) async fn verify(
     type_field(view, &row_key(0, window, cx), "fresh_form", window, cx);
     draw(window, cx).await;
     let reopened = window
-        .update(cx, |_, _, cx| view.read(cx).dialog.is_some())
+        .update(cx, |_, _, cx| view.read(cx).dialog.as_ref().map(|dialog| dialog.id))
         .unwrap();
     drop(guard);
     idle(view, window, cx).await;
-    let reopened_closed = window
-        .update(cx, |_, _, cx| view.read(cx).dialog.is_none())
+    let reopened_preserved = window
+        .update(cx, |_, _, cx| view.read(cx).dialog.as_ref().map(|dialog| dialog.id) == reopened)
         .unwrap();
     let saved = service
         .run(
@@ -234,8 +234,8 @@ pub(in crate::ui) async fn verify(
             && full_read
             && pending
             && canceled
-            && reopened
-            && reopened_closed
+            && reopened.is_some()
+            && reopened_preserved
             && error_closed
     );
     assert_eq!(saved, vec!["old", "alpha", "beta", "gamma", "delta"]);
@@ -255,6 +255,8 @@ pub(in crate::ui) async fn verify(
             })
         })
         .unwrap();
+    // Restore the fixture's final geometry before the layout oracle runs.
+    cx.background_executor().timer(Duration::from_millis(180)).await;
     draw(window, cx).await;
     println!(
         "ADD ENTRIES INPUT QA PASS: actual row inputs/buttons, no-reload metadata, remembered reload/full read, pending cancel, error close and DB15 cleanup"

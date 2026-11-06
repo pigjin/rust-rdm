@@ -2,7 +2,7 @@
 use super::*;
 
 pub(super) struct Restore {
-    history: VecDeque<crate::service::CommandLog>,
+    history: crate::service::CommandHistory,
     monitor: Option<StreamState>,
     pubsub: Option<StreamState>,
     _sender: Arc<Mutex<stream_history::Inbox>>,
@@ -166,6 +166,7 @@ pub(super) fn restore(state: Restore, app: &mut RdmApp, w: &mut Window, cx: &mut
     app.tabs[i].check_mode = false;
     app.tabs[i].selected.clear();
     *app.service.history.lock() = state.history;
+    *app.log_view.borrow_mut() = log_view::State::default();
     app.pref.cli.font_family.clear();
     cx.notify();
 }

@@ -38,6 +38,8 @@ pub struct Connection {
     pub port: u16,
     pub username: String,
     pub password: String,
+    #[serde(alias = "readOnly")]
+    pub read_only: bool,
     #[serde(alias = "defaultFilter")]
     pub default_filter: String,
     #[serde(alias = "keySeparator")]
@@ -80,6 +82,7 @@ impl Default for Connection {
             port: 6379,
             username: String::new(),
             password: String::new(),
+            read_only: false,
             default_filter: "*".into(),
             key_separator: ":".into(),
             conn_timeout: 60,

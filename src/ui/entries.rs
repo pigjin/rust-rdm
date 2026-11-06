@@ -617,6 +617,8 @@ impl RdmApp {
                 self.btn("add-entry", "", "", cx, |app, w, cx| {
                     app.open_dialog(DialogKind::AddEntries, w, cx)
                 })
+                .disabled(tab.conn.read_only)
+                .when(tab.conn.read_only, |button| button.opacity(0.5))
                 .accessibility_label(add_label.clone())
                 .px(px(11.))
                 .text_size(px(14.))

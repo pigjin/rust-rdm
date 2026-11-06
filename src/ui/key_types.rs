@@ -98,9 +98,6 @@ impl RdmApp {
             return;
         };
         let tab = &mut self.tabs[i];
-        if tab.keys_loading {
-            return;
-        }
         let keys = tab.key_types.begin(rows);
         if keys.is_empty() {
             return;

@@ -79,7 +79,7 @@ impl RdmApp {
 
     pub(super) fn diagnostic_row(
         &self, prefix: &'static str, index: usize, count: usize, cells: [String; 4],
-        widths: [Option<f32>; 4], sorted: bool, striped: bool, cx: &App,
+        widths: [Option<f32>; 4], sorted: bool, striped: bool, mut command_action: Option<AnyElement>, cx: &App,
     ) -> AnyElement {
         let dark = self.dark(cx);
         let stripe = striped && index % 2 == 1;
@@ -102,7 +102,12 @@ impl RdmApp {
                 .bg(if j == 0 { first } else { normal })
                 .when(j != 2, |cell| cell.text_center())
                 .when(j == 1, |cell| cell.truncate())
-                .child(text);
+                .child(if j == 2 && command_action.is_some() {
+                    div().line_clamp(4).text_ellipsis().child(text).into_any_element()
+                } else {
+                    text.into_any_element()
+                })
+                .when(j == 2, |cell| cell.children(command_action.take().map(|action| div().child(action))));
             row = row.child(cell);
         }
         row.into_any_element()

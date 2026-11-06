@@ -16,6 +16,8 @@ use std::{
 };
 
 mod frame;
+mod read_only;
+pub use read_only::{ReadOnlyError, check_read_only, ensure_writable, is_read_only_command};
 
 pub trait ReadWrite: Read + Write + Send {}
 impl<T: Read + Write + Send> ReadWrite for T {}
@@ -179,6 +181,7 @@ fn read_nested(reader: &mut impl BufRead, depth: usize, buffered: bool) -> Resul
 }
 
 pub struct Wire {
+    read_only: bool,
     reader: BufReader<Box<dyn ReadWrite>>,
     pending: Vec<u8>,
     frame: frame::Frame,
@@ -192,6 +195,7 @@ impl Wire {
         sentinel: bool,
     ) -> Result<Self> {
         let mut wire = Self {
+            read_only: config.read_only,
             reader: BufReader::new(transport(config, host, port)?),
             pending: vec![],
             frame: frame::Frame::default(),
@@ -220,6 +224,7 @@ impl Wire {
         self.read()
     }
     pub fn send(&mut self, args: &[Vec<u8>]) -> Result<()> {
+        check_read_only(self.read_only, args)?;
         let s = self.reader.get_mut();
         s.write_all(&encode_command(args))?;
         s.flush()?;
@@ -244,6 +249,7 @@ impl Wire {
         }
     }
     pub fn pipeline(&mut self, commands: &[Vec<Vec<u8>>]) -> Result<Vec<Value>> {
+        for args in commands { check_read_only(self.read_only, args)?; }
         if commands.is_empty() {
             return Ok(vec![]);
         }
@@ -344,6 +350,7 @@ impl Client {
         if args.is_empty() {
             bail!("命令不能为空");
         }
+        check_read_only(self.config.read_only, args)?;
         if self.config.sentinel.enable && self.sentinel_checked.elapsed() >= Duration::from_secs(1)
         {
             let _ = self.rediscover_master();
@@ -438,6 +445,7 @@ impl Client {
         Ok(true)
     }
     pub fn query_at(&mut self, host: &str, port: u16, args: &[Vec<u8>]) -> Result<Value> {
+        check_read_only(self.config.read_only, args)?;
         if self.config.sentinel.enable {
             return self.query(args);
         }
@@ -462,6 +470,7 @@ impl Client {
         port: u16,
         args: &[Vec<Vec<u8>>],
     ) -> Result<Vec<Value>> {
+        for command in args { check_read_only(self.config.read_only, command)?; }
         let addr = (host.to_owned(), port);
         if !self.wires.contains_key(&addr) {
             self.wires.insert(
@@ -1203,7 +1212,22 @@ mod pipeline_tests {
     }
     fn wire(short: usize, fail_after: usize, response: Vec<u8>) -> (Wire, Arc<Mutex<Record>>) {
         let record = Arc::new(Mutex::new(Record::default()));
-        (Wire { reader: BufReader::new(Box::new(Transport { record: record.clone(), response: io::Cursor::new(response), short, fail_after })), pending: vec![], frame: frame::Frame::default() }, record)
+        (Wire { read_only: false, reader: BufReader::new(Box::new(Transport { record: record.clone(), response: io::Cursor::new(response), short, fail_after })), pending: vec![], frame: frame::Frame::default() }, record)
+    }
+    #[test]
+    fn read_only_rejections_send_nothing_and_leave_the_stream_usable() {
+        let (mut wire, record) = wire(usize::MAX, usize::MAX, b"+PONG\r\n".to_vec());
+        wire.read_only = true;
+        assert!(wire.send(&command(&["SET", "k", "v"])).unwrap_err().is::<ReadOnlyError>());
+        assert!(wire.query(&command(&["DEL", "k"])).is_err());
+        assert!(wire.pipeline(&[command(&["PING"]), command(&["FLUSHDB"])]).is_err());
+        {
+            let r = record.lock().unwrap();
+            assert!(r.bytes.is_empty());
+            assert_eq!((r.reads, r.flushes), (0, 0));
+        }
+        assert_eq!(wire.query(&command(&["PING"])).unwrap().bytes(), b"PONG");
+        assert_eq!(record.lock().unwrap().bytes, encode_command(&command(&["PING"])));
     }
     #[test]
     fn pipeline_coalesces_bounded_writes_and_handles_short_writes() {

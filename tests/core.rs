@@ -189,6 +189,144 @@ impl Drop for RedisFixture {
 }
 
 #[test]
+fn read_only_profiles_preserve_defaults_aliases_forms_and_backups() {
+    let old: Connection = serde_yaml::from_str("name: old\n").unwrap();
+    assert!(!old.read_only);
+    let profile: Connection = serde_json::from_str(r#"{"name":"protected","readOnly":true}"#).unwrap();
+    assert!(profile.read_only);
+    assert!(profile.form_profile().read_only);
+    assert!(profile.clone().read_only);
+    let dir = tempfile::tempdir().unwrap();
+    let store = Store::new(dir.path());
+    store.save("connections.yaml", &vec![profile.clone(), old]).unwrap();
+    let path = dir.path().join("connections.zip");
+    store.export_connections(&path).unwrap();
+    let imported = Store::new(dir.path().join("imported")).import_connections(&path).unwrap();
+    assert_eq!(imported[0], profile);
+    assert!(!imported[1].read_only);
+    let mut writable = imported[0].clone();
+    writable.read_only = false;
+    store.save("connections.yaml", &vec![writable]).unwrap();
+    assert!(!store.connections().unwrap()[0].read_only);
+}
+
+#[test]
+fn read_only_queries_work_and_mutators_fail_before_any_partial_work() {
+    let f = RedisFixture::new();
+    let s = f.service();
+    for args in [vec!["SET", "s", "value"], vec!["HSET", "h", "field", "value"],
+        vec!["RPUSH", "l", "value"], vec!["SADD", "set", "value"],
+        vec!["ZADD", "z", "1", "value"], vec!["XADD", "x", "*", "field", "value"]] {
+        s.run(&f.config, 0, command(&args)).unwrap();
+    }
+    s.ttl(&f.config, 0, b"s", 600).unwrap();
+    let keys = ["s", "h", "l", "set", "z", "x"];
+    let before = keys.iter().map(|k| s.run(&f.config, 0, command(&["DUMP", k])).unwrap()).collect::<Vec<_>>();
+    let ro = Connection { read_only: true, ..f.config.clone() };
+    s.connect(&ro, 0).unwrap();
+    assert_eq!(s.run(&ro, 0, command(&["GET", "s"])).unwrap().bytes(), b"value");
+    assert_eq!(s.all_keys(&ro, 0, "*", &Default::default()).unwrap().len(), 6);
+    for key in keys { assert!(s.key_summary(&ro, 0, key.as_bytes()).is_ok()); }
+    assert!(!s.info(&ro).unwrap().is_empty());
+    assert!(!s.databases(&ro).unwrap().is_empty());
+    assert!(!s.client_list(&ro).unwrap().is_empty());
+    assert!(s.slow_logs(&ro, 10).is_ok());
+    let csv = f.dir.path().join("readonly.csv");
+    let cancel = Default::default();
+    let report = s.export_csv(&ro, 0, &[b"s".to_vec()], &csv, true, &cancel, |_| {}).unwrap();
+    assert_eq!(report.done, 1);
+    let row = Entry { id: b"field".to_vec(), value: b"changed".to_vec(), ..Default::default() };
+    let errors = [
+        s.set_string(&ro, 0, b"s", b"changed".to_vec(), false).unwrap_err(),
+        s.create(&ro, 0, b"new", KeyType::String, b"changed", &[], -1).unwrap_err(),
+        s.create_key(&ro, 0, b"h", KeyType::Hash, &serde_json::json!([]), -1).unwrap_err(),
+        s.ttl(&ro, 0, b"s", -1).unwrap_err(),
+        s.rename(&ro, 0, b"s", b"renamed").unwrap_err(),
+        s.delete(&ro, 0, b"s", false).unwrap_err(),
+        s.edit_entry(&ro, 0, b"h", &KeyType::Hash, &row, &row, false).unwrap_err(),
+        s.add_entries(&ro, 0, b"h", KeyType::Hash, &[row.clone()], false, true, "").unwrap_err(),
+        s.add_key_entries(&ro, 0, b"h", KeyType::Hash, 0, &serde_json::json!(["f","v"])).unwrap_err(),
+        s.update_key_entry(&ro, 0, b"h", &KeyType::Hash, &Default::default(), &[]).unwrap_err(),
+        s.flush(&ro, 0, false).unwrap_err(),
+        s.import_csv(&ro, 0, &csv, true, -1, &cancel, |_| {}).unwrap_err(),
+        s.import_csv(&ro, 0, &csv.with_extension("missing"), false, -1, &cancel, |_| {}).unwrap_err(),
+        s.batch(&ro, 0, &[b"s".to_vec()], None, &cancel, |_| {}).unwrap_err(),
+        s.batch(&ro, 0, &[], Some(0), &cancel, |_| {}).unwrap_err(),
+    ];
+    for error in errors { assert!(error.is::<redis::ReadOnlyError>(), "{error}"); }
+    for args in [vec!["SET","s","changed"], vec!["DEL","s"], vec!["EXPIRE","s","1"],
+        vec!["FLUSHDB"], vec!["CONFIG","SET","timeout","1"], vec!["PUBLISH","c","m"],
+        vec!["GETDEL","s"], vec!["XREADGROUP","GROUP","g","c","STREAMS","x",">"],
+        vec!["EVAL","return redis.call('DEL','s')","0"], vec!["MULTI"], vec!["EXEC"], vec!["UNKNOWN"]] {
+        assert!(s.run(&ro, 0, command(&args)).unwrap_err().is::<redis::ReadOnlyError>());
+        assert!(s.run_cli(&ro, 0, command(&args)).unwrap_err().is::<redis::ReadOnlyError>());
+    }
+    assert!(!s.history.lock().iter().next_back().unwrap().error.is_empty());
+    for (key, before) in keys.iter().zip(before) {
+        assert_eq!(s.run(&ro, 0, command(&["DUMP", key])).unwrap(), before);
+    }
+    assert!(s.run(&ro, 0, command(&["TTL", "s"])).unwrap().integer().unwrap() > 590);
+    assert_eq!(s.run(&ro, 0, command(&["DBSIZE"])).unwrap().integer().unwrap(), 6);
+    assert!(s.ensure_no_writes(&ro.name).is_ok());
+}
+
+#[test]
+fn read_only_mode_is_preserved_by_cached_cli_and_dedicated_connections() {
+    let f = RedisFixture::new();
+    let s = f.service();
+    let ro = Connection { read_only: true, ..f.config.clone() };
+    s.run_cli(&f.config, 0, command(&["SELECT", "2"])).unwrap();
+    s.run_cli(&f.config, 2, command(&["SET", "k", "value"])).unwrap();
+    s.run_cli(&ro, 0, command(&["SELECT", "2"])).unwrap();
+    assert_eq!(s.run_cli(&ro, 2, command(&["GET", "k"])).unwrap().bytes(), b"value");
+    assert!(s.run_cli(&ro, 2, command(&["SET", "k", "changed"])).is_err());
+    let mut client = s.client(&ro, 2).unwrap();
+    assert!(client.config.read_only);
+    assert!(client.query_at("127.0.0.1", 6379, &command(&["DEL","k"])).is_err());
+    assert!(client.pipeline_at("127.0.0.1", 6379, &[command(&["GET","k"]), command(&["DEL","k"])]).is_err());
+    let mut wire = client.dedicated().unwrap();
+    drop(client);
+    assert!(wire.send(&command(&["SET","k","changed"])).is_err());
+    assert_eq!(wire.query(&command(&["GET","k"])).unwrap().bytes(), b"value");
+    s.close(&ro.name);
+    s.run_cli(&f.config, 0, command(&["SET","restored","writable"])).unwrap();
+    assert_eq!(s.run(&ro, 0, command(&["GET","restored"])).unwrap().bytes(), b"writable");
+    let pending = s.write_task(&f.config).unwrap();
+    s.close(&ro.name);
+    assert!(s.connect(&ro, 0).is_err());
+    drop(pending);
+    s.connect(&ro, 0).unwrap();
+}
+
+#[test]
+fn read_only_switch_waits_until_a_canceled_import_has_actually_exited() {
+    let f = RedisFixture::new();
+    let service = std::sync::Arc::new(f.service());
+    service.run(&f.config, 0, command(&["SET", "imported", "original"])).unwrap();
+    let path = f.dir.path().join("import.csv");
+    service.export_csv(&f.config, 0, &[b"imported".to_vec()], &path, false, &Default::default(), |_| {}).unwrap();
+    let locked = service.client(&f.config, 0).unwrap();
+    let owners = std::sync::Arc::strong_count(parking_lot::ArcMutexGuard::mutex(&locked));
+    let cancel = redis::Cancellation::default();
+    let (worker, config, token) = (service.clone(), f.config.clone(), cancel.clone());
+    let task = std::thread::spawn(move || worker.import_csv(&config, 0, &path, false, -1, &token, |_| {}));
+    let started = Instant::now();
+    while std::sync::Arc::strong_count(parking_lot::ArcMutexGuard::mutex(&locked)) == owners {
+        assert!(started.elapsed() < Duration::from_secs(2), "import must reach the locked client before cancellation");
+        std::thread::sleep(Duration::from_millis(1));
+    }
+    cancel.cancel();
+    service.close(&f.config.name);
+    let read_only = Connection { read_only: true, ..f.config.clone() };
+    assert!(service.ensure_no_writes(&read_only.name).is_err());
+    assert!(service.connect(&read_only, 0).is_err());
+    drop(locked);
+    assert!(task.join().unwrap().unwrap().canceled);
+    service.connect(&read_only, 0).unwrap();
+    assert_eq!(service.run(&read_only, 0, command(&["GET", "imported"])).unwrap().bytes(), b"original");
+}
+
+#[test]
 fn resp_is_binary_safe_and_nested() {
     let v = redis::read_value(&mut Cursor::new(
         b"*4\r\n:42\r\n$4\r\n\0\xff\r\n\r\n$-1\r\n*2\r\n+OK\r\n-ERR nope\r\n",
@@ -585,7 +723,7 @@ fn exact_key_search_keeps_literal_backslashes_and_binary_fallback() {
     s.create(c, 0, b"\xff:key", KeyType::String, b"binary", &[], -1)
         .unwrap();
     assert_eq!(
-        s.scan(c, 0, "\\xFF:key", "", true, ScanState::default(), 100)
+        s.scan(c, 0, "\\xFF:key", "", true, ScanState::default(), 100, &Default::default())
             .unwrap()
             .keys[0]
             .key,
@@ -593,7 +731,7 @@ fn exact_key_search_keeps_literal_backslashes_and_binary_fallback() {
     );
     s.delete(c, 0, b"\\xFF:key", false).unwrap();
     assert_eq!(
-        s.scan(c, 0, "\\xFF:key", "", true, ScanState::default(), 100)
+        s.scan(c, 0, "\\xFF:key", "", true, ScanState::default(), 100, &Default::default())
             .unwrap()
             .keys[0]
             .key,
@@ -1539,7 +1677,7 @@ fn redisjson_real_module_preserves_source_contracts_and_dump_restore() {
         assert_eq!(detail.ttl,-1);assert!(detail.memory>0);assert!(detail.end);
     }
     service.create(config,0,b"plain",KeyType::String,b"text",&[],-1).unwrap();
-    let page=service.scan(config,0,"*","JSON",false,ScanState::default(),100).unwrap();
+    let page=service.scan(config,0,"*","JSON",false,ScanState::default(),100,&Default::default()).unwrap();
     assert_eq!(page.keys.len(),12);assert!(page.keys.iter().all(|key|key.kind==KeyType::Json));
     let binary=[0xff,0,b'J'];
     service.create(config,0,&binary,KeyType::Json,br#"{"before":1}"#,&[],30).unwrap();
@@ -1556,6 +1694,14 @@ fn redisjson_real_module_preserves_source_contracts_and_dump_restore() {
     service.rename(config,0,&binary,b"renamed-json").unwrap();
     service.ttl(config,0,b"renamed-json",-1).unwrap();assert_eq!(service.detail(config,0,b"renamed-json",0,"",100,"",false).unwrap().ttl,-1);
     service.delete(config,0,b"renamed-json",false).unwrap();assert!(service.detail(config,0,b"renamed-json",0,"",100,"",false).is_err());
+    let read_only = Connection { read_only: true, ..config.clone() };
+    let before = service.detail(config, 0, b"json:0", 0, "", 100, "", false).unwrap().value;
+    assert_eq!(service.detail(&read_only, 0, b"json:0", 0, "", 100, "", false).unwrap().value, before);
+    assert!(service.set_string(&read_only, 0, b"json:0", b"{}".to_vec(), true).unwrap_err().is::<redis::ReadOnlyError>());
+    assert!(service.run_cli(&read_only, 0, command(&["JSON.DEL", "json:0", "$"])).is_err());
+    assert_eq!(service.run_cli(&read_only, 0, command(&["JSON.GET", "json:0"])).unwrap().bytes(), before);
+    let readonly_export = fixture.dir.path().join("readonly-json.csv");
+    assert_eq!(service.export_csv(&read_only, 0, &[b"json:0".to_vec()], &readonly_export, true, &cancel, |_| {}).unwrap().done, 1);
 }
 
 #[test]
@@ -1762,7 +1908,7 @@ fn scan_pages_filter_type_and_exact_key() {
     let mut state = ScanState::default();
     let mut found = std::collections::HashSet::new();
     while !state.end {
-        let p = s.scan(c, 0, "user:*", "STRING", false, state, 5).unwrap();
+        let p = s.scan(c, 0, "user:*", "STRING", false, state, 5, &Default::default()).unwrap();
         for k in p.keys {
             assert_eq!(k.kind, KeyType::String);
             assert!(found.insert(k.key), "pages must not repeat keys in a stable database");
@@ -1771,7 +1917,7 @@ fn scan_pages_filter_type_and_exact_key() {
     }
     assert_eq!(found.len(), 80);
     let p = s
-        .scan(c, 0, "user:1", "", true, ScanState::default(), 5)
+        .scan(c, 0, "user:1", "", true, ScanState::default(), 5, &Default::default())
         .unwrap();
     assert_eq!(p.keys.len(), 1);
     assert!(p.state.end);
@@ -1807,7 +1953,7 @@ fn scan_displays_complete_redis_batches_without_deferring_overflow() {
             expected.extend(reply[1].array().unwrap().iter().map(Value::bytes));
             if !expected.is_empty() || cursor == 0 { break; }
         }
-        let page = s.scan(&f.config, 0, "*", "", false, state, 1).unwrap();
+        let page = s.scan(&f.config, 0, "*", "", false, state, 1, &Default::default()).unwrap();
         assert_eq!(page.keys.iter().map(|entry| entry.key.clone()).collect::<Vec<_>>(), expected);
         assert_eq!(page.state.cursor, cursor);
         assert_eq!(page.state.end, cursor == 0);
@@ -1835,7 +1981,7 @@ fn large_first_page_defers_types_and_preserves_binary_keys() {
     client.query(&vec![b"SET".to_vec(), binary.clone(), b"x".to_vec()]).unwrap();
     let service = f.service();
     let started = Instant::now();
-    let page = service.scan(&f.config, 0, "*", "", false, ScanState::default(), 3000).unwrap();
+    let page = service.scan(&f.config, 0, "*", "", false, ScanState::default(), 3000, &Default::default()).unwrap();
     println!("FIRST PAGE: keys={} total={} elapsed_ms={:.2}", page.keys.len(), page.total, started.elapsed().as_secs_f64()*1000.);
     assert!(page.keys.len() >= 500 && page.keys.len() < 10_000);
     assert!(!page.state.end);
@@ -1844,7 +1990,7 @@ fn large_first_page_defers_types_and_preserves_binary_keys() {
     assert!(!service.history.lock().iter().any(|entry| entry.command.lines().any(|line| line.starts_with("TYPE "))));
     let keys = vec![binary.clone(), b"large:42".to_vec(), b"missing-key".to_vec()];
     assert_eq!(service.key_types(&f.config, 0, &keys, &Default::default()).unwrap(), vec![KeyType::String, KeyType::String, KeyType::None]);
-    let exact = service.scan(&f.config, 0, &display_bytes(&binary), "", true, ScanState::default(), 3000).unwrap();
+    let exact = service.scan(&f.config, 0, &display_bytes(&binary), "", true, ScanState::default(), 3000, &Default::default()).unwrap();
     assert_eq!(exact.keys[0].key, binary);
     assert_eq!(exact.keys[0].kind, KeyType::String);
     let cancel = redis::Cancellation::default();
@@ -1967,7 +2113,9 @@ fn canceled_bulk_operation_does_not_mutate() {
 #[test]
 fn monitor_and_pubsub_use_independent_connections() {
     let f = RedisFixture::new();
-    let c = Client::connect(&f.config, 0).unwrap();
+    let read_only = Connection { read_only: true, ..f.config.clone() };
+    let mut c = Client::connect(&read_only, 0).unwrap();
+    assert!(c.query(&command(&["PUBLISH", "test:channel", "blocked"])).is_err());
     let mut subscriber = c.dedicated().unwrap();
     subscriber
         .send(&command(&["PSUBSCRIBE", "test:*"]))

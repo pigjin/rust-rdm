@@ -79,7 +79,7 @@ impl RdmApp {
         window: &Window,
         cx: &Context<Self>,
     ) -> Input {
-        self.styled_form_input(field, &self.dialog.as_ref().unwrap().fields[key], window, cx)
+        self.styled_form_input(field, &self.display_dialog().unwrap().fields[key], window, cx)
     }
 
     pub(super) fn styled_form_input(
@@ -127,7 +127,7 @@ impl RdmApp {
     }
 
     fn csv_file_control(&self, save: bool, window: &Window, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         div()
             .flex()
             .items_center()
@@ -159,7 +159,7 @@ impl RdmApp {
         window: &Window,
         cx: &Context<Self>,
     ) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         self.csv_form_field(
             label,
             self.csv_input_style(form_input(&dialog.fields[key]), key, window, cx)
@@ -172,7 +172,7 @@ impl RdmApp {
     }
 
     fn csv_radios(&self, key: &str, options: &[(&str, String)], cx: &Context<Self>) -> AnyElement {
-        let value = self.dialog.as_ref().unwrap().value(key, cx);
+        let value = self.display_dialog().unwrap().value(key, cx);
         let mut row = div()
             .id(SharedString::from(format!("csv-{key}-choices")))
             .test_support()
@@ -235,7 +235,7 @@ impl RdmApp {
     }
 
     fn csv_affected_keys(&self, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let keys = dialog
             .target
             .as_ref()
@@ -349,7 +349,7 @@ impl RdmApp {
     }
 
     pub(super) fn csv_confirm_enabled(&self, cx: &App) -> bool {
-        self.dialog.as_ref().is_some_and(|dialog| {
+        self.display_dialog().is_some_and(|dialog| {
             !dialog.value("path", cx).is_empty()
                 && (!matches!(dialog.kind, DialogKind::Export)
                     || dialog
@@ -359,8 +359,8 @@ impl RdmApp {
         })
     }
 
-    pub(super) fn render_csv_dialog(&self, window: &mut Window, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+    pub(super) fn render_csv_dialog(&self, progress: f32, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
+        let dialog = self.display_dialog().unwrap();
         let import = matches!(dialog.kind, DialogKind::Import);
         let mut form = div()
             .id("csv-form")
@@ -470,10 +470,11 @@ impl RdmApp {
             .items_center()
             .justify_center()
             .bg(rgba(0x00000066))
-            .occlude()
+            .when(self.dialog.is_some(), |mask| mask.occlude())
             .child(
                 div()
                     .id("dialog-card")
+                    .relative().top(px(8. * (1. - progress)))
                     .test_support()
                     .w(px(446.))
                     .h(px(height))
@@ -563,7 +564,8 @@ impl RdmApp {
                                 })
                                 .disabled(!self.csv_confirm_enabled(cx)),
                             ),
-                    ),
+                    )
+                    .when(self.dialog.is_none(), |card| motion::inert(card, ("dialog-exit-focus", dialog.id), window, cx)),
             )
             .into_any_element()
     }

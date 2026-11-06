@@ -1,5 +1,12 @@
 {
   "name": "Español",
+  "read_only": {
+    "label": "Conexión de solo lectura",
+    "badge": "Solo lectura",
+    "hint": "Permitir solo consultas, incluida la consola. Vuelva a conectarse después de cambiar esta opción.",
+    "error": "Esta conexión es de solo lectura; solo se permiten consultas.",
+    "pending": "Hay escrituras pendientes. Espere a que terminen o cancele las tareas antes de cambiar la configuración de la conexión."
+  },
   "common": {
     "confirm": "Confirmar",
     "cancel": "Cancelar",

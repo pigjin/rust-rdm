@@ -116,7 +116,7 @@ pub(super) fn json(value: Option<f64>) -> Json {
 
 impl RdmApp {
     pub(crate) fn number_input(&self, key: &str, cx: &Context<Self>) -> Input {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let state = dialog.fields.get(key).unwrap();
         let invalid = bounds(&dialog.kind, key).is_some_and(|(min, max)| {
             match parse(&text_input(state, cx)) {

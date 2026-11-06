@@ -4,6 +4,8 @@ pub(super) mod json_diagnostics_qa;
 pub(super) mod tab_close_qa;
 #[cfg(feature = "ui-qa")]
 pub(super) mod connection_tabs_qa;
+#[cfg(feature = "ui-qa")]
+pub(super) mod read_only_qa;
 pub(super) mod numbers;
 pub(super) mod csv;
 mod new_key;
@@ -374,6 +376,23 @@ fn set_json_boolean(value: &mut Json, key: &str, new: bool) {
     }
 }
 impl RdmApp {
+    pub(super) fn display_dialog(&self) -> Option<&Dialog> {
+        self.dialog.as_ref().or_else(|| self.exiting_dialog.as_ref().map(|exit| &exit.value))
+    }
+
+    pub(super) fn retire_dialog(&mut self, window: &mut Window, cx: &mut Context<Self>) {
+        let Some(mut dialog) = self.dialog.take() else { return; };
+        dialog.font_menu = None;
+        dialog.csv_unit_picker.retire();
+        if let Some(state) = &mut dialog.new_key { state.retire(); }
+        dialog.return_focus.as_ref().unwrap_or(&self.focus).focus(window, cx);
+        self.exiting_dialog = if matches!(dialog.kind, DialogKind::EditEntry(_)) || cx.reduce_motion() {
+            None
+        } else {
+            Some(motion::Exit::new(dialog, cx))
+        };
+    }
+
     fn preference_dialog(&self) -> Option<&Dialog> {
         self.dialog
             .as_ref()
@@ -905,6 +924,7 @@ impl RdmApp {
             self.general_css_size = self.pref.general.font_size;
         }
         let return_focus = self.dialog.as_ref().and_then(|dialog| dialog.return_focus.clone());
+        self.retire_dialog(window, cx);
         self.dialog = self.dialog_stack.pop();
         self.full_editor = self
             .dialog
@@ -1074,7 +1094,7 @@ impl RdmApp {
         self.render_collection_entry_panel(window,cx)
     }
     fn connection_general(&self, cx: &Context<Self>) -> AnyElement {
-        let d = self.dialog.as_ref().unwrap();
+        let d = self.display_dialog().unwrap();
         let weak = cx.weak_entity();
         let network = d.value("network", cx);
         let invalid_address = d.connection_errors.contains_key("addr");
@@ -1259,6 +1279,10 @@ impl RdmApp {
                         cx,
                     ))),
             )
+            .child(div().flex().flex_col().gap(px(4.)).pb(px(8.))
+                .child(self.dialog_checkbox("read_only", &self.tr("read_only.label"), cx))
+                .child(div().text_size(px(12.)).text_color(cx.theme().muted_foreground)
+                    .child(self.tr("read_only.hint"))))
             .into_any_element()
     }
     #[cfg(feature="ui-qa")]
@@ -1278,6 +1302,10 @@ impl RdmApp {
         window: &mut Window,
         cx: &mut Context<Self>,
     ) {
+        if super::read_only::writes_data(&kind)
+            && let Some(i) = self.index()
+            && !self.writable_tab(self.tabs[i].id, cx) { return; }
+        self.exiting_dialog = None;
         if matches!(kind, DialogKind::Preferences) && self.editing_entry() {
             let id = self.dialog.as_ref().unwrap().id;
             self.close_entry_picker(id, window, cx);
@@ -1817,7 +1845,7 @@ impl RdmApp {
         cx.notify();
     }
     fn simple_dialog_input(&self, key: &str, label: &str, window: &Window, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let state = &dialog.fields[key];
         let field = form_input(state)
             .id(format!("simple-field-{key}"))
@@ -1827,7 +1855,7 @@ impl RdmApp {
     }
 
     fn dialog_input(&self, key: &str, label: &str, multi: bool, cx: &Context<Self>) -> AnyElement {
-        let Some(d) = &self.dialog else {
+        let Some(d) = self.display_dialog() else {
             return div().into_any_element();
         };
         let input = if let Some(state) = d.editors.get(key) {
@@ -1898,14 +1926,10 @@ impl RdmApp {
         control: AnyElement,
         cx: &Context<Self>,
     ) -> AnyElement {
-        let error = self
-            .dialog
-            .as_ref()
+        let error = self.display_dialog()
             .and_then(|dialog| dialog.connection_errors.get(key))
             .copied();
-        let help = if self
-            .dialog
-            .as_ref()
+        let help = if self.display_dialog()
             .is_some_and(|dialog| matches!(dialog.kind, DialogKind::Preferences))
         {
             if label == self.tr("preferences.general.font") {
@@ -1984,7 +2008,7 @@ impl RdmApp {
         options: &[(&str, String)],
         cx: &Context<Self>,
     ) -> AnyElement {
-        let value = self.dialog.as_ref().unwrap().value(key, cx);
+        let value = self.display_dialog().unwrap().value(key, cx);
         let disabled = self.connection_field_disabled(key, cx);
         let mut choices = div().flex().items_center();
         for (index, (candidate, label)) in options.iter().enumerate() {
@@ -2047,7 +2071,7 @@ impl RdmApp {
         self.form_field(label, control.into_any_element(), cx)
     }
     fn dialog_ttl(&self, window: &Window, cx: &Context<Self>) -> AnyElement {
-        let d = self.dialog.as_ref().unwrap();
+        let d = self.display_dialog().unwrap();
         let unit = d.value("unit", cx).parse::<i64>().unwrap_or(1);
         let unit_name = match unit {
             60 => "common.minute",
@@ -2152,9 +2176,7 @@ impl RdmApp {
         }
     }
     fn font_candidates(&self, key: &str, cx: &App) -> Vec<String> {
-        let query = self
-            .dialog
-            .as_ref()
+        let query = self.display_dialog()
             .unwrap()
             .value(&format!("font_query.{key}"), cx);
         let search = query.to_lowercase();
@@ -2222,7 +2244,7 @@ impl RdmApp {
         true
     }
     fn dialog_font(&self, key: &str, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let selected =
             serde_json::from_str::<Vec<String>>(&dialog.value(key, cx)).unwrap_or_default();
         let query_key = format!("font_query.{key}");
@@ -2362,8 +2384,8 @@ impl RdmApp {
         )
     }
     fn dialog_checkbox(&self, key: &str, label: &str, cx: &Context<Self>) -> AnyElement {
-        let checked = self.dialog.as_ref().is_some_and(|d| d.boolean(key));
-        let csv = self.dialog.as_ref().is_some_and(|d| matches!(d.kind, DialogKind::Import|DialogKind::Export|DialogKind::AddEntries));
+        let checked = self.display_dialog().is_some_and(|d| d.boolean(key));
+        let csv = self.display_dialog().is_some_and(|d| matches!(d.kind, DialogKind::Import|DialogKind::Export|DialogKind::AddEntries));
         let csv_dark = self.dark(cx) && csv;
         let disabled = self.connection_field_disabled(key, cx);
         let label = localized(label);
@@ -2688,7 +2710,7 @@ impl RdmApp {
         options: Vec<(String, String)>,
         cx: &Context<Self>,
     ) -> AnyElement {
-        let d = self.dialog.as_ref().unwrap();
+        let d = self.display_dialog().unwrap();
         let value = d.value(key, cx);
         let value = if key == "general.language" {
             match value.as_str() {
@@ -2746,7 +2768,7 @@ impl RdmApp {
         self.form_field(label, self.file_control(key, save, cx), cx)
     }
     fn connection_field_disabled(&self, key: &str, cx: &App) -> bool {
-        let Some(dialog) = &self.dialog else {
+        let Some(dialog) = self.display_dialog() else {
             return false;
         };
         if !matches!(
@@ -2768,7 +2790,7 @@ impl RdmApp {
         false
     }
     fn file_control(&self, key: &str, save: bool, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let field = key.to_string();
         let disabled = self.connection_field_disabled(key, cx);
         div()
@@ -2825,7 +2847,7 @@ impl RdmApp {
         cx.notify();
     }
     fn connection_database_tags(&self, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let mut tags = div().flex().items_center().gap(px(4.));
         for (index, field) in dialog
             .arguments
@@ -2924,7 +2946,7 @@ impl RdmApp {
         )
     }
     fn connection_pane(&self, cx: &Context<Self>) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let mut pane = div().flex().flex_col();
         match dialog.tab.as_str() {
             "general" => return self.connection_general(cx),
@@ -3442,12 +3464,12 @@ impl RdmApp {
         }
         pane.into_any_element()
     }
-    pub(super) fn render_dialog(&self, window: &mut Window, cx: &Context<Self>) -> AnyElement {
-        let d = self.dialog.as_ref().unwrap();
+    pub(super) fn render_dialog(&self, motion_progress: f32, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
+        let d = self.display_dialog().unwrap();
         let simple_dialog = matches!(d.kind, DialogKind::Group(_) | DialogKind::Rename | DialogKind::Ttl | DialogKind::DeleteKeys | DialogKind::Flush);
-        if matches!(d.kind, DialogKind::NewKey) { return self.render_new_key(window, cx); }
-        if matches!(d.kind, DialogKind::AddEntries) { return self.render_add_entries(window, cx); }
-        if matches!(d.kind, DialogKind::Import | DialogKind::Export) {return self.render_csv_dialog(window,cx);}
+        if matches!(d.kind, DialogKind::NewKey) { return self.render_new_key(motion_progress, window, cx); }
+        if matches!(d.kind, DialogKind::AddEntries) { return self.render_add_entries(motion_progress, window, cx); }
+        if matches!(d.kind, DialogKind::Import | DialogKind::Export) {return self.render_csv_dialog(motion_progress, window,cx);}
         if let DialogKind::DeleteKey(key) = &d.kind {
             let message = self
                 .tr("dialogue.remove_tip")
@@ -3455,24 +3477,24 @@ impl RdmApp {
                 .replace("{name}", &display_bytes(key))
                 .trim()
                 .to_string();
-            return self.render_warning_dialog(message, cx);
+            return self.render_warning_dialog(motion_progress, message, window, cx);
         }
         if matches!(d.kind, DialogKind::ConfirmEdit(_)) {
-            return self.render_warning_dialog(self.tr("dialogue.edit_close_confirm"), cx);
+            return self.render_warning_dialog(motion_progress, self.tr("dialogue.edit_close_confirm"), window, cx);
         }
         if let DialogKind::DeleteConnection(name) = &d.kind {
             let message = self
                 .tr("dialogue.remove_tip")
                 .replace("{type}", &self.tr("dialogue.connection.conn_name"))
                 .replace("{name}", name);
-            return self.render_warning_dialog(message, cx);
+            return self.render_warning_dialog(motion_progress, message, window, cx);
         }
         if let DialogKind::DeleteGroup(name) = &d.kind {
             let message = self.tr("dialogue.remove_group_tip").replace("{name}", name);
-            return self.render_warning_dialog(message, cx);
+            return self.render_warning_dialog(motion_progress, message, window, cx);
         }
         if matches!(d.kind, DialogKind::CleanLog) {
-            return self.render_warning_dialog(self.tr("log.confirm_clean_log"), cx);
+            return self.render_warning_dialog(motion_progress, self.tr("log.confirm_clean_log"), window, cx);
         }
         let special = matches!(d.kind, DialogKind::About);
         let mut body = div().flex().flex_col();
@@ -4216,10 +4238,11 @@ impl RdmApp {
             .items_center()
             .justify_center()
             .bg(rgba(0x00000066))
-            .occlude()
+            .when(self.dialog.is_some(), |mask| mask.occlude())
             .child(
                 div()
                     .id("dialog-card")
+                    .relative().top(px(8. * (1. - motion_progress)))
                     .test_support()
                     .w(px(if matches!(d.kind, DialogKind::Preferences) {
                         640.
@@ -4337,7 +4360,8 @@ impl RdmApp {
                         )
                     })
                     .when(!progress.is_empty(), |d| d.child(progress))
-                    .child(footer),
+                    .child(footer)
+                    .when(self.dialog.is_none(), |card| motion::inert(card, ("dialog-exit-focus", d.id), window, cx)),
             )
             .into_any_element()
     }
@@ -4348,11 +4372,11 @@ impl RdmApp {
         }
         if let Err(e) = self.submit_inner(window, cx) {
             if self.dialog.as_ref().is_some_and(|dialog| matches!(dialog.kind, DialogKind::NewKey)) {
-                self.toast(e.to_string(), true);
+                self.toast(localized(&e.to_string()), true);
             } else if e.is::<serde_json::Error>() || e.to_string().starts_with("json: cannot unmarshal") {
-                self.error_notification(e.to_string());
+                self.error_notification(e.to_string(), cx);
             } else {
-                self.toast(e.to_string(), true);
+                self.toast(localized(&e.to_string()), true);
             }
         }
         cx.notify();
@@ -4437,6 +4461,10 @@ impl RdmApp {
     fn submit_inner(&mut self, window: &mut Window, cx: &mut Context<Self>) -> Result<()> {
         self.finish_focused_number(window, cx);
         let d = self.dialog.as_ref().unwrap();
+        if (super::read_only::writes_data(&d.kind) || matches!(d.kind, DialogKind::EditEntry(_)))
+            && let Some(target) = &d.target {
+            crate::redis::ensure_writable(target.conn.read_only)?;
+        }
         if d.format_loading && !matches!(d.kind, DialogKind::EditEntry(_)) {
             return Ok(());
         }
@@ -4493,20 +4521,25 @@ impl RdmApp {
             }
             DialogKind::Connection(old) => {
                 let mut c: Connection = d.result(cx)?;
+                if c.read_only || old.as_ref().is_some_and(|old| old.name != c.name) {
+                    self.service.ensure_no_writes(old.as_ref().map_or(c.name.as_str(), |old| old.name.as_str()))?;
+                    self.service.ensure_no_writes(&c.name)?;
+                }
                 c.prepare_form_save(d.boolean("proxy.auth"));
                 let name = old.as_ref().map(|c| c.name.as_str());
                 crate::storage::save_connection(&mut self.connections, name, c)?;
                 self.status_refresh_profiles.clear();
                 self.save_connections();
-                self.dialog = None;
+                self.retire_dialog(window, cx);
             }
             DialogKind::ConnectionCopy(_) => {
                 let mut c: Connection = d.result(cx)?;
+                if c.read_only { self.service.ensure_no_writes(&c.name)?; }
                 c.prepare_form_save(d.boolean("proxy.auth"));
                 crate::storage::save_connection(&mut self.connections, None, c)?;
                 self.status_refresh_profiles.clear();
                 self.save_connections();
-                self.dialog = None;
+                self.retire_dialog(window, cx);
             }
             DialogKind::Group(old) => {
                 let name = d.value("name", cx);
@@ -4543,6 +4576,7 @@ impl RdmApp {
                 }
                 self.status_refresh_profiles.clear();
                 self.save_connections();
+                self.retire_dialog(window, cx);
                 self.dialog = self.dialog_stack.pop();
                 if let Some(parent) = &self.dialog
                     && let Some(field) = parent.fields.get("group")
@@ -4552,11 +4586,12 @@ impl RdmApp {
             }
             DialogKind::DeleteKey(key) => {
                 let target = target.ok_or_else(|| anyhow::anyhow!("请先打开 Redis 连接"))?;
-                let key = key.clone(); let deleted_key = key.clone(); let id = target.id;
+                let key = key.clone(); let deleted_key = key.clone(); let id = target.id; let db = target.db;
                 let label = display_bytes(&key);
-                self.dialog = None;
-                self.job(window,cx,move|service|Ok(service.run(&target.conn,target.db,vec![b"DEL".to_vec(),key])?.integer()?.max(0) as u64),move|app,count,_,cx|{
-                    if let Some(i)=app.tab_index(id) {
+                self.retire_dialog(window, cx);
+                self.write_job(window,cx,target.conn.clone(),move|service|Ok(service.run(&target.conn,target.db,vec![b"DEL".to_vec(),key])?.integer()?.max(0) as u64),move|app,count,_,cx|{
+                    if let Some(i)=app.tab_index(id) && app.tabs[i].db == db {
+                        app.cancel_key_scan(id);
                         let tab=&mut app.tabs[i];
                         tab.keys.retain(|entry|entry.key!=deleted_key);
                         tab.key_types.states.remove(&deleted_key);
@@ -4571,14 +4606,14 @@ impl RdmApp {
                 crate::storage::remove_connection(&mut self.connections, name);
                 self.status_refresh_profiles.clear();
                 self.save_connections();
-                self.dialog = None;
+                self.retire_dialog(window, cx);
                 if let Some(t) = self.tabs.iter().find(|t| t.conn.name == *name) {
                     self.close_tab(t.id, window, cx);
                 }
             }
             DialogKind::CleanLog => {
                 self.service.history.lock().clear();
-                self.dialog = None;
+                self.retire_dialog(window, cx);
                 self.toast(self.tr("log.clean_success"), false);
             }
             DialogKind::DeleteGroup(name) => {
@@ -4604,7 +4639,7 @@ impl RdmApp {
                     self.status_refresh_profiles.clear();
                     self.save_connections();
                 }
-                self.dialog = None;
+                self.retire_dialog(window, cx);
             }
             DialogKind::Preferences => {
                 let return_focus = d.return_focus.clone();
@@ -4638,6 +4673,7 @@ impl RdmApp {
                         });
                     }
                 }
+                self.retire_dialog(window, cx);
                 self.dialog = self.dialog_stack.pop();
                 self.full_editor = self.dialog.as_ref().is_some_and(|dialog| dialog.boolean("rdm_full_editor"));
                 return_focus.unwrap_or_else(|| self.focus.clone()).focus(window, cx);
@@ -4678,11 +4714,12 @@ impl RdmApp {
                         if new.is_empty() {
                             anyhow::bail!("新键名不能为空");
                         }
-                        self.dialog = None;
+                        self.retire_dialog(window, cx);
                         let new2 = new.clone();
-                        self.job(
+                        self.write_job(
                             window,
                             cx,
+                            c.clone(),
                             move |s| s.rename(&c, db, &key, &new),
                             move |a, _, w, cx| {
                                 a.select_key(id, new2, w, cx);
@@ -4695,10 +4732,11 @@ impl RdmApp {
                             anyhow::bail!("请勾选确认清空数据库");
                         }
                         let asynchronous = boolval("async");
-                        self.dialog = None;
-                        self.job(
+                        self.retire_dialog(window, cx);
+                        self.write_job(
                             window,
                             cx,
+                            c.clone(),
                             move |s| s.flush(&c, db, asynchronous),
                             move |a, _, w, cx| {
                                 if let Some(i) = a.tab_index(id) {
@@ -4725,9 +4763,10 @@ impl RdmApp {
                         self.transfer = Some(cancel.clone());
                         let mut keys = target.keys;
                         let mode = kind.clone();
-                        self.job(
+                        self.write_job(
                             window,
                             cx,
+                            c.clone(),
                             move |s| {
                                 Ok((|| -> Result<crate::service::TransferProgress> {
                                     if keys.is_empty() || all {
@@ -4782,7 +4821,7 @@ impl RdmApp {
                                 match result {
                                     Ok(r) => {
                                         if current {
-                                            a.dialog = None;
+                                            a.retire_dialog(w, cx);
                                         }
                                         if !r.canceled && !apply_cancel.canceled() {
                                             a.toast(
@@ -4809,7 +4848,7 @@ impl RdmApp {
                 }
             }
             _ => {
-                self.dialog = None;
+                self.retire_dialog(window, cx);
             }
         }
         cx.notify();

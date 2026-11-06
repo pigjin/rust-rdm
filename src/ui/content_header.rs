@@ -22,8 +22,8 @@ impl RdmApp {
     pub(super) fn render_content_nav(
         &self,
         i: usize,
-        window: &Window,
-        cx: &Context<Self>,
+        window: &mut Window,
+        cx: &mut Context<Self>,
     ) -> AnyElement {
         let tab = &self.tabs[i];
         let id = tab.id;
@@ -41,6 +41,10 @@ impl RdmApp {
             .position(|(pane, _, _)| *pane == tab.pane)
             .unwrap();
         let left = padding + widths[..active].iter().sum::<f32>() + active as f32 * 10.;
+        let geometry_changed = tab.content_nav_layout.get()
+            .is_none_or(|(_, old_available, old_widths)| old_available != available || old_widths != widths);
+        let indicator = motion::move_to(ElementId::from(("content-nav-indicator-motion", id)),
+            point(px(left.round()), px(widths[active].round())), geometry_changed, window, cx);
         if tab.content_nav_layout.get() != Some((tab.pane, available, widths)) {
             let current = tab.content_nav_offset.get();
             let next = if current > left.round() {
@@ -75,6 +79,9 @@ impl RdmApp {
             .px(px(padding));
         for (index, (pane, image, key)) in CONTENT_PANES.into_iter().enumerate() {
             let selected = pane == tab.pane;
+            let (hovered, on_hover) = motion::hover(format!("pane-hover-{id}-{index}"), window, cx);
+            let foreground = motion::color(format!("pane-color-{id}-{index}"),
+                if selected || hovered { primary } else { normal }, false, window, cx);
             row =
                 row.child(
                     div()
@@ -94,9 +101,10 @@ impl RdmApp {
                         .text_size(px(14.))
                         .font_weight(FontWeight::NORMAL)
                         .line_height(px(18.2))
-                        .text_color(if selected { primary } else { normal })
+                        .text_color(foreground)
                         .cursor_pointer()
-                        .hover(move |style| style.text_color(primary))
+                        .on_hover(on_hover)
+                        .active(move |style| style.text_color(primary))
                         .on_click(cx.listener(move |app, _, window, cx| {
                             app.switch_pane(id, pane, window, cx)
                         }))
@@ -126,9 +134,9 @@ impl RdmApp {
                 .id("content-nav-indicator")
                 .test_support()
                 .absolute()
-                .left(px(left.round()))
+                .left(indicator.x)
                 .bottom_0()
-                .w(px(widths[active].round()))
+                .w(indicator.y)
                 .h(px(2.))
                 .bg(primary),
         );
@@ -460,6 +468,8 @@ impl RdmApp {
                 self.btn("ttl", "", "timer", cx, |app, window, cx| {
                     app.open_dialog(dialogs::DialogKind::Ttl, window, cx)
                 })
+                .disabled(tab.conn.read_only)
+                .when(tab.conn.read_only, |button| button.opacity(0.5))
                 .content_style(
                     ttl_content.style().clone(),
                     gpui_component::Size::Size(px(18.)),
@@ -496,8 +506,8 @@ impl RdmApp {
                     cx,
                     |app, window, cx| app.open_dialog(dialogs::DialogKind::Rename, window, cx),
                 )
-                .disabled(binary)
-                .when(binary, |button| button.opacity(0.5))
+                .disabled(binary || tab.conn.read_only)
+                .when(binary || tab.conn.read_only, |button| button.opacity(0.5))
                 .border_l_0()
                 .pl(px(1.))
                 .rounded_l(px(0.)),
@@ -535,6 +545,8 @@ impl RdmApp {
                                 }
                             },
                         )
+                        .disabled(tab.conn.read_only)
+                        .when(tab.conn.read_only, |button| button.opacity(0.5))
                         .tooltip_show_delay(Duration::from_millis(100)),
                     ),
             )

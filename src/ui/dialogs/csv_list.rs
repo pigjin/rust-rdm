@@ -23,7 +23,7 @@ impl RdmApp {
         count: usize,
         cx: &Context<Self>,
     ) -> AnyElement {
-        let dialog = self.dialog.as_ref().unwrap();
+        let dialog = self.display_dialog().unwrap();
         let content = count as f32 * 25.;
         let rail = (height - 4.).max(0.);
         let thumb = if content > 0. {

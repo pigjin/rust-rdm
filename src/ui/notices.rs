@@ -85,7 +85,7 @@ impl RdmApp {
             self.open_dialog(dialogs::DialogKind::Preferences, window, cx);
         }
         match record["type"].as_str().unwrap() {
-            "notification" => self.error_notification(record["text"].as_str().unwrap().into()),
+            "notification" => self.error_notification(record["text"].as_str().unwrap().into(), cx),
             "stack" => {
                 self.toast("第一条", false);
                 self.toast("第二条", true);
@@ -125,29 +125,39 @@ impl RdmApp {
         self.messages.last_mut().unwrap().closable = true;
         id
     }
-    pub(super) fn close_message(&mut self, id: u64) {
+    pub(super) fn close_message(&mut self, id: u64, cx: &App) {
         self.cancel_csv_transfer(id);
-        self.destroy_message(id);
+        self.destroy_message(id, cx);
     }
-    pub(super) fn destroy_message(&mut self, id: u64) {
-        self.messages.retain(|notice| notice.id != id);
+    pub(super) fn destroy_message(&mut self, id: u64, cx: &App) {
+        if let Some(index) = self.messages.iter().position(|notice| notice.id == id) {
+            let notice = self.messages.remove(index);
+            self.exiting_messages.push(motion::Exit::new(notice, cx));
+        }
     }
-    pub(super) fn error_notification(&mut self, text: String) {
+    pub(super) fn dismiss_notification(&mut self, id: u64, cx: &App) {
+        if let Some(index) = self.notifications.iter().position(|notice| notice.id == id) {
+            let notice = self.notifications.remove(index);
+            self.exiting_notifications.push(motion::Exit::new(notice, cx));
+        }
+    }
+    pub(super) fn error_notification(&mut self, text: String, cx: &App) {
         self.next_notice_id += 1;
         if self.notifications.len() == 5 {
-            self.notifications.remove(0);
+            self.dismiss_notification(self.notifications[0].id, cx);
         }
         self.notifications.push(ErrorNotification {
             id: self.next_notice_id,
             text,
         });
     }
-    pub(super) fn expire_messages(&mut self) -> bool {
-        let count = self.messages.len();
+    pub(super) fn expire_messages(&mut self, cx: &App) -> bool {
         let now = Instant::now();
-        self.messages
-            .retain(|notice| notice.expires.is_none_or(|expires| expires > now));
-        self.messages.len() != count
+        let expired: Vec<_> = self.messages.iter()
+            .filter(|notice| notice.expires.is_some_and(|expires| expires <= now))
+            .map(|notice| notice.id).collect();
+        for id in &expired { self.destroy_message(*id, cx); }
+        !expired.is_empty()
     }
     fn hover_message(&mut self, id: u64, hovered: bool) {
         if let Some(notice) = self.messages.iter_mut().find(|notice| notice.id == id) {
@@ -156,7 +166,7 @@ impl RdmApp {
             }
         }
     }
-    pub(super) fn render_notices(&self, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
+    pub(super) fn render_notices(&mut self, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
         let dark = self.dark(cx);
         let border = if !cfg!(target_os = "windows") && !window.is_fullscreen() {
             1.
@@ -170,11 +180,16 @@ impl RdmApp {
             .right_0()
             .flex()
             .flex_col()
-            .items_center()
-            .gap(px(8.));
-        for notice in &self.messages {
+            .items_center();
+        let mut visible_messages: Vec<_> = self.messages.iter().map(|notice| (notice, true))
+            .chain(self.exiting_messages.iter().map(|exit| (&exit.value, false))).collect();
+        visible_messages.sort_by_key(|(notice, _)| notice.id);
+        let mut finished_messages = Vec::new();
+        for (notice, present) in visible_messages {
             let id = notice.id;
-            let progress = motion::enter(ElementId::from(("message-enter", id)), window, cx);
+            let sample = motion::presence(ElementId::from(("message-enter", id)), present, window, cx);
+            if !sample.should_render() { finished_messages.push(id); continue; }
+            let progress = sample.progress;
             let (name, color) = match notice.kind {
                 MessageKind::Success => ("notice-success", if dark { 0x63e2b7 } else { 0x18a058 }),
                 MessageKind::Warning => ("notice-warning", if dark { 0xf2c97d } else { 0xf0a020 }),
@@ -193,8 +208,7 @@ impl RdmApp {
                     .text_color(rgb(color))
                     .into_any_element()
             };
-            messages = messages.child(
-                div()
+            let card = div()
                     .id(("message", id))
                     .test_support()
                     .relative()
@@ -257,12 +271,14 @@ impl RdmApp {
                                 })
                                 .child(icon("notice-close").size_full())
                                 .on_click(cx.listener(move |app, _, _, cx| {
-                                    app.close_message(id);
+                                    app.close_message(id, cx);
                                     cx.notify();
                                 })),
                         )
-                    }),
-            );
+                    })
+                .when(!present, |card| card.child(motion::shield()))
+                .into_any_element();
+            messages = messages.child(notice_row(("message-reveal", id).into(), if present { 1. } else { progress }, 8., card));
         }
         let mut notifications = div()
             .absolute()
@@ -270,13 +286,17 @@ impl RdmApp {
             .right(px(16. - border))
             .w(px(365.))
             .flex()
-            .flex_col()
-            .gap(px(12.));
-        for notice in &self.notifications {
+            .flex_col();
+        let mut visible_notifications: Vec<_> = self.notifications.iter().map(|notice| (notice, true))
+            .chain(self.exiting_notifications.iter().map(|exit| (&exit.value, false))).collect();
+        visible_notifications.sort_by_key(|(notice, _)| notice.id);
+        let mut finished_notifications = Vec::new();
+        for (notice, present) in visible_notifications {
             let id = notice.id;
-            let progress = motion::enter(ElementId::from(("notification-enter", id)), window, cx);
-            notifications = notifications.child(
-                div()
+            let sample = motion::presence(ElementId::from(("notification-enter", id)), present, window, cx);
+            if !sample.should_render() { finished_notifications.push(id); continue; }
+            let progress = sample.progress;
+            let card = div()
                     .id(("error-notification", id))
                     .test_support()
                     .relative()
@@ -349,10 +369,10 @@ impl RdmApp {
                                 "",
                                 cx,
                                 move |app, _, cx| {
-                                    app.notifications.retain(|notice| notice.id != id);
+                                    app.dismiss_notification(id, cx);
                                     cx.notify();
                                 },
-                            )
+                            ).tab_stop(present)
                             .icon(icon("notice-close").size(px(16.)))
                             .with_size(gpui_component::Size::Size(px(20.)))
                             .size(px(20.))
@@ -363,9 +383,19 @@ impl RdmApp {
                                 rgb(0x666666).into()
                             }),
                         ),
-                    ),
-            );
+                    )
+                .when(!present, |card| card.child(motion::shield()))
+                .into_any_element();
+            notifications = notifications.child(notice_row(("notification-reveal", id).into(), if present { 1. } else { progress }, 12., card));
         }
+        self.exiting_messages.retain_mut(|exit| {
+            exit.keep_visible(cx);
+            !finished_messages.contains(&exit.value.id)
+        });
+        self.exiting_notifications.retain_mut(|exit| {
+            exit.keep_visible(cx);
+            !finished_notifications.contains(&exit.value.id)
+        });
         div()
             .absolute()
             .inset_0()
@@ -375,4 +405,9 @@ impl RdmApp {
             ])
             .into_any_element()
     }
+}
+
+fn notice_row(id: ElementId, progress: f32, gap: f32, card: AnyElement) -> AnyElement {
+    let row = div().w_full().pt(px(gap)).flex().justify_center().child(card).into_any_element();
+    gpui_base::motion::MotionReveal::new(id, progress, row).into_any_element()
 }

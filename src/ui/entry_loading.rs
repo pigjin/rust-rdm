@@ -2,6 +2,7 @@ use super::*;
 
 impl Drop for Tab {
     fn drop(&mut self) {
+        self.scan_cancel.cancel();
         self.detail_cancel.cancel();
     }
 }

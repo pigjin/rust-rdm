@@ -1,5 +1,12 @@
 {
   "name": "Türkçe",
+  "read_only": {
+    "label": "Salt okunur bağlantı",
+    "badge": "Salt okunur",
+    "hint": "Konsol dahil yalnızca okuma sorgularına izin verilir. Değişiklikten sonra yeniden bağlanın.",
+    "error": "Bu bağlantı salt okunurdur; yalnızca okuma sorgularına izin verilir.",
+    "pending": "Bekleyen yazma görevleri var. Bağlantı ayarlarını değiştirmeden önce bitmelerini bekleyin veya görevleri iptal edin."
+  },
   "common": {
     "confirm": "Onayla",
     "cancel": "İptal",

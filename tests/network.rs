@@ -299,6 +299,11 @@ fn sentinel_uses_general_auth_for_sentinel_and_separate_master_auth() {
             .unwrap()
             .is_empty()
     );
+    let read_only = Connection { read_only: true, ..config.clone() };
+    let mut protected = Client::connect(&read_only, 1).unwrap();
+    assert_eq!(protected.query(&command(&["GET", "via-sentinel"])).unwrap().bytes(), b"value");
+    assert!(!service.sentinel_masters(&read_only).unwrap().array().unwrap().is_empty());
+    assert!(protected.query(&command(&["SET", "via-sentinel", "changed"])).is_err());
     let mut replica_client = Client::connect(
         &Connection {
             port: replica.port,
@@ -374,6 +379,12 @@ fn sentinel_uses_general_auth_for_sentinel_and_separate_master_auth() {
         c.query(&command(&["GET", "via-sentinel"])).unwrap().bytes(),
         b"value"
     );
+    assert_eq!(protected.query(&command(&["GET", "via-sentinel"])).unwrap().bytes(), b"value");
+    assert_eq!(protected.primary.1, replica.port, "read-only connections also rediscover the promoted master");
+    assert_eq!(protected.db, 1);
+    assert!(protected.dedicated().unwrap().send(&command(&["DEL", "via-sentinel"])).is_err());
+    assert!(protected.query(&command(&["SET", "after-failover", "changed"])).is_err());
+
 }
 fn tls_fixture() -> (Server, Connection) {
     let dir = tempfile::Builder::new()
@@ -660,7 +671,7 @@ fn cluster_redirects_and_scans_every_master() {
     let mut state = redisdock::service::ScanState::default();
     let mut paged = std::collections::HashSet::new();
     while !state.end {
-        let page = service.scan(&config, 0, "cluster:*", "", false, state, 7).unwrap();
+        let page = service.scan(&config, 0, "cluster:*", "", false, state, 7, &Default::default()).unwrap();
         assert_eq!(page.total, 91);
         for entry in page.keys {
             assert!(paged.insert(entry.key), "cluster pages must not repeat stable keys");
@@ -717,6 +728,20 @@ fn cluster_redirects_and_scans_every_master() {
         );
     }
     assert!(Client::connect(&config, 1).is_err());
+    let read_only = Connection { read_only: true, ..config.clone() };
+    let mut protected = Client::connect(&read_only, 0).unwrap();
+    assert_eq!(service.key_types(&read_only, 0, &keys, &Default::default()).unwrap(), expected);
+    let replies = protected.pipeline_at("127.0.0.1", base, &commands).unwrap();
+    assert_eq!(replies.iter().map(|v| KeyType::parse(&v.text())).collect::<Vec<_>>(), expected);
+    assert_eq!(service.all_keys(&read_only, 0, "cluster:*", &Default::default()).unwrap().len(), 91);
+    assert!(service.slow_logs(&read_only, 10).is_ok());
+    for node in &nodes {
+        assert!(protected.query_at("127.0.0.1", node.port, &command(&["FLUSHDB"])).is_err());
+        assert!(protected.pipeline_at("127.0.0.1", node.port, &[command(&["PING"]), command(&["SET", "cluster:42", "changed"])]).is_err());
+    }
+    assert!(protected.dedicated().unwrap().send(&command(&["SET", "cluster:42", "changed"])).is_err());
+    assert_eq!(protected.query(&command(&["GET", "cluster:42"])).unwrap().bytes(), b"42");
+
 }
 
 #[test]
@@ -1195,4 +1220,157 @@ fn a_lost_write_reply_is_never_replayed() {
     let listener=server.join().unwrap();listener.set_nonblocking(true).unwrap();
     assert!(matches!(listener.accept(),Err(e) if e.kind()==std::io::ErrorKind::WouldBlock),"no second connection may replay the uncertain write");
     }
+}
+
+#[test]
+fn scan_yields_matching_batches_with_fixed_count_and_one_total_query() {
+    let listener = TcpListener::bind(("127.0.0.1", 0)).unwrap();
+    let config = Connection { port: listener.local_addr().unwrap().port(), ..Default::default() };
+    let server = std::thread::spawn(move || {
+        let (stream, _) = listener.accept().unwrap();
+        let mut reader = std::io::BufReader::new(stream);
+        for (expected, reply) in [
+            (vec!["PING"], "+PONG\r\n"),
+            (vec!["DBSIZE"], ":2000000\r\n"),
+            (vec!["SCAN", "0", "MATCH", "*rare*", "COUNT", "3"], "*2\r\n$2\r\n11\r\n*3\r\n$4\r\na:10\r\n$4\r\na:10\r\n$3\r\na:2\r\n"),
+            (vec!["SCAN", "11", "MATCH", "*rare*", "COUNT", "3"], "*2\r\n$1\r\n0\r\n*1\r\n$1\r\nb\r\n"),
+        ] {
+            let actual = redisdock::redis::read_value(&mut reader).unwrap();
+            assert_eq!(actual.array().unwrap().iter().map(|v| v.bytes()).collect::<Vec<_>>(), command(&expected));
+            reader.get_mut().write_all(reply.as_bytes()).unwrap();
+        }
+    });
+    let dir = tempfile::tempdir().unwrap();
+    let service = Service::new(Store::new(dir.path().to_path_buf()));
+    let cancel = Default::default();
+    let page = service.scan(&config, 0, "*rare*", "", false, Default::default(), 3, &cancel).unwrap();
+    assert_eq!(page.keys.iter().map(|k| k.key.clone()).collect::<Vec<_>>(), vec![b"a:10".to_vec(), b"a:2".to_vec()]);
+    assert!(!page.state.end);
+    assert_eq!(page.state.cursor, 11);
+    assert_eq!(page.total, 2_000_000);
+    let page = service.scan(&config, 0, "*rare*", "", false, page.state, 3, &cancel).unwrap();
+    assert_eq!(page.keys[0].key, b"b");
+    assert!(page.state.end);
+    assert_eq!(page.total, 2_000_000);
+    let completed = service.scan(&config, 0, "*rare*", "", false, page.state, 3, &cancel).unwrap();
+    assert!(completed.keys.is_empty() && completed.state.end);
+    assert_eq!(completed.total, 2_000_000);
+    assert_eq!(service.history.lock().iter().filter(|log| log.command == "DBSIZE").count(), 1);
+    server.join().unwrap();
+}
+
+#[test]
+fn scan_empty_batches_yield_and_cancellation_stops_commands_without_closing_transport() {
+    let listener = TcpListener::bind(("127.0.0.1", 0)).unwrap();
+    let config = Connection { port: listener.local_addr().unwrap().port(), ..Default::default() };
+    let scans = Arc::new(AtomicUsize::new(0));
+    let cancel = redisdock::redis::Cancellation::default();
+    let (server_scans, server_cancel) = (scans.clone(), cancel.clone());
+    let server = std::thread::spawn(move || {
+        let (stream, _) = listener.accept().unwrap();
+        let mut reader = std::io::BufReader::new(stream);
+        let mut pings = 0;
+        loop {
+            let value = redisdock::redis::read_value(&mut reader).unwrap();
+            let args = value.array().unwrap().iter().map(|v| v.bytes()).collect::<Vec<_>>();
+            match args[0].as_slice() {
+                b"PING" => {
+                    reader.get_mut().write_all(b"+PONG\r\n").unwrap();
+                    pings += 1;
+                    if pings == 2 { break; }
+                }
+                b"DBSIZE" => reader.get_mut().write_all(b":2000000\r\n").unwrap(),
+                b"SCAN" => {
+                    assert_eq!(args[5], b"3000");
+                    let n = server_scans.fetch_add(1, Ordering::SeqCst) + 1;
+                    assert_eq!(args[1], (n - 1).to_string().as_bytes());
+                    if n > 5 { server_cancel.cancel(); }
+                    std::thread::sleep(Duration::from_millis(20));
+                    let cursor = n.to_string();
+                    write!(reader.get_mut(), "*2\r\n${}\r\n{}\r\n*0\r\n", cursor.len(), cursor).unwrap();
+                }
+                _ => panic!("unexpected command: {args:?}"),
+            }
+        }
+    });
+    let dir = tempfile::tempdir().unwrap();
+    let service = Service::new(Store::new(dir.path().to_path_buf()));
+    let page = service.scan(&config, 0, "*rare*", "", false, Default::default(), 3000, &cancel).unwrap();
+    assert!(page.keys.is_empty() && !page.state.end && page.state.started);
+    assert_eq!(page.state.cursor, scans.load(Ordering::SeqCst) as u64);
+    assert!((1..=5).contains(&scans.load(Ordering::SeqCst)), "empty batch must yield after 100ms, not wait for 64 round trips");
+    let mut state = page.state;
+    while !cancel.canceled() {
+        match service.scan(&config, 0, "*rare*", "", false, state.clone(), 3000, &cancel) {
+            Ok(page) => state = page.state,
+            Err(_) => assert!(cancel.canceled()),
+        }
+    }
+    assert_eq!(scans.load(Ordering::SeqCst), 6);
+    let before = service.history.lock().len();
+    assert!(service.scan(&config, 0, "anything", "", true, Default::default(), 3000, &cancel).is_err());
+    assert_eq!(service.history.lock().len(), before);
+    assert!(service.all_keys(&config, 0, "*", &cancel).unwrap().is_empty());
+    assert_eq!(service.run(&config, 0, command(&["PING"])).unwrap().text(), "PONG");
+    server.join().unwrap();
+}
+
+#[test]
+fn scan_canceled_while_waiting_for_client_sends_no_command() {
+    let server = redis_server(&[], false);
+    let config = Connection { port: server.port, ..Default::default() };
+    let dir = tempfile::tempdir().unwrap();
+    let service = Arc::new(Service::new(Store::new(dir.path().to_path_buf())));
+    service.connect(&config, 0).unwrap();
+    let client = service.client(&config, 0).unwrap();
+    let cancel = redisdock::redis::Cancellation::default();
+    let barrier = Arc::new(std::sync::Barrier::new(2));
+    let (worker_service, worker_config, worker_cancel, worker_barrier) = (service.clone(), config.clone(), cancel.clone(), barrier.clone());
+    let worker = std::thread::spawn(move || {
+        worker_barrier.wait();
+        let state = redisdock::service::ScanState { nodes: vec![(worker_config.addr.clone(), worker_config.port)], total: Some(0), ..Default::default() };
+        worker_service.scan(&worker_config, 0, "*", "", false, state, 3000, &worker_cancel)
+    });
+    barrier.wait();
+    std::thread::sleep(Duration::from_millis(20));
+    cancel.cancel();
+    drop(client);
+    assert!(worker.join().unwrap().is_err());
+    let stats = service.run(&config, 0, command(&["INFO", "commandstats"])).unwrap().text();
+    assert!(!stats.contains("cmdstat_scan:"), "a canceled waiter must not issue SCAN after acquiring the client");
+}
+
+#[test]
+fn scan_canceled_during_connect_does_not_restore_a_closed_client() {
+    let listener = TcpListener::bind(("127.0.0.1", 0)).unwrap();
+    let config = Connection { port: listener.local_addr().unwrap().port(), ..Default::default() };
+    let (entered, connecting) = std::sync::mpsc::channel();
+    let (release, gate) = std::sync::mpsc::channel();
+    let server = std::thread::spawn(move || {
+        let (stream, _) = listener.accept().unwrap();
+        let mut reader = std::io::BufReader::new(stream);
+        assert_eq!(redisdock::redis::read_value(&mut reader).unwrap().array().unwrap()[0].bytes(), b"PING");
+        entered.send(()).unwrap();
+        gate.recv_timeout(Duration::from_secs(5)).unwrap();
+        reader.get_mut().write_all(b"+PONG\r\n").unwrap();
+        assert!(redisdock::redis::read_value(&mut reader).is_err(), "canceled connection must be dropped instead of cached");
+        let (stream, _) = listener.accept().unwrap();
+        let mut reader = std::io::BufReader::new(stream);
+        for _ in 0..2 {
+            assert_eq!(redisdock::redis::read_value(&mut reader).unwrap().array().unwrap()[0].bytes(), b"PING");
+            reader.get_mut().write_all(b"+PONG\r\n").unwrap();
+        }
+    });
+    let dir = tempfile::tempdir().unwrap();
+    let service = Arc::new(Service::new(Store::new(dir.path().to_path_buf())));
+    let cancel = redisdock::redis::Cancellation::default();
+    let (worker_service, worker_config, worker_cancel) = (service.clone(), config.clone(), cancel.clone());
+    let worker = std::thread::spawn(move || worker_service.scan(&worker_config, 0, "*", "", false, Default::default(), 3000, &worker_cancel));
+    connecting.recv_timeout(Duration::from_secs(5)).unwrap();
+    cancel.cancel();
+    service.close(&config.name);
+    release.send(()).unwrap();
+    assert!(worker.join().unwrap().is_err());
+    assert_eq!(service.run(&config, 0, command(&["PING"])).unwrap().text(), "PONG");
+    server.join().unwrap();
 }
