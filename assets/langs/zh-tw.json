@@ -1,5 +1,11 @@
 {
   "name": "繁體中文",
+  "cli": {
+    "reconnecting": "連線中斷，正在自動重連…",
+    "connection_lost": "連線中斷或逾時，原命令執行結果未確認，不會自動重送。",
+    "reconnected": "已自動重連，保留目前資料庫，其餘工作階段狀態已重設。原命令未重送。",
+    "reconnect_failed": "自動重連失敗，下次執行命令時將再次嘗試連線"
+  },
   "read_only": {
     "label": "唯讀連線",
     "badge": "唯讀",

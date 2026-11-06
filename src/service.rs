@@ -134,7 +134,7 @@ impl Service {
             let client = if let Some(client) = existing {
                 client
             } else {
-                let client = Arc::new(Mutex::new(Client::connect(c, 0)?));
+                let client = Arc::new(Mutex::new(Client::connect(c, db)?));
                 self.cli_clients
                     .lock()
                     .entry(id)
@@ -143,6 +143,14 @@ impl Service {
             };
             client.lock().query(&args)
         })
+    }
+    pub fn reconnect_cli(&self, c: &Connection) -> Result<()> {
+        let client = self.cli_clients.lock().get(&(c.name.clone(), c.read_only)).cloned()
+            .ok_or_else(|| anyhow::anyhow!("CLI connection is closed"))?;
+        let mut client = client.lock();
+        // Restore only the connection and selected DB; never replay an uncertain command.
+        *client = Client::connect(c, client.db)?;
+        Ok(())
     }
     fn run_at(
         &self,

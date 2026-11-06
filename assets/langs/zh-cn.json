@@ -1,5 +1,11 @@
 {
   "name": "简体中文",
+  "cli": {
+    "reconnecting": "连接中断，正在自动重连…",
+    "connection_lost": "连接中断或超时，原命令执行结果未确认，不会自动重发。",
+    "reconnected": "已自动重连，保留当前数据库，其余会话状态已重置。原命令未重发。",
+    "reconnect_failed": "自动重连失败，下次执行命令时将再次尝试连接"
+  },
   "read_only": {
     "label": "只读连接",
     "badge": "只读",

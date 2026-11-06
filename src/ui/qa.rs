@@ -598,6 +598,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     "cli",
                     "cli-keyboard",
                     "cli-results",
+                    "cli-lifecycle",
                     "cli-ansi",
                     "cli-long",
                     "cli-selection",
@@ -1070,7 +1071,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                                         app.switch_pane(id, Pane::Slow, window, cx);
                                     }
                                 }
-                                "cli" | "cli-keyboard" | "cli-results" | "cli-ansi" | "cli-long" | "cli-selection" | "cli-word-selection" | "cli-font-size" => {
+                                "cli" | "cli-keyboard" | "cli-results" | "cli-lifecycle" | "cli-ansi" | "cli-long" | "cli-selection" | "cli-word-selection" | "cli-font-size" => {
                                     if app.active.is_none() {
                                         app.open_connection(app.connections[0].clone(), window, cx);
                                     }
@@ -1801,6 +1802,9 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                             }).unwrap();
                         }
                         println!("QA PASS: CLI Ctrl editing, Unicode cursor, history draft and clear-screen keys");
+                    }
+                    if snapshot == "cli-lifecycle" {
+                        terminal_qa::verify(&view, window, cx).await;
                     }
                     if snapshot == "cli-results" || snapshot == "cli-keyboard" {
                         let lines: &[&str] = if snapshot == "cli-results" {

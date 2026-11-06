@@ -56,6 +56,8 @@ mod qa_refresh;
 #[cfg(feature = "ui-qa")]
 mod qa_refresh_status;
 mod terminal;
+#[cfg(feature = "ui-qa")]
+mod terminal_qa;
 mod views;
 mod sidebar;
 mod status_values;
@@ -529,6 +531,7 @@ struct Tab {
     cli_output: Vec<cli::Line>,
     cli_history: cli::History,
     cli_db: u32,
+    cli_state: terminal::CliState,
     cli_scroll: ScrollHandle,
     cli_view: std::rc::Rc<RefCell<terminal::CliView>>,
     slow: Vec<SlowLog>,
@@ -1272,6 +1275,7 @@ impl RdmApp {
             ],
             cli_history: cli::History::default(),
             cli_db: 0,
+            cli_state: terminal::CliState::Ready,
             cli_scroll: ScrollHandle::new(),
             cli_view: Default::default(),
             slow: vec![],
@@ -1613,6 +1617,10 @@ impl RdmApp {
             return;
         }
         let control = event.keystroke.modifiers.control;
+        if t.cli_state != terminal::CliState::Ready {
+            cx.stop_propagation();
+            return;
+        }
         let input = text_input(&t.cli_input, cx);
         if (!control && matches!(key, "up" | "down" | "pageup" | "pagedown"))
             || (control && matches!(key, "p" | "n"))
@@ -1771,6 +1779,9 @@ impl RdmApp {
             return;
         };
         let t = &mut self.tabs[i];
+        if t.cli_state != terminal::CliState::Ready {
+            return;
+        }
         let line = text_input(&t.cli_input, cx);
         t.cli_history.finish(&line);
         t.cli_view.borrow_mut().scroll_back = 0;
@@ -1793,6 +1804,8 @@ impl RdmApp {
         }
         let c = t.conn.clone();
         let db = t.cli_db;
+        t.cli_state = terminal::CliState::Running;
+        t.cli_input.update(cx, |input, cx| input.set_disabled(true, cx));
         let pending_write = if !c.read_only && !crate::redis::is_read_only_command(&args) {
             self.service.write_task(&c).ok()
         } else { None };
@@ -1811,19 +1824,39 @@ impl RdmApp {
             cx,
             move |service| {
                 let _write = pending_write;
-                Ok(match service.run_cli(&c, db, args) {
-                    Ok(value) => (value, selected_db),
-                    Err(error) => (crate::redis::Value::Error(error.to_string()), None),
-                })
+                Ok(service.run_cli(&c, db, args))
             },
-            move |app, (mut value, selected_db), _, _| {
-                if let crate::redis::Value::Error(error) = &mut value { *error = localized(error); }
-                if let Some(i) = app.tab_index(id) {
-                    if let Some(db) = selected_db {
-                        app.tabs[i].cli_db = db;
+            move |app, result, window, cx| {
+                let Some(i) = app.tab_index(id) else { return; };
+                let reconnect = result.as_ref().is_err_and(|error| error.is::<crate::redis::ConnectionError>());
+                let value = match result {
+                    Ok(value) => {
+                        if let Some(db) = selected_db { app.tabs[i].cli_db = db; }
+                        value
                     }
-                    app.tabs[i].cli_output.extend(cli::Line::reply(&value));
-                    app.tabs[i].cli_scroll.scroll_to_bottom();
+                    Err(error) => crate::redis::Value::Error(localized(&error.to_string())),
+                };
+                app.tabs[i].cli_output.extend(cli::Line::reply(&value));
+                app.tabs[i].cli_scroll.scroll_to_bottom();
+                app.tabs[i].cli_state = terminal::CliState::Ready;
+                if reconnect {
+                    let message = app.tr("cli.connection_lost");
+                    app.tabs[i].cli_output.extend(cli::Line::reply(&crate::redis::Value::Error(message)));
+                    app.tabs[i].cli_state = terminal::CliState::Reconnecting;
+                    let c = app.tabs[i].conn.clone();
+                    app.job(window, cx, move |service| Ok(service.reconnect_cli(&c)), move |app, result, _, cx| {
+                        let Some(i) = app.tab_index(id) else { return; };
+                        let value = match result {
+                            Ok(()) => crate::redis::Value::Bytes(app.tr("cli.reconnected").into_bytes()),
+                            Err(error) => crate::redis::Value::Error(format!("{}: {}", app.tr("cli.reconnect_failed"), error)),
+                        };
+                        app.tabs[i].cli_output.extend(cli::Line::reply(&value));
+                        app.tabs[i].cli_state = terminal::CliState::Ready;
+                        app.tabs[i].cli_input.update(cx, |input, cx| input.set_disabled(false, cx));
+                        app.tabs[i].cli_scroll.scroll_to_bottom();
+                    });
+                } else {
+                    app.tabs[i].cli_input.update(cx, |input, cx| input.set_disabled(false, cx));
                 }
             },
         );

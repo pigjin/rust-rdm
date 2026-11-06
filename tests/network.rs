@@ -1223,6 +1223,38 @@ fn a_lost_write_reply_is_never_replayed() {
 }
 
 #[test]
+fn cli_reconnection_never_replays_a_write_with_a_lost_reply() {
+    use redisdock::redis::{ConnectionError, Value, read_value};
+    let listener = TcpListener::bind(("127.0.0.1", 0)).unwrap();
+    let config = Connection {
+        port: listener.local_addr().unwrap().port(),
+        conn_timeout: 1,
+        exec_timeout: 1,
+        ..Default::default()
+    };
+    let server = std::thread::spawn(move || {
+        for replies in [
+            vec![(command(&["SELECT", "2"]), "+OK\r\n"), (command(&["PING"]), "+PONG\r\n"), (command(&["INCR", "counter"]), "")],
+            vec![(command(&["SELECT", "2"]), "+OK\r\n"), (command(&["PING"]), "+PONG\r\n"), (command(&["GET", "counter"]), ":1\r\n")],
+        ] {
+            let (stream, _) = listener.accept().unwrap();
+            stream.set_read_timeout(Some(Duration::from_secs(3))).unwrap();
+            let mut reader = std::io::BufReader::new(stream);
+            for (args, reply) in replies {
+                assert_eq!(read_value(&mut reader).unwrap(), Value::Array(args.into_iter().map(Value::Bytes).collect()));
+                reader.get_mut().write_all(reply.as_bytes()).unwrap();
+            }
+        }
+    });
+    let dir = tempfile::tempdir().unwrap();
+    let service = Service::new(Store::new(dir.path()));
+    assert!(service.run_cli(&config, 2, command(&["INCR", "counter"])).unwrap_err().is::<ConnectionError>());
+    service.reconnect_cli(&config).unwrap();
+    assert_eq!(service.run_cli(&config, 2, command(&["GET", "counter"])).unwrap(), Value::Int(1));
+    server.join().unwrap();
+}
+
+#[test]
 fn scan_yields_matching_batches_with_fixed_count_and_one_total_query() {
     let listener = TcpListener::bind(("127.0.0.1", 0)).unwrap();
     let config = Connection { port: listener.local_addr().unwrap().port(), ..Default::default() };

@@ -2,6 +2,13 @@ use super::*;
 use crate::cli::terminal::{Frame, Point as CellPoint};
 use std::rc::Rc;
 
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+pub(super) enum CliState {
+    Ready,
+    Running,
+    Reconnecting,
+}
+
 pub(super) struct CliView {
     pub bounds: Bounds<Pixels>,
     pub cell_width: f32,
@@ -125,9 +132,15 @@ impl RdmApp {
         let tab = &self.tabs[i];
         let id = tab.id;
         let view = tab.cli_view.clone();
-        let input = text_input(&tab.cli_input, cx);
-        let cursor = tab.cli_input.read(cx).cursor();
-        let prefix = read_only::cli_prompt(&tab.conn, tab.cli_db);
+        let pending = tab.cli_state != CliState::Ready;
+        let show_cursor = tab.cli_state != CliState::Reconnecting;
+        let input = if pending { String::new() } else { text_input(&tab.cli_input, cx) };
+        let cursor = if pending { 0 } else { tab.cli_input.read(cx).cursor() };
+        let prefix = match tab.cli_state {
+            CliState::Ready => read_only::cli_prompt(&tab.conn, tab.cli_db),
+            CliState::Running => String::new(),
+            CliState::Reconnecting => self.tr("cli.reconnecting"),
+        };
         {
             let mut state = view.borrow_mut();
             if state.lines != tab.cli_output
@@ -315,7 +328,7 @@ impl RdmApp {
                         }
                     }
                 }
-                if focus.is_focused(window)
+                if show_cursor && focus.is_focused(window)
                     && frame.cursor.row >= first
                     && frame.cursor.row
                         < first + (bounds.size.height.as_f32() / line_height).floor() as usize

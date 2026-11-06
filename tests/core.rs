@@ -1705,6 +1705,46 @@ fn redisjson_real_module_preserves_source_contracts_and_dump_restore() {
 }
 
 #[test]
+fn cli_reconnect_restores_selected_database_and_read_only_mode() {
+    let fixture = RedisFixture::new();
+    let service = fixture.service();
+    service.run(&fixture.config, 2, command(&["SET", "scoped", "db2"])).unwrap();
+    for read_only in [false, true] {
+        let mut config = fixture.config.clone();
+        config.read_only = read_only;
+        service.run_cli(&config, 0, command(&["SELECT", "2"])).unwrap();
+        let old_id = service.run_cli(&config, 2, command(&["CLIENT", "ID"])).unwrap().text();
+        service.run(&fixture.config, 0, command(&["CLIENT", "KILL", "ID", &old_id])).unwrap();
+        let error = service.run_cli(&config, 2, command(&["GET", "scoped"])).unwrap_err();
+        assert!(error.is::<redis::ConnectionError>(), "{error}");
+        service.reconnect_cli(&config).unwrap();
+        assert_eq!(service.run_cli(&config, 2, command(&["GET", "scoped"])).unwrap().bytes(), b"db2");
+        assert_ne!(service.run_cli(&config, 2, command(&["CLIENT", "ID"])).unwrap().text(), old_id);
+        let invalid = service.run_cli(&config, 2, command(&["SELECT", "999999"])).unwrap_err();
+        assert!(!invalid.is::<redis::ConnectionError>(), "Redis errors must not reset the session");
+        if read_only {
+            let denied = service.run_cli(&config, 2, command(&["SET", "scoped", "changed"])).unwrap_err();
+            assert!(denied.is::<redis::ReadOnlyError>());
+            assert!(!denied.is::<redis::ConnectionError>());
+        }
+    }
+    service.close(&fixture.config.name);
+    assert!(service.reconnect_cli(&fixture.config).is_err(), "a closed tab must not be restored");
+    assert_eq!(service.run_cli(&fixture.config, 2, command(&["GET", "scoped"])).unwrap().bytes(), b"db2");
+}
+
+#[test]
+fn cli_timeout_is_classified_and_reconnection_discards_the_pending_reply() {
+    let fixture = RedisFixture::new();
+    let service = fixture.service();
+    let error = service.run_cli(&fixture.config, 0, command(&["BLPOP", "missing", "0"])).unwrap_err();
+    assert!(error.is::<redis::ConnectionError>());
+    assert!(redis::is_timeout(&error), "the underlying I/O error must remain available");
+    service.reconnect_cli(&fixture.config).unwrap();
+    assert_eq!(service.run_cli(&fixture.config, 0, command(&["PING"])).unwrap().text(), "PONG");
+}
+
+#[test]
 fn cli_sessions_cannot_collide_with_real_connection_names_or_browser_databases() {
     let fixture = RedisFixture::new();
     let service = fixture.service();

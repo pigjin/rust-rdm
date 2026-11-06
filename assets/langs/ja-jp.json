@@ -1,5 +1,11 @@
 {
   "name": "日本語",
+  "cli": {
+    "reconnecting": "Connection lost. Reconnecting…",
+    "connection_lost": "Connection lost or timed out. The command's outcome is unknown; it will not be replayed.",
+    "reconnected": "Reconnected. Database retained; other session state was reset. The command was not replayed.",
+    "reconnect_failed": "Reconnection failed. The next command will try to connect again"
+  },
   "read_only": {
     "label": "読み取り専用接続",
     "badge": "読み取り専用",

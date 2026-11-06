@@ -19,6 +19,24 @@ mod frame;
 mod read_only;
 pub use read_only::{ReadOnlyError, check_read_only, ensure_writable, is_read_only_command};
 
+/// Identifies connection failures without treating Redis command errors as disconnects.
+#[derive(Debug)]
+pub struct ConnectionError(String);
+
+impl std::fmt::Display for ConnectionError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.write_str(&self.0)
+    }
+}
+impl std::error::Error for ConnectionError {}
+
+impl ConnectionError {
+    fn wrap(error: anyhow::Error) -> anyhow::Error {
+        let context = Self(error.to_string());
+        error.context(context)
+    }
+}
+
 pub trait ReadWrite: Read + Write + Send {}
 impl<T: Read + Write + Send> ReadWrite for T {}
 impl std::fmt::Debug for dyn ReadWrite {
@@ -379,13 +397,19 @@ impl Client {
                             asking = false;
                             continue;
                         }
-                        return Err(error);
+                        return Err(ConnectionError::wrap(error));
                     }
                 }
             }
             let wire = self.wires.get_mut(&target).unwrap();
             if asking {
-                wire.query(&command(&["ASKING"]))?.checked()?;
+                match wire.query(&command(&["ASKING"])) {
+                    Ok(value) => { value.checked()?; }
+                    Err(error) => {
+                        self.wires.remove(&target);
+                        return Err(ConnectionError::wrap(error));
+                    }
+                }
             }
             let value = match wire.query(args) {
                 Ok(v) => v,
@@ -394,7 +418,7 @@ impl Client {
                     // A lost reply can follow a successful write. Rediscover for
                     // subsequent commands without replaying an uncertain write.
                     let _ = self.rediscover_master();
-                    return Err(e);
+                    return Err(ConnectionError::wrap(e));
                 }
             };
             if self.config.sentinel.enable
