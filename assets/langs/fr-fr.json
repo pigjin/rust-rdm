@@ -422,7 +422,8 @@
     "preferences": "Préférences",
     "help": "Aide",
     "report_bug": "Signaler un bug",
-    "about": "À propos"
+    "about": "À propos",
+    "check_update": "Rechercher des mises à jour..."
   },
   "log": {
     "title": "Journal de lancement",
@@ -489,5 +490,22 @@
     "always_show_last": "Défilement automatique vers le dernier message"
   },
   "ssh_trust": {"title": "Trust SSH server?", "verify": "Verify this fingerprint with the server administrator before continuing. Authentication starts only after confirmation.", "accept": "Trust and connect"},
-  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only."
+  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only.",
+  "updates": {
+    "title": "Mise à jour du logiciel",
+    "checking": "Recherche de mises à jour…",
+    "up_to_date": "Vous utilisez la dernière version",
+    "available": "La version v{version} est disponible",
+    "details": "Voir les détails",
+    "current_version": "Version actuelle : v{version}",
+    "install_hint": "Après le téléchargement, quittez RedisDock et lancez le programme d’installation ou remplacez l’application.",
+    "no_package": "Aucun paquet ne correspond à ce système et à cette architecture. Consultez la page de publication.",
+    "no_notes": "Aucune note de version fournie.",
+    "release_page": "Page de publication",
+    "download": "Télécharger {format}",
+    "network_error": "Impossible de rechercher des mises à jour. Vérifiez votre connexion et réessayez.",
+    "rate_limited": "Limite de requêtes GitHub atteinte. Réessayez plus tard.",
+    "no_release": "Aucune version stable trouvée. Réessayez plus tard.",
+    "invalid_response": "Informations de mise à jour invalides. Réessayez plus tard."
+  }
 }

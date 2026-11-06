@@ -43,6 +43,7 @@ use super::views::menu_action;
 use super::*;
 use gpui::prelude::*;
 use gpui_base::TestSupportExt as _;
+use gpui_base::FocusTrapElement as _;
 use gpui_component::input::Textarea;
 use serde::de::DeserializeOwned;
 
@@ -90,6 +91,7 @@ pub(super) enum DialogKind {
     Import,
     Export,
     About,
+    Update,
     CleanLog,
 }
 #[derive(Clone)]
@@ -152,7 +154,7 @@ pub(super) struct Dialog {
     pub(super) id: u64,
     format_epoch: u64,
     format_loading: bool,
-    kind: DialogKind,
+    pub(super) kind: DialogKind,
     pub(super) data: Json,
     fields: BTreeMap<String, Entity<InputState>>,
     numbers: BTreeMap<String, Option<f64>>,
@@ -187,7 +189,7 @@ impl Dialog {
         ["value", "field", "score"].iter()
             .any(|key| self.value(key, cx) != self.data[*key].as_str().unwrap_or_default())
     }
-    fn value(&self, key: &str, cx: &App) -> String {
+    pub(super) fn value(&self, key: &str, cx: &App) -> String {
         if key == "value" && let Some(content) = &self.entry_content {
             return content.editing.clone();
         }
@@ -1463,6 +1465,7 @@ impl RdmApp {
                 "general",
             ),
             DialogKind::About => (self.tr("menu.about"), Json::Null, "general"),
+            DialogKind::Update => (self.tr("updates.title"), Json::Null, "general"),
         };
         if matches!(
             kind,
@@ -3496,7 +3499,7 @@ impl RdmApp {
         if matches!(d.kind, DialogKind::CleanLog) {
             return self.render_warning_dialog(motion_progress, self.tr("log.confirm_clean_log"), window, cx);
         }
-        let special = matches!(d.kind, DialogKind::About);
+        let special = matches!(d.kind, DialogKind::About | DialogKind::Update);
         let mut body = div().flex().flex_col();
         let mut sections = vec![];
         match &d.kind {
@@ -4018,6 +4021,7 @@ impl RdmApp {
             DialogKind::Group(_) => {
                 body = body.child(self.simple_dialog_input("name", "", window, cx))
             }
+            DialogKind::Update => body = body.child(self.update_details_body(cx)),
             DialogKind::About => {
                 let icon = if self.dark(cx) {
                     "images/icon-dark.png"
@@ -4161,18 +4165,22 @@ impl RdmApp {
                 },
             ));
         }
+        if matches!(d.kind, DialogKind::Update) {
+            footer = footer.child(self.update_download_buttons(cx));
+        }
         footer = footer
             .when(!connection_footer, |footer| footer.child(div().flex_1()))
             .child(self.btn(
                 "dialog-cancel",
-                if special { "关闭" } else { "取消" },
+                if matches!(d.kind, DialogKind::Update) { self.tr("menu.close") } else if special { localized("关闭") } else { localized("取消") },
                 "",
                 cx,
                 |a, w, cx| {
                     a.close_dialog(w, cx);
                     cx.notify();
                 },
-            ).when(simple_dialog, |button| self.diagnostic_button(button)
+            ).when(matches!(d.kind, DialogKind::Update), |button| button.tab_stop(true))
+                .when(simple_dialog, |button| self.diagnostic_button(button)
                 .px(px(11.))
                 .border_color(if self.dark(cx){rgba(0xffffff3d)}else{rgb(0xe0e0e6)})
                 .w(px(text::script_width(&self.tr("common.cancel"), gpui::font(".SystemUIFont"), 14., window) + 24.))
@@ -4244,7 +4252,9 @@ impl RdmApp {
                     .id("dialog-card")
                     .relative().top(px(8. * (1. - motion_progress)))
                     .test_support()
-                    .w(px(if matches!(d.kind, DialogKind::Preferences) {
+                    .w(px(if matches!(d.kind, DialogKind::Update) {
+                        600.
+                    } else if matches!(d.kind, DialogKind::Preferences) {
                         640.
                     } else if has_sections {
                         600.
@@ -4361,7 +4371,13 @@ impl RdmApp {
                     })
                     .when(!progress.is_empty(), |d| d.child(progress))
                     .child(footer)
-                    .when(self.dialog.is_none(), |card| motion::inert(card, ("dialog-exit-focus", d.id), window, cx)),
+                    .when(self.dialog.is_none(), |card| motion::inert(card, ("dialog-exit-focus", d.id), window, cx))
+                    .map(|card| {
+                        if matches!(d.kind, DialogKind::Update) && self.dialog.is_some() {
+                            card.role(Role::Dialog).aria_label(d.title.clone())
+                                .focus_trap("update-dialog", self.updates.focus.as_ref().unwrap()).into_any_element()
+                        } else { card.into_any_element() }
+                    }),
             )
             .into_any_element()
     }

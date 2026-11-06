@@ -5865,7 +5865,7 @@ checksum = "03251193000f4bd3b042892be858ee50e8b3719f2b08e5833ac4353724632430"
 
 [[package]]
 name = "redisdock"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
@@ -5880,7 +5880,9 @@ dependencies = [
  "gpui-component",
  "gpui-kit-assets",
  "gpui-pre",
+ "gpui-pre-http-client",
  "gpui-pre-platform",
+ "gpui-pre-reqwest-client",
  "hex",
  "indexmap",
  "lz4_flex",
@@ -5893,6 +5895,7 @@ dependencies = [
  "raw-window-handle",
  "rmp-serde",
  "rust-embed",
+ "semver",
  "serde",
  "serde-pickle",
  "serde_json",

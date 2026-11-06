@@ -40,6 +40,14 @@ RedisJSON 需要 Redis 服务端提供对应模块；PHP 转码需要本机 PHP�
 
 发布页提供 `SHA256SUMS`，可用于核对安装包的 SHA-256 校验值。
 
+### 检查更新
+
+启动 RedisDock 后会在后台检查 GitHub Releases 的最新正式版，每 24 小时最多自动检查一次。发现新版时显示可关闭的提示，点击“查看详情”可阅读更新说明并下载适合当前系统和程序架构的安装包；Linux 同时提供 AppImage 和 DEB。也可以从左侧设置菜单选择“检查更新…”。
+
+下载由浏览器处理。下载完成后退出 RedisDock，再运行安装器或替换应用，连接配置和偏好设置保存在独立的用户配置目录中。当前版本不会在应用内自动安装或重启，也不会推荐预发布版或较旧版本。
+
+更新检查需要访问 GitHub，不使用账号或 Token，不发送 Redis 连接信息。自动检查失败时保持静默，手动检查会显示错误；失败的自动请求也计入 24 小时间隔，手动检查可随时触发，一分钟内复用检查结果。
+
 ## 源码运行
 
 当前 CI 使用 Rust 1.99.0。请先准备 Rust 工具链和对应平台的编译环境：macOS 可使用 Command Line Tools；Windows 需要 MSVC、Windows SDK 和可用于构建 OpenSSL 的 Perl；Linux 的系统依赖可参考 [发布工作流](.github/workflows/release.yml)。

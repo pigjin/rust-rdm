@@ -422,7 +422,8 @@
     "preferences": "設定",
     "help": "ヘルプ",
     "report_bug": "バグを報告",
-    "about": "このソフトについて"
+    "about": "このソフトについて",
+    "check_update": "アップデートを確認..."
   },
   "log": {
     "title": "実行ログ",
@@ -489,5 +490,22 @@
     "always_show_last": "最新に自動スクロール"
   },
   "ssh_trust": {"title": "Trust SSH server?", "verify": "Verify this fingerprint with the server administrator before continuing. Authentication starts only after confirmation.", "accept": "Trust and connect"},
-  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only."
+  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only.",
+  "updates": {
+    "title": "ソフトウェア更新",
+    "checking": "アップデートを確認中…",
+    "up_to_date": "最新バージョンを使用しています",
+    "available": "バージョン v{version} が利用可能です",
+    "details": "詳細を表示",
+    "current_version": "現在のバージョン: v{version}",
+    "install_hint": "ダウンロード後、RedisDock を終了してインストーラーを実行するか、アプリを置き換えてください。",
+    "no_package": "このシステムとアーキテクチャに対応するパッケージがありません。リリースページをご確認ください。",
+    "no_notes": "リリースノートはありません。",
+    "release_page": "リリースページ",
+    "download": "{format} をダウンロード",
+    "network_error": "更新を確認できません。ネットワークを確認して再試行してください。",
+    "rate_limited": "GitHub のリクエスト制限に達しました。後でもう一度お試しください。",
+    "no_release": "安定版が見つかりません。後でもう一度お試しください。",
+    "invalid_response": "更新情報が無効です。後でもう一度お試しください。"
+  }
 }

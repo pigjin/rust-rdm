@@ -325,6 +325,7 @@ impl RdmApp {
             !finished_warnings.contains(&exit.value.id)
         });
         root = root.child(self.render_notices(window, cx));
+        root = root.child(self.render_update_notice(cx));
         if self.ssh_trust.is_some() || self.exiting_ssh.is_some() {
             let present = self.ssh_trust.is_some();
             let sample = motion::presence("ssh-trust-enter", present, window, cx);
@@ -566,6 +567,7 @@ impl RdmApp {
         let preferences = self.tr("menu.preferences");
         let about = self.tr("menu.about");
         let report = self.tr("menu.report_bug");
+        let check_update = self.tr("menu.check_update");
         let menu = self
             .connection_icon_button(
                 "settings",
@@ -591,6 +593,9 @@ impl RdmApp {
                         report.clone(),
                         "https://github.com/pigjin/rust-rdm/issues",
                     ))
+                    .item(menu_action(check_update.clone(), weak.clone(), |app, w, cx| {
+                        app.check_update(true, w, cx)
+                    }).icon(icon("update")))
                     .separator()
                     .item(menu_action(about.clone(), weak.clone(), |app, w, cx| {
                         app.open_dialog(DialogKind::About, w, cx)

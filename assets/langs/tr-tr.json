@@ -422,7 +422,8 @@
     "preferences": "Tercihler",
     "help": "Yardım",
     "report_bug": "Hata Bildir",
-    "about": "Hakkında"
+    "about": "Hakkında",
+    "check_update": "Güncellemeleri denetle..."
   },
   "log": {
     "title": "Başlatma Logu",
@@ -489,5 +490,22 @@
     "always_show_last": "Son Mesaja Otomatik Kaydır"
   },
   "ssh_trust": {"title": "Trust SSH server?", "verify": "Verify this fingerprint with the server administrator before continuing. Authentication starts only after confirmation.", "accept": "Trust and connect"},
-  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only."
+  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only.",
+  "updates": {
+    "title": "Yazılım güncellemesi",
+    "checking": "Güncellemeler denetleniyor…",
+    "up_to_date": "En son sürümü kullanıyorsunuz",
+    "available": "v{version} sürümü mevcut",
+    "details": "Ayrıntıları gör",
+    "current_version": "Mevcut sürüm: v{version}",
+    "install_hint": "İndirdikten sonra RedisDock’u kapatıp yükleyiciyi çalıştırın veya uygulamayı değiştirin.",
+    "no_package": "Bu sistem ve mimari için paket yok. Sürüm sayfasını ziyaret edin.",
+    "no_notes": "Sürüm notları bulunmuyor.",
+    "release_page": "Sürüm sayfası",
+    "download": "{format} indir",
+    "network_error": "Güncellemeler denetlenemedi. Ağ bağlantınızı kontrol edip tekrar deneyin.",
+    "rate_limited": "GitHub istek sınırına ulaşıldı. Lütfen daha sonra tekrar deneyin.",
+    "no_release": "Kararlı sürüm bulunamadı. Lütfen daha sonra tekrar deneyin.",
+    "invalid_response": "Güncelleme bilgileri geçersiz. Lütfen daha sonra tekrar deneyin."
+  }
 }

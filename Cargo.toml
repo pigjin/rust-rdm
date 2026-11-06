@@ -1,6 +1,6 @@
 [package]
 name = "redisdock"
-version = "0.1.5"
+version = "0.1.6"
 edition = "2024"
 license = "GPL-3.0-only"
 description = "RedisDock, a native Redis desktop client built with Rust and GPUI"
@@ -12,8 +12,8 @@ resolver = "2"
 
 [features]
 default = ["desktop"]
-desktop = ["dep:gpui", "dep:gpui-platform", "dep:gpui-base", "dep:gpui-component", "dep:gpui-component-assets", "dep:objc2", "dep:objc2-app-kit", "dep:objc2-foundation", "dep:block2", "dep:raw-window-handle", "dep:unicode-segmentation", "dep:unicode-linebreak"]
-ui-qa = ["desktop", "gpui/test-support", "gpui-platform/test-support", "gpui-component/test-support"]
+desktop = ["dep:gpui", "dep:gpui-platform", "dep:gpui-base", "dep:gpui-component", "dep:gpui-component-assets", "dep:http-client", "dep:reqwest-client", "dep:objc2", "dep:objc2-app-kit", "dep:objc2-foundation", "dep:block2", "dep:raw-window-handle", "dep:unicode-segmentation", "dep:unicode-linebreak"]
+ui-qa = ["desktop", "gpui/test-support", "gpui-platform/test-support", "gpui-component/test-support", "http-client/test-support"]
 
 [dependencies]
 anyhow = "1"
@@ -41,6 +41,9 @@ parking_lot = { version = "0.12", features = ["arc_lock"] }
 indexmap = "2"
 tempfile = "3"
 futures = "0.3"
+semver = "1"
+http-client = { package = "gpui-pre-http-client", version = "=0.3.9", optional = true }
+reqwest-client = { package = "gpui-pre-reqwest-client", version = "=0.3.9", optional = true }
 gpui = { package = "gpui-pre", version = "=0.3.9", optional = true }
 gpui-platform = { package = "gpui-pre-platform", version = "=0.3.9", features = ["runtime_shaders", "font-kit", "x11", "wayland"], optional = true }
 gpui-base = { version = "=0.7.3", optional = true }

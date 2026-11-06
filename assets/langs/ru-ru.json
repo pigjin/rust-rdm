@@ -422,7 +422,8 @@
     "preferences": "Настройки",
     "help": "Помощь",
     "report_bug": "Сообщить об ошибке",
-    "about": "О программе"
+    "about": "О программе",
+    "check_update": "Проверить обновления..."
   },
   "log": {
     "title": "Журнал запуска",
@@ -489,5 +490,22 @@
     "always_show_last": "Автоматическая прокрутка к последнему"
   },
   "ssh_trust": {"title": "Trust SSH server?", "verify": "Verify this fingerprint with the server administrator before continuing. Authentication starts only after confirmation.", "accept": "Trust and connect"},
-  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only."
+  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only.",
+  "updates": {
+    "title": "Обновление программы",
+    "checking": "Проверка обновлений…",
+    "up_to_date": "Вы используете последнюю версию",
+    "available": "Доступна версия v{version}",
+    "details": "Подробнее",
+    "current_version": "Текущая версия: v{version}",
+    "install_hint": "После загрузки закройте RedisDock и запустите установщик или замените приложение.",
+    "no_package": "Нет пакета для этой системы и архитектуры. Откройте страницу выпуска.",
+    "no_notes": "Примечания к выпуску отсутствуют.",
+    "release_page": "Страница выпуска",
+    "download": "Скачать {format}",
+    "network_error": "Не удалось проверить обновления. Проверьте подключение и повторите попытку.",
+    "rate_limited": "Достигнут лимит запросов GitHub. Повторите попытку позже.",
+    "no_release": "Стабильный выпуск не найден. Повторите попытку позже.",
+    "invalid_response": "Некорректные сведения об обновлении. Повторите попытку позже."
+  }
 }

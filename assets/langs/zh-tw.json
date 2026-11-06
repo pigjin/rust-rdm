@@ -422,7 +422,8 @@
     "preferences": "偏好設定",
     "help": "説明",
     "report_bug": "回報錯誤",
-    "about": "關於"
+    "about": "關於",
+    "check_update": "檢查更新..."
   },
   "log": {
     "title": "運行日誌",
@@ -489,5 +490,22 @@
     "always_show_last": "自動捲動到最新"
   },
   "ssh_trust": {"title": "确认 SSH 服务器身份", "verify": "请先通过可信渠道核对服务器指纹。确认后才会发送认证信息；密钥变化时会阻止连接。", "accept": "信任并连接"},
-  "stream_retention": "保留 {kept} 条，已淘汰 {dropped} 条；复制和导出仅包含保留记录"
+  "stream_retention": "保留 {kept} 条，已淘汰 {dropped} 条；复制和导出仅包含保留记录",
+  "updates": {
+    "title": "軟體更新",
+    "checking": "正在檢查更新…",
+    "up_to_date": "目前已是最新版本",
+    "available": "發現新版本 v{version}",
+    "details": "查看詳情",
+    "current_version": "目前版本：v{version}",
+    "install_hint": "下載完成後，請結束 RedisDock 並執行安裝程式或替換應用程式。",
+    "no_package": "暫無符合目前系統與架構的安裝檔，請查看發佈頁面。",
+    "no_notes": "此版本未提供更新說明。",
+    "release_page": "查看發佈頁面",
+    "download": "下載 {format}",
+    "network_error": "無法檢查更新，請檢查網路後重試。",
+    "rate_limited": "GitHub 請求過於頻繁，請稍後重試。",
+    "no_release": "暫未找到正式版本，請稍後重試。",
+    "invalid_response": "更新資訊無效，請稍後重試。"
+  }
 }

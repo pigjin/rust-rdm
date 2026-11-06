@@ -140,6 +140,9 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                 let qa_connections = configs.clone();
                 let qa_decoders = window.update(cx, |_, _, cx| view.read(cx).pref.decoder.clone()).unwrap();
                 let snapshots = [
+                    "update-light",
+                    "update-dark",
+                    "update-en",
                     "read-only-settings-light",
                     "read-only-settings-dark",
                     "read-only-connections",
@@ -1169,6 +1172,9 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                     if snapshot.starts_with("json-") {
                         if let Some(text) = qa_json::verify(&view, window, snapshot, cx).await { _copied_text = Some(text); }
                     }
+                    let update_restore = if snapshot.starts_with("update-") {
+                        Some(update::qa::verify(&view, window, snapshot, cx).await)
+                    } else { None };
                     if snapshot.starts_with("scalar-string-") {
                         let (copied, original) = qa_string::verify(&view, window, snapshot, cx).await;
                         if let Some(text) = copied { _copied_text = Some(text); }
@@ -2051,11 +2057,11 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                             let expected_y=if snapshot=="settings-menu" {gpui_base::test_support::find(window,&[],&"settings".into()).unwrap().bounds().origin.y-bounds.size.height-px(6.)}else{px(expected["y"].as_f64().unwrap()as f32)};
                             assert!((bounds.origin.y-expected_y).abs()<px(0.6),"source menu anchor gap");
                             assert!((bounds.size.width.as_f32()-expected["w"].as_f64().unwrap() as f32).abs()<0.1,"source menu width");
-                            let expected_height=expected["h"].as_f64().unwrap() as f32-if snapshot=="settings-menu" {2.*28.} else {0.};
-                            assert!((bounds.size.height.as_f32()-expected_height).abs()<0.1,"menu height after removing guide and update rows");
+                            let expected_height=expected["h"].as_f64().unwrap() as f32-if snapshot=="settings-menu" {28.} else {0.};
+                            assert!((bounds.size.height.as_f32()-expected_height).abs()<0.1,"menu height after removing the guide row");
                             let mut items=gpui_base::test_support::snapshots(window).into_iter().filter(|item|item.role()==Some(gpui::Role::MenuItem)&&item.label().is_some()).collect::<Vec<_>>();items.sort_by(|a,b|a.bounds().origin.y.partial_cmp(&b.bounds().origin.y).unwrap());
                             let source_items=source["metrics"].as_array().unwrap().iter().filter(|item|item["class"].as_str().unwrap().split_whitespace().next()==Some("n-dropdown-option-body"))
-                                .filter(|item|snapshot!="settings-menu"||!matches!(item["text"].as_str(),Some("使用指南"|"检查更新..."))).collect::<Vec<_>>();
+                                .filter(|item|snapshot!="settings-menu"||item["text"].as_str()!=Some("使用指南")).collect::<Vec<_>>();
                             assert_eq!(items.len(),source_items.len(),"source menu item count");
                             for (item,expected) in items.iter().zip(source_items) {
                                 assert_eq!(item.label(),expected["text"].as_str(),"source menu label");
@@ -2654,6 +2660,7 @@ pub(super) fn run(data_dir: PathBuf, output_dir: PathBuf) {
                         cx.background_executor().timer(Duration::from_millis(250)).await;
                     }
                     if let Some(saved) = status_values_restore { status_values_qa::restore(&view,window,saved,cx); }
+                    if let Some(saved) = update_restore { update::qa::restore(&view, window, saved, cx); }
                     if let Some(saved) = read_only_restore { dialogs::read_only_qa::restore(&view, window, saved, cx).await; }
                     if let Some(saved) = status_layout_restore { status_layout_qa::restore(&view,window,saved,cx); }
                     if let Some(saved) = status_info_restore { status_info_qa::restore(&view,window,saved,cx); }

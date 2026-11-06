@@ -422,7 +422,8 @@
     "preferences": "Preferences",
     "help": "Help",
     "report_bug": "Report Bug",
-    "about": "About"
+    "about": "About",
+    "check_update": "Check for Updates..."
   },
   "log": {
     "title": "Launch Log",
@@ -489,5 +490,22 @@
     "always_show_last": "Auto Scroll to Latest"
   },
   "ssh_trust": {"title": "Trust SSH server?", "verify": "Verify this fingerprint with the server administrator before continuing. Authentication starts only after confirmation.", "accept": "Trust and connect"},
-  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only."
+  "stream_retention": "Retained {kept}; discarded {dropped}. Copy and export include retained records only.",
+  "updates": {
+    "title": "Software Update",
+    "checking": "Checking for updates…",
+    "up_to_date": "You are using the latest version",
+    "available": "Version v{version} is available",
+    "details": "View Details",
+    "current_version": "Current version: v{version}",
+    "install_hint": "After downloading, quit RedisDock and run the installer or replace the application.",
+    "no_package": "No package matches this system and architecture. Visit the release page.",
+    "no_notes": "No release notes provided.",
+    "release_page": "Release Page",
+    "download": "Download {format}",
+    "network_error": "Unable to check for updates. Check your network and try again.",
+    "rate_limited": "GitHub rate limit reached. Please try again later.",
+    "no_release": "No stable release found. Please try again later.",
+    "invalid_response": "Invalid update information. Please try again later."
+  }
 }

@@ -33,6 +33,7 @@ mod refresh;
 mod dialogs;
 mod file_dialogs;
 mod notices;
+mod update;
 mod motion;
 #[cfg(feature = "ui-qa")]
 mod motion_qa;
@@ -342,6 +343,7 @@ pub fn run() {
                 },
                 move |window, cx| {
                     let view = cx.new(|cx| RdmApp::new(store, window, cx));
+                    view.update(cx, |app, cx| app.schedule_update_check(window, cx));
                     cx.new(|cx| Root::new(view, window, cx))
                 },
             )
@@ -609,6 +611,7 @@ struct RdmApp {
     exiting_messages: Vec<motion::Exit<notices::MessageNotice>>,
     exiting_notifications: Vec<motion::Exit<notices::ErrorNotification>>,
     next_notice_id: u64,
+    updates: update::State,
     last_poll: Instant,
     last_auto: Instant,
     log_server: String,
@@ -766,6 +769,7 @@ impl RdmApp {
         let connections = store.connections();
         let preferences = store.preferences();
         let pref = preferences.as_ref().cloned().unwrap_or_default();
+        let updates = update::State::new(&store);
         let mut app = Self {
             service: Arc::new(Service::new(store.clone())),
             store,
@@ -802,6 +806,7 @@ impl RdmApp {
             exiting_messages: vec![],
             exiting_notifications: vec![],
             next_notice_id: 0,
+            updates,
             last_poll: Instant::now(),
             last_auto: Instant::now(),
             log_server: String::new(),
