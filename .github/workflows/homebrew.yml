@@ -1,0 +1,90 @@
+name: Sync RedisDock Homebrew cask
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        required: true
+    secrets:
+      HOMEBREW_TAP_DEPLOY_KEY:
+        required: true
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Published tag (leave empty for the latest stable release)
+        type: string
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: redisdock-homebrew-tap
+  queue: max
+
+jobs:
+  sync:
+    if: github.repository == 'pigjin/rust-rdm' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      version: ${{ steps.cask.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v7.0.1
+        with:
+          repository: pigjin/homebrew-tap
+          ref: main
+          path: tap
+          ssh-key: ${{ secrets.HOMEBREW_TAP_DEPLOY_KEY }}
+      - name: Verify the published DMGs and generate the cask
+        id: cask
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: python3 scripts/homebrew.py tap/Casks/redisdock.rb --tag "$TAG" --github-output "$GITHUB_OUTPUT"
+      - name: Publish the cask
+        if: steps.cask.outputs.version != ''
+        working-directory: tap
+        env:
+          VERSION: ${{ steps.cask.outputs.version }}
+        run: |
+          git add -- Casks/redisdock.rb
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "chore(cask): 更新 RedisDock 至 $VERSION"
+          git push origin HEAD:main
+
+  install:
+    name: Install and uninstall on ${{ matrix.arch }}
+    needs: sync
+    if: needs.sync.outputs.version != ''
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm64
+            runner: macos-15
+          - arch: x86_64
+            runner: macos-15-intel
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 15
+    env:
+      ARCH: ${{ matrix.arch }}
+      VERSION: ${{ needs.sync.outputs.version }}
+    steps:
+      - name: Install from the public tap and check the app
+        run: |
+          appdir="$RUNNER_TEMP/Applications"
+          mkdir -p "$appdir"
+          brew install --cask --appdir="$appdir" pigjin/tap/redisdock
+          app="$appdir/RedisDock.app"
+          test "$(uname -m)" = "$ARCH"
+          test "$(lipo -archs "$app/Contents/MacOS/redisdock")" = "$ARCH"
+          test "$(plutil -extract CFBundleShortVersionString raw "$app/Contents/Info.plist")" = "${VERSION%%+*}"
+          brew uninstall --cask pigjin/tap/redisdock
+          test ! -e "$app"

@@ -70,14 +70,18 @@ def check_assets(directory, version):
     return [directory / name for name in sorted(expected)]
 
 
+def file_sha256(path):
+    digest = hashlib.sha256()
+    with path.open("rb") as source:
+        for chunk in iter(lambda: source.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def checksum_manifest(directory, version):
     lines = []
     for path in check_assets(directory, version):
-        digest = hashlib.sha256()
-        with path.open("rb") as source:
-            for chunk in iter(lambda: source.read(1024 * 1024), b""):
-                digest.update(chunk)
-        lines.append(f"{digest.hexdigest()}  {path.name}\n")
+        lines.append(f"{file_sha256(path)}  {path.name}\n")
     manifest = Path(directory) / "SHA256SUMS"
     manifest.write_text("".join(lines), encoding="utf-8")
     return manifest

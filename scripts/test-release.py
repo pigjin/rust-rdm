@@ -9,13 +9,70 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+from homebrew import published_version, update_cask
 from release import (
     asset_names, binary_arch, check_assets, check_tag, check_upload,
-    checksum_manifest, core_version, deb_version, main, package_version,
+    checksum_manifest, core_version, deb_version, file_sha256, main, package_version,
 )
 
 
 class ReleaseTests(unittest.TestCase):
+    def test_homebrew_release_channels(self):
+        release = {"tagName": "v0.1.7+build-2", "isDraft": False, "isPrerelease": False}
+        self.assertEqual(published_version(release), "0.1.7+build-2")
+        for field, value in (("isDraft", True), ("isPrerelease", True), ("tagName", "v0.1.8-rc.1")):
+            self.assertIsNone(published_version(dict(release, **{field: value})))
+        with self.assertRaises(ValueError):
+            published_version(dict(release, tagName="v0.1.7/other"))
+
+    def test_homebrew_publish_replay_and_corrupted_downloads(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            cask = root / "tap/Casks/redisdock.rb"
+
+            def downloads(version):
+                directory = root / version
+                directory.mkdir()
+                rows = []
+                for name in asset_names(version):
+                    if name.endswith(".dmg"):
+                        package = directory / name
+                        package.write_bytes(name.encode())
+                        rows.append(f"{file_sha256(package)}  {name}\n")
+                (directory / "SHA256SUMS").write_text("".join(rows))
+                return directory
+
+            current = downloads("0.1.10")
+            old = downloads("0.1.9")
+            self.assertTrue(update_cask(old, "0.1.9", cask))
+            self.assertTrue(update_cask(current, "0.1.10", cask))
+            published = cask.read_text()
+            arm = current / "RedisDock-0.1.10-macos-arm64.dmg"
+            intel = current / "RedisDock-0.1.10-macos-x86_64.dmg"
+            self.assertIn(f'sha256 arm:   "{file_sha256(arm)}"', published)
+            self.assertIn(f'intel: "{file_sha256(intel)}"', published)
+            self.assertTrue(update_cask(current, "0.1.10", cask))
+            self.assertFalse(update_cask(old, "0.1.9", cask))
+            self.assertEqual(cask.read_text(), published)
+
+            manifest = current / "SHA256SUMS"
+            original = manifest.read_text()
+            manifest.write_text(original + original)
+            with self.assertRaisesRegex(ValueError, "duplicate"):
+                update_cask(current, "0.1.10", cask)
+            manifest.write_text(original)
+            old_hash = file_sha256(arm)
+            arm.write_bytes(b"modified DMG")
+            with self.assertRaisesRegex(ValueError, "incorrect SHA-256"):
+                update_cask(current, "0.1.10", cask)
+            manifest.write_text(original.replace(old_hash, file_sha256(arm)))
+            with self.assertRaisesRegex(ValueError, "SHA-256 changed"):
+                update_cask(current, "0.1.10", cask)
+            intel.unlink()
+            with self.assertRaisesRegex(ValueError, "both macOS packages"):
+                update_cask(current, "0.1.10", cask)
+            self.assertEqual(cask.read_text(), published)
+
     def test_versions_and_tag_mismatch(self):
         for version, core, deb in (("0.1.0", "0.1.0", "0.1.0"), ("1.2.3-rc.1+build-2", "1.2.3", "1.2.3~rc.1+build-2"), ("1.2.3+build-2", "1.2.3", "1.2.3+build-2")):
             with self.subTest(version=version):

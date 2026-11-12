@@ -253,3 +253,12 @@ jobs:
           gh release view "$TAG" --json isDraft,tagName,name,assets > "$RUNNER_TEMP/release.json"
           python3 scripts/release.py check-upload target/dist "$RUNNER_TEMP/release.json" --version "$VERSION"
           gh release edit "$TAG" --draft=false
+
+  homebrew:
+    needs: [version, release]
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') && needs.version.outputs.prerelease == 'false'
+    uses: ./.github/workflows/homebrew.yml
+    with:
+      tag: ${{ github.ref_name }}
+    secrets:
+      HOMEBREW_TAP_DEPLOY_KEY: ${{ secrets.HOMEBREW_TAP_DEPLOY_KEY }}
