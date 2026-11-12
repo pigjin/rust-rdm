@@ -20,7 +20,15 @@ RedisJSON 需要 Redis 服务端提供对应模块；PHP 转码需要本机 PHP�
 
 ## 下载安装
 
-前往 [GitHub Releases](https://github.com/pigjin/rust-rdm/releases)，选择对应系统和处理器架构的安装包。
+macOS 用户可以通过 Homebrew 安装 RedisDock，Homebrew 会自动选择 Apple Silicon 或 Intel 安装包。
+
+```bash
+brew install --cask pigjin/tap/redisdock
+```
+
+通过 Homebrew 安装后，运行 `brew upgrade --cask pigjin/tap/redisdock` 即可升级。
+
+也可前往 [GitHub Releases](https://github.com/pigjin/rust-rdm/releases)，选择对应系统和处理器架构的安装包。
 
 | 系统 | 架构 | 安装方式 |
 | --- | --- | --- |
